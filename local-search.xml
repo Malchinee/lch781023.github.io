@@ -4,12 +4,18 @@
   
   
   <entry>
-    <title>123</title>
-    <link href="/2022/03/07/123/"/>
-    <url>/2022/03/07/123/</url>
+    <title>Spring入门</title>
+    <link href="/2022/03/07/Spring/"/>
+    <url>/2022/03/07/Spring/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<h1 id="Spring-入门"><a href="#Spring-入门" class="headerlink" title="Spring 入门"></a>Spring 入门</h1><h3 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h3><div class="code-wrapper"><pre><code class="hljs">1、开源免费框架2、轻量级、非入侵式3、控制反转（IOC），面向切面编程（AOP）4、支持事务的处理，对框架整合的支持！</code></pre></div><h3 id="Spring-组成"><a href="#Spring-组成" class="headerlink" title="Spring 组成"></a>Spring 组成</h3><img src="/2022/03/07/Spring/Spring%E7%BB%84%E6%88%90.png" class><img src="/2022/03/07/Spring/java%E8%B7%AF%E7%BA%BF.png" class><h4 id="SpringBoot"><a href="#SpringBoot" class="headerlink" title="SpringBoot"></a>SpringBoot</h4><div class="code-wrapper"><pre><code class="hljs">一个快速开发的脚手架基于SpringBoot可以快速开发单个微服务约定大于配置</code></pre></div><h4 id="SpringCloud"><a href="#SpringCloud" class="headerlink" title="SpringCloud"></a>SpringCloud</h4><div class="code-wrapper"><pre><code class="hljs">SpringClud基于SpringBoot实现</code></pre></div>]]></content>
     
+    
+    <categories>
+      
+      <category>Spring</category>
+      
+    </categories>
     
     
   </entry>
