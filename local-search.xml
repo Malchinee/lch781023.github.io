@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>虚幻4入门</title>
+    <link href="/2022/03/22/%E8%99%9A%E5%B9%BB4%E5%85%A5%E9%97%A8/"/>
+    <url>/2022/03/22/%E8%99%9A%E5%B9%BB4%E5%85%A5%E9%97%A8/</url>
+    
+    <content type="html"><![CDATA[<h3 id="虚幻4工程文件夹的结构"><a href="#虚幻4工程文件夹的结构" class="headerlink" title="虚幻4工程文件夹的结构"></a>虚幻4工程文件夹的结构</h3><div class="code-wrapper"><pre><code class="hljs">Config ：包含项目设置，键盘输入之类的配置文件Content ：存放引擎或游戏内容，包括地图、贴图、模型、材质、蓝图等Intermediate 包含了在编译引擎或游戏时生成的临时文件Saved 包含了自动保存内容，配置（*.ini）文件以及日志文件.uproject 项目启动程序，开启项目</code></pre></div><img src="/2022/03/22/%E8%99%9A%E5%B9%BB4%E5%85%A5%E9%97%A8/%E9%A1%B9%E7%9B%AE%E7%BB%84%E6%88%90.png" class>]]></content>
+    
+    
+    <categories>
+      
+      <category>虚幻4</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Spring入门</title>
     <link href="/2022/03/07/Spring/"/>
     <url>/2022/03/07/Spring/</url>
@@ -16,19 +35,6 @@
       <category>Spring</category>
       
     </categories>
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="/2022/03/07/hello-world/"/>
-    <url>/2022/03/07/hello-world/</url>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-    
     
     
   </entry>
