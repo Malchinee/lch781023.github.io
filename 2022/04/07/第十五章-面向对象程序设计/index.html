@@ -16,15 +16,15 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前七章">
+    <meta name="description" content="面向对象程序设计">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第十五章-面向对象程序设计">
 <meta property="og:url" content="http://example.com/2022/04/07/%E7%AC%AC%E5%8D%81%E4%BA%94%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="前七章">
+<meta property="og:description" content="面向对象程序设计">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-07T12:14:25.000Z">
-<meta property="article:modified_time" content="2022-04-07T13:01:49.333Z">
+<meta property="article:modified_time" content="2022-04-10T09:16:07.116Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -196,7 +196,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      3.7k 字
     </span>
   
 
@@ -205,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1 分钟
+      31 分钟
     </span>
   
 
@@ -237,7 +237,63 @@
             <h1 style="display: none">第十五章-面向对象程序设计</h1>
             
             <div class="markdown-body">
-              
+              <h1 id="定义基类和派生类"><a href="#定义基类和派生类" class="headerlink" title="定义基类和派生类"></a>定义基类和派生类</h1><p>基类：<br>Quote<br>派生类：<br>Disc_quote 继承Quote<br>Bulk_quote 继承Disc_quote</p>
+<h2 id="定义派生类"><a href="#定义派生类" class="headerlink" title="定义派生类"></a>定义派生类</h2><h3 id="派生类构函数"><a href="#派生类构函数" class="headerlink" title="派生类构函数"></a>派生类构函数</h3><p>派生类构造函数通过初始化列表将实参传递给基类构造函数</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-constructor">Bulk_quote(<span class="hljs-params">const</span> <span class="hljs-params">std</span>::<span class="hljs-params">string</span> &amp; <span class="hljs-params">book</span>,<span class="hljs-params">double</span> <span class="hljs-params">p</span>,<span class="hljs-params">std</span>::<span class="hljs-params">size_t</span> <span class="hljs-params">qty</span>,<span class="hljs-params">double</span> <span class="hljs-params">disc</span>)</span><br>:<span class="hljs-constructor">Qutoe(<span class="hljs-params">book</span>,<span class="hljs-params">p</span>)</span>,min<span class="hljs-constructor">_qty(<span class="hljs-params">qty</span>)</span>,discount(disc)&#123;&#125;<br></code></pre></td></tr></table></figure>
+<p>除非特别指出，否则派生类的基类部分会像数据成员一样执行默认初始化。如果想<strong>使用其他的基类构造函数</strong>，我们需要以<strong>类名加圆括号内的实参列表</strong>的形式为构造函数提供初始值</p>
+<h3 id="继承与静态成员"><a href="#继承与静态成员" class="headerlink" title="继承与静态成员"></a>继承与静态成员</h3><p><strong>static</strong>关键字：整个继承体系中只存在该成员的唯一定义。假设某成员是可访问的，我们既能通过基类使用它也能通过派生类使用它。</p>
+<h3 id="防止继承的发生"><a href="#防止继承的发生" class="headerlink" title="防止继承的发生"></a>防止继承的发生</h3><p><strong>final</strong>：断子绝孙</p>
+<h2 id="类型转换与继承"><a href="#类型转换与继承" class="headerlink" title="类型转换与继承"></a>类型转换与继承</h2><p>我们可以将基类的指针或引用绑定到派生类对象中。例如，我们可以用Quote&amp;指向一个Bulk_qupte对象，也可以把一个Bulk_quote对象的地址赋给一个Quote*</p>
+<h3 id="静态类型与动态类型"><a href="#静态类型与动态类型" class="headerlink" title="静态类型与动态类型"></a>静态类型与动态类型</h3><p>表达式的<strong>静态类型</strong>在编译时总是已知的，它是变量声明时的类型或表达式生成的类型<br><strong>动态类型</strong>时变量或表达式表示的内存中的对象的类型，知道运行时才可知</p>
+<p>如果表达式既不是引用也不是指针，则它的动态类型与静态类型一致。</p>
+<p>编译器在编译时无法确定某个特定类型转换在运行时是否安全，因为编译器只能通过<strong>检查指针或引用的静态类型</strong>来推断该转换是否合法。<br>如果在基类中含有一个或多个虚函数，我们可以使用<strong>dynamic_cast</strong>请求一个类型转换<br>如果已知某个基类向派生类的转换是否是安全的，我们可以使用<strong>static_cast</strong>强制覆盖掉编译器的检查工作</p>
+<h3 id="······在对象之间不存在类型转换"><a href="#······在对象之间不存在类型转换" class="headerlink" title="······在对象之间不存在类型转换"></a>······在对象之间不存在类型转换</h3><p>当我们给基类的构造函数传递一个基类派生类对象时，实际运行的构造函数时基类的中定义的那个，显然该基类构造函数只能处理基类自己的成员。</p>
+<p>类似的，如果我们将一个派生类对象赋值给一个基类对象，实际运行的赋值运算符也是基类中定义的那个，该运算符只能处理基类自己的成员。也就是说，属于派生类而不属于基类的成员被<strong>切掉</strong>了。</p>
+<h1 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h1><h3 id="派生类的虚函数"><a href="#派生类的虚函数" class="headerlink" title="派生类的虚函数"></a>派生类的虚函数</h3><p>一个派生类的函数如果覆盖了某个继承而来的虚函数，则它的形参类型必须与它被覆盖的基类函数<strong>完全一致</strong>。同样，派生类中虚函数的返回类型也必须与基类函数匹配，该规则存在一个<strong>例外</strong>：</p>
+<p>类的虚函数返回<strong>类本身的指针或引用时</strong>：如D由B派生得到，基类的虚函数返回B*而派生类对应的函数可以返回D*，不过这样的返回类型要求从D到B的类型转换是可访问的。</p>
+<h3 id="final和override说明符"><a href="#final和override说明符" class="headerlink" title="final和override说明符"></a>final和override说明符</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">struct</span> B&#123;<br>    <span class="hljs-function">vitural <span class="hljs-keyword">void</span> <span class="hljs-title">f1</span>(<span class="hljs-params"><span class="hljs-built_in">int</span></span>)<span class="hljs-keyword">const</span></span>;<br>    <span class="hljs-function">vitural <span class="hljs-keyword">void</span> <span class="hljs-title">f2</span>()</span>;<br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">f3</span>()</span>;<br>&#125;;<br><span class="hljs-keyword">struct</span> D1:B&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">f1</span>(<span class="hljs-params"><span class="hljs-built_in">int</span></span>) <span class="hljs-keyword">const</span> <span class="hljs-keyword">override</span></span>;<br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">f2</span>(<span class="hljs-params"><span class="hljs-built_in">int</span></span>) <span class="hljs-keyword">override</span></span>;   <span class="hljs-comment">//错误，B没有形如f2(int)的函数</span><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">f3</span>() <span class="hljs-keyword">override</span>      <span class="hljs-comment">//错误：f3不是虚函数</span></span><br><span class="hljs-function">    <span class="hljs-keyword">void</span> <span class="hljs-title">f4</span>() <span class="hljs-keyword">override</span>    <span class="hljs-comment">//错误，B没有名为f4的函数</span></span><br><span class="hljs-function">&#125;</span>;<br></code></pre></td></tr></table></figure>
+
+<h3 id="回避虚函数的机制"><a href="#回避虚函数的机制" class="headerlink" title="回避虚函数的机制"></a>回避虚函数的机制</h3><p>使用<strong>作用域运算符</strong>可以实现对虚函数的调用不要进行动态绑定，而是强迫其执行虚函数的某个版本。<br>回避虚函数的默认机制：当一个派生类的虚函数调用覆盖掉的基类的虚函数版本。在此情况下，基类的版本通常完成继承层次中所有类型都要做的共同任务，而派生类中定义的版本需要执行一些与派生类本身密切相关的操作。</p>
+<h1 id="抽象基类"><a href="#抽象基类" class="headerlink" title="抽象基类"></a>抽象基类</h1><h3 id="纯虚函数"><a href="#纯虚函数" class="headerlink" title="纯虚函数"></a>纯虚函数</h3><p>我们通过在函数体的位置（在生命语句的分号之前）书写&#x3D;0就可以将一个虚函数说明为<strong>纯虚函数</strong>，其中，&#x3D;0只能出现在类的内部的虚函数声明语句处</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-keyword">class</span> <span class="hljs-symbol">Disc_quote:<span class="hljs-symbol">public</span></span> <span class="hljs-symbol">Quote</span>&#123;<br>    <span class="hljs-keyword">public</span>:<br>        ··········<br>        <span class="hljs-built_in">double</span> bet_price(std::size_t) <span class="hljs-keyword">const</span>=<span class="hljs-number">0</span>;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p>我们也可以给纯虚函数提供定义，不过函数体在类的外部，<strong>我们不能在类的内部为一个&#x3D;0的函数提供函数体</strong>。</p>
+<h3 id="含有纯虚函数的类是抽象基类"><a href="#含有纯虚函数的类是抽象基类" class="headerlink" title="含有纯虚函数的类是抽象基类"></a>含有纯虚函数的类是抽象基类</h3><p>（含有或者未经覆盖直接继承），我们不能直接创建一个抽象基类的对象。</p>
+<h1 id="访问控制与继承"><a href="#访问控制与继承" class="headerlink" title="访问控制与继承"></a>访问控制与继承</h1><h3 id="受保护的成员"><a href="#受保护的成员" class="headerlink" title="受保护的成员"></a>受保护的成员</h3><p><strong>protected</strong>：希望与它的派生类分享但是不想被其他公共访问使用的成员。</p>
+<h3 id="派生类向基类转换的可访问性"><a href="#派生类向基类转换的可访问性" class="headerlink" title="派生类向基类转换的可访问性"></a>派生类向基类转换的可访问性</h3><p>假定D继承自B：</p>
+<ul>
+<li>只有当D公有地继承B时，用户代码才能使用派生类向基类的转换；如果D继承B的方式是受保护的或者是私有的则用户代码不能使用该转换</li>
+<li>不论D以什么方式继承B，D的成员函数和友元都能使用派生类向基类的转换；派生类向其基类的类型转换对于派生类的成员和友元来说永远是可访问的</li>
+<li>如果D继承B的方式是公有地或者受保护的，则D的派生类的成员和友元可以使用D向B的类型转换；反之，如果D继承B的方式是私有的，则不能使用</li>
+</ul>
+<h3 id="改变个别成员的可访问性"><a href="#改变个别成员的可访问性" class="headerlink" title="改变个别成员的可访问性"></a>改变个别成员的可访问性</h3><p>改变派生类继承的某个名字的访问级别，如：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Base</span>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">std::<span class="hljs-type">size_t</span> <span class="hljs-title">size</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>&#123;<span class="hljs-keyword">return</span> n;&#125;<br><span class="hljs-keyword">protected</span>:<br>    std::<span class="hljs-type">size_t</span> n;<br>&#125;;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Derived</span> : <span class="hljs-keyword">private</span> Base&#123;<br>    <span class="hljs-keyword">using</span> Base::size;<br>    <span class="hljs-keyword">using</span> Base::n;<br>&#125;;<br><br></code></pre></td></tr></table></figure>
+<p>通过在类的内部使用using声明语句，我们可以将该类的直接或间接基类中的任何可访问成员标记出来。using声明语句中的名字的访问权限由该using声明语句之前的访问运算符来决定。</p>
+<h1 id="继承中的类作用域"><a href="#继承中的类作用域" class="headerlink" title="继承中的类作用域"></a>继承中的类作用域</h1><p>派生类的作用域位于基类的作用域之内。</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs abnf">Bulk_quote bulk<span class="hljs-comment">;</span><br>cout&lt;&lt;bulk.ison()<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+<p>名字ison的解析：<br>在Bulk_quote查找-&gt;在disc_quote中查找-&gt;在Qutoe中查找。</p>
+<h3 id="在编译时按名字查找"><a href="#在编译时按名字查找" class="headerlink" title="在编译时按名字查找"></a>在编译时按名字查找</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Dise_quote</span> :<span class="hljs-keyword">public</span> Quote&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">std::pair&lt;<span class="hljs-type">size_t</span>,<span class="hljs-type">double</span>&gt; <span class="hljs-title">discount_policy</span> <span class="hljs-params">()</span> <span class="hljs-type">const</span></span>&#123;<span class="hljs-keyword">return</span> &#123;quantity,discount&#125;;&#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p>我们只能通过Disc_qutoe及其派生类的对象、引用或指针使用discount_policy：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">Bulk_quote bulk;<br>Bulk_quote *bulkp=&amp;bulk;    <span class="hljs-regexp">//</span>静态类型与动态类型一致<br>Quote *itemp=&amp;bulk;         <span class="hljs-regexp">//</span>静态类型与动态类型不一致<br>bulkp-&gt;discount_policy();   <span class="hljs-regexp">//</span>正确：bulkp的类型时Bulk_quote*<br>itemp-&gt;discount_policy();  <span class="hljs-regexp">//</span>错误：itemp的类型时Quote*<br></code></pre></td></tr></table></figure>
+<h3 id="名字冲突与继承"><a href="#名字冲突与继承" class="headerlink" title="名字冲突与继承"></a>名字冲突与继承</h3><p>派生类的成员将隐藏同名的基类成员</p>
+<h3 id="通过作用域运算符来使用隐藏的成员"><a href="#通过作用域运算符来使用隐藏的成员" class="headerlink" title="通过作用域运算符来使用隐藏的成员"></a>通过作用域运算符来使用隐藏的成员</h3><p><strong>tip</strong>：除了覆盖继承而来的虚函数之外，派生类最好不要重用定义在基类中的名字</p>
+<p>调用p-&gt;men()执行一下4步：</p>
+<ol>
+<li>首先确定p的静态类型，因为调用的时成员，所以类型是类类型。</li>
+<li>在p的静态类型对应的类中查找men，如果找不到，依次在直接基类中不断查找至继承链的顶端。如果找不到就报错。</li>
+<li>一旦找到了men，进行常规类型检查，以确定对于当前找到的men，本次调用是否合法</li>
+<li>假设调用合法，编译器根据是否是虚函数而产生不同的代码</li>
+<li><ul>
+<li>如果men是虚函数且我们是通过引用或指针进行的调用，则编译器产生的代码将在运行时确定运行该虚函数的哪个版本，依据是对象的动态类型</li>
+<li>反之，如果men不是虚函数或者我们是通过对象（非引用或指针）进行的调用，则编译器将产生一个常规函数的调用。</li>
+</ul>
+</li>
+</ol>
+<h3 id="一如往常，名字查找先于类型检查"><a href="#一如往常，名字查找先于类型检查" class="headerlink" title="一如往常，名字查找先于类型检查"></a>一如往常，名字查找先于类型检查</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">struct Base&#123;<br>    int <span class="hljs-function"><span class="hljs-title">fun</span><span class="hljs-params">()</span></span>;<br>&#125;;<br>struct Derived : Base&#123;<br>    int <span class="hljs-function"><span class="hljs-title">fun</span><span class="hljs-params">(int)</span></span>;<br>&#125;;<br>Derived d;<br>d.<span class="hljs-keyword">fun</span>();<br></code></pre></td></tr></table></figure>
+<p>上述代码错误，因为Derived中的fun将Base中的fun覆盖，而d调用时没有提供参数，所以错误。</p>
+<h3 id="通过基类调用隐藏的虚函数"><a href="#通过基类调用隐藏的虚函数" class="headerlink" title="通过基类调用隐藏的虚函数"></a>通过基类调用隐藏的虚函数</h3><h3 id="覆盖重载的函数"><a href="#覆盖重载的函数" class="headerlink" title="覆盖重载的函数"></a>覆盖重载的函数</h3><p>有时一个类仅需重载集合中的一些而非全部函数，一种好的解决方法是为重载的成员提供一条using声明语句，这样我们就无需覆盖基类的每一个重载版本了。<br>using语句指定一个名字而不指定形参列表。</p>
+<h1 id="构造函数与拷贝控制"><a href="#构造函数与拷贝控制" class="headerlink" title="构造函数与拷贝控制"></a>构造函数与拷贝控制</h1><h2 id="虚析构函数"><a href="#虚析构函数" class="headerlink" title="虚析构函数"></a>虚析构函数</h2><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs axapta"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Quote</span>&#123;<br>    <span class="hljs-keyword">public</span>: <br>        vitural ~Quote ()=<span class="hljs-literal">default</span>;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="虚析构函数将阻止合成移动操作"><a href="#虚析构函数将阻止合成移动操作" class="headerlink" title="虚析构函数将阻止合成移动操作"></a>虚析构函数将阻止合成移动操作</h3><h2 id="合成拷贝控制与继承"><a href="#合成拷贝控制与继承" class="headerlink" title="合成拷贝控制与继承"></a>合成拷贝控制与继承</h2><p>对于派生类的析构函数来说，不仅要销毁自己的成员，还要销毁派生类的直接基类，该直接基类要销毁它自己的直接基类，以此类推到继承链的顶端。</p>
+<h3 id="派生类中删除的拷贝控制与基类的关系"><a href="#派生类中删除的拷贝控制与基类的关系" class="headerlink" title="派生类中删除的拷贝控制与基类的关系"></a>派生类中删除的拷贝控制与基类的关系</h3>
             </div>
             <hr>
             <div>
