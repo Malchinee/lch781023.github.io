@@ -23,10 +23,12 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="基础第一个QT程序大致结构如下myWidget.h: 1234567891011121314#ifndef MYWIDGET_H#define MYWIDGET_H#include &lt;QWidget&gt;&#x2F;&#x2F;包含头文件 QWidget窗口类class myWidget : public QWidget&amp;#123;    Q_OBJECT&#x2F;&#x2F;Q_Obgect宏，允许类中使用信号和槽的机制pu">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2022/04/18/QT/QT%E5%AF%B9%E8%B1%A1%E6%A0%91.png">
 <meta property="article:published_time" content="2022-04-18T08:08:17.000Z">
-<meta property="article:modified_time" content="2022-04-18T08:23:26.231Z">
+<meta property="article:modified_time" content="2022-04-18T08:48:34.702Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2022/04/18/QT/QT%E5%AF%B9%E8%B1%A1%E6%A0%91.png">
   
   
   <title>QT - Hexo</title>
@@ -196,7 +198,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      1.5k 字
     </span>
   
 
@@ -205,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      11 分钟
+      13 分钟
     </span>
   
 
@@ -240,7 +242,7 @@
               <h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><h2 id="第一个QT程序"><a href="#第一个QT程序" class="headerlink" title="第一个QT程序"></a>第一个QT程序</h2><h4 id="大致结构如下"><a href="#大致结构如下" class="headerlink" title="大致结构如下"></a>大致结构如下</h4><p><strong>myWidget.h</strong>:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> MYWIDGET_H</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> MYWIDGET_H</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;QWidget&gt;</span><span class="hljs-comment">//包含头文件 QWidget窗口类</span></span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">myWidget</span> : <span class="hljs-keyword">public</span> QWidget<br>&#123;<br>    Q_OBJECT<span class="hljs-comment">//Q_Obgect宏，允许类中使用信号和槽的机制</span><br><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">myWidget</span>(QWidget *parent = <span class="hljs-literal">nullptr</span>);<span class="hljs-comment">//构造函数</span><br>    ~<span class="hljs-built_in">myWidget</span>();<br>&#125;;<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span> <span class="hljs-comment">// MYWIDGET_H</span></span><br></code></pre></td></tr></table></figure>
 <p><strong>myWidget.cpp</strong>:</p>
-<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;mywidget.h&quot;</span><br>#<span class="hljs-keyword">include</span>&lt;QPushButton&gt;<br>myWidget::my<span class="hljs-constructor">Widget(QWidget <span class="hljs-operator">*</span><span class="hljs-params">parent</span>)</span><br>    : <span class="hljs-constructor">QWidget(<span class="hljs-params">parent</span>)</span><br>&#123;<br>    <span class="hljs-comment">//创建一个按钮</span><br>    QPushButton *btn=<span class="hljs-keyword">new</span> QPushButton;<br>    btn-&gt;show<span class="hljs-literal">()</span>;<span class="hljs-comment">//show以顶层方式弹出窗口控件</span><br>    <span class="hljs-comment">//让btn对象，依赖在myWidget窗口中</span><br>    btn-&gt;set<span class="hljs-constructor">Parent(<span class="hljs-params">this</span>)</span>;<br><br>    <span class="hljs-comment">//显示文本</span><br>    btn-&gt;set<span class="hljs-constructor">Text(<span class="hljs-string">&quot;第一个按钮&quot;</span>)</span>;<br>myWidget::~my<span class="hljs-constructor">Widget()</span><br>&#123;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;mywidget.h&quot;</span><br>#<span class="hljs-keyword">include</span>&lt;QPushButton&gt;<br>myWidget::my<span class="hljs-constructor">Widget(QWidget <span class="hljs-operator">*</span><span class="hljs-params">parent</span>)</span><br>    : <span class="hljs-constructor">QWidget(<span class="hljs-params">parent</span>)</span><br>&#123;<br>    <span class="hljs-comment">//创建一个按钮</span><br>    QPushButton *btn=<span class="hljs-keyword">new</span> QPushButton;<br>    btn-&gt;show<span class="hljs-literal">()</span>;<span class="hljs-comment">//show以顶层方式弹出窗口控件</span><br>    <span class="hljs-comment">//让btn对象，依赖在myWidget窗口中</span><br>    btn-&gt;set<span class="hljs-constructor">Parent(<span class="hljs-params">this</span>)</span>;<br><br>    <span class="hljs-comment">//显示文本</span><br>    btn-&gt;set<span class="hljs-constructor">Text(<span class="hljs-string">&quot;第一个按钮&quot;</span>)</span>;<br>    <span class="hljs-comment">//使用有参构造</span><br>     QPushButton *btn2=<span class="hljs-keyword">new</span> <span class="hljs-constructor">QPushButton(<span class="hljs-string">&quot;第二个按钮&quot;</span>,<span class="hljs-params">this</span>)</span>;<br>myWidget::~my<span class="hljs-constructor">Widget()</span><br>&#123;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
 <p>其中创建了一个按钮<br>改变窗口和按钮属性的函数：</p>
 <p>btn-&gt;setText() 显示文本<br>btn-&gt;move(a,b)  移动按钮位置<br>btn-&gt;resize()   改变按钮的大小<br>btn-&gt;setParent(this) 将按钮设置到对象树中</p>
 <p>resize()   改变窗口的大小<br>setWindowTitle()   改变窗口的名字<br>setFixedSize()     设置窗口的固定大小</p>
@@ -249,9 +251,11 @@
 
 
 <h2 id="命名规范"><a href="#命名规范" class="headerlink" title="命名规范"></a>命名规范</h2><p>命名规范：<br>类型 首字母大写，单词和单词之间首字母大写、<br>函数名 变量名 首字母小写，单词和单词之间首字母大写</p>
-<h2 id="对象树"><a href="#对象树" class="headerlink" title="对象树"></a>对象树</h2>
+<h2 id="对象树"><a href="#对象树" class="headerlink" title="对象树"></a>对象树</h2><img src="/2022/04/18/QT/QT%E5%AF%B9%E8%B1%A1%E6%A0%91.png" srcset="/img/loading.gif" lazyload class>
 <p>当创建的对象在堆区的时候，如果指定的父亲是QObject派生下来的类或者QObject子类派生下来的类，可以不用管理释放的操作，将对象放入到对象树中<br>一定程度上优化了内存回收机制<br>构造时由上往下，析构时由下往上</p>
-
+<h2 id="信号和槽"><a href="#信号和槽" class="headerlink" title="信号和槽"></a>信号和槽</h2><p><strong>connect</strong>(信号的发送者，发送的具体信号，信号的接收者，信号的处理（槽）)、<br>信号槽的优点：松散耦合，信号发送端和接受端本身是没有关联的，通过connect连接将两端耦合在一起</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-comment">//需求 点击按钮 关闭窗口</span><br>       <span class="hljs-comment">//参数1：信号的发送者  参数2：发送的信号 参数3：信号的接收者 参数4：处理的槽函数</span><br>        connect(myBtn,<span class="hljs-variable">&amp;</span>QPushButton::clicked,this,<span class="hljs-variable">&amp;</span>myWidget::close)<span class="hljs-punctuation">;</span><br><br></code></pre></td></tr></table></figure>
+<h3 id="自定义信号和槽"><a href="#自定义信号和槽" class="headerlink" title="自定义信号和槽"></a>自定义信号和槽</h3>
             </div>
             <hr>
             <div>
