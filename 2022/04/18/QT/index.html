@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2022/04/18/QT/QT%E5%AF%B9%E8%B1%A1%E6%A0%91.png">
 <meta property="article:published_time" content="2022-04-18T08:08:17.000Z">
-<meta property="article:modified_time" content="2022-04-18T08:48:34.702Z">
+<meta property="article:modified_time" content="2022-04-19T00:41:15.968Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2022/04/18/QT/QT%E5%AF%B9%E8%B1%A1%E6%A0%91.png">
@@ -198,7 +198,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.5k 字
+      2.6k 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13 分钟
+      22 分钟
     </span>
   
 
@@ -255,7 +255,14 @@
 <p>当创建的对象在堆区的时候，如果指定的父亲是QObject派生下来的类或者QObject子类派生下来的类，可以不用管理释放的操作，将对象放入到对象树中<br>一定程度上优化了内存回收机制<br>构造时由上往下，析构时由下往上</p>
 <h2 id="信号和槽"><a href="#信号和槽" class="headerlink" title="信号和槽"></a>信号和槽</h2><p><strong>connect</strong>(信号的发送者，发送的具体信号，信号的接收者，信号的处理（槽）)、<br>信号槽的优点：松散耦合，信号发送端和接受端本身是没有关联的，通过connect连接将两端耦合在一起</p>
 <figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-comment">//需求 点击按钮 关闭窗口</span><br>       <span class="hljs-comment">//参数1：信号的发送者  参数2：发送的信号 参数3：信号的接收者 参数4：处理的槽函数</span><br>        connect(myBtn,<span class="hljs-variable">&amp;</span>QPushButton::clicked,this,<span class="hljs-variable">&amp;</span>myWidget::close)<span class="hljs-punctuation">;</span><br><br></code></pre></td></tr></table></figure>
-<h3 id="自定义信号和槽"><a href="#自定义信号和槽" class="headerlink" title="自定义信号和槽"></a>自定义信号和槽</h3>
+<h3 id="自定义信号和槽"><a href="#自定义信号和槽" class="headerlink" title="自定义信号和槽"></a>自定义信号和槽</h3><h4 id="自定义信号"><a href="#自定义信号" class="headerlink" title="自定义信号"></a>自定义信号</h4><p><strong>信号</strong>：在类的signals里面写，返回值是void，不需要实现，可以有参数，可以重载<br><strong>槽函数</strong>：在public slots中写，返回值void，需要声明，需要实现，可以有参数，可以重载<br>用emit触发信号<br>先连接，然后再调用触发信号的函数</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs scss"><br> ······&#123;<br>    <span class="hljs-comment">//老师放学，学生回家的连接   </span><br>    <span class="hljs-built_in">connect</span>(zt,&amp;Teacher::overClass,st,&amp;Student::goHome);<br>    <span class="hljs-comment">//调用下课</span><br>    <span class="hljs-built_in">ClassisOver</span>();<br>&#125;<br>    void Widget::ClassisOver()&#123;<br>    <span class="hljs-comment">//下课后 调用老师下课的信号</span><br>    emit zt-&gt;<span class="hljs-built_in">overClass</span>();<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h5 id="自定义信号和槽函数重载后"><a href="#自定义信号和槽函数重载后" class="headerlink" title="自定义信号和槽函数重载后"></a>自定义信号和槽函数重载后</h5><p>需要利用函数指针指向函数的地址</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-comment">//自定义信号和槽函数的重载</span><br>   void (Teacher::*teacherSignal)(QString)=<span class="hljs-variable">&amp;</span>Teacher::overC<span class="hljs-attr">lass</span><span class="hljs-punctuation">;</span><br>   void (Student::*studentSlot)(QString)=<span class="hljs-variable">&amp;</span>Student::goH<span class="hljs-attr">ome</span><span class="hljs-punctuation">;</span><br>   <span class="hljs-comment">//连接带参数的信号和槽</span><br>   connect(zt,teacherSignal,st,studentSlot)<span class="hljs-punctuation">;</span><br><br>   <span class="hljs-comment">//调用下课</span><br>   ClassisOver()<span class="hljs-punctuation">;</span><br></code></pre></td></tr></table></figure>
+<p>QString 转化为char <em>：<br>先用ToUtf8()转化为QByteArray，再用Data()专户为char</em> </p>
+<h4 id="使用按钮"><a href="#使用按钮" class="headerlink" title="使用按钮"></a>使用按钮</h4><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs lisp">QPushButton *btn= new QPushButton(<span class="hljs-string">&quot;下课&quot;</span>,this)<span class="hljs-comment">;</span><br>this-&gt;resize(<span class="hljs-number">600</span>,<span class="hljs-number">400</span>)<span class="hljs-comment">;</span><br>connect(<span class="hljs-name">btn</span>,<span class="hljs-symbol">&amp;QPushButton</span>:<span class="hljs-symbol">:clicked</span>,this,<span class="hljs-symbol">&amp;Widget</span>:<span class="hljs-symbol">:ClassisOver</span>)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+<h4 id="信号连接信号"><a href="#信号连接信号" class="headerlink" title="信号连接信号"></a>信号连接信号</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs php">QPushButton *btn2=<span class="hljs-keyword">new</span> <span class="hljs-title class_">QPushButton</span>(<span class="hljs-string">&quot;第二个按钮&quot;</span>,this);<br>    this-&gt;<span class="hljs-title function_ invoke__">resize</span>(<span class="hljs-number">800</span>,<span class="hljs-number">400</span>);<br>    <span class="hljs-keyword">void</span>(<span class="hljs-title class_">Teacher</span>::*teacherSignal2)(<span class="hljs-keyword">void</span>)=&amp;<span class="hljs-title class_">Teacher</span>::overClass;<br>    <span class="hljs-keyword">void</span>(<span class="hljs-title class_">Student</span>::*studentSignal2)(<span class="hljs-keyword">void</span>)=&amp;<span class="hljs-title class_">Student</span>::goHome;<br>    <span class="hljs-title function_ invoke__">connect</span>(zt,teacherSignal2,st,studentSignal2);<br>    <span class="hljs-title function_ invoke__">connect</span>(btn2,&amp;<span class="hljs-title class_">QPushButton</span>::clicked,zt,teacherSignal2);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="断开信号：disconnect"><a href="#断开信号：disconnect" class="headerlink" title="断开信号：disconnect"></a>断开信号：disconnect</h4>
             </div>
             <hr>
             <div>
