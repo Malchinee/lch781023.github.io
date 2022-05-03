@@ -24,7 +24,7 @@
 <meta property="og:description" content="周报">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-02T06:12:42.000Z">
-<meta property="article:modified_time" content="2022-05-03T07:29:47.369Z">
+<meta property="article:modified_time" content="2022-05-03T09:35:51.961Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -196,7 +196,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      3.2k 字
     </span>
   
 
@@ -205,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      11 分钟
+      27 分钟
     </span>
   
 
@@ -245,6 +245,26 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">mycomparison</span>&#123;<br>    <span class="hljs-keyword">public</span>:<br>        <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(<span class="hljs-type">const</span> pair&lt;<span class="hljs-type">int</span>,<span class="hljs-type">int</span>&gt;&amp;lhs,<span class="hljs-type">const</span> pair &lt;<span class="hljs-type">int</span>,<span class="hljs-type">int</span>&gt;&amp;rhs)</span></span>&#123;<br>            <span class="hljs-keyword">return</span> lhs.second&gt;rhs.second;<br>        &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h2><p>学习了应用层的一些知识，<a target="_blank" rel="noopener" href="https://lch781023.github.io/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/">应用层协议原理</a>。</p>
 <h1 id="周二"><a href="#周二" class="headerlink" title="周二"></a>周二</h1><h2 id="计算机网络-1"><a href="#计算机网络-1" class="headerlink" title="计算机网络"></a>计算机网络</h2><p><a target="_blank" rel="noopener" href="https://lch781023.github.io/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/#Web%E5%92%8CHTTP">web和HTTP</a><br><a target="_blank" rel="noopener" href="https://lch781023.github.io/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/#%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6">电子邮件</a></p>
+<h2 id="代码随想录的二叉树内容"><a href="#代码随想录的二叉树内容" class="headerlink" title="代码随想录的二叉树内容"></a>代码随想录的二叉树内容</h2><h4 id="力扣513-找树左下角的值"><a href="#力扣513-找树左下角的值" class="headerlink" title="力扣513.找树左下角的值"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-bottom-left-tree-value/submissions/">力扣513</a>.找树左下角的值</h4><p>层序遍历的话，如何判断是最后一层呢？通过迭代result的值就可以了，最后一个result的值一定是最后一层左下角的值了</p>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs xl"><span class="hljs-keyword">while</span>(!que.empty())&#123;<br>           int size=que.size();<br>           <span class="hljs-function"><span class="hljs-title">result</span>=que.front()-&gt;</span>val;<br>           <span class="hljs-keyword">for</span>(int i=<span class="hljs-number">0</span>;i&lt;size;i++)&#123;<br>               TreeNode* cur=que.front();<br>               que.pop();<br>               <span class="hljs-function"><span class="hljs-title">if</span>(cur-&gt;</span><span class="hljs-function"><span class="hljs-title">left</span>) que.push(cur-&gt;</span>left);<br>               <span class="hljs-function"><span class="hljs-title">if</span>(cur-&gt;</span><span class="hljs-function"><span class="hljs-title">right</span>) que.push(cur-&gt;</span>right);<br>           &#125;<br>       &#125;<br></code></pre></td></tr></table></figure>
+<p>递归法的话，求深度使用<strong>前序遍历</strong>，但是不能一直递归到最左边，因为不一定是最下层<br>需要一个类里面定义个最大深度，只有最左边的，最大深度的节点，才是树左下角的节点。每次递归是判断是不是叶子节点，如果是，再判断是不是深度最大的，不断更新最大深度</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">int <span class="hljs-attr">maxlen=</span>INT_MIN;<br>int maxLeftValue;<br>void traversal(TreeNode* <span class="hljs-keyword">node</span><span class="hljs-title">,int</span> leftLen)&#123;<br>    if(<span class="hljs-keyword">node</span><span class="hljs-title">-&gt;left</span>==NULL&amp;&amp;<span class="hljs-keyword">node</span><span class="hljs-title">-&gt;right</span>==NULL)&#123;<br>        if(leftLen&gt;maxlen)&#123;<br>            <span class="hljs-attr">maxlen=</span>leftLen;<br>            <span class="hljs-attr">maxLeftValue=</span><span class="hljs-keyword">node</span><span class="hljs-title">-&gt;val</span>;<br>        &#125;<br>        return;<br>    &#125;<br>    if(<span class="hljs-keyword">node</span><span class="hljs-title">-&gt;left</span>)&#123;<br>        leftLen++;<br>        traversal(<span class="hljs-keyword">node</span><span class="hljs-title">-&gt;left</span>,leftLen);<br>        leftLen--; //回溯<br>    &#125;<br>    if(<span class="hljs-keyword">node</span><span class="hljs-title">-&gt;right</span>)&#123;<br>        leftLen++;<br>        traversal(<span class="hljs-keyword">node</span><span class="hljs-title">-&gt;right</span>,leftLen);<br>        leftLen--;//回溯<br>    &#125;<br>    return ;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>那么另外，判断某递归函数返回值是void还是其他，如果是遍历整棵树，返回值是void；遍历某一条路线，必须有返回值</p>
+<h4 id="力扣112-路径总和"><a href="#力扣112-路径总和" class="headerlink" title="力扣112.路径总和"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/path-sum/submissions/">力扣112</a>.路径总和</h4><p>是否需要返回值，由三点：（搬运）</p>
+<ul>
+<li>如果需要搜索整棵二叉树且<strong>不用处理递归返回值</strong>，递归函数就不要返回值。</li>
+<li>如果需要搜索整棵二叉树且<strong>需要处理递归返回值</strong>，递归函数就需要返回值。 </li>
+<li>如果要搜索其中一条符合条件的路径，那么递归一定需要返回值，因为遇到符合条件的路径了就要及时返回。（本题的情况）</li>
+</ul>
+<p>在算总和方面，不要正向加，而是反向减targetSum，使targetSum&#x3D;0并且没有左右叶子就是要找的路径<br>递归函数：</p>
+<figure class="highlight plaintext"><figcaption><span>traversal(TreeNode* cur, int count) &#123;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bool">    if (!cur-&gt;left &amp;&amp; !cur-&gt;right &amp;&amp; count == 0) return true; // 遇到叶子节点，并且计数为0<br>    if (!cur-&gt;left &amp;&amp; !cur-&gt;right) return false; // 遇到叶子节点直接返回<br><br>    if (cur-&gt;left) &#123; // 左<br>        count -= cur-&gt;left-&gt;val; // 递归，处理节点;<br>        if (traversal(cur-&gt;left, count)) return true;<br>        count += cur-&gt;left-&gt;val; // 回溯，撤销处理结果<br>    &#125;<br>    if (cur-&gt;right) &#123; // 右<br>        count -= cur-&gt;right-&gt;val; // 递归，处理节点;<br>        if (traversal(cur-&gt;right, count)) return true;<br>        count += cur-&gt;right-&gt;val; // 回溯，撤销处理结果<br>    &#125;<br>    return false;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>特别特别记住，主函数调用时，还要减去根节点的值</p>
+<p><strong>迭代法</strong>要使用pair&lt; TreeNode*,int&gt;，first记录节点，second记录到目前节点的总和</p>
+<h4 id="力扣113-路径之和II"><a href="#力扣113-路径之和II" class="headerlink" title="力扣113.路径之和II"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/path-sum-ii/submissions/">力扣113</a>.路径之和II</h4><p>类里面定义一个result用于存储结果，vec存储每一条路径<br>因为此题是遍历整个二叉树，递归函数不能有返回值</p>
+<ul>
+<li>递归终止条件：叶子节点并且targetSum＝0，将vec存入result中</li>
+<li>单层递归逻辑：如果有左右节点，vec加入左右节点，targetSum减去左右节点的值，然后调用递归函数，然后再回溯</li>
+</ul>
 
             </div>
             <hr>
