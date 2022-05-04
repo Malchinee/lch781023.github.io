@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://example.com/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%E5%92%8C%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F.png">
 <meta property="og:image" content="http://example.com/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/SMTP.png">
 <meta property="article:published_time" content="2022-05-02T12:39:18.000Z">
-<meta property="article:modified_time" content="2022-05-03T11:35:16.539Z">
+<meta property="article:modified_time" content="2022-05-04T00:58:37.678Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%E5%92%8C%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F.png">
@@ -255,8 +255,17 @@
 <li>交换报文的类型</li>
 <li>各种报文类型的语法</li>
 <li>字段的语义</li>
-<li>确定一个进程何时以及如何发送报文<br>注：应用层协议只是网络应用的一部分。<br>web协议是http，电子邮件协议是SMTP<h1 id="Web和HTTP"><a href="#Web和HTTP" class="headerlink" title="Web和HTTP"></a>Web和HTTP</h1><h4 id="HTTP概况"><a href="#HTTP概况" class="headerlink" title="HTTP概况"></a>HTTP概况</h4>WEB页面由对象组成<br>HTML基本文件通过URL地址引用页面中的其他对象，URL由两部分组成：存放对象的服务器主机名和对象的路径名<br>http使用TCP作为它的支撑运输协议，一个客户进程发送的每个HTTP请求报文都能最终完整地到达服务器，服务器进程发出的每个响应报文都能最终完整地到达客户<br>HTTP是<strong>无状态协议</strong>，不保存任何客户的信息<h4 id="非持续连接和持续连接"><a href="#非持续连接和持续连接" class="headerlink" title="非持续连接和持续连接"></a>非持续连接和持续连接</h4>非持续连接：每个请求&#x2F;响应都通过单独的TCP连接发送<br>持续连接：所有的请求和响应都经过相同的TCP连接发送<br>默认情况下使用持续连接<h5 id="采用非持续连接的HTTP"><a href="#采用非持续连接的HTTP" class="headerlink" title="采用非持续连接的HTTP"></a>采用非持续连接的HTTP</h5>如果客户向服务器访问含有11个对象的网页（1个html基本文件和10个jpeg图像），需要建立11次连接<br>往返时间RTT：包括分组传播时延、分组在中间路由器和交换机上的排队时延以及分组处理的时延。<br>用户点击某超链接时，总的响应时间就是两个RTT（一个RTT用于建立连接，另一个用于请求和接受对象）加上服务器传输html文件的时间<h5 id="采用持续连接的TCP"><a href="#采用持续连接的TCP" class="headerlink" title="采用持续连接的TCP"></a>采用持续连接的TCP</h5>服务器在发送响应后保持该TCP连接打开，若长时间未使用，HTTP服务器就关闭该连接<h4 id="HTTP报文格式"><a href="#HTTP报文格式" class="headerlink" title="HTTP报文格式"></a>HTTP报文格式</h4><img src="/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%E5%92%8C%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F.png" srcset="/img/loading.gif" lazyload class>
-<h5 id="请求报文"><a href="#请求报文" class="headerlink" title="请求报文"></a>请求报文</h5>get方法：请求一个对象<br>post方法：提交表单<br>head方法：类似于get方法但是不返回请求对象，常用于调试跟踪<br>put方法：允许用户上传对象到指定的web服务器上的指定的路径<br>delete方法：允许用户或应用程序删除web服务器上的对象<h5 id="响应报文"><a href="#响应报文" class="headerlink" title="响应报文"></a>响应报文</h5>常见的状态码和相关短语：</li>
+<li>确定一个进程何时以及如何发送报文</li>
+</ul>
+<p>注：应用层协议只是网络应用的一部分。<br>web协议是http，电子邮件协议是SMTP</p>
+<h1 id="Web和HTTP"><a href="#Web和HTTP" class="headerlink" title="Web和HTTP"></a>Web和HTTP</h1><h4 id="HTTP概况"><a href="#HTTP概况" class="headerlink" title="HTTP概况"></a>HTTP概况</h4><p>WEB页面由对象组成<br>HTML基本文件通过URL地址引用页面中的其他对象，URL由两部分组成：存放对象的服务器主机名和对象的路径名<br>http使用TCP作为它的支撑运输协议，一个客户进程发送的每个HTTP请求报文都能最终完整地到达服务器，服务器进程发出的每个响应报文都能最终完整地到达客户<br>HTTP是<strong>无状态协议</strong>，不保存任何客户的信息</p>
+<h4 id="非持续连接和持续连接"><a href="#非持续连接和持续连接" class="headerlink" title="非持续连接和持续连接"></a>非持续连接和持续连接</h4><p>非持续连接：每个请求&#x2F;响应都通过单独的TCP连接发送<br>持续连接：所有的请求和响应都经过相同的TCP连接发送<br>默认情况下使用持续连接</p>
+<h5 id="采用非持续连接的HTTP"><a href="#采用非持续连接的HTTP" class="headerlink" title="采用非持续连接的HTTP"></a>采用非持续连接的HTTP</h5><p>如果客户向服务器访问含有11个对象的网页（1个html基本文件和10个jpeg图像），需要建立11次连接<br>往返时间RTT：包括分组传播时延、分组在中间路由器和交换机上的排队时延以及分组处理的时延。<br>用户点击某超链接时，总的响应时间就是两个RTT（一个RTT用于建立连接，另一个用于请求和接受对象）加上服务器传输html文件的时间</p>
+<h5 id="采用持续连接的TCP"><a href="#采用持续连接的TCP" class="headerlink" title="采用持续连接的TCP"></a>采用持续连接的TCP</h5><p>服务器在发送响应后保持该TCP连接打开，若长时间未使用，HTTP服务器就关闭该连接</p>
+<h4 id="HTTP报文格式"><a href="#HTTP报文格式" class="headerlink" title="HTTP报文格式"></a>HTTP报文格式</h4><img src="/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%E5%92%8C%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F.png" srcset="/img/loading.gif" lazyload class>
+<h5 id="请求报文"><a href="#请求报文" class="headerlink" title="请求报文"></a>请求报文</h5><p>get方法：请求一个对象<br>post方法：提交表单<br>head方法：类似于get方法但是不返回请求对象，常用于调试跟踪<br>put方法：允许用户上传对象到指定的web服务器上的指定的路径<br>delete方法：允许用户或应用程序删除web服务器上的对象</p>
+<h5 id="响应报文"><a href="#响应报文" class="headerlink" title="响应报文"></a>响应报文</h5><p>常见的状态码和相关短语：</p>
+<ul>
 <li>200 OK：请求成功，信息返回在响应报文中</li>
 <li>301 Moved Permanently：请求的对象已经被永久转移了，新的url定义在响应报文的location：首部行中。客户软件将自动获取新的url</li>
 <li>400 Bad Request：一个通用的差错代码，指示该请求不能被服务器理解。</li>
