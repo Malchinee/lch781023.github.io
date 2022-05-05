@@ -24,7 +24,7 @@
 <meta property="og:description" content="周报">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-02T06:12:42.000Z">
-<meta property="article:modified_time" content="2022-05-03T13:16:33.169Z">
+<meta property="article:modified_time" content="2022-05-05T07:41:59.780Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -196,7 +196,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.4k 字
+      5.2k 字
     </span>
   
 
@@ -205,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      37 分钟
+      43 分钟
     </span>
   
 
@@ -280,6 +280,23 @@
 <li>我们找出数组中的最大的元素，然后将该值赋给该层递归的根节点，然后分割数组，左右的数组分别进入下一层递归</li>
 <li>maxValueIndex值要大于0，才能让root-&gt;left进入下一层递归，否则，root-&gt;left就是空的，maxValueIndex &lt; nums.size()-1同理，必须保证有元素。</li>
 </ul>
+<h1 id="周三"><a href="#周三" class="headerlink" title="周三"></a>周三</h1><p>补物理作业加摆烂</p>
+<h1 id="周四"><a href="#周四" class="headerlink" title="周四"></a>周四</h1><h2 id="代码随想录"><a href="#代码随想录" class="headerlink" title="代码随想录"></a>代码随想录</h2><p>递归求深度高度这块一直不太清楚<br>首先，</p>
+<ul>
+<li>深度：从<strong>根节点</strong>到<strong>该节点</strong>最长简单路径的个数（但是力扣上以节点个数为准）</li>
+<li>高度：从<strong>该节点</strong>到<strong>叶子节点</strong>最长简单路径的个数（但是力扣上以节点个数）为准</li>
+</ul>
+<p>求深度，用前序遍历，求高度，用后序遍历<br>因为求深度可以从上往下去查，用前序（中左右）；求高度得从下往上去查，用后序（左右中）<br>但是求二叉树的最大深度（也就是根节点的最大高度），我们可以使用后序。</p>
+<p>如求高度：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/balanced-binary-tree/submissions/">力扣110</a>.平衡二叉树</p>
+<h4 id="力扣617-合并二叉树"><a href="#力扣617-合并二叉树" class="headerlink" title="力扣617.合并二叉树"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/merge-two-binary-trees/submissions/">力扣617</a>.合并二叉树</h4><p>自己做的时候是想创建两个队列，不管是不是空就放进去，空的话就放一个NULL进去，然后这样做的画很麻烦。<br>作者创建一个队列，</p>
+<ul>
+<li>如果两个节点都不空，将两个数的各自的节点同时放进去</li>
+<li>如果root1节点空，但是root2节点不空，就赋值过去</li>
+<li>如果root1节点不空，但是root2节点空，那就什么都不需要管就好了，最终返回也是返回root1</li>
+</ul>
+<p>此题用递归法比较简单。<br>递归：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs coq">TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) &#123;<br>        <span class="hljs-keyword">if</span>(root1==NULL) <span class="hljs-keyword">return</span> root2;<br>        <span class="hljs-keyword">if</span>(root2==NULL) <span class="hljs-keyword">return</span> root1;<br>        <br>        root1-&gt;val+=root2-&gt;val;<br>        root1-&gt;<span class="hljs-built_in">left</span>=mergeTrees(root1-&gt;<span class="hljs-built_in">left</span>,root2-&gt;<span class="hljs-built_in">left</span>);<br>        root1-&gt;<span class="hljs-built_in">right</span>=mergeTrees(root1-&gt;<span class="hljs-built_in">right</span>,root2-&gt;<span class="hljs-built_in">right</span>);<br><br>        <span class="hljs-keyword">return</span> root1;<br>    &#125;<br></code></pre></td></tr></table></figure>
+<h4 id="力扣700-二叉搜索树中的搜索"><a href="#力扣700-二叉搜索树中的搜索" class="headerlink" title="力扣700.二叉搜索树中的搜索"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/search-in-a-binary-search-tree/">力扣700</a>.二叉搜索树中的搜索</h4><p>二叉搜索树可以使用更简单的迭代方法，不适用辅助队列和辅助栈</p>
 
             </div>
             <hr>
