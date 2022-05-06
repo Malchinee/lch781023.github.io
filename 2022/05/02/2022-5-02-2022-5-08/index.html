@@ -24,7 +24,7 @@
 <meta property="og:description" content="周报">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-02T06:12:42.000Z">
-<meta property="article:modified_time" content="2022-05-05T07:41:59.780Z">
+<meta property="article:modified_time" content="2022-05-06T07:25:06.742Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -196,7 +196,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      5.2k 字
+      6k 字
     </span>
   
 
@@ -205,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      43 分钟
+      50 分钟
     </span>
   
 
@@ -297,6 +297,18 @@
 <p>此题用递归法比较简单。<br>递归：</p>
 <figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs coq">TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) &#123;<br>        <span class="hljs-keyword">if</span>(root1==NULL) <span class="hljs-keyword">return</span> root2;<br>        <span class="hljs-keyword">if</span>(root2==NULL) <span class="hljs-keyword">return</span> root1;<br>        <br>        root1-&gt;val+=root2-&gt;val;<br>        root1-&gt;<span class="hljs-built_in">left</span>=mergeTrees(root1-&gt;<span class="hljs-built_in">left</span>,root2-&gt;<span class="hljs-built_in">left</span>);<br>        root1-&gt;<span class="hljs-built_in">right</span>=mergeTrees(root1-&gt;<span class="hljs-built_in">right</span>,root2-&gt;<span class="hljs-built_in">right</span>);<br><br>        <span class="hljs-keyword">return</span> root1;<br>    &#125;<br></code></pre></td></tr></table></figure>
 <h4 id="力扣700-二叉搜索树中的搜索"><a href="#力扣700-二叉搜索树中的搜索" class="headerlink" title="力扣700.二叉搜索树中的搜索"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/search-in-a-binary-search-tree/">力扣700</a>.二叉搜索树中的搜索</h4><p>二叉搜索树可以使用更简单的迭代方法，不适用辅助队列和辅助栈</p>
+<h1 id="周五"><a href="#周五" class="headerlink" title="周五"></a>周五</h1><h2 id="代码随想录-1"><a href="#代码随想录-1" class="headerlink" title="代码随想录"></a>代码随想录</h2><h4 id="力扣236-二叉树的最近公共祖先"><a href="#力扣236-二叉树的最近公共祖先" class="headerlink" title="力扣236.二叉树的最近公共祖先"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/">力扣236</a>.二叉树的最近公共祖先</h4><p>如果递归函数有返回值，如何判断搜索一条边还是一棵树：<br>搜索一条边：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs coq"><span class="hljs-keyword">if</span> (递归函数(root-&gt;<span class="hljs-built_in">left</span>)) <span class="hljs-keyword">return</span> ;<br><br><span class="hljs-keyword">if</span> (递归函数(root-&gt;<span class="hljs-built_in">right</span>)) <span class="hljs-keyword">return</span> ;<br></code></pre></td></tr></table></figure>
+<p>搜索整棵树：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs coq"><span class="hljs-built_in">left</span> = 递归函数(root-&gt;<span class="hljs-built_in">left</span>);<br><span class="hljs-built_in">right</span> = 递归函数(root-&gt;<span class="hljs-built_in">right</span>);<br><span class="hljs-built_in">left</span>与<span class="hljs-built_in">right</span>的逻辑处理;<br></code></pre></td></tr></table></figure>
+<p>如果是搜索一条边，递归函数有返回值时，需要立刻返回；<br>如果时搜索整棵树，需要用left和right接住变量值，再处理逻辑，也是后序遍历中处理中间节点的逻辑(也是回溯)</p>
+<p>判断p和q的最近公共祖先：如果根节点左子树有p(q)，并且右子树有q(p)，则该节点是公共祖先。我们从下往上找，就能找到最近公共祖先。从下往上找，就需要后序遍历(回溯)<br>用left和right接住处理结果，当左右都不空，返回该节点；左空右不空，返回右节点(左节点同理)</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs coq">TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) &#123;<br>       <span class="hljs-keyword">if</span>(q==root|<span class="hljs-type">|p</span>==root|<span class="hljs-type">|root</span>==NULL) <span class="hljs-keyword">return</span> root;<br>       TreeNode* <span class="hljs-built_in">left</span>=lowestCommonAncestor(root-&gt;<span class="hljs-built_in">left</span>,p,q);<br>       TreeNode* <span class="hljs-built_in">right</span>=lowestCommonAncestor(root-&gt;<span class="hljs-built_in">right</span>,p,q);<br>       <span class="hljs-keyword">if</span>(<span class="hljs-built_in">left</span>!=NULL&amp;&amp;<span class="hljs-built_in">right</span>!=NULL) <span class="hljs-keyword">return</span> root;<br>       <span class="hljs-keyword">if</span>(<span class="hljs-built_in">left</span>!=NULL&amp;&amp;<span class="hljs-built_in">right</span>==NULL) <span class="hljs-keyword">return</span> <span class="hljs-built_in">left</span>;<br>       <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-built_in">left</span>==NULL&amp;&amp;<span class="hljs-built_in">right</span>!=NULL) <span class="hljs-keyword">return</span> <span class="hljs-built_in">right</span>;<br>       <span class="hljs-keyword">else</span>&#123;<br>           <span class="hljs-keyword">return</span> NULL;<br>       &#125;<br>   &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
 
             </div>
             <hr>
