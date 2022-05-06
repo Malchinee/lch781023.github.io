@@ -24,7 +24,7 @@
 <meta property="og:description" content="周报">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-02T06:12:42.000Z">
-<meta property="article:modified_time" content="2022-05-06T07:25:06.742Z">
+<meta property="article:modified_time" content="2022-05-06T13:28:54.584Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -196,7 +196,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      6k 字
+      6.9k 字
     </span>
   
 
@@ -205,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      50 分钟
+      58 分钟
     </span>
   
 
@@ -304,11 +304,11 @@
 <p>如果是搜索一条边，递归函数有返回值时，需要立刻返回；<br>如果时搜索整棵树，需要用left和right接住变量值，再处理逻辑，也是后序遍历中处理中间节点的逻辑(也是回溯)</p>
 <p>判断p和q的最近公共祖先：如果根节点左子树有p(q)，并且右子树有q(p)，则该节点是公共祖先。我们从下往上找，就能找到最近公共祖先。从下往上找，就需要后序遍历(回溯)<br>用left和right接住处理结果，当左右都不空，返回该节点；左空右不空，返回右节点(左节点同理)</p>
 <figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs coq">TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) &#123;<br>       <span class="hljs-keyword">if</span>(q==root|<span class="hljs-type">|p</span>==root|<span class="hljs-type">|root</span>==NULL) <span class="hljs-keyword">return</span> root;<br>       TreeNode* <span class="hljs-built_in">left</span>=lowestCommonAncestor(root-&gt;<span class="hljs-built_in">left</span>,p,q);<br>       TreeNode* <span class="hljs-built_in">right</span>=lowestCommonAncestor(root-&gt;<span class="hljs-built_in">right</span>,p,q);<br>       <span class="hljs-keyword">if</span>(<span class="hljs-built_in">left</span>!=NULL&amp;&amp;<span class="hljs-built_in">right</span>!=NULL) <span class="hljs-keyword">return</span> root;<br>       <span class="hljs-keyword">if</span>(<span class="hljs-built_in">left</span>!=NULL&amp;&amp;<span class="hljs-built_in">right</span>==NULL) <span class="hljs-keyword">return</span> <span class="hljs-built_in">left</span>;<br>       <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-built_in">left</span>==NULL&amp;&amp;<span class="hljs-built_in">right</span>!=NULL) <span class="hljs-keyword">return</span> <span class="hljs-built_in">right</span>;<br>       <span class="hljs-keyword">else</span>&#123;<br>           <span class="hljs-keyword">return</span> NULL;<br>       &#125;<br>   &#125;<br></code></pre></td></tr></table></figure>
-
-
-
-
-
+<h4 id="力扣235-二叉搜索树的最近公共祖先"><a href="#力扣235-二叉搜索树的最近公共祖先" class="headerlink" title="力扣235.二叉搜索树的最近公共祖先"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/submissions/">力扣235</a>.二叉搜索树的最近公共祖先</h4><p>利用二叉搜索树的性质，当节点的值大于p和q，那么就向左边搜索；反之就向右边搜索。</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">TreeNode* traversal(TreeNode* <span class="hljs-keyword">node</span><span class="hljs-title">,TreeNode</span>* p,TreeNode* q)&#123;<br>        if(<span class="hljs-keyword">node</span><span class="hljs-title">==NULL</span>) return <span class="hljs-keyword">node</span><span class="hljs-title">;</span><br><span class="hljs-title">        if</span>(<span class="hljs-keyword">node</span><span class="hljs-title">-&gt;val</span>&gt;p-&gt;val&amp;&amp;<span class="hljs-keyword">node</span><span class="hljs-title">-&gt;val</span>&gt;q-&gt;val)&#123;<br>            TreeNode *<span class="hljs-attr">left=</span>traversal(<span class="hljs-keyword">node</span><span class="hljs-title">-&gt;left</span>,p,q);<br>            if(left!=NULL) return left;<br>        &#125;<br>        if(<span class="hljs-keyword">node</span><span class="hljs-title">-&gt;val</span><span class="hljs-tag">&lt;p-&gt;</span>val&amp;&amp;<span class="hljs-keyword">node</span><span class="hljs-title">-&gt;val</span><span class="hljs-tag">&lt;q-&gt;</span>val)&#123;<br>            TreeNode* <span class="hljs-attr">right=</span>traversal(<span class="hljs-keyword">node</span><span class="hljs-title">-&gt;right</span>,p,q);<br>            if(right!=NULL) return right;<br>        &#125;<br>        return <span class="hljs-keyword">node</span><span class="hljs-title">;</span><br><span class="hljs-title">    &#125;</span><br></code></pre></td></tr></table></figure>
+<p>使用迭代法要定义两个节点，一个是当前的节点，另一个是当前节点的父节点<br>注意二叉搜索树的遍历方式</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs routeros">TreeNode* insertIntoBST(TreeNode* root, int val) &#123;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-attribute">root</span>==NULL)&#123;<br>            TreeNode* <span class="hljs-attribute">cur</span>=new TreeNode(val);<br>            return cur;<br>        &#125;<br>        TreeNode* <span class="hljs-attribute">parent</span>=root;<br>        TreeNode* <span class="hljs-attribute">cur</span>=root;<br>        <span class="hljs-keyword">while</span>(cur!=<span class="hljs-literal">NULL</span>)&#123;<br>            <span class="hljs-attribute">parent</span>=cur;<br>            <span class="hljs-keyword">if</span>(cur-&gt;val&gt;val) <span class="hljs-attribute">cur</span>=cur-&gt;left;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(cur-&gt;val&lt;val) <span class="hljs-attribute">cur</span>=cur-&gt;right;<br>        &#125;<br>        TreeNode *<span class="hljs-attribute">node</span>=new TreeNode(val);<br>        <span class="hljs-keyword">if</span>(val&lt;parent-&gt;val)&#123;<br>            parent-&gt;<span class="hljs-attribute">left</span>=node;<br>        &#125;<span class="hljs-keyword">else</span> parent-&gt;<span class="hljs-attribute">right</span>=node;<br>        return root;<br>    &#125;<br></code></pre></td></tr></table></figure>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>看了第一章<a target="_blank" rel="noopener" href="https://lch781023.github.io/2022/05/06/%E7%BB%AA%E8%AE%BA/">绪论</a></p>
 
             </div>
             <hr>
