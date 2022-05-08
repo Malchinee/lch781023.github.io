@@ -4,11 +4,30 @@
   
   
   <entry>
+    <title>SQL</title>
+    <link href="/2022/05/08/SQL/"/>
+    <url>/2022/05/08/SQL/</url>
+    
+    <content type="html"><![CDATA[<h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><p>SQL语言：</p><ul><li>数据定义语言<strong>DDL</strong>（提供定义关系模式、删除关系以及修改关系模式的命令）</li><li>数据操纵语言<strong>DML</strong>（提供从数据库中查询信息，以及在数据库中插入元组、删除元组、修改元组的能力）</li><li>完整性：<strong>DDL</strong>定义完整性约束的命令，保存在数据库中的数据必须满足所定义的完整性约束</li><li>视图定义：DDL包括视图的定义</li><li>事务控制：定义事务的开始和结束</li><li>嵌入式SQL和动态SQL</li><li>授权</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>数据库</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>关系数据库</title>
     <link href="/2022/05/06/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     <url>/2022/05/06/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
     
-    <content type="html"><![CDATA[<h1 id="关系数据结构及形式化定义"><a href="#关系数据结构及形式化定义" class="headerlink" title="关系数据结构及形式化定义"></a>关系数据结构及形式化定义</h1><h2 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h2><p><strong>域</strong>、<strong>笛卡尔积</strong>、<strong>元组</strong>、<strong>分量</strong>、<strong>基数</strong>、<strong>关系</strong></p><img src="/2022/05/06/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E7%B3%BB.png" class><p>关系可以有三种类型：基本关系、查询表和视图表<br>基本关系的6条性质</p><ul><li>列是同质的，每一列中的分量是同一类型的数据，来自同一个域</li><li>不同列课出自同一个域，称其中的每一列为一个属性，不同的属性要给予不同的属性名</li><li>列的顺序无所谓</li><li>任何两个元组的候选码不能取相同的值</li><li>行的顺序无所谓</li><li>分量必须取原子值，每一个分量都是不可分的数据项</li></ul><h2 id="关系模式"><a href="#关系模式" class="headerlink" title="关系模式"></a>关系模式</h2><p>关系的描述称为<strong>关系模式</strong>，表示为：R(U,D,DOM,F)<br>R：关系名，U组成该关系的属性名集合，D：U中属性所来自的域，DOM属性向域的映像集合，F为属性间数据的依赖关系集合</p><h2 id="关系数据库"><a href="#关系数据库" class="headerlink" title="关系数据库"></a>关系数据库</h2><p>型：关系数据库模式<br>值：这些关系模式在某一时刻对应的关系的集合</p><h1 id="关系操作"><a href="#关系操作" class="headerlink" title="关系操作"></a>关系操作</h1><h2 id="基本关系操作"><a href="#基本关系操作" class="headerlink" title="基本关系操作"></a>基本关系操作</h2><p>查询、插入、删除、修改<br>查询基本操作：选择、投影、并、差、笛卡尔积<br>关系操作的特点是集合操作方式，操作的对象和结果都是集合（一次一集合方式），非关系数据库的数据操作方式称为一次一记录方式</p><h2 id="关系数据语言的分类"><a href="#关系数据语言的分类" class="headerlink" title="关系数据语言的分类"></a>关系数据语言的分类</h2><h1 id="关系的完整性"><a href="#关系的完整性" class="headerlink" title="关系的完整性"></a>关系的完整性</h1><h2 id="实体完整性"><a href="#实体完整性" class="headerlink" title="实体完整性"></a>实体完整性</h2><p><strong>实体完整性规则</strong>：若属性A是基本关系R的主属性，则A不能取空值</p><h2 id="参照完整性"><a href="#参照完整性" class="headerlink" title="参照完整性"></a>参照完整性</h2><img src="/2022/05/06/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%8F%82%E7%85%A7%E5%AE%8C%E6%95%B4%E6%80%A7.png" class><p><strong>参照完整性规则</strong>：若属性F是基本关系R的外码，它与基本关系S的主码Ks相对应（基本关系R与S不一定是不同的关系），则对于R中的每个元组在F上的值必须：</p><ul><li>或者空值</li><li>或者等于S中的某个元组的主码值</li><li>空值</li><li>非空值，则该值必须是专业关系元组的“专业号”</li></ul><h2 id="用户定义的完整性"><a href="#用户定义的完整性" class="headerlink" title="用户定义的完整性"></a>用户定义的完整性</h2><p>针对某一具体关系数据库的约束条件，反应某一具体应用涉及的数据必须满足的语义要求</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="关系数据结构及形式化定义"><a href="#关系数据结构及形式化定义" class="headerlink" title="关系数据结构及形式化定义"></a>关系数据结构及形式化定义</h1><h2 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h2><p><strong>域</strong>、<strong>笛卡尔积</strong>、<strong>元组</strong>、<strong>分量</strong>、<strong>基数</strong>、<strong>关系</strong></p><img src="/2022/05/06/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E7%B3%BB.png" class><p>关系可以有三种类型：基本关系、查询表和视图表<br>基本关系的6条性质</p><ul><li>列是同质的，每一列中的分量是同一类型的数据，来自同一个域</li><li>不同列课出自同一个域，称其中的每一列为一个属性，不同的属性要给予不同的属性名</li><li>列的顺序无所谓</li><li>任何两个元组的候选码不能取相同的值</li><li>行的顺序无所谓</li><li>分量必须取原子值，每一个分量都是不可分的数据项</li></ul><h2 id="关系模式"><a href="#关系模式" class="headerlink" title="关系模式"></a>关系模式</h2><p>关系的描述称为<strong>关系模式</strong>，表示为：R(U,D,DOM,F)<br>R：关系名，U组成该关系的属性名集合，D：U中属性所来自的域，DOM属性向域的映像集合，F为属性间数据的依赖关系集合</p><h2 id="关系数据库"><a href="#关系数据库" class="headerlink" title="关系数据库"></a>关系数据库</h2><p>型：关系数据库模式<br>值：这些关系模式在某一时刻对应的关系的集合</p><h1 id="关系操作"><a href="#关系操作" class="headerlink" title="关系操作"></a>关系操作</h1><h2 id="基本关系操作"><a href="#基本关系操作" class="headerlink" title="基本关系操作"></a>基本关系操作</h2><p>查询、插入、删除、修改<br>查询基本操作：选择、投影、并、差、笛卡尔积<br>关系操作的特点是集合操作方式，操作的对象和结果都是集合（一次一集合方式），非关系数据库的数据操作方式称为一次一记录方式</p><h2 id="关系数据语言的分类"><a href="#关系数据语言的分类" class="headerlink" title="关系数据语言的分类"></a>关系数据语言的分类</h2><h1 id="关系的完整性"><a href="#关系的完整性" class="headerlink" title="关系的完整性"></a>关系的完整性</h1><h2 id="实体完整性"><a href="#实体完整性" class="headerlink" title="实体完整性"></a>实体完整性</h2><p><strong>实体完整性规则</strong>：若属性A是基本关系R的主属性，则A不能取空值</p><h2 id="参照完整性"><a href="#参照完整性" class="headerlink" title="参照完整性"></a>参照完整性</h2><img src="/2022/05/06/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%8F%82%E7%85%A7%E5%AE%8C%E6%95%B4%E6%80%A7.png" class><p><strong>参照完整性规则</strong>：若属性F是基本关系R的外码，它与基本关系S的主码Ks相对应（基本关系R与S不一定是不同的关系），则对于R中的每个元组在F上的值必须：</p><ul><li>或者空值</li><li>或者等于S中的某个元组的主码值</li><li>空值</li><li>非空值，则该值必须是专业关系元组的“专业号”</li></ul><h2 id="用户定义的完整性"><a href="#用户定义的完整性" class="headerlink" title="用户定义的完整性"></a>用户定义的完整性</h2><p>针对某一具体关系数据库的约束条件，反应某一具体应用涉及的数据必须满足的语义要求</p><h1 id="关系代数"><a href="#关系代数" class="headerlink" title="关系代数"></a>关系代数</h1><p>关系代数使用对关系的运算来表达查询</p><img src="/2022/05/06/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E7%B3%BB%E4%BB%A3%E6%95%B0.png" class><p>传统的集合运算：并，差，交，笛卡尔积</p><h2 id="专门的关系运算"><a href="#专门的关系运算" class="headerlink" title="专门的关系运算"></a>专门的关系运算</h2><p>选择:返回输入关系中满足谓词的行<br>投影：对输入关系的所有行输出指定的属性<br>连接：从两个输入关系中输出这样的·1元组对：它们在具有相同名字的所有属性上取值相同<br>笛卡尔族：从两个输入关系中输出所有的元组对（无论它们在共同属性上的取值是否相同）<br>并：输出两个关系中元组的并</p>]]></content>
     
     
     <categories>
