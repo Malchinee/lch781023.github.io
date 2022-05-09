@@ -16,20 +16,20 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="SQL">
+    <meta name="description" content="周报">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL">
-<meta property="og:url" content="http://example.com/2022/05/08/SQL/index.html">
+<meta property="og:title" content="2022-05-09~2022-05-15">
+<meta property="og:url" content="http://example.com/2022/05/09/2022-05-09-2022-05-15/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="SQL">
+<meta property="og:description" content="周报">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-05-08T13:08:20.000Z">
-<meta property="article:modified_time" content="2022-05-08T13:28:09.139Z">
+<meta property="article:published_time" content="2022-05-09T08:34:30.000Z">
+<meta property="article:modified_time" content="2022-05-09T09:26:38.062Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>SQL - Hexo</title>
+  <title>2022-05-09~2022-05-15 - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -175,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="SQL">
+            <span class="h2" id="subtitle" title="2022-05-09~2022-05-15">
               
             </span>
 
@@ -185,8 +185,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-05-08 21:08" pubdate>
-        2022年5月8日 晚上
+      <time datetime="2022-05-09 16:34" pubdate>
+        2022年5月9日 下午
       </time>
     </span>
   
@@ -196,7 +196,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      175 字
+      826 字
     </span>
   
 
@@ -205,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2 分钟
+      7 分钟
     </span>
   
 
@@ -234,19 +234,21 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">SQL</h1>
+            <h1 style="display: none">2022-05-09~2022-05-15</h1>
             
             <div class="markdown-body">
-              <h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><p>SQL语言：</p>
+              <h1 id="周一"><a href="#周一" class="headerlink" title="周一"></a>周一</h1><h2 id="代码随想录"><a href="#代码随想录" class="headerlink" title="代码随想录"></a>代码随想录</h2><h4 id="力扣131-分割回文串"><a href="#力扣131-分割回文串" class="headerlink" title="力扣131.分割回文串"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/palindrome-partitioning/">力扣131</a>.分割回文串</h4><p>切割问题类似于组合问题，递归用来纵向遍历，for循环用来横向遍历，在切割线遇到字符串的结尾，递归完成，找到一个例子<br>在判断终止条件的时候优点问题：stratIndex大于s.size()终止，此时分割线已经到达字符串末尾<br>在push_back    path的时候，使用substr函数，分割字符串<br>回溯函数：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><pre><code class="hljs reasonml">void backtracking(const <span class="hljs-built_in">string</span> &amp;s,<span class="hljs-built_in">int</span> startIndex)&#123;<br>        <span class="hljs-keyword">if</span>(s.size<span class="hljs-literal">()</span>&lt;=startIndex)&#123;<br>            result.push<span class="hljs-constructor">_back(<span class="hljs-params">path</span>)</span>;<br>            return;<br>        &#125;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-built_in">int</span> i=startIndex;i&lt;s.size<span class="hljs-literal">()</span>;i++)&#123;<br>            <span class="hljs-keyword">if</span>(is<span class="hljs-constructor">Palindrome(<span class="hljs-params">s</span>,<span class="hljs-params">startIndex</span>,<span class="hljs-params">i</span>)</span>)&#123;<br>                <span class="hljs-built_in">string</span> str=s.substr(startIndex,i-startIndex+<span class="hljs-number">1</span>);<br>                path.push<span class="hljs-constructor">_back(<span class="hljs-params">str</span>)</span>;<br>            &#125;<span class="hljs-keyword">else</span> continue;<br>            backtracking(s,i+<span class="hljs-number">1</span>);<br>            path.pop<span class="hljs-constructor">_back()</span>;<br>        &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
+<p><strong>回溯函数模板</strong>：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs scss">void <span class="hljs-built_in">backtracking</span>(参数) &#123;<br>    if (终止条件) &#123;<br>        存放结果;<br>        return;<br>    &#125;<br><br>    for (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) &#123;<br>        处理节点;<br>        <span class="hljs-built_in">backtracking</span>(路径，选择列表); <span class="hljs-comment">// 递归</span><br>        回溯，撤销处理结果<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h4 id="力扣93-复原IP地址"><a href="#力扣93-复原IP地址" class="headerlink" title="力扣93.复原IP地址"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/restore-ip-addresses/">力扣93</a>.复原IP地址</h4><p>这道题首先要写个判断字串是否是合法的</p>
 <ul>
-<li>数据定义语言<strong>DDL</strong>（提供定义关系模式、删除关系以及修改关系模式的命令）</li>
-<li>数据操纵语言<strong>DML</strong>（提供从数据库中查询信息，以及在数据库中插入元组、删除元组、修改元组的能力）</li>
-<li>完整性：<strong>DDL</strong>定义完整性约束的命令，保存在数据库中的数据必须满足所定义的完整性约束</li>
-<li>视图定义：DDL包括视图的定义</li>
-<li>事务控制：定义事务的开始和结束</li>
-<li>嵌入式SQL和动态SQL</li>
-<li>授权</li>
+<li>不能以0开头</li>
+<li>不能有非法字符</li>
+<li>不能大于255</li>
 </ul>
+<p>封装一个函数，不然的话卸载回溯函数里面优点麻烦<br>然后这道题没有path，直接在s里面修改，通过增加删除’.’来修改结果</p>
+<h2 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h2><p>学习了<a target="_blank" rel="noopener" href="https://lch781023.github.io/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/#%E8%A7%86%E9%A2%91%E6%B5%81%E5%92%8C%E5%86%85%E5%AE%B9%E5%88%86%E5%8F%91%E7%BD%91">视频流和内容分发</a>、<a target="_blank" rel="noopener" href="https://lch781023.github.io/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/#%E5%A5%97%E6%8E%A5%E5%AD%97%E7%BC%96%E7%A8%8B">套接字编程</a></p>
 
             </div>
             <hr>
@@ -256,7 +258,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+                      <a class="hover-with-bg" href="/categories/%E5%91%A8%E6%8A%A5/">周报</a>
                     
                   </div>
                 
@@ -274,18 +276,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/05/09/2022-05-09-2022-05-15/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">2022-05-09~2022-05-15</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/05/06/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">
-                        <span class="hidden-mobile">关系数据库</span>
+                      <a href="/2022/05/08/SQL/">
+                        <span class="hidden-mobile">SQL</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
