@@ -24,7 +24,7 @@
 <meta property="og:description" content="周报">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-02T06:12:42.000Z">
-<meta property="article:modified_time" content="2022-05-08T08:14:25.244Z">
+<meta property="article:modified_time" content="2022-05-10T12:40:34.936Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -196,7 +196,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      8k 字
+      8.1k 字
     </span>
   
 
@@ -205,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      67 分钟
+      68 分钟
     </span>
   
 
@@ -316,11 +316,15 @@
 <li>当左节点为空，右节点不空，删除节点，右节点补位<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs coq"><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(root-&gt;<span class="hljs-built_in">left</span>==NULL&amp;&amp;root-&gt;<span class="hljs-built_in">right</span>!=NULL)&#123;<br>                TreeNode* retNode=root-&gt;<span class="hljs-built_in">right</span>;<br>                delete root;<br>                <span class="hljs-keyword">return</span> retNode;<br>            &#125;<br></code></pre></td></tr></table></figure></li>
 <li>当右节点为空，左节点不空，删除节点，左节点补位<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs coq"><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(root-&gt;<span class="hljs-built_in">right</span>==NULL&amp;&amp;root-&gt;<span class="hljs-built_in">left</span>!=NULL)&#123;<br>                TreeNode* retNode=root-&gt;<span class="hljs-built_in">left</span>;<br>                delete root;<br>                <span class="hljs-keyword">return</span> retNode;<br>            &#125;<br></code></pre></td></tr></table></figure></li>
 <li>左右节点都不空，找到该节点右子树的最左边节点，将要删除的节点的左子树移到最左边节点，作为其左子树，然后删除节点，右子树补位<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs coq"><span class="hljs-keyword">else</span>&#123;<br>                TreeNode* cur=root-&gt;<span class="hljs-built_in">right</span>;<br>                while(cur-&gt;<span class="hljs-built_in">left</span>!=NULL)&#123;<br>                    cur=cur-&gt;<span class="hljs-built_in">left</span>;<br>                &#125;<br>                cur-&gt;<span class="hljs-built_in">left</span>=root-&gt;<span class="hljs-built_in">left</span>;<br>                TreeNode* tmp=root;<br>                root=root-&gt;<span class="hljs-built_in">right</span>;<br>                delete tmp;<br>                <span class="hljs-keyword">return</span> root;<br>            &#125;<br></code></pre></td></tr></table></figure>
-<h1 id="周日"><a href="#周日" class="headerlink" title="周日"></a>周日</h1><h2 id="代码随想录-3"><a href="#代码随想录-3" class="headerlink" title="代码随想录"></a>代码随想录</h2>一刷二叉树完成了,下面开始回溯<br>依然是值得记录的题：<h4 id="力扣39-组合总和"><a href="#力扣39-组合总和" class="headerlink" title="力扣39.组合总和"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combination-sum/submissions/">力扣39</a>.组合总和</h4>这道题元素可以重复取<h4 id="力扣40-组合总和II"><a href="#力扣40-组合总和II" class="headerlink" title="力扣40.组合总和II"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combination-sum-ii/">力扣40</a>.组合总和II</h4>这道题说组合不可以重复取，我们要去重。<br>回溯结构都可以用树状结构表示<br>去重有两种意义，第一种是同一层不能重，即组合不能重复取<br>第二种是同一支不能重，即元素不能重复取<br>那么本题的意思就是组合不能重复取</li>
+<h1 id="周日"><a href="#周日" class="headerlink" title="周日"></a>周日</h1><h2 id="代码随想录-3"><a href="#代码随想录-3" class="headerlink" title="代码随想录"></a>代码随想录</h2>一刷二叉树完成了,下面开始回溯<br>依然是值得记录的题：<h4 id="力扣39-组合总和"><a href="#力扣39-组合总和" class="headerlink" title="力扣39.组合总和"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combination-sum/submissions/">力扣39</a>.组合总和</h4>这道题元素可以重复取<h4 id="力扣40-组合总和II"><a href="#力扣40-组合总和II" class="headerlink" title="力扣40.组合总和II"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combination-sum-ii/">力扣40</a>.组合总和II</h4>这道题和上题的区别是：</li>
+<li>这道题上的每个数字在每个组合只能使用一次(每次回溯的时候i需要＋1，元素不能重复取)</li>
+<li>本题的candidates中的元素是有重复的，而上题的元素是无重复的</li>
 </ul>
+<p><strong>难点：集合有重复元素，但是不能有重复的组合</strong><br>回溯结构都可以用树状结构表示<br>去重有两种意义，第一种是同一层不能重，即组合不能重复取<br>第二种是同一支不能重，即元素不能重复取<br>那么本题的意思就是组合不能重复取,<strong>树层的去重，要先对数组进行排序</strong></p>
 <p>本题首先要对给的数组进行排序，然后在单层逻辑上增添</p>
 <figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">if(i&gt;startIndex&amp;&amp;candidates<span class="hljs-comment">[i]</span>==candidates<span class="hljs-comment">[i-1]</span>) continue;<br></code></pre></td></tr></table></figure>
 <p>避免组合重复</p>
+<h4 id="力扣216-组合总和III"><a href="#力扣216-组合总和III" class="headerlink" title="力扣216.组合总和III"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-iii/">力扣216</a>.组合总和III</h4><p>本题与上面两题的区别是多了数组的大小，相对而言感觉还是组合总和II更难一点</p>
 
             </div>
             <hr>
