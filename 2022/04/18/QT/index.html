@@ -16,22 +16,23 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="基础第一个QT程序大致结构如下myWidget.h: 1234567891011121314#ifndef MYWIDGET_H#define MYWIDGET_H#include &lt;QWidget&gt;&#x2F;&#x2F;包含头文件 QWidget窗口类class myWidget : public QWidget&amp;#123;    Q_OBJECT&#x2F;&#x2F;Q_Obgect宏，允许类中使用信号和槽的机制pu">
+    <meta name="description" content="QT入门">
 <meta property="og:type" content="article">
-<meta property="og:title" content="QT">
+<meta property="og:title" content="QT入门">
 <meta property="og:url" content="http://example.com/2022/04/18/QT/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="基础第一个QT程序大致结构如下myWidget.h: 1234567891011121314#ifndef MYWIDGET_H#define MYWIDGET_H#include &lt;QWidget&gt;&#x2F;&#x2F;包含头文件 QWidget窗口类class myWidget : public QWidget&amp;#123;    Q_OBJECT&#x2F;&#x2F;Q_Obgect宏，允许类中使用信号和槽的机制pu">
+<meta property="og:description" content="QT入门">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2022/04/18/QT/QT%E5%AF%B9%E8%B1%A1%E6%A0%91.png">
+<meta property="og:image" content="http://example.com/2022/04/18/QT/QWidget.png">
 <meta property="article:published_time" content="2022-04-18T08:08:17.000Z">
-<meta property="article:modified_time" content="2022-04-20T11:39:51.508Z">
+<meta property="article:modified_time" content="2022-05-12T13:02:12.979Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2022/04/18/QT/QT%E5%AF%B9%E8%B1%A1%E6%A0%91.png">
   
   
-  <title>QT - Hexo</title>
+  <title>QT入门 - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -177,7 +178,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="QT">
+            <span class="h2" id="subtitle" title="QT入门">
               
             </span>
 
@@ -198,7 +199,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.8k 字
+      4.1k 字
     </span>
   
 
@@ -207,7 +208,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      24 分钟
+      35 分钟
     </span>
   
 
@@ -236,10 +237,19 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">QT</h1>
+            <h1 style="display: none">QT入门</h1>
             
             <div class="markdown-body">
-              <h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><h2 id="第一个QT程序"><a href="#第一个QT程序" class="headerlink" title="第一个QT程序"></a>第一个QT程序</h2><h4 id="大致结构如下"><a href="#大致结构如下" class="headerlink" title="大致结构如下"></a>大致结构如下</h4><p><strong>myWidget.h</strong>:</p>
+              <h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><h2 id="第一个QT程序"><a href="#第一个QT程序" class="headerlink" title="第一个QT程序"></a>第一个QT程序</h2><p>文件说明：</p>
+<ul>
+<li>.pro：项目文件，包含项目相关信息</li>
+<li>.pro.user：包含与用户有关的项目信息</li>
+<li>.h：头文件</li>
+<li>***.cpp：源文件</li>
+<li>main.cpp：主函数</li>
+<li>.ui：设计师设计界面对应的界面文件</li>
+</ul>
+<h4 id="大致结构如下"><a href="#大致结构如下" class="headerlink" title="大致结构如下"></a>大致结构如下</h4><p><strong>myWidget.h</strong>:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> MYWIDGET_H</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> MYWIDGET_H</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;QWidget&gt;</span><span class="hljs-comment">//包含头文件 QWidget窗口类</span></span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">myWidget</span> : <span class="hljs-keyword">public</span> QWidget<br>&#123;<br>    Q_OBJECT<span class="hljs-comment">//Q_Obgect宏，允许类中使用信号和槽的机制</span><br><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">myWidget</span>(QWidget *parent = <span class="hljs-literal">nullptr</span>);<span class="hljs-comment">//构造函数</span><br>    ~<span class="hljs-built_in">myWidget</span>();<br>&#125;;<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span> <span class="hljs-comment">// MYWIDGET_H</span></span><br></code></pre></td></tr></table></figure>
 <p><strong>myWidget.cpp</strong>:</p>
 <figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;mywidget.h&quot;</span><br>#<span class="hljs-keyword">include</span>&lt;QPushButton&gt;<br>myWidget::my<span class="hljs-constructor">Widget(QWidget <span class="hljs-operator">*</span><span class="hljs-params">parent</span>)</span><br>    : <span class="hljs-constructor">QWidget(<span class="hljs-params">parent</span>)</span><br>&#123;<br>    <span class="hljs-comment">//创建一个按钮</span><br>    QPushButton *btn=<span class="hljs-keyword">new</span> QPushButton;<br>    btn-&gt;show<span class="hljs-literal">()</span>;<span class="hljs-comment">//show以顶层方式弹出窗口控件</span><br>    <span class="hljs-comment">//让btn对象，依赖在myWidget窗口中</span><br>    btn-&gt;set<span class="hljs-constructor">Parent(<span class="hljs-params">this</span>)</span>;<br><br>    <span class="hljs-comment">//显示文本</span><br>    btn-&gt;set<span class="hljs-constructor">Text(<span class="hljs-string">&quot;第一个按钮&quot;</span>)</span>;<br>    <span class="hljs-comment">//使用有参构造</span><br>     QPushButton *btn2=<span class="hljs-keyword">new</span> <span class="hljs-constructor">QPushButton(<span class="hljs-string">&quot;第二个按钮&quot;</span>,<span class="hljs-params">this</span>)</span>;<br>myWidget::~my<span class="hljs-constructor">Widget()</span><br>&#123;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
@@ -264,11 +274,41 @@
 <h4 id="信号连接信号"><a href="#信号连接信号" class="headerlink" title="信号连接信号"></a>信号连接信号</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs php">QPushButton *btn2=<span class="hljs-keyword">new</span> <span class="hljs-title class_">QPushButton</span>(<span class="hljs-string">&quot;第二个按钮&quot;</span>,this);<br>    this-&gt;<span class="hljs-title function_ invoke__">resize</span>(<span class="hljs-number">800</span>,<span class="hljs-number">400</span>);<br>    <span class="hljs-keyword">void</span>(<span class="hljs-title class_">Teacher</span>::*teacherSignal2)(<span class="hljs-keyword">void</span>)=&amp;<span class="hljs-title class_">Teacher</span>::overClass;<br>    <span class="hljs-keyword">void</span>(<span class="hljs-title class_">Student</span>::*studentSignal2)(<span class="hljs-keyword">void</span>)=&amp;<span class="hljs-title class_">Student</span>::goHome;<br>    <span class="hljs-title function_ invoke__">connect</span>(zt,teacherSignal2,st,studentSignal2);<br>    <span class="hljs-title function_ invoke__">connect</span>(btn2,&amp;<span class="hljs-title class_">QPushButton</span>::clicked,zt,teacherSignal2);<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>上述代码中的信号和槽函数调用void版本的函数，而不能调用QString类型的函数，因为clicked函数的参数是bool，有一个参数，而void没有参数，1&gt;0，所以可以调用void而不能调用QString</p>
 <h4 id="断开信号：disconnect"><a href="#断开信号：disconnect" class="headerlink" title="断开信号：disconnect"></a>断开信号：disconnect</h4><h4 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h4><p>1、信号可以连接信号<br>2、一个信号可以连接多个槽函数<br>3、多个信号可以连接同一个槽函数<br>4、信号和槽函数的参数类型必须一一对应<br>5、信号的参数个数可以多于槽函数的参数个数</p>
-<h2 id="使用lambda表达式"><a href="#使用lambda表达式" class="headerlink" title="使用lambda表达式"></a>使用lambda表达式</h2>
+<h1 id="窗口部件"><a href="#窗口部件" class="headerlink" title="窗口部件"></a>窗口部件</h1><h2 id="基础窗口部件QWidget"><a href="#基础窗口部件QWidget" class="headerlink" title="基础窗口部件QWidget"></a>基础窗口部件QWidget</h2><p>QWidget类关系图：</p>
+<img src="/2022/04/18/QT/QWidget.png" srcset="/img/loading.gif" lazyload class>
+<h4 id="窗口与子部件"><a href="#窗口与子部件" class="headerlink" title="窗口与子部件"></a>窗口与子部件</h4><p>QMainWindow和大量的QDialog子类是最一般的窗口类型。<br>窗口就是没有副部件的部件，又称<strong>顶级部件</strong>。与其相对的是非窗口部件，又称为<strong>子部件</strong><br>QWidget提供了绘制自己和处理用户输入事件的基本功能，Qt提供的所有界面元素不是QWidget的子类就是与QWidget的子类相关联。要设计自己的窗口部件，可以继承自QWidget或者是它的子类等</p>
+<h4 id="窗口类型"><a href="#窗口类型" class="headerlink" title="窗口类型"></a>窗口类型</h4><p>QWidget构造函数有两个参数：QWidget * parent&#x3D;0 和QT::WindowFlags f&#x3D;0<br>前者表示父窗口部件，默认值为0，表明没有父窗口；后面的参数是Qt::windowFlag类型的，是一个枚举类型，分为窗口类型（定义窗口的类型，f&#x3D;0表明使用Qt::widget一项，这种类型的部件如果有父窗口，那么它就是子部件，否则就是独立的窗口）和窗口标志</p>
+<p>还有Dialog(对话框类型)，SplashScreen(欢迎窗口类型)，FramelessWindowHint(无边框窗口)，WindowStaysOnTopHint(使该窗口停留在所有其他窗口上面)</p>
+<p>其他函数：setWindowState：设置窗口的状态；如：WindowMaximized(最大化)、WindowMinimized(最小化)、WindowFullScreen(全屏显示)，默认为WindowNoState</p>
+<h3 id="窗口几何布局"><a href="#窗口几何布局" class="headerlink" title="窗口几何布局"></a>窗口几何布局</h3><p>函数分为两类：</p>
+<ul>
+<li>包含框架的：x()、y()、frameGeometry()、pos()和move()</li>
+<li>不包含框架的：geometry()、width()、height()、rect()和size()</li>
+</ul>
+<h3 id="调试程序"><a href="#调试程序" class="headerlink" title="调试程序"></a>调试程序</h3><p>常用qDebug()函数，将调试信息直接输出到控制台</p>
+<h2 id="对话框QDialog"><a href="#对话框QDialog" class="headerlink" title="对话框QDialog"></a>对话框QDialog</h2><h3 id="模态和非模态对话框"><a href="#模态和非模态对话框" class="headerlink" title="模态和非模态对话框"></a>模态和非模态对话框</h3><p>模态对话框：没有关闭它之前，不能再和同一个应用程序的其他窗口进行交互<br>非模态对话框：既可以与它交互，也可以与同一程序中的其他窗口交互</p>
+<p>想让一个对话框成为模态对话框，调用它的exec()函数<br>成为非模态对话框：使用new操作创建，调用show()函数</p>
+<p>使用show()创建模态对话框</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">QDialog<span class="hljs-operator"> * </span>dialog=<span class="hljs-keyword">new</span> <span class="hljs-constructor">QDialog(<span class="hljs-params">this</span>)</span>;<br>dialog-&gt;set<span class="hljs-constructor">Model(<span class="hljs-params">true</span>)</span>;<br>dialog-&gt;show<span class="hljs-literal">()</span>;<br><br></code></pre></td></tr></table></figure>
+<p>其他函数setWindowModality(参数):</p>
+<ul>
+<li>Qt::NonModel 不阻塞任何窗口</li>
+<li>Qt::WindowModel 阻塞它的父窗口和所有祖先窗口以及它们的子窗口</li>
+<li>Qt::ApplicationModel 阻塞整个应用程序的所有窗口</li>
+</ul>
+<h3 id="多窗口切换"><a href="#多窗口切换" class="headerlink" title="多窗口切换"></a>多窗口切换</h3><h4 id="信号和槽-1"><a href="#信号和槽-1" class="headerlink" title="信号和槽"></a>信号和槽</h4><p>第一种：直接在设计器中进行，在ui界面按下F4进入，然后拖到鼠标右键进行操作。这种方法更适合在设计器中的部件见进行<br>第二种：在设计器中直接进入相关的信号和槽，它用的就是自动关联，这样也会自动添加该槽的声明，我们只需更改其实现内容就行</p>
+
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/QT/">QT</a>
+                    
+                  </div>
                 
                 
               </div>
