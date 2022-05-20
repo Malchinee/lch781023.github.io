@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://example.com/2022/04/18/QT/QT%E5%AF%B9%E8%B1%A1%E6%A0%91.png">
 <meta property="og:image" content="http://example.com/2022/04/18/QT/QWidget.png">
 <meta property="article:published_time" content="2022-04-18T08:08:17.000Z">
-<meta property="article:modified_time" content="2022-05-16T12:11:44.883Z">
+<meta property="article:modified_time" content="2022-05-20T07:59:55.718Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2022/04/18/QT/QT%E5%AF%B9%E8%B1%A1%E6%A0%91.png">
@@ -202,7 +202,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.1k 字
+      4.6k 字
     </span>
   
 
@@ -211,7 +211,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      35 分钟
+      39 分钟
     </span>
   
 
@@ -301,6 +301,21 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 </ul>
 <h3 id="多窗口切换"><a href="#多窗口切换" class="headerlink" title="多窗口切换"></a>多窗口切换</h3><h4 id="信号和槽-1"><a href="#信号和槽-1" class="headerlink" title="信号和槽"></a>信号和槽</h4><p>第一种：直接在设计器中进行，在ui界面按下F4进入，然后拖到鼠标右键进行操作。这种方法更适合在设计器中的部件见进行</p>
 <p>第二种：在设计器中直接进入相关的信号和槽，它用的就是自动关联，这样也会自动添加该槽的声明，我们只需更改其实现内容就行</p>
+<h3 id="标准对话框"><a href="#标准对话框" class="headerlink" title="标准对话框"></a>标准对话框</h3><h4 id="颜色对话框"><a href="#颜色对话框" class="headerlink" title="颜色对话框"></a>颜色对话框</h4><p>头文件：QColorDialog<br>槽函数：click()</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">QColor color=QColorDialog::get<span class="hljs-constructor">Color(Qt::<span class="hljs-params">red</span>,<span class="hljs-params">this</span>,<span class="hljs-params">tr</span>(<span class="hljs-string">&quot;颜色对话框&quot;</span>)</span>);<br></code></pre></td></tr></table></figure>
+<h4 id="文件对话框"><a href="#文件对话框" class="headerlink" title="文件对话框"></a>文件对话框</h4><p>头文件：QFileName<br>槽函数：click()<br>getOpenFileName(4参数):</p>
+<ul>
+<li>指定父窗口</li>
+<li>设置对话框标题   如：tr(“文件对话框”)</li>
+<li>指定默认打开的目标路径</li>
+<li>设置文件类型过滤器  如：tr(“图片文件(*png  *jpg)”)<br>用QString 变量接住返回值</li>
+</ul>
+<p>如果设置多个不同类别的文件类型过滤器，不同类别用;;隔开<br>**选用多个文件，使用getOpenFileName()函数，参数与上一样</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">QString fileNames=QFileDialog::get<span class="hljs-constructor">OpenFileName(<span class="hljs-params">this</span>,<span class="hljs-params">tr</span>(<span class="hljs-string">&quot;请选择文件&quot;</span>)</span>,<span class="hljs-string">&quot;E:&quot;</span>,tr(<span class="hljs-string">&quot;图片文件(*png *jpg);;文本文件(*txt)&quot;</span>));<br></code></pre></td></tr></table></figure>
+
+
+
+
 
             </div>
             <hr>
