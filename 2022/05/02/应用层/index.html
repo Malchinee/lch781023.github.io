@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://www.example.com/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/TCP.png">
 <meta property="og:image" content="https://www.example.com/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/TCP1.png">
 <meta property="article:published_time" content="2022-05-02T12:39:18.000Z">
-<meta property="article:modified_time" content="2022-05-10T13:23:07.520Z">
+<meta property="article:modified_time" content="2022-05-21T14:15:26.723Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://www.example.com/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%E5%92%8C%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F.png">
@@ -207,7 +207,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      5.8k 字
+      6.3k 字
     </span>
   
 
@@ -216,7 +216,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      49 分钟
+      53 分钟
     </span>
   
 
@@ -248,8 +248,34 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             <h1 style="display: none">应用层</h1>
             
             <div class="markdown-body">
-              <h1 id="应用层协议原理"><a href="#应用层协议原理" class="headerlink" title="应用层协议原理"></a>应用层协议原理</h1><h4 id="应用程序体系结构"><a href="#应用程序体系结构" class="headerlink" title="应用程序体系结构"></a>应用程序体系结构</h4><p>由应用程序研发者决定，使用如客户-服务器体系结构，P2P体系结构等</p>
-<h4 id="进程通信"><a href="#进程通信" class="headerlink" title="进程通信"></a>进程通信</h4><p>客户、服务器<br>进程之间通过一个称为<strong>套接字</strong>的软件接口向网络发送报文和从网络接受报文。套接字也被称为<strong>应用程序编程接口</strong>。<br>标识进程需要定义两种信息：主机地址+目的主机中接受进程的标识符。标识符，IP地址＋端口号</p>
+              <h1 id="应用层协议原理"><a href="#应用层协议原理" class="headerlink" title="应用层协议原理"></a>应用层协议原理</h1><h4 id="应用程序体系结构"><a href="#应用程序体系结构" class="headerlink" title="应用程序体系结构"></a>应用程序体系结构</h4><p>由应用程序研发者决定，使用如客户-服务器体系结构(C&#x2F;S模式)，P2P体系结构等<br>各个结构的缺点：</p>
+<ul>
+<li>C&#x2F;S模式的可扩展性比较差，用户达到一定阈值会断崖式下降，可靠性也比较差</li>
+<li>P2P管理困难</li>
+</ul>
+<h4 id="分布式进程需要解决的问题："><a href="#分布式进程需要解决的问题：" class="headerlink" title="分布式进程需要解决的问题："></a>分布式进程需要解决的问题：</h4><ol>
+<li>进程标示和寻址问题(服务用户)</li>
+<li>传输层-应用层提供服务是如何(服务)<ul>
+<li>位置：层间界面的SAP(TCP&#x2F;IP:socket)</li>
+<li>形式：应用程序接口API(TCP&#x2F;IP:socket API)</li>
+</ul>
+</li>
+<li>如何使用传输层提供的服务、实现进程间报文的交换，实现应用(用户使用服务)</li>
+</ol>
+<h4 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h4><ol>
+<li>对进程进行编址：引入端口号</li>
+<li>传输层提供的服务：需要穿过层间的信息<ul>
+<li>层间接口必须要携带的的信息：要传输的报文(SDU)、应用进程的标示(IP+TCP或UDP端口)、对方的应用程序的标示(IP+TCP或UDP端口)</li>
+<li>传输层实体根据这些信息进行TCP报文段&#x2F;UDP数据段的封装</li>
+</ul>
+</li>
+<li><ul>
+<li>定义应用层协议：报文格式，解释，时序等</li>
+<li>编制程序，使用OS提供的API，调用网络基础设施提供通信服务传报文，实现应用时序<h4 id="进程通信"><a href="#进程通信" class="headerlink" title="进程通信"></a>进程通信</h4>客户、服务器<br>进程之间通过一个称为<strong>套接字</strong>的软件接口向网络发送报文和从网络接受报文。套接字也被称为<strong>应用程序编程接口</strong>。<br>标识进程需要定义两种信息：主机地址+目的主机中接受进程的标识符。标识符，IP地址＋端口号</li>
+</ul>
+</li>
+</ol>
+<p><strong>TCP socket返回一个整数，代表一个四元组，是本地标示</strong><br><strong>UDP socket返回整数，代表本地IP和端口的二元组，但是在发送时，必须指定对方的IP和udp端口</strong><br>优点：便于管理、穿过层间的信息量最少</p>
 <h4 id="可供应用程序使用的运输服务"><a href="#可供应用程序使用的运输服务" class="headerlink" title="可供应用程序使用的运输服务"></a>可供应用程序使用的运输服务</h4><p>运输层协议为调用它的应用程序提供四个方面的服务：</p>
 <ul>
 <li>可靠数据传输</li>
