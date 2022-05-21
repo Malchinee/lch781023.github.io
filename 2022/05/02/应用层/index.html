@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://www.example.com/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/TCP.png">
 <meta property="og:image" content="https://www.example.com/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/TCP1.png">
 <meta property="article:published_time" content="2022-05-02T12:39:18.000Z">
-<meta property="article:modified_time" content="2022-05-21T14:15:26.723Z">
+<meta property="article:modified_time" content="2022-05-21T14:41:22.411Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://www.example.com/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%E5%92%8C%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F.png">
@@ -271,11 +271,11 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 </li>
 <li><ul>
 <li>定义应用层协议：报文格式，解释，时序等</li>
-<li>编制程序，使用OS提供的API，调用网络基础设施提供通信服务传报文，实现应用时序<h4 id="进程通信"><a href="#进程通信" class="headerlink" title="进程通信"></a>进程通信</h4>客户、服务器<br>进程之间通过一个称为<strong>套接字</strong>的软件接口向网络发送报文和从网络接受报文。套接字也被称为<strong>应用程序编程接口</strong>。<br>标识进程需要定义两种信息：主机地址+目的主机中接受进程的标识符。标识符，IP地址＋端口号</li>
+<li>编制程序，使用OS提供的API，调用网络基础设施提供通信服务传报文，实现应用时序</li>
 </ul>
 </li>
 </ol>
-<p><strong>TCP socket返回一个整数，代表一个四元组，是本地标示</strong><br><strong>UDP socket返回整数，代表本地IP和端口的二元组，但是在发送时，必须指定对方的IP和udp端口</strong><br>优点：便于管理、穿过层间的信息量最少</p>
+<h4 id="进程通信"><a href="#进程通信" class="headerlink" title="进程通信"></a>进程通信</h4><p>客户、服务器<br>进程之间通过一个称为<strong>套接字</strong>的软件接口向网络发送报文和从网络接受报文。套接字也被称为<strong>应用程序编程接口</strong>。<br>标识进程需要定义两种信息：主机地址+目的主机中接受进程的标识符。标识符，IP地址＋端口号<br><strong>TCP socket返回一个整数，代表一个四元组，是本地标示</strong><br><strong>UDP socket返回整数，代表本地IP和端口的二元组，但是在发送时，必须指定对方的IP和udp端口</strong><br>优点：便于管理、穿过层间的信息量最少</p>
 <h4 id="可供应用程序使用的运输服务"><a href="#可供应用程序使用的运输服务" class="headerlink" title="可供应用程序使用的运输服务"></a>可供应用程序使用的运输服务</h4><p>运输层协议为调用它的应用程序提供四个方面的服务：</p>
 <ul>
 <li>可靠数据传输</li>
