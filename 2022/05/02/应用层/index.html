@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://www.example.com/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/TCP.png">
 <meta property="og:image" content="https://www.example.com/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/TCP1.png">
 <meta property="article:published_time" content="2022-05-02T12:39:18.000Z">
-<meta property="article:modified_time" content="2022-05-23T01:36:13.076Z">
+<meta property="article:modified_time" content="2022-05-23T08:18:48.291Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://www.example.com/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%E5%92%8C%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F.png">
@@ -207,7 +207,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      6.6k 字
+      6.9k 字
     </span>
   
 
@@ -216,7 +216,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      55 分钟
+      58 分钟
     </span>
   
 
@@ -348,7 +348,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>“<strong>Type=MX</strong>“，Value是个别名为Name的邮件服务器的规范主机名</li>
 </ul>
 <h5 id="dns报文格式"><a href="#dns报文格式" class="headerlink" title="dns报文格式"></a>dns报文格式</h5><img src="/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/dns.png" srcset="/img/loading.gif" lazyload class>
-<h1 id="P2P应用"><a href="#P2P应用" class="headerlink" title="P2P应用"></a>P2P应用</h1><h1 id="视频流和内容分发网"><a href="#视频流和内容分发网" class="headerlink" title="视频流和内容分发网"></a>视频流和内容分发网</h1><h2 id="因特网视频"><a href="#因特网视频" class="headerlink" title="因特网视频"></a>因特网视频</h2><p>流视频的最为重要的性能度量：平均端到端的吞吐量</p>
+<h1 id="P2P应用"><a href="#P2P应用" class="headerlink" title="P2P应用"></a>P2P应用</h1><h4 id="BitTorrent"><a href="#BitTorrent" class="headerlink" title="BitTorrent"></a>BitTorrent</h4><p>参与一个特定的文件分发的所有对等方的集合被称为一个<strong>洪流</strong>。在一个洪流中的对等方彼此下载等长度的<strong>文件块</strong>，典型的块长度为256KB。<br>每个洪流都以一个基础设施节点：<strong>追踪器</strong>，每个对等方加入洪流时，向追踪器注册自己，并且周期性地通知追踪器它仍在该洪流中。<br>一个新的对等方加入该洪流时，追踪器随机地从参与对等方地集合中选择对等方的一个子集<br><strong>最稀缺优先</strong>：解决<strong>某对等方应该从它的另据请求哪些块，应当向哪些向它请求的邻居发送块</strong>的问题。思路：</p>
+<ul>
+<li>针对它没有的块在它的邻居中最稀缺的块，并首先请求那些最稀缺的块。</li>
+<li>对换算法：对等方能够趋向于找到彼此的协调的速率上载。(具体实现机制略)</li>
+</ul>
+<h1 id="视频流和内容分发网"><a href="#视频流和内容分发网" class="headerlink" title="视频流和内容分发网"></a>视频流和内容分发网</h1><h2 id="因特网视频"><a href="#因特网视频" class="headerlink" title="因特网视频"></a>因特网视频</h2><p>流视频的最为重要的性能度量：平均端到端的吞吐量</p>
 <h2 id="HTTP和DASH"><a href="#HTTP和DASH" class="headerlink" title="HTTP和DASH"></a>HTTP和DASH</h2><p><strong>DASH</strong>：经HTTP的动态适应流<br>视频编码为几个不同的版本，每个版本具有不同的比特率，对应于不同的质量水平。客户动态地请求来自不同版本且长度为几秒的视频段数据块。当可用带宽较高时，客户自然的选择来自高速率版本的块；较低时同理。</p>
 <p>DASH允许用户使用不同的以太网接入速率流式播放具有不同编码速率的视频。</p>
 <p>使用DASH后，每个视频版本存储在HTTP服务器中，每个版本都有不同的URL。<br>HTTP服务器有<strong>告示文件</strong>，为每个版本提供了一个URL及其比特率<br>客户首先请求该告示文件并得知各种各样的版本。然后客户通过在HTTP GET请求报文中对每块指定一个URL和一个字节范围，一次选择一块。在下载块的同时，客户也测量接收带宽并运行一个<strong>速率决定算法</strong>来选择下次请求的块</p>
