@@ -26,8 +26,12 @@
 <meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/%E7%AB%AF%E5%8F%A3.png">
 <meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/%E7%AB%AF%E5%8F%A3%E5%8F%8D%E8%BD%AC.png">
 <meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/TCP0.png">
+<meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/UDP0.png">
+<meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E6%9C%8D%E5%8A%A1.png">
+<meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/rdt1.png">
+<meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/rdt2.png">
 <meta property="article:published_time" content="2022-05-24T06:31:24.000Z">
-<meta property="article:modified_time" content="2022-05-24T07:37:36.851Z">
+<meta property="article:modified_time" content="2022-05-24T13:05:36.470Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/%E7%AB%AF%E5%8F%A3.png">
@@ -203,7 +207,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      975 字
+      1.9k 字
     </span>
   
 
@@ -212,7 +216,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9 分钟
+      17 分钟
     </span>
   
 
@@ -291,7 +295,29 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>若两个源主机IP不同，源端口号不同，但是目的主机IP和目的主机端口号相同的UDP报文段，那么这两个报文段就会被定向到相同的目标进程</p>
 <p>UDP报文段源主机IP和源端口号的作用显然<br><img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/%E7%AB%AF%E5%8F%A3%E5%8F%8D%E8%BD%AC.png" srcset="/img/loading.gif" lazyload class></p>
 <h2 id="面向连接的多路复用与多路分解"><a href="#面向连接的多路复用与多路分解" class="headerlink" title="面向连接的多路复用与多路分解"></a>面向连接的多路复用与多路分解</h2><p>与UDP不同，TCP套接字是一个四元组(前面已知)，TCP报文段的四部分必须完全一致才能被定向到一个相同的进程<br><img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/TCP0.png" srcset="/img/loading.gif" lazyload class></p>
-<h2 id="Web服务器与TCP"><a href="#Web服务器与TCP" class="headerlink" title="Web服务器与TCP"></a>Web服务器与TCP</h2>
+<h1 id="无连接传输UDP"><a href="#无连接传输UDP" class="headerlink" title="无连接传输UDP"></a>无连接传输UDP</h1><p>UDP的优点：</p>
+<ol>
+<li>采用UDP时，只要应用进程将数据传递给UDP，UDP就会将此数据打包进UDP报文段并将其立即传递给网络层。<strong>TCP有拥塞控制机制</strong>，当源和目的主机的一条或多条链路变得极度拥塞时会遏制TCP发送方，TCP发送方仍然会发送，不管用多长时间。<strong>实时应用通常要求最小的发送速率，不希望过分地延迟报文段的发送，能容忍数据的丢失</strong></li>
+<li><strong>无须连接建立</strong>，TCP不会引入建立连接的时延，而TCP会</li>
+<li><strong>无连接状态</strong>，TCP需要在端系统中维护连接状态，包括接收和发送缓存、拥塞控制参数以及序号和确认号的参数。UDP不需要维护连接状态，也不跟踪这些参数</li>
+<li>分组首部开销小。每个TCP报文段都有20字节的首部开销，而UDP仅有8字节的开销</li>
+</ol>
+<h2 id="UDP报文段结构"><a href="#UDP报文段结构" class="headerlink" title="UDP报文段结构"></a>UDP报文段结构</h2><img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/UDP0.png" srcset="/img/loading.gif" lazyload class>
+<p>UDP首部只有4个字段，每个字段两个字节</p>
+<p><strong>长度</strong>：指示了在UDP报文段中的字节数(首部加数据)。接收方使用检验和来检查在报文段中是否出现了差错</p>
+<h2 id="UDP检验和"><a href="#UDP检验和" class="headerlink" title="UDP检验和"></a>UDP检验和</h2><p><strong>UDP检验和提供了差错检测功能</strong>，检验和用于确定当UDP报文段从源到达目的地移动时，其中的比特是否发生了改变。<br>发送方的UDP对报文段中的所有16比特字的和进行反码运算，求和时遇到的任何溢出都被回卷。得到的结果被放在UDP报文段中的检验和字段</p>
+<p><strong>虽然UDP提供差错检测，但它对差错恢复无能为力。UDP的某种实现只是丢弃受损的报文段；其他实现是将受损的报文段交给应用程序并给出警告</strong></p>
+<h1 id="可靠数据传输原理"><a href="#可靠数据传输原理" class="headerlink" title="可靠数据传输原理"></a>可靠数据传输原理</h1><img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E6%9C%8D%E5%8A%A1.png" srcset="/img/loading.gif" lazyload class>
+<h2 id="构造可靠数据传输协议"><a href="#构造可靠数据传输协议" class="headerlink" title="构造可靠数据传输协议"></a>构造可靠数据传输协议</h2><h3 id="经完全可靠信道的可靠数据传输"><a href="#经完全可靠信道的可靠数据传输" class="headerlink" title="经完全可靠信道的可靠数据传输"></a>经完全可靠信道的可靠数据传输</h3><p>在这个协议中，一个单元数据和一个分组没差别。所有分组是从发送方流向接收方；<br>有了完全可靠的信道，接收端就不需要提供任何反馈信息给发送方，因为不必担心差错；<br>假定接收方接收数据的速率能够和发送方发送数据的速率一样快，接收方没有必要请求发送方慢一点<br><img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/rdt1.png" srcset="/img/loading.gif" lazyload class></p>
+<h3 id="经具有比特差错信道的可靠数据传输"><a href="#经具有比特差错信道的可靠数据传输" class="headerlink" title="经具有比特差错信道的可靠数据传输"></a>经具有比特差错信道的可靠数据传输</h3><p><strong>自动重传请求(ARQ)协议</strong><br>这些控制报文使得接收方可以让发送方知道哪些内容被正确接受，哪些内容接收有误并因此需要重复，基于这样的重传机制为自动重传请求协议</p>
+<p>此外，还需要另外三种协议功能来处理比特差错的情况</p>
+<ul>
+<li><strong>差错检测</strong>，如UDP使用因特网检验和字段是为了这个目的</li>
+<li><strong>接收方反馈</strong>：如”ACK”(肯定确认)和”NAK”(否定确认)，理论上，这些分组只需要一个比特长，0标示NAK，1标示ACK</li>
+<li><strong>重传</strong>：接收方收到有差错的分组时，发送方将重传该报文</li>
+</ul>
+<img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/rdt2.png" srcset="/img/loading.gif" lazyload class>
+
             </div>
             <hr>
             <div>
