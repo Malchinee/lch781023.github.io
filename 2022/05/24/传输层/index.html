@@ -16,20 +16,24 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="2">
+    <meta name="description" content="传输层">
 <meta property="og:type" content="article">
-<meta property="og:title" content="贪心">
-<meta property="og:url" content="https://www.example.com/2022/05/23/%E8%B4%AA%E5%BF%83/index.html">
+<meta property="og:title" content="传输层">
+<meta property="og:url" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="2">
+<meta property="og:description" content="传输层">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-05-23T08:50:13.000Z">
-<meta property="article:modified_time" content="2022-05-23T12:19:08.542Z">
+<meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/%E7%AB%AF%E5%8F%A3.png">
+<meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/%E7%AB%AF%E5%8F%A3%E5%8F%8D%E8%BD%AC.png">
+<meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/TCP0.png">
+<meta property="article:published_time" content="2022-05-24T06:31:24.000Z">
+<meta property="article:modified_time" content="2022-05-24T07:28:46.630Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/%E7%AB%AF%E5%8F%A3.png">
   
   
-  <title>贪心 - Hexo</title>
+  <title>传输层 - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -178,7 +182,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="贪心">
+            <span class="h2" id="subtitle" title="传输层">
               
             </span>
 
@@ -188,8 +192,8 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-05-23 16:50" pubdate>
-        2022年5月23日 下午
+      <time datetime="2022-05-24 14:31" pubdate>
+        2022年5月24日 下午
       </time>
     </span>
   
@@ -199,7 +203,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.6k 字
+      955 字
     </span>
   
 
@@ -208,7 +212,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13 分钟
+      8 分钟
     </span>
   
 
@@ -237,22 +241,56 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">贪心</h1>
+            <h1 style="display: none">传输层</h1>
             
             <div class="markdown-body">
-              <p>贪心算法没有固定的模板，总的思路就是找到局部最优解从而推出总体最优解，并且找不到反例，就可以用贪心</p>
-<h4 id="力扣55-跳跃游戏"><a href="#力扣55-跳跃游戏" class="headerlink" title="力扣55.跳跃游戏"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/jump-game/">力扣55</a>.跳跃游戏</h4><p>局部最优解：每次取最大的跳跃步数，就是取最大的覆盖范围<br>整体最优解：最后得到整体的最大覆盖范围<br>找不到反例，可以用贪心<br>现设一个cover变量，初始化为0；<br>然后遍历可以到达的数组，cover每次取可以最大的覆盖范围，如果cover大于数组长度，返回true</p>
-<h4 id="力扣45-跳跃游戏II"><a href="#力扣45-跳跃游戏II" class="headerlink" title="力扣45.跳跃游戏II"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/jump-game-ii/">力扣45</a>.跳跃游戏II</h4><p>本题覆盖范围要设两个变量，一个是当前的最大覆盖范围curDistance，另一个是下一步的最大覆盖范围nextDistance<br>遍历整个数组，更新nextDistance；<br>如果当前curDistance＝i，判断curDistance是否大于数组最大长度，大于，终止；小于，步数+1并且curDistance=nextDistance。</p>
-<h4 id="力扣1005-k次取反后最大化的数组和"><a href="#力扣1005-k次取反后最大化的数组和" class="headerlink" title="力扣1005.k次取反后最大化的数组和"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximize-sum-of-array-after-k-negations/">力扣1005</a>.k次取反后最大化的数组和</h4><p>sort函数可以有第三个参数，标示排序的规则<br>本题在类内使用sort函数，需要定义一个排序的函数，必须在函数前加static，因为sort需要传入的是一个普通函数指针，而不是成员函数指针，所以需要在类成员定义前加static</p>
-<p>利用绝对值大小排序，将小于0的值尽可能多的反正，如果k还有剩余<br>这里可以判断k的奇偶，奇的话让最小的值变号即可</p>
-<h4 id="力扣134-加油站"><a href="#力扣134-加油站" class="headerlink" title="力扣134.加油站"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/gas-station/">力扣134</a>.加油站</h4><h5 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h5><p>从全局进行选择：</p>
+              <h1 id="概述和传输层服务"><a href="#概述和传输层服务" class="headerlink" title="概述和传输层服务"></a>概述和传输层服务</h1><p>网络层服务：主机到主机的逻辑通信<br>传输层服务：主机中进程到进程的逻辑通信</p>
+<ul>
+<li>依赖于网络层的服务，如延时，带宽</li>
+<li>并对网络层的服务进行增强，如数据丢失、顺序混乱、加密等</li>
+</ul>
+<p>可靠的、保序的传输：TCP</p>
+<ul>
+<li>多路复用，解复用</li>
+<li>拥塞控制</li>
+<li>流量控制</li>
+<li>建立连接</li>
+</ul>
+<p>不可靠的、不保序的传输：UDP</p>
+<ul>
+<li>多路复用、解复用</li>
+<li>没有尽力而为地为IP服务器添加更多的其他的额外的服务</li>
+</ul>
+<p>都不提供的服务：</p>
+<ul>
+<li>延时保证</li>
+<li>带宽保证</li>
+</ul>
+<h1 id="多路复用与多路分解"><a href="#多路复用与多路分解" class="headerlink" title="多路复用与多路分解"></a>多路复用与多路分解</h1><h2 id="接收主机将到达地运输层报文定向到适当的套接字"><a href="#接收主机将到达地运输层报文定向到适当的套接字" class="headerlink" title="接收主机将到达地运输层报文定向到适当的套接字"></a>接收主机将到达地运输层报文定向到适当的套接字</h2><p>每个运输层报文段中具有几个字段<br>在接收端，运输层检查这些字段，表示出接收套接字，进而将报文段定向到该套接字<br><strong>将运输段报文段中的数据交付到正确的套接字地工作成为多路分解</strong></p>
+<p>源主机从不同套接字中收集数据块，并为每个数据块封装上首部信息从而生成报文段，然后将报文段传递到网络层，所有这些工作为<strong>多路复用</strong></p>
+<p><strong>它们在某层的单一协议何时被位于接下来的较高层的多个协议使用有关</strong></p>
+<p><strong>运输层多路复用的要求：</strong></p>
 <ol>
-<li>如果gas的总和小于cost的总和，返回-1；</li>
-<li>rest[ i ]=gas[ i ]-cost[ i ]为一天剩下的油，从0位置开始遍历，如果rest一直大于0，说明油一直没断过，0就是起点</li>
-<li>如果累加的最小值是负数，汽车就要从非0节点出发，从后向前，看哪个节点能把负数填平，哪个节点就是出发节点<figure class="highlight mel"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><pre><code class="hljs mel"><span class="hljs-keyword">int</span> canCompleteCircuit(<span class="hljs-keyword">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; gas, <span class="hljs-keyword">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; cost) &#123;<br>           <span class="hljs-keyword">int</span> <span class="hljs-keyword">min</span>=INT_MAX;<br>           <span class="hljs-keyword">int</span> curSum=<span class="hljs-number">0</span>;<br>           <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;gas.<span class="hljs-keyword">size</span>();i++)&#123;<br>               <span class="hljs-keyword">int</span> rest=gas[i]-cost[i];<br>               curSum+=rest;<br>               <span class="hljs-keyword">if</span>(curSum&lt;<span class="hljs-keyword">min</span>)&#123;<br>                   <span class="hljs-keyword">min</span>=curSum;<br>               &#125;<br>           &#125;<br>           <span class="hljs-keyword">if</span>(curSum&lt;<span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>           <span class="hljs-keyword">if</span>(<span class="hljs-keyword">min</span>&gt;=<span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>           <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=gas.<span class="hljs-keyword">size</span>()<span class="hljs-number">-1</span>;i&gt;=<span class="hljs-number">0</span>;i--)&#123;<br>               <span class="hljs-keyword">int</span> rest=gas[i]-cost[i];<br>               <span class="hljs-keyword">min</span>+=rest;<br>               <span class="hljs-keyword">if</span>(<span class="hljs-keyword">min</span>&gt;=<span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> i;<br>           &#125;<br>           <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>   &#125;<br></code></pre></td></tr></table></figure>
-<h5 id="解法二："><a href="#解法二：" class="headerlink" title="解法二："></a>解法二：</h5>贪心算法：<br>每个加油站的剩余量rest[ i ]为gas[i]-cost[i]；i从0开始累加rest[i]，和记为curSum，一旦curSum&lt;0说明[0, i]都不能作为起始位置，起始位置从i+1算起，再从0累加curSum<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-type">int</span> canCompleteCircuit(vector&lt;<span class="hljs-type">int</span>&gt;&amp; gas, vector&lt;<span class="hljs-type">int</span>&gt;&amp; <span class="hljs-keyword">cost</span>) &#123;<br>       <span class="hljs-type">int</span> totalSum=<span class="hljs-number">0</span>;<br>       <span class="hljs-type">int</span> curSum=<span class="hljs-number">0</span>;<br>       <span class="hljs-type">int</span>    start=<span class="hljs-number">0</span>;<br>       <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;gas.size();i++)&#123;<br>           curSum+=gas[i]-<span class="hljs-keyword">cost</span>[i];<br>           totalSum+=gas[i]-<span class="hljs-keyword">cost</span>[i];<br>           <span class="hljs-keyword">if</span>(curSum&lt;<span class="hljs-number">0</span>)&#123;<br>               start=i+<span class="hljs-number">1</span>;<br>               curSum=<span class="hljs-number">0</span>;<br>           &#125;<br>       &#125;<br>       <span class="hljs-keyword">if</span>(totalSum&lt;<span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>       <span class="hljs-keyword">return</span> <span class="hljs-keyword">start</span>;<br>   &#125;<br></code></pre></td></tr></table></figure>
-</li>
+<li>套接字有唯一标识符</li>
+<li>每个报文段有特殊字段来指示该报文段所要交付到的套接字</li>
 </ol>
+<img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/%E7%AB%AF%E5%8F%A3.png" srcset="/img/loading.gif" lazyload class>
+<p>上述特殊字段是<strong>源端口号字段</strong>和<strong>目的端口号字段</strong><br>端口号是16比特的数，在0~65535之间。</p>
+<ul>
+<li>0~1023范围的端口号为周知端口号，是受限制的，留给HTTP(80号端口)、FTP(21号端口)等周知的应用层协议来使用</li>
+</ul>
+<h2 id="无连接的多路复用与多路分解"><a href="#无连接的多路复用与多路分解" class="headerlink" title="无连接的多路复用与多路分解"></a>无连接的多路复用与多路分解</h2><ol>
+<li>主机A向主机B发送UDP报文</li>
+<li>主机A的运输层创建一个运输层报文段，包括应用程序数据、源端口号、目的端口号和两个其他值</li>
+<li>运输层将得到的报文段传递到网络层</li>
+<li>网络层将报文段封装到一个IP数据报并尽力将报文段交付给接收主机</li>
+<li>主机B运输层检查报文段目标端口号，并将报文段交付给该端口号所标识的套接字</li>
+<li>主机B有多个进程，每个进程有自己特定的UDP套接字和相应的端口号，当UDP报文段从网络到达时，主机B检查报文段的目的端口号，将每个报文段定向分解到相应的套接字</li>
+</ol>
+<p><strong>一个UDP套接字时一个二元组：目的主机IP和目的主机端口号</strong></p>
+<p>若两个源主机IP不同，源端口号不同，但是目的主机IP和目的主机端口号相同的UDP报文段，那么这两个报文段就会被定向到相同的目标进程</p>
+<p>UDP报文段源主机IP和源端口号的作用显然<br><img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/%E7%AB%AF%E5%8F%A3%E5%8F%8D%E8%BD%AC.png" srcset="/img/loading.gif" lazyload class></p>
+<h2 id="面向连接的多路复用与多路分解"><a href="#面向连接的多路复用与多路分解" class="headerlink" title="面向连接的多路复用与多路分解"></a>面向连接的多路复用与多路分解</h2><p>与UDP不同，TCP套接字是一个四元组(前面已知)，TCP报文段的四部分必须完全一致才能被定向到一个相同的进程<br><img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/TCP0.png" srcset="/img/loading.gif" lazyload class></p>
 
             </div>
             <hr>
@@ -262,7 +300,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">刷题记录</a>
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
                     
                   </div>
                 
@@ -280,18 +318,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">传输层</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/05/09/2022-05-09-2022-05-15/">
-                        <span class="hidden-mobile">2022-05-09~2022-05-15</span>
+                      <a href="/2022/05/23/%E8%B4%AA%E5%BF%83/">
+                        <span class="hidden-mobile">贪心</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
