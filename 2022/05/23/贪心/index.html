@@ -24,7 +24,7 @@
 <meta property="og:description" content="2">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-23T08:50:13.000Z">
-<meta property="article:modified_time" content="2022-05-24T15:40:31.168Z">
+<meta property="article:modified_time" content="2022-05-24T16:05:50.458Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -199,7 +199,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.7k 字
+      2.4k 字
     </span>
   
 
@@ -208,7 +208,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      15 分钟
+      21 分钟
     </span>
   
 
@@ -256,8 +256,11 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <h4 id="力扣452-用最小的箭引爆气球"><a href="#力扣452-用最小的箭引爆气球" class="headerlink" title="力扣452.用最小的箭引爆气球"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons/">力扣452</a>.用最小的箭引爆气球</h4><p>本题甚至看题都有一点费劲<br>先排序，按照左边界从小到大，那么对应的也要从前往后遍历<br>关注气球的左右边界：</p>
 <ul>
 <li>如果两个气球没挨着，结果值+1<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">if(points<span class="hljs-selector-attr">[i]</span><span class="hljs-selector-attr">[0]</span>&gt;points<span class="hljs-selector-attr">[i-1]</span><span class="hljs-selector-attr">[1]</span>)<br></code></pre></td></tr></table></figure></li>
-<li>如果两个气球挨着，那么更新第i个的右边界，取第i-1个和它本身最小值。当遍历到两气球没有挨着时，前面几个都可以用一支箭，就是第一种情况</li>
+<li>如果两个气球挨着，那么更新第i个的右边界，取第i-1个和它本身最小值。当遍历到两气球没有挨着时，前面几个都可以用一支箭，就是第一种情况<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">points<span class="hljs-comment">[i]</span><span class="hljs-comment">[1]</span>=min(points<span class="hljs-comment">[i-1]</span><span class="hljs-comment">[1]</span>,points<span class="hljs-comment">[i]</span><span class="hljs-comment">[1]</span>);<br></code></pre></td></tr></table></figure>
+</li>
 </ul>
+<h4 id="力扣435-无重叠区间"><a href="#力扣435-无重叠区间" class="headerlink" title="力扣435.无重叠区间"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/non-overlapping-intervals/">力扣435</a>.无重叠区间</h4><p>先排序，按照左边界排序和右边界排序均可以<br>总的区间个数=重叠区间个数+非重叠区间个数<br><strong>只需找到非重叠区间个数最多的情况即可</strong><br>如果按照右边界排序，就从左向右遍历<br><strong>优先选取右边界比较小的区间，那么留给下一个区间的范围就会更大，局部最优推出整体最优，找不到反例，用贪心</strong></p>
+<p>每次取非交叉区间的时候，都是可右边界最小的来做分割点<br><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">static <span class="hljs-built_in">bool</span> cmp( vector&lt;<span class="hljs-built_in">int</span>&gt; &amp;a,vector&lt;<span class="hljs-built_in">int</span>&gt; &amp;b)&#123;<br>        <span class="hljs-keyword">return</span> a[<span class="hljs-number">1</span>]&lt;b[<span class="hljs-number">1</span>];<br>    &#125;<br>    <span class="hljs-built_in">int</span> eraseOverlapIntervals(vector&lt;vector&lt;<span class="hljs-built_in">int</span>&gt;&gt;&amp; <span class="hljs-built_in">int</span>ervals) &#123;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">int</span>ervals.size()==<span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        sort(<span class="hljs-built_in">int</span>ervals.begin(),<span class="hljs-built_in">int</span>ervals.end(),cmp);<br>        <span class="hljs-built_in">int</span> count=<span class="hljs-number">1</span>;<br>        <span class="hljs-built_in">int</span> minBoard=<span class="hljs-built_in">int</span>ervals[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-built_in">int</span> i=<span class="hljs-number">1</span>;i&lt;<span class="hljs-built_in">int</span>ervals.size();i++)&#123;<br>            <span class="hljs-keyword">if</span>(minBoard&lt;=<span class="hljs-built_in">int</span>ervals[i][<span class="hljs-number">0</span>])&#123;<br>                count++;<br>                minBoard=<span class="hljs-built_in">int</span>ervals[i][<span class="hljs-number">1</span>];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">int</span>ervals.size()-count;<br>    &#125;<br></code></pre></td></tr></table></figure></p>
 
             </div>
             <hr>
