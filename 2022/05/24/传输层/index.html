@@ -30,8 +30,20 @@
 <meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E6%9C%8D%E5%8A%A1.png">
 <meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/rdt1.png">
 <meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/rdt2.png">
+<meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/rdt2.11.png">
+<meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/rdt2.12.png">
+<meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/rdt2.21.png">
+<meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/rdt2.22.png">
+<meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/rdt3.png">
+<meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/%E6%B5%81%E6%B0%B4%E7%BA%BF%E6%93%8D%E4%BD%9C.png">
+<meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/GBN.png">
+<meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/GBN1.png">
+<meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/GBN2.png">
+<meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/SR.png">
+<meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/TCP%E5%8F%91%E9%80%81%E7%BC%93%E5%AD%98%E5%92%8C%E6%8E%A5%E6%94%B6%E7%BC%93%E5%AD%98.png">
+<meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/TCP%E6%8A%A5%E6%96%87%E6%AE%B5%E7%BB%93%E6%9E%84.png">
 <meta property="article:published_time" content="2022-05-24T06:31:24.000Z">
-<meta property="article:modified_time" content="2022-05-24T13:05:36.470Z">
+<meta property="article:modified_time" content="2022-05-25T14:07:02.829Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/%E7%AB%AF%E5%8F%A3.png">
@@ -207,7 +219,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.9k 字
+      3.7k 字
     </span>
   
 
@@ -216,7 +228,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      17 分钟
+      31 分钟
     </span>
   
 
@@ -308,16 +320,92 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <h2 id="UDP检验和"><a href="#UDP检验和" class="headerlink" title="UDP检验和"></a>UDP检验和</h2><p><strong>UDP检验和提供了差错检测功能</strong>，检验和用于确定当UDP报文段从源到达目的地移动时，其中的比特是否发生了改变。<br>发送方的UDP对报文段中的所有16比特字的和进行反码运算，求和时遇到的任何溢出都被回卷。得到的结果被放在UDP报文段中的检验和字段</p>
 <p><strong>虽然UDP提供差错检测，但它对差错恢复无能为力。UDP的某种实现只是丢弃受损的报文段；其他实现是将受损的报文段交给应用程序并给出警告</strong></p>
 <h1 id="可靠数据传输原理"><a href="#可靠数据传输原理" class="headerlink" title="可靠数据传输原理"></a>可靠数据传输原理</h1><img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E6%9C%8D%E5%8A%A1.png" srcset="/img/loading.gif" lazyload class>
-<h2 id="构造可靠数据传输协议"><a href="#构造可靠数据传输协议" class="headerlink" title="构造可靠数据传输协议"></a>构造可靠数据传输协议</h2><h3 id="经完全可靠信道的可靠数据传输"><a href="#经完全可靠信道的可靠数据传输" class="headerlink" title="经完全可靠信道的可靠数据传输"></a>经完全可靠信道的可靠数据传输</h3><p>在这个协议中，一个单元数据和一个分组没差别。所有分组是从发送方流向接收方；<br>有了完全可靠的信道，接收端就不需要提供任何反馈信息给发送方，因为不必担心差错；<br>假定接收方接收数据的速率能够和发送方发送数据的速率一样快，接收方没有必要请求发送方慢一点<br><img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/rdt1.png" srcset="/img/loading.gif" lazyload class></p>
-<h3 id="经具有比特差错信道的可靠数据传输"><a href="#经具有比特差错信道的可靠数据传输" class="headerlink" title="经具有比特差错信道的可靠数据传输"></a>经具有比特差错信道的可靠数据传输</h3><p><strong>自动重传请求(ARQ)协议</strong><br>这些控制报文使得接收方可以让发送方知道哪些内容被正确接受，哪些内容接收有误并因此需要重复，基于这样的重传机制为自动重传请求协议</p>
+<h2 id="构造可靠数据传输协议"><a href="#构造可靠数据传输协议" class="headerlink" title="构造可靠数据传输协议"></a>构造可靠数据传输协议</h2><h3 id="经完全可靠信道的可靠数据传输-rdt1-0"><a href="#经完全可靠信道的可靠数据传输-rdt1-0" class="headerlink" title="经完全可靠信道的可靠数据传输 rdt1.0"></a>经完全可靠信道的可靠数据传输 rdt1.0</h3><p>在这个协议中，一个单元数据和一个分组没差别。所有分组是从发送方流向接收方；<br>有了完全可靠的信道，接收端就不需要提供任何反馈信息给发送方，因为不必担心差错；<br>假定接收方接收数据的速率能够和发送方发送数据的速率一样快，接收方没有必要请求发送方慢一点<br><img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/rdt1.png" srcset="/img/loading.gif" lazyload class></p>
+<h3 id="经具有比特差错信道的可靠数据传输-rdt2-0"><a href="#经具有比特差错信道的可靠数据传输-rdt2-0" class="headerlink" title="经具有比特差错信道的可靠数据传输 rdt2.0"></a>经具有比特差错信道的可靠数据传输 rdt2.0</h3><p><strong>自动重传请求(ARQ)协议</strong><br>这些控制报文使得接收方可以让发送方知道哪些内容被正确接受，哪些内容接收有误并因此需要重复，基于这样的重传机制为自动重传请求协议</p>
 <p>此外，还需要另外三种协议功能来处理比特差错的情况</p>
 <ul>
 <li><strong>差错检测</strong>，如UDP使用因特网检验和字段是为了这个目的</li>
-<li><strong>接收方反馈</strong>：如”ACK”(肯定确认)和”NAK”(否定确认)，理论上，这些分组只需要一个比特长，0标示NAK，1标示ACK</li>
+<li><strong>接收方反馈ACK/NAK</strong>：如”ACK”(肯定确认)和”NAK”(否定确认)，理论上，这些分组只需要一个比特长，0标示NAK，1标示ACK</li>
 <li><strong>重传</strong>：接收方收到有差错的分组时，发送方将重传该报文</li>
 </ul>
 <img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/rdt2.png" srcset="/img/loading.gif" lazyload class>
-
+<h4 id="rdt2-1"><a href="#rdt2-1" class="headerlink" title="rdt2.1"></a>rdt2.1</h4><p>rdt2.0的缺陷是无法确认ACK和NAK一定是正确的<br>就是在rdt2.0基础上将发送方的数据进行分组</p>
+<p> 如果收到受损的分组 ，则接收方将发送一个否定确认 。 如果不发送 NAK, 而是对上次正确接收的分组发送一个 ACK, 我们也能实现与 NAK — 样的效果 。 发送方接收到对同一个分组的两个 ACK （ 即接收冗余 ACK（ duplicate ACK））后 ， 就知道接收方没有正确接收到跟在被确认两次的分组后面的分组<br>发送方<br><img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/rdt2.11.png" srcset="/img/loading.gif" lazyload class><br>接收方<br><img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/rdt2.12.png" srcset="/img/loading.gif" lazyload class></p>
+<h4 id="rdt2-2"><a href="#rdt2-2" class="headerlink" title="rdt2.2"></a>rdt2.2</h4><p>相比于rdt2.1，rdt2.2只使用ACK报</p>
+<ul>
+<li>接收方通过ACK告知最后一个被正确接收的分组</li>
+<li>在ACK消息中显示地加入被正确分组的序列号</li>
+</ul>
+<p>发送方收到重复的ACK之后，采取与收到NAK消息相同的动作，重传当前分组<br>发送方<br><img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/rdt2.21.png" srcset="/img/loading.gif" lazyload class><br>接收方<br><img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/rdt2.22.png" srcset="/img/loading.gif" lazyload class></p>
+<h3 id="经具有比特差错的丢包信道的可靠数据传输：rdt3-0"><a href="#经具有比特差错的丢包信道的可靠数据传输：rdt3-0" class="headerlink" title="经具有比特差错的丢包信道的可靠数据传输：rdt3.0"></a>经具有比特差错的丢包信道的可靠数据传输：rdt3.0</h3><p>让发送方负责检测和恢复丢包工作<br>在发送方和接收方之间加一个往返时延，当发送方在此时间内没有收到ACK，则重传该分组。<br><strong>这就在发送方和接收方的信道中引入了冗余数据分组的可能性</strong>，在rdt2.2中该问题已解决<br><strong>发送方应该做到</strong>：</p>
+<ol>
+<li>每次发送一个分组(包括第一次分组和重传分组)时，便启动一个定时器</li>
+<li>响应定时器中断(采取适当动作)</li>
+<li>终止定时器<br>发送方：<img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/rdt3.png" srcset="/img/loading.gif" lazyload class>
+</li>
+</ol>
+<h2 id="流水线可靠数据传输协议"><a href="#流水线可靠数据传输协议" class="headerlink" title="流水线可靠数据传输协议"></a>流水线可靠数据传输协议</h2><p>既然rdt3.0性能非常差，那么每次让发送方发送一定数量的分组而无需等待确认，可以解决该问题。</p>
+<img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/%E6%B5%81%E6%B0%B4%E7%BA%BF%E6%93%8D%E4%BD%9C.png" srcset="/img/loading.gif" lazyload class>
+<ol>
+<li>必须增加序号范围：每个输送的分组(不包括重传)必须有一个唯一的序号，而且也许有多个在输送中的未确认的报文</li>
+<li>协议中的发送方和接收方两端也许不得不缓存多个分组。发送方最低限度应当能缓冲哪些已发送但没有确认的分组</li>
+<li>解决流水线的回复差错的两种基本方法：<strong>回退N步(GBN)和选择重传(SR)</strong></li>
+</ol>
+<h3 id="GBN"><a href="#GBN" class="headerlink" title="GBN"></a>GBN</h3><p><strong>基序号</strong>定义为最早未确认分组的序号，将<strong>下一个序号</strong>定义为最小的未使用序号(下一个待发分组的序号)<br><strong>N为窗口长度</strong></p>
+<p>[0,base-1]对应已经发送但未被确认的分组<br>[base,nexteqnum-1]对应已经发送但未确认的分组<br>[nexteqnum,base+N-1] 对应要被立即发送的分组<br>直到流水线中未被确认的分组得到确认为止，大于等于base+N的序号时不能使用的<br><img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/GBN.png" srcset="/img/loading.gif" lazyload class><br>扩展的状态机：<br><img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/GBN1.png" srcset="/img/loading.gif" lazyload class><br><img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/GBN2.png" srcset="/img/loading.gif" lazyload class></p>
+<p>ACK机制：发送拥有最高序列号的、已被正确接收的分组的ACK</p>
+<ul>
+<li>可能产生ACK</li>
+<li>只需要记住唯一的expectedeqnum</li>
+</ul>
+<p>乱序到达的分组</p>
+<ul>
+<li>直接丢弃-&gt;接收方没有缓存</li>
+<li>重新确认序列号最大的、按序到达的分组</li>
+</ul>
+<h3 id="SR"><a href="#SR" class="headerlink" title="SR"></a>SR</h3><ul>
+<li>接收方对每个分组<strong>单独进行确认</strong><ul>
+<li>设置<strong>缓存机制</strong>，缓存乱序到达的分组</li>
+</ul>
+</li>
+<li>发送方只重传那些没收到ACK的分组 <ul>
+<li>为每个窗口设置定时器</li>
+</ul>
+</li>
+<li>发送方窗口<ul>
+<li>N个连续的序列号</li>
+<li>限制已发送且未确认的分组 </li>
+</ul>
+</li>
+</ul>
+<p>比GBN先进的地方是，</p>
+<ul>
+<li>为每个分组单独地设置计时器，当超时以后，没发出去的分组再单独重发，不必将后面的已经收到的重发</li>
+<li>接收方也有一个滑动窗口，可以将乱序的分组放进缓存中去</li>
+</ul>
+<img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/SR.png" srcset="/img/loading.gif" lazyload class>
+<p>当窗口中的所有分组都收到时，才将该窗口的分组交给上层应用</p>
+<h1 id="面向连接的传输：TCP"><a href="#面向连接的传输：TCP" class="headerlink" title="面向连接的传输：TCP"></a>面向连接的传输：TCP</h1><h2 id="TCP连接"><a href="#TCP连接" class="headerlink" title="TCP连接"></a>TCP连接</h2><p><strong>三次握手</strong>：前两个报文段不包含应用层数据；第三个报文段可以承载有效载荷</p>
+<p>TCP将数据引导到连接的<strong>发送缓存</strong>里，发送缓存是发起三次握手期间设置的缓存之一<br>TCP在方便的时候以报文段的形式发送数据。<br>TCP可从缓存中取出并放入报文段的数量受限于<strong>最大报文段长度MSS</strong>。MSS通常根据最初确定的由本地发送主机发送的<strong>最大链路层帧长度(最大传输单元)</strong>来设置</p>
+<p>TCP为每块客户数据配上一个TCP首部，从而形成多个TCP报文段</p>
+<img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/TCP%E5%8F%91%E9%80%81%E7%BC%93%E5%AD%98%E5%92%8C%E6%8E%A5%E6%94%B6%E7%BC%93%E5%AD%98.png" srcset="/img/loading.gif" lazyload class>
+<h2 id="TCP报文段结构"><a href="#TCP报文段结构" class="headerlink" title="TCP报文段结构"></a>TCP报文段结构</h2><p>MSS限制了报文段数据字段的最大长度<br><img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/TCP%E6%8A%A5%E6%96%87%E6%AE%B5%E7%BB%93%E6%9E%84.png" srcset="/img/loading.gif" lazyload class><br>TCP首部一般是20字节(UDP8字节)<br>TCP报文段首部包括：</p>
+<ul>
+<li><strong>源端口和目的端口</strong></li>
+<li><strong>检验和字段</strong></li>
+<li>32比特的<strong>序号字段</strong>和32比特的<strong>确认号字段</strong></li>
+<li>16比特的<strong>接收窗口字段</strong>，该字段用于流量控制</li>
+<li>4比特的<strong>首部长度字段</strong>，该字段指示了以32比特的字为单位的TCP首部长度(通常该字段为空，所以TCP首部的典型长度为20字节)</li>
+<li>可选与变长的<strong>选项字段</strong>，该字段用于发送方与接收方协商最大报文段长度时，或在高速网络环境下用作窗口调节因子时使用</li>
+<li>16比特的<strong>标志字段</strong>，<ul>
+<li>RST、SYN、FIN比特用于连接建立和拆除</li>
+<li>明确拥塞通告中使用了CWR和ECE比特</li>
+<li>当PSH比特被置位时，就指示接收方应立即将数据交给上层</li>
+<li>URG比特用于指示报文段里存在着被发送端上层实体置为“紧急”的数据。紧急数据的最后一个字节由16比特的<strong>紧急数据指针字段指出</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="序号和确认号"><a href="#序号和确认号" class="headerlink" title="序号和确认号"></a>序号和确认号</h4>
             </div>
             <hr>
             <div>
