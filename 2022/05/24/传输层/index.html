@@ -43,7 +43,7 @@
 <meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/TCP%E5%8F%91%E9%80%81%E7%BC%93%E5%AD%98%E5%92%8C%E6%8E%A5%E6%94%B6%E7%BC%93%E5%AD%98.png">
 <meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/TCP%E6%8A%A5%E6%96%87%E6%AE%B5%E7%BB%93%E6%9E%84.png">
 <meta property="article:published_time" content="2022-05-24T06:31:24.000Z">
-<meta property="article:modified_time" content="2022-05-25T14:07:02.829Z">
+<meta property="article:modified_time" content="2022-05-26T14:08:40.383Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/%E7%AB%AF%E5%8F%A3.png">
@@ -219,7 +219,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.7k 字
+      4k 字
     </span>
   
 
@@ -228,7 +228,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      31 分钟
+      34 分钟
     </span>
   
 
@@ -386,6 +386,18 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/SR.png" srcset="/img/loading.gif" lazyload class>
 <p>当窗口中的所有分组都收到时，才将该窗口的分组交给上层应用</p>
 <h1 id="面向连接的传输：TCP"><a href="#面向连接的传输：TCP" class="headerlink" title="面向连接的传输：TCP"></a>面向连接的传输：TCP</h1><h2 id="TCP连接"><a href="#TCP连接" class="headerlink" title="TCP连接"></a>TCP连接</h2><p><strong>三次握手</strong>：前两个报文段不包含应用层数据；第三个报文段可以承载有效载荷</p>
+<ul>
+<li>点对点</li>
+<li>可靠的、按序的字节流</li>
+<li>流水线机制<ul>
+<li>Tcp拥塞控制和流量控制机制，设置窗口尺寸 </li>
+</ul>
+</li>
+<li>发送方/接收方缓存</li>
+<li>全双工：同一连接中能够传输双向数据流</li>
+<li>面向连接</li>
+<li>流量控制机制</li>
+</ul>
 <p>TCP将数据引导到连接的<strong>发送缓存</strong>里，发送缓存是发起三次握手期间设置的缓存之一<br>TCP在方便的时候以报文段的形式发送数据。<br>TCP可从缓存中取出并放入报文段的数量受限于<strong>最大报文段长度MSS</strong>。MSS通常根据最初确定的由本地发送主机发送的<strong>最大链路层帧长度(最大传输单元)</strong>来设置</p>
 <p>TCP为每块客户数据配上一个TCP首部，从而形成多个TCP报文段</p>
 <img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/TCP%E5%8F%91%E9%80%81%E7%BC%93%E5%AD%98%E5%92%8C%E6%8E%A5%E6%94%B6%E7%BC%93%E5%AD%98.png" srcset="/img/loading.gif" lazyload class>
@@ -405,7 +417,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 </ul>
 </li>
 </ul>
-<h4 id="序号和确认号"><a href="#序号和确认号" class="headerlink" title="序号和确认号"></a>序号和确认号</h4>
+<h4 id="序号和确认号"><a href="#序号和确认号" class="headerlink" title="序号和确认号"></a>序号和确认号</h4><p><strong>序号</strong>以字节为编号，是该报文段首字节的字节流编号。500000字节大小文件，MSS为1000，则序号分别为0，1000，2000<br><strong>主机A填充进报文段的确认号是主机A期望从主机B收到的下一字节的序号</strong><br>TCP只确认该流中至第一个丢失字节为止的字节，所以被称为提供<strong>累计确认</strong><br>主机收到失序报文段，由实现TCP的编程人员去处理</p>
+<ul>
+<li>接收方立即丢弃失序报文段</li>
+<li>接收方保留时失序报文段，并等待缺少的字节以填补该间隔</li>
+</ul>
+
             </div>
             <hr>
             <div>
@@ -431,6 +448,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/05/26/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数据链路</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
