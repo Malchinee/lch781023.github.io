@@ -24,9 +24,11 @@
 <meta property="og:description" content="传输层">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/%E7%AB%AF%E5%8F%A3.png">
+<meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/TCPUDP.png">
 <meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/%E7%AB%AF%E5%8F%A3%E5%8F%8D%E8%BD%AC.png">
 <meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/TCP0.png">
 <meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/UDP0.png">
+<meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/789456.png">
 <meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E6%9C%8D%E5%8A%A1.png">
 <meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/rdt1.png">
 <meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/rdt2.png">
@@ -42,8 +44,10 @@
 <meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/SR.png">
 <meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/TCP%E5%8F%91%E9%80%81%E7%BC%93%E5%AD%98%E5%92%8C%E6%8E%A5%E6%94%B6%E7%BC%93%E5%AD%98.png">
 <meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/TCP%E6%8A%A5%E6%96%87%E6%AE%B5%E7%BB%93%E6%9E%84.png">
+<meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/123456789.png">
+<meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/TCP%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6.png">
 <meta property="article:published_time" content="2022-05-24T06:31:24.000Z">
-<meta property="article:modified_time" content="2022-05-26T14:08:40.383Z">
+<meta property="article:modified_time" content="2022-05-27T13:26:29.075Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/%E7%AB%AF%E5%8F%A3.png">
@@ -219,7 +223,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4k 字
+      4.5k 字
     </span>
   
 
@@ -228,7 +232,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      34 分钟
+      38 分钟
     </span>
   
 
@@ -293,9 +297,10 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/%E7%AB%AF%E5%8F%A3.png" srcset="/img/loading.gif" lazyload class>
 <p>上述特殊字段是<strong>源端口号字段</strong>和<strong>目的端口号字段</strong><br>端口号是16比特的数，在0~65535之间。</p>
 <ul>
-<li>0~1023范围的端口号为周知端口号，是受限制的，留给HTTP(80号端口)、FTP(21号端口)等周知的应用层协议来使用</li>
+<li>0~1023范围的端口号为周知端口号，是受限制的，留给HTTP(80号端口)、FTP(21号端口)、DNS(53号端口)等周知的应用层协议来使用<img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/TCPUDP.png" srcset="/img/loading.gif" lazyload class>
+<h2 id="无连接的多路复用与多路分解"><a href="#无连接的多路复用与多路分解" class="headerlink" title="无连接的多路复用与多路分解"></a>无连接的多路复用与多路分解</h2></li>
 </ul>
-<h2 id="无连接的多路复用与多路分解"><a href="#无连接的多路复用与多路分解" class="headerlink" title="无连接的多路复用与多路分解"></a>无连接的多路复用与多路分解</h2><ol>
+<ol>
 <li>主机A向主机B发送UDP报文</li>
 <li>主机A的运输层创建一个运输层报文段，包括应用程序数据、目的IP、目的端口号和两个其他值、UDPSocket</li>
 <li>运输层将得到的报文段传递到网络层</li>
@@ -315,8 +320,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>分组首部开销小。每个TCP报文段都有20字节的首部开销，而UDP仅有8字节的开销</li>
 </ol>
 <h2 id="UDP报文段结构"><a href="#UDP报文段结构" class="headerlink" title="UDP报文段结构"></a>UDP报文段结构</h2><img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/UDP0.png" srcset="/img/loading.gif" lazyload class>
-<p>UDP首部只有4个字段，每个字段两个字节</p>
-<p><strong>长度</strong>：指示了在UDP报文段中的字节数(首部加数据)。接收方使用检验和来检查在报文段中是否出现了差错</p>
+<p>UDP首部只有4个字段，每个字段两个字节<br><img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/789456.png" srcset="/img/loading.gif" lazyload class><br><strong>长度</strong>：指示了在UDP报文段中的字节数(首部加数据)。接收方使用检验和来检查在报文段中是否出现了差错</p>
 <h2 id="UDP检验和"><a href="#UDP检验和" class="headerlink" title="UDP检验和"></a>UDP检验和</h2><p><strong>UDP检验和提供了差错检测功能</strong>，检验和用于确定当UDP报文段从源到达目的地移动时，其中的比特是否发生了改变。<br>发送方的UDP对报文段中的所有16比特字的和进行反码运算，求和时遇到的任何溢出都被回卷。得到的结果被放在UDP报文段中的检验和字段</p>
 <p><strong>虽然UDP提供差错检测，但它对差错恢复无能为力。UDP的某种实现只是丢弃受损的报文段；其他实现是将受损的报文段交给应用程序并给出警告</strong></p>
 <h1 id="可靠数据传输原理"><a href="#可靠数据传输原理" class="headerlink" title="可靠数据传输原理"></a>可靠数据传输原理</h1><img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E6%9C%8D%E5%8A%A1.png" srcset="/img/loading.gif" lazyload class>
@@ -417,12 +421,39 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 </ul>
 </li>
 </ul>
+<img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/123456789.png" srcset="/img/loading.gif" lazyload class>
 <h4 id="序号和确认号"><a href="#序号和确认号" class="headerlink" title="序号和确认号"></a>序号和确认号</h4><p><strong>序号</strong>以字节为编号，是该报文段首字节的字节流编号。500000字节大小文件，MSS为1000，则序号分别为0，1000，2000<br><strong>主机A填充进报文段的确认号是主机A期望从主机B收到的下一字节的序号</strong><br>TCP只确认该流中至第一个丢失字节为止的字节，所以被称为提供<strong>累计确认</strong><br>主机收到失序报文段，由实现TCP的编程人员去处理</p>
 <ul>
 <li>接收方立即丢弃失序报文段</li>
 <li>接收方保留时失序报文段，并等待缺少的字节以填补该间隔</li>
 </ul>
-
+<h2 id="TCP流量控制"><a href="#TCP流量控制" class="headerlink" title="TCP流量控制"></a>TCP流量控制</h2><p><strong>流量控制就是让发送方的发送速率不要太快，要接收方来得及接收</strong><br>利用滑动窗口机制方便在TCP连接上实现对发送方的流量控制</p>
+<ul>
+<li>TCP接收方利用自己的接收窗口的大小来限制发送方发送窗口的大小</li>
+<li>TCP发送方收到接收方的零窗口通知后，应启动持续计时器。持续计时器超时后，向接收方发送零窗口探测报文(该探测报文超过一段时间未收到确认后也会重传)</li>
+</ul>
+<h2 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h2><img src="/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/TCP%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6.png" srcset="/img/loading.gif" lazyload class>
+<p>假定：</p>
+<ol>
+<li>数据是单方向传送，而另一个方向只传送确认</li>
+<li>接收方总是有足够大的缓存空间，因而发送方发送窗口的大小由网络的拥塞程度来决定</li>
+<li>以最大报文段MSS的个数为讨论问题的单位，而不是以字节为单位</li>
+</ol>
+<ul>
+<li>发送方维护一个<strong>拥塞窗口cwnd</strong>的状态变量，其值取决于<strong>网络的拥塞程度</strong>，并且<strong>动态变化</strong><ul>
+<li>拥塞窗口<strong>cwnd的维护原则</strong>：只要窗口没有出现拥塞，拥塞窗口就再增大一些；但只要网络出现拥塞，拥塞窗口就减少一些</li>
+<li>判断出现网络拥塞的<strong>依据</strong>：没有按时收到应当到达的报文(即<strong>发生超时重传</strong>)</li>
+</ul>
+</li>
+<li>发送方将拥塞窗口作为<strong>发送窗口swnd</strong>，即<strong>swnd=cend</strong></li>
+<li>维护一个慢开始门限<strong>ssthresh</strong>状态变量：<ul>
+<li>当cwnd&lt; ssthresh时，使用慢开始算法；</li>
+<li>当cwnd&gt;ssthresh时，停止使用慢开始算法而改用拥塞避免算法</li>
+<li>当cwnd==ssthresh时，既可以使用慢开始算法，也可以使用拥塞避免算法</li>
+</ul>
+</li>
+</ul>
+<h3 id="慢开始"><a href="#慢开始" class="headerlink" title="慢开始"></a>慢开始</h3>
             </div>
             <hr>
             <div>
