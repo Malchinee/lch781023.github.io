@@ -47,7 +47,7 @@
 <meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/123456789.png">
 <meta property="og:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/TCP%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6.png">
 <meta property="article:published_time" content="2022-05-24T06:31:24.000Z">
-<meta property="article:modified_time" content="2022-05-27T13:26:29.075Z">
+<meta property="article:modified_time" content="2022-06-01T01:39:40.832Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://www.example.com/2022/05/24/%E4%BC%A0%E8%BE%93%E5%B1%82/%E7%AB%AF%E5%8F%A3.png">
@@ -223,7 +223,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.5k 字
+      4.7k 字
     </span>
   
 
@@ -232,7 +232,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      38 分钟
+      40 分钟
     </span>
   
 
@@ -427,6 +427,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>接收方立即丢弃失序报文段</li>
 <li>接收方保留时失序报文段，并等待缺少的字节以填补该间隔</li>
 </ul>
+<h2 id="往返时间估计与超时"><a href="#往返时间估计与超时" class="headerlink" title="往返时间估计与超时"></a>往返时间估计与超时</h2><h3 id="估计往返时间"><a href="#估计往返时间" class="headerlink" title="估计往返时间"></a>估计往返时间</h3><p>大多数TCP仅在某一时刻做sampleRTT测量，不为每个发送的报文段做sampleRTT<br>TCP维持一个SampleRTT均值(EstimatedRTT)<br>EstimatedRTT=(1-α)<em>EstimatedRTT+α</em>SampleRTT，推荐α取0.125</p>
 <h2 id="TCP流量控制"><a href="#TCP流量控制" class="headerlink" title="TCP流量控制"></a>TCP流量控制</h2><p><strong>流量控制就是让发送方的发送速率不要太快，要接收方来得及接收</strong><br>利用滑动窗口机制方便在TCP连接上实现对发送方的流量控制</p>
 <ul>
 <li>TCP接收方利用自己的接收窗口的大小来限制发送方发送窗口的大小</li>
