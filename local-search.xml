@@ -4,6 +4,46 @@
   
   
   <entry>
+    <title>cs144实验环境准备</title>
+    <link href="/2022/06/07/cs144%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/"/>
+    <url>/2022/06/07/cs144%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/</url>
+    
+    <content type="html"><![CDATA[<h1 id="设置虚拟机"><a href="#设置虚拟机" class="headerlink" title="设置虚拟机"></a>设置虚拟机</h1><h2 id="下载工作"><a href="#下载工作" class="headerlink" title="下载工作"></a>下载工作</h2><p><a href="https://stanford.edu/class/cs144/vm_howto/">地址</a><br>1、下载VirtualBox，本人用windows环境，就下载windows版本的<br>2、下载VM映像，下载后是这样：<br><img src="/2022/06/07/cs144%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/VM.png" class></p><h2 id="设置VM镜像"><a href="#设置VM镜像" class="headerlink" title="设置VM镜像"></a>设置VM镜像</h2><p>打开VirtualBox，配置好虚拟机，按照官方文档描述配置即可</p><h2 id="连接虚拟机"><a href="#连接虚拟机" class="headerlink" title="连接虚拟机"></a>连接虚拟机</h2><figure class="highlight css"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs css">ssh -<span class="hljs-selector-tag">p</span> <span class="hljs-number">2222</span> cs144<span class="hljs-keyword">@localhost</span> <br></code></pre></td></tr></table></figure><p>这句是在cmd窗口打的，不是在虚拟机，效果如下：<br><img src="/2022/06/07/cs144%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/TCP.png" class></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>计算机网络</category>
+      
+      <category>CS144</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>网络层</title>
+    <link href="/2022/06/05/%E7%BD%91%E7%BB%9C%E5%B1%82/"/>
+    <url>/2022/06/05/%E7%BD%91%E7%BB%9C%E5%B1%82/</url>
+    
+    <content type="html"><![CDATA[<h1 id="数据平面-每台路由器的功能"><a href="#数据平面-每台路由器的功能" class="headerlink" title="数据平面(每台路由器的功能)"></a>数据平面(每台路由器的功能)</h1><p>数据平面功能决定到达路由器输入链路之一的数据报如何转发到该路由器的输出链路之一</p><p><strong>转发</strong> 是指将分组从一个输入链路接口转移到适当的输出链路接口的路由器本地动作<br><strong>路由选择</strong> 是指确定分组从源到目的地所采取的端到端路径的网络范围处理过程 </p><h1 id="控制平面-网络范围的逻辑"><a href="#控制平面-网络范围的逻辑" class="headerlink" title="控制平面(网络范围的逻辑)"></a>控制平面(网络范围的逻辑)</h1><p>控制平面功能控制数据报沿着从源主机到目的主机的端到端路径中路由器之间的路由方式</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>计算机网络</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>动态规划</title>
     <link href="/2022/05/27/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     <url>/2022/05/27/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</url>
@@ -27,7 +67,7 @@
     <link href="/2022/05/26/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF/"/>
     <url>/2022/05/26/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF/</url>
     
-    <content type="html"><![CDATA[<p><strong>数据链路层的协议定义了通过通信媒介互连的设备之间传输的规范</strong><br>通信媒介包括双绞线电缆、同轴电缆、光纤、电波以及红外线等介质。此外，各个设备之间有时也会通过交换机、网桥、中继器等中转数据</p><h2 id="MAC地址"><a href="#MAC地址" class="headerlink" title="MAC地址"></a>MAC地址</h2><p>MAC地址用于识别数据链路中互连的节点<br>MAC地址长48比特，任何一个网卡的MAC地址都是唯一的<br><img src="/2022/05/26/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF/MAC%E5%9C%B0%E5%9D%80.png" class></p><h2 id="共享介质型网络"><a href="#共享介质型网络" class="headerlink" title="共享介质型网络"></a>共享介质型网络</h2><p><strong>共享介质型网络是指由多个设备共享一个通信介质的一种网络</strong>，有两种介质访问控制方式：争用方式和令牌传递方式</p><h3 id="争用方式"><a href="#争用方式" class="headerlink" title="争用方式"></a>争用方式</h3><p>争夺获取数据传输的权力，也叫CSMA，采用先到先得的方式占用信道发送数据<br>改良CSMA另一种方式——CSMA/CD</p><ul><li>如果载波信道上没有数据流动，任何站可以发送数据</li><li>检查是否会发生冲突。一旦发生冲突，放弃发送数据，同时立即释放载波信道</li><li>放弃发送后，随机延时一段时间，再重新争用介质，重新发送帧</li></ul><h3 id="令牌传递方式"><a href="#令牌传递方式" class="headerlink" title="令牌传递方式"></a>令牌传递方式</h3><p>只有获得令牌的站才能发送数据，有两个特点：</p><ul><li>不会有冲突</li><li>每个站都有通过平等循环获得令牌的机会</li></ul><h2 id="非共享介质网络"><a href="#非共享介质网络" class="headerlink" title="非共享介质网络"></a>非共享介质网络</h2><p>网络中的每个站直连交换机，由交换机负责转发数据帧<br>并且交换机的端口与计算机之间可以实现同时收发的全双工通信<br><img src="/2022/05/26/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF/%E9%9D%9E%E5%85%B1%E4%BA%AB%E4%BB%8B%E8%B4%A8%E7%BD%91%E7%BB%9C.png" class></p><h2 id="根据MAC地址转发"><a href="#根据MAC地址转发" class="headerlink" title="根据MAC地址转发"></a>根据MAC地址转发</h2><p><strong>以太网交换机就是持有多个端口的网桥</strong>，此处端口不是操作系统的端口。它们根据数据链路层中每个帧的目标MAC地址，决定从哪个网络接口发送数据。<strong>所参考的，用以记录发送接口的表叫做转发表</strong><br>转发表内容可以自动生成，又叫<strong>自学过程</strong><br><img src="/2022/05/26/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF/%E4%BA%A4%E6%8D%A2%E6%9C%BA%E8%87%AA%E5%AD%A6.png" class><br>当连接多个终端时，有必要讲网络分成多个数据链路，采用类似于网络层的IP地址一样对地址进行分层管理<br><strong>交换机转发方式</strong>：</p><ul><li>存储转发：检查以太网数据帧末尾的FCS位后再进行转发，可以避免由于冲突而被破坏的帧或噪声导致的错误帧</li><li>直通转发：不需要将整个帧全部接收下来以后再进行转发。只需要得知目标地址即可开始转发。具有延迟较短的优势，但可能会发送错误帧</li></ul><h2 id="环路检测技术"><a href="#环路检测技术" class="headerlink" title="环路检测技术"></a>环路检测技术</h2>]]></content>
+    <content type="html"><![CDATA[<p><strong>数据链路层的协议定义了通过通信媒介互连的设备之间传输的规范</strong><br>通信媒介包括双绞线电缆、同轴电缆、光纤、电波以及红外线等介质。此外，各个设备之间有时也会通过交换机、网桥、中继器等中转数据</p><h2 id="MAC地址"><a href="#MAC地址" class="headerlink" title="MAC地址"></a>MAC地址</h2><p>MAC地址用于识别数据链路中互连的节点<br>MAC地址长48比特，任何一个网卡的MAC地址都是唯一的<br><img src="/2022/05/26/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF/MAC%E5%9C%B0%E5%9D%80.png" class></p><h2 id="共享介质型网络"><a href="#共享介质型网络" class="headerlink" title="共享介质型网络"></a>共享介质型网络</h2><p><strong>共享介质型网络是指由多个设备共享一个通信介质的一种网络</strong>，有两种介质访问控制方式：争用方式和令牌传递方式</p><h3 id="争用方式"><a href="#争用方式" class="headerlink" title="争用方式"></a>争用方式</h3><p>争夺获取数据传输的权力，也叫CSMA，采用先到先得的方式占用信道发送数据<br>改良CSMA另一种方式——CSMA/CD</p><ul><li>如果载波信道上没有数据流动，任何站可以发送数据</li><li>检查是否会发生冲突。一旦发生冲突，放弃发送数据，同时立即释放载波信道</li><li>放弃发送后，随机延时一段时间，再重新争用介质，重新发送帧</li></ul><h3 id="令牌传递方式"><a href="#令牌传递方式" class="headerlink" title="令牌传递方式"></a>令牌传递方式</h3><p>只有获得令牌的站才能发送数据，有两个特点：</p><ul><li>不会有冲突</li><li>每个站都有通过平等循环获得令牌的机会</li></ul><h2 id="非共享介质网络"><a href="#非共享介质网络" class="headerlink" title="非共享介质网络"></a>非共享介质网络</h2><p>网络中的每个站直连交换机，由交换机负责转发数据帧<br>并且交换机的端口与计算机之间可以实现同时收发的全双工通信<br><img src="/2022/05/26/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF/%E9%9D%9E%E5%85%B1%E4%BA%AB%E4%BB%8B%E8%B4%A8%E7%BD%91%E7%BB%9C.png" class></p><h2 id="根据MAC地址转发"><a href="#根据MAC地址转发" class="headerlink" title="根据MAC地址转发"></a>根据MAC地址转发</h2><p><strong>以太网交换机就是持有多个端口的网桥</strong>，此处端口不是操作系统的端口。它们根据数据链路层中每个帧的目标MAC地址，决定从哪个网络接口发送数据。<strong>所参考的，用以记录发送接口的表叫做转发表</strong><br>转发表内容可以自动生成，又叫<strong>自学过程</strong><br><img src="/2022/05/26/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF/%E4%BA%A4%E6%8D%A2%E6%9C%BA%E8%87%AA%E5%AD%A6.png" class><br>当连接多个终端时，有必要讲网络分成多个数据链路，采用类似于网络层的IP地址一样对地址进行分层管理<br><strong>交换机转发方式</strong>：</p><ul><li>存储转发：检查以太网数据帧末尾的FCS位后再进行转发，可以避免由于冲突而被破坏的帧或噪声导致的错误帧</li><li>直通转发：不需要将整个帧全部接收下来以后再进行转发。只需要得知目标地址即可开始转发。具有延迟较短的优势，但可能会发送错误帧</li></ul><h2 id="环路检测技术"><a href="#环路检测技术" class="headerlink" title="环路检测技术"></a>环路检测技术</h2><p>最坏的情况下，数据帧会在环路中被持续转发，数据帧的积累导致网络瘫痪</p>]]></content>
     
     
     <categories>
