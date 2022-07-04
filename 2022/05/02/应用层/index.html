@@ -248,16 +248,16 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             <h1 style="display: none">应用层</h1>
             
             <div class="markdown-body">
-              <h1 id="应用层协议原理"><a href="#应用层协议原理" class="headerlink" title="应用层协议原理"></a>应用层协议原理</h1><h4 id="应用程序体系结构"><a href="#应用程序体系结构" class="headerlink" title="应用程序体系结构"></a>应用程序体系结构</h4><p>由应用程序研发者决定，使用如客户-服务器体系结构(C/S模式)，P2P体系结构等<br>各个结构的缺点：</p>
+              <h1 id="应用层协议原理"><a href="#应用层协议原理" class="headerlink" title="应用层协议原理"></a>应用层协议原理</h1><h4 id="应用程序体系结构"><a href="#应用程序体系结构" class="headerlink" title="应用程序体系结构"></a>应用程序体系结构</h4><p>由应用程序研发者决定，使用如客户-服务器体系结构(C&#x2F;S模式)，P2P体系结构等<br>各个结构的缺点：</p>
 <ul>
-<li>C/S模式的可扩展性比较差，用户达到一定阈值会断崖式下降，可靠性也比较差</li>
+<li>C&#x2F;S模式的可扩展性比较差，用户达到一定阈值会断崖式下降，可靠性也比较差</li>
 <li>P2P管理困难</li>
 </ul>
 <h4 id="分布式进程需要解决的问题："><a href="#分布式进程需要解决的问题：" class="headerlink" title="分布式进程需要解决的问题："></a>分布式进程需要解决的问题：</h4><ol>
 <li>进程标示和寻址问题(服务用户)</li>
 <li>传输层-应用层提供服务是如何(服务)<ul>
-<li>位置：层间界面的SAP(TCP/IP:socket)</li>
-<li>形式：应用程序接口API(TCP/IP:socket API)</li>
+<li>位置：层间界面的SAP(TCP&#x2F;IP:socket)</li>
+<li>形式：应用程序接口API(TCP&#x2F;IP:socket API)</li>
 </ul>
 </li>
 <li>如何使用传输层提供的服务、实现进程间报文的交换，实现应用(用户使用服务)</li>
@@ -266,7 +266,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>对进程进行编址：引入端口号</li>
 <li>传输层提供的服务：需要穿过层间的信息<ul>
 <li>层间接口必须要携带的的信息：要传输的报文(SDU)、应用进程的标示(IP+TCP或UDP端口)、对方的应用程序的标示(IP+TCP或UDP端口)</li>
-<li>传输层实体根据这些信息进行TCP报文段/UDP数据段的封装</li>
+<li>传输层实体根据这些信息进行TCP报文段&#x2F;UDP数据段的封装</li>
 </ul>
 </li>
 <li><ul>
@@ -281,7 +281,11 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>可靠数据传输</li>
 <li>吞吐量</li>
 <li>定时</li>
-<li>安全性<br>可用吞吐量是指发送进程能够向接收进程交付比特的速率<h4 id="因特网提供的运输服务"><a href="#因特网提供的运输服务" class="headerlink" title="因特网提供的运输服务"></a>因特网提供的运输服务</h4><strong>tcp服务</strong>模型包括面向连接服务和可靠数据传输服务，还拥有拥塞控制机制<br><strong>udp服务</strong>实现简单、无头部开销，仅提供最小服务<br>目前因特网没有提供吞吐量和定时的保证<h4 id="应用层协议"><a href="#应用层协议" class="headerlink" title="应用层协议"></a>应用层协议</h4>应用层协议定义：</li>
+<li>安全性<br>可用吞吐量是指发送进程能够向接收进程交付比特的速率</li>
+</ul>
+<h4 id="因特网提供的运输服务"><a href="#因特网提供的运输服务" class="headerlink" title="因特网提供的运输服务"></a>因特网提供的运输服务</h4><p><strong>tcp服务</strong>模型包括面向连接服务和可靠数据传输服务，还拥有拥塞控制机制<br><strong>udp服务</strong>实现简单、无头部开销，仅提供最小服务<br>目前因特网没有提供吞吐量和定时的保证</p>
+<h4 id="应用层协议"><a href="#应用层协议" class="headerlink" title="应用层协议"></a>应用层协议</h4><p>应用层协议定义：</p>
+<ul>
 <li>交换报文的类型</li>
 <li>各种报文类型的语法</li>
 <li>字段的语义</li>
@@ -289,7 +293,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 </ul>
 <p>注：应用层协议只是网络应用的一部分。<br>web协议是http，电子邮件协议是SMTP</p>
 <h1 id="Web和HTTP"><a href="#Web和HTTP" class="headerlink" title="Web和HTTP"></a>Web和HTTP</h1><h4 id="HTTP概况"><a href="#HTTP概况" class="headerlink" title="HTTP概况"></a>HTTP概况</h4><p>WEB页面由对象组成<br>HTML基本文件通过URL地址引用页面中的其他对象，URL由两部分组成：存放对象的服务器主机名和对象的路径名<br>http使用TCP作为它的支撑运输协议，一个客户进程发送的每个HTTP请求报文都能最终完整地到达服务器，服务器进程发出的每个响应报文都能最终完整地到达客户<br>HTTP是<strong>无状态协议</strong>，不保存任何客户的信息</p>
-<h4 id="非持续连接和持续连接"><a href="#非持续连接和持续连接" class="headerlink" title="非持续连接和持续连接"></a>非持续连接和持续连接</h4><p>非持续连接：每个请求/响应都通过单独的TCP连接发送<br>持续连接：所有的请求和响应都经过相同的TCP连接发送<br>默认情况下使用持续连接</p>
+<h4 id="非持续连接和持续连接"><a href="#非持续连接和持续连接" class="headerlink" title="非持续连接和持续连接"></a>非持续连接和持续连接</h4><p>非持续连接：每个请求&#x2F;响应都通过单独的TCP连接发送<br>持续连接：所有的请求和响应都经过相同的TCP连接发送<br>默认情况下使用持续连接</p>
 <h5 id="采用非持续连接的HTTP"><a href="#采用非持续连接的HTTP" class="headerlink" title="采用非持续连接的HTTP"></a>采用非持续连接的HTTP</h5><p>如果客户向服务器访问含有11个对象的网页（1个html基本文件和10个jpeg图像），需要建立11次连接<br>往返时间RTT：一个小的分组从客户端到服务器，再回到客户端的时间(传输时间忽略不计)。包括分组传播时延、分组在中间路由器和交换机上的排队时延以及分组处理的时延。<br>用户点击某超链接时，总的响应时间就是两个RTT（一个RTT用于建立连接，另一个用于请求和接受对象）加上服务器传输html文件的时间</p>
 <h5 id="采用持续连接的TCP"><a href="#采用持续连接的TCP" class="headerlink" title="采用持续连接的TCP"></a>采用持续连接的TCP</h5><p>服务器在发送响应后保持该TCP连接打开，若长时间未使用，HTTP服务器就关闭该连接<br>使用流水线的方式</p>
 <h4 id="HTTP报文格式"><a href="#HTTP报文格式" class="headerlink" title="HTTP报文格式"></a>HTTP报文格式</h4><img src="/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%E5%92%8C%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F.png" srcset="/img/loading.gif" lazyload class>
@@ -312,7 +316,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <h4 id="web缓存（代理服务器）"><a href="#web缓存（代理服务器）" class="headerlink" title="web缓存（代理服务器）"></a>web缓存（代理服务器）</h4><p>web缓存服务器既是服务器又是客户。<br>自己的理解：当用户访问某web站点时，浏览器创建与缓存服务器的TCP连接，然后在缓存服务器中寻找是否有该对象，若有，则发送响应报文返回；若没有，则与创建该对象的初始服务器建立一条TCP连接，发送请求报文，初始服务器返回响应报文，然后web缓存器接受到该对象，在本地存储区建立副本，然后通过响应报文将对象返回给用户。</p>
 <h4 id="条件GET方法"><a href="#条件GET方法" class="headerlink" title="条件GET方法"></a>条件GET方法</h4><p>如果请求报文中使用GET方法，并且请求报文中包含一个”If-modified-Since”首部行，那么这个HTTP请求报文就是一个条件GET请求报文<br>如果客户再次访问该对象（代理服务器已保存），代理服务器向初始服务器使用一个条件GET方法，如果”If-modified-Since”的值等于最后一次服务器发送的响应报文中的Last-Modified:首部行的值，那么服务器的响应报文没有想要请求的对象（避免浪费带宽）</p>
 <h1 id="FTP-文件传输协议"><a href="#FTP-文件传输协议" class="headerlink" title="FTP 文件传输协议"></a>FTP 文件传输协议</h1><p>客户端上载文件到服务器，也可以把服务器相应目录下的文件下载到本地<br>一开始是控制连接：FTP守候的端口TCP：21，等待FTP客户端的连接请求；<br>然后身份认证，客户端向服务端发出一系列命令<br><strong>数据传输是通过另一个TCP上进行的</strong><br>FTP是一个<strong>有状态的</strong>协议</p>
-<h1 id="电子邮件"><a href="#电子邮件" class="headerlink" title="电子邮件"></a>电子邮件</h1><p>因特网电子邮件的三个主要组成部分：<strong>用户代理(如outlook)</strong>，<strong>邮件服务器</strong>，<strong>简单邮件传输协议(SMTP)</strong><br>一个典型的发送邮件的过程：从发送方的用户代理开始，传输到发送方的邮件服务器，在传输到接收方的邮件服务器，然后在这里被分发到接收方的邮箱中。<br>SMTP使用TCP可靠数据传输服务，既是客户端也是服务端</p>
+<h1 id="电子邮件"><a href="#电子邮件" class="headerlink" title="电子邮件"></a>电子邮件</h1><p>因特网电子邮件的三个主要组成部分：<strong>用户代理(如outlook)<strong>，</strong>邮件服务器</strong>，<strong>简单邮件传输协议(SMTP)</strong><br>一个典型的发送邮件的过程：从发送方的用户代理开始，传输到发送方的邮件服务器，在传输到接收方的邮件服务器，然后在这里被分发到接收方的邮箱中。<br>SMTP使用TCP可靠数据传输服务，既是客户端也是服务端</p>
 <h4 id="SMTP"><a href="#SMTP" class="headerlink" title="SMTP"></a>SMTP</h4><img src="/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/SMTP.png" srcset="/img/loading.gif" lazyload class>
 <p>服务器守候在25号端口，等待客户端建立连接<br>分三个阶段：握手，传报文，关闭。</p>
 <h4 id="与http的对比"><a href="#与http的对比" class="headerlink" title="与http的对比"></a>与http的对比</h4><ul>
@@ -321,7 +325,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li><strong>HTTP把每个对象封装到它自己的HTTP响应报文中，而SMTP把所有报文对象放在一个报文之中</strong></li>
 </ul>
 <h4 id="邮件报文格式"><a href="#邮件报文格式" class="headerlink" title="邮件报文格式"></a>邮件报文格式</h4><p>每个首部必须含有一个From：首部行和一个To：首部行；可能含有subject：首部行以及其他可选的首部行。报文首部之后，紧跟一个空白行。然后是以ASCLL表示的报文体</p>
-<h4 id="邮件访问协议"><a href="#邮件访问协议" class="headerlink" title="邮件访问协议"></a>邮件访问协议</h4><p>用户代理没办法到达一个不可达的目的地接收服务器。<br>接收方的用户代理，通过<strong>第三版的邮局协议(POP3)</strong>、<strong>因特网邮件访问协议(IMAP)以及HTTP</strong>“拉取”邮件服务器上的报文传给它的本地PC</p>
+<h4 id="邮件访问协议"><a href="#邮件访问协议" class="headerlink" title="邮件访问协议"></a>邮件访问协议</h4><p>用户代理没办法到达一个不可达的目的地接收服务器。<br>接收方的用户代理，通过<strong>第三版的邮局协议(POP3)<strong>、</strong>因特网邮件访问协议(IMAP)以及HTTP</strong>“拉取”邮件服务器上的报文传给它的本地PC</p>
 <h5 id="POP3"><a href="#POP3" class="headerlink" title="POP3"></a>POP3</h5><p>协议简单，功能有限<br>三个阶段：</p>
 <ul>
 <li><strong>特许</strong>：两个主要命令 user &lt; user name &gt;和pass &lt; password &gt;用户代理以明文形式发送用户名和口令以鉴别用户</li>
@@ -341,13 +345,20 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <ul>
 <li>主机别名</li>
 <li>邮件服务器别名</li>
-<li>负载分配<h5 id="分布式、层级数据库"><a href="#分布式、层级数据库" class="headerlink" title="分布式、层级数据库"></a>分布式、层级数据库</h5>主机域名到ip地址之间的映射分布在DNS服务器上，有三种DNS服务器：根DNS服务器，顶级域DNS服务器和权威DNS服务器，他们中的前者为后者提供IP地址<br>本地DNS服务器不属于层级结构中，通常主机向本地DNS服务器查询属于递归查询(逐级返回IP地址)，而其他查询属于迭代查询(本地DNS服务器一直问问问)<h5 id="DNS缓存"><a href="#DNS缓存" class="headerlink" title="DNS缓存"></a>DNS缓存</h5>当某DNS服务器接受某DNS回答时，能将映射缓存到本地存储器中，即使它不是主机名的权威服务器，它也能提供IP地址，但缓存不是永久的<h4 id="DNS记录和报文"><a href="#DNS记录和报文" class="headerlink" title="DNS记录和报文"></a>DNS记录和报文</h4><h5 id="资源记录"><a href="#资源记录" class="headerlink" title="资源记录"></a>资源记录</h5>(Name , Value , Type , TTL)<br>TTL是该记录的生存时间，TTL维护权威记录就是无限大，而维护缓存记录就是有限值<br>Name和Value的值取决于Type：</li>
-<li>“<strong>Type=A</strong>“，则Name是主机名，Value是该主机名对应的IP地址，一条A类型的资源记录提供了标准的主机名到IP地址的映射</li>
-<li>“<strong>Type=NS</strong>“，则Name是个域，Value是个知道如何获得该域中主机IP地址的权威DNS服务器的主机名</li>
-<li>“<strong>Type=CNAME</strong>“，则Value是个别名为Name的主机对应的规范主机名</li>
-<li>“<strong>Type=MX</strong>“，Value是个别名为Name的邮件服务器的规范主机名</li>
+<li>负载分配</li>
+</ul>
+<h5 id="分布式、层级数据库"><a href="#分布式、层级数据库" class="headerlink" title="分布式、层级数据库"></a>分布式、层级数据库</h5><p>主机域名到ip地址之间的映射分布在DNS服务器上，有三种DNS服务器：根DNS服务器，顶级域DNS服务器和权威DNS服务器，他们中的前者为后者提供IP地址<br>本地DNS服务器不属于层级结构中，通常主机向本地DNS服务器查询属于递归查询(逐级返回IP地址)，而其他查询属于迭代查询(本地DNS服务器一直问问问)</p>
+<h5 id="DNS缓存"><a href="#DNS缓存" class="headerlink" title="DNS缓存"></a>DNS缓存</h5><p>当某DNS服务器接受某DNS回答时，能将映射缓存到本地存储器中，即使它不是主机名的权威服务器，它也能提供IP地址，但缓存不是永久的</p>
+<h4 id="DNS记录和报文"><a href="#DNS记录和报文" class="headerlink" title="DNS记录和报文"></a>DNS记录和报文</h4><h5 id="资源记录"><a href="#资源记录" class="headerlink" title="资源记录"></a>资源记录</h5><p>(Name , Value , Type , TTL)<br>TTL是该记录的生存时间，TTL维护权威记录就是无限大，而维护缓存记录就是有限值<br>Name和Value的值取决于Type：</p>
+<ul>
+<li>“<strong>Type&#x3D;A</strong>“，则Name是主机名，Value是该主机名对应的IP地址，一条A类型的资源记录提供了标准的主机名到IP地址的映射</li>
+<li>“<strong>Type&#x3D;NS</strong>“，则Name是个域，Value是个知道如何获得该域中主机IP地址的权威DNS服务器的主机名</li>
+<li>“<strong>Type&#x3D;CNAME</strong>“，则Value是个别名为Name的主机对应的规范主机名</li>
+<li>“<strong>Type&#x3D;MX</strong>“，Value是个别名为Name的邮件服务器的规范主机名</li>
 </ul>
 <h5 id="dns报文格式"><a href="#dns报文格式" class="headerlink" title="dns报文格式"></a>dns报文格式</h5><img src="/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/dns.png" srcset="/img/loading.gif" lazyload class>
+
+
 <h1 id="P2P应用"><a href="#P2P应用" class="headerlink" title="P2P应用"></a>P2P应用</h1><h4 id="BitTorrent"><a href="#BitTorrent" class="headerlink" title="BitTorrent"></a>BitTorrent</h4><p>参与一个特定的文件分发的所有对等方的集合被称为一个<strong>洪流</strong>。在一个洪流中的对等方彼此下载等长度的<strong>文件块</strong>，典型的块长度为256KB。<br>每个洪流都以一个基础设施节点：<strong>追踪器</strong>，每个对等方加入洪流时，向追踪器注册自己，并且周期性地通知追踪器它仍在该洪流中。<br>一个新的对等方加入该洪流时，追踪器随机地从参与对等方地集合中选择对等方的一个子集<br><strong>最稀缺优先</strong>：解决<strong>某对等方应该从它的另据请求哪些块，应当向哪些向它请求的邻居发送块</strong>的问题。思路：</p>
 <ul>
 <li>针对它没有的块在它的邻居中最稀缺的块，并首先请求那些最稀缺的块。</li>
@@ -385,11 +396,14 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 </ul>
 <p>使用python：</p>
 <h2 id="UDP套接字"><a href="#UDP套接字" class="headerlink" title="UDP套接字"></a>UDP套接字</h2><img src="/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/UDP.png" srcset="/img/loading.gif" lazyload class>
+
 <h3 id="UDPClient-py"><a href="#UDPClient-py" class="headerlink" title="UDPClient.py"></a>UDPClient.py</h3><figure class="highlight awk"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>导包<br>from socket import *<br><span class="hljs-regexp">//</span>设置变量<br>serverName=<span class="hljs-string">&#x27;hostname&#x27;</span><br>serverPort=<span class="hljs-number">12000</span><br><span class="hljs-regexp">//</span>创建客户套接字，AF_INET：使用IPv4，SOCK_DGRAM：使用UDP协议<br>clientSocket=socket(<span class="hljs-string">&#x27;Input lowercase sentence:&#x27;</span>)<br>message=raw_input(<span class="hljs-string">&#x27;Input lowercase sentence:&#x27;</span>)<br><span class="hljs-regexp">//</span>将报文由字符串类型转换为字节类型，方法 sendto () 为报文附上目的地址( serverName , serverPort ) 并且向进程的套接字 clientSocket 发送结果分组 <br>clientSocket,sendto(message.encode(),(serverName,serverPort))<br><span class="hljs-regexp">//</span>分组的数据放到modifiedMessage中，源地址放到serverAddress中<br>modifiedMessage,serverAddress=clientSocket.recvfrom(<span class="hljs-number">2048</span>)<br><span class="hljs-regexp">//</span>向屏幕打印<br>print(modifiedMessage.decode())<br><span class="hljs-regexp">//</span>关闭套接字，然后关闭进程<br>clientSocket.close()<br><br></code></pre></td></tr></table></figure>
 <p>当创建套接字时,我们并没有指定客户套接字的端口号;相反,我们让操作系统为我们做这件事.</p>
 <h3 id="UDPserver-py"><a href="#UDPserver-py" class="headerlink" title="UDPserver.py"></a>UDPserver.py</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>导包<br>from socket import *<br><span class="hljs-regexp">//</span>同上<br>serverPort=<span class="hljs-number">12000</span><br>serverSocket=socket(AF_INET,SOCK_DGRAM)<br><span class="hljs-regexp">//</span>将端口号<span class="hljs-number">12000</span>与该服务器的套接字绑定<br>serverSocket.bind(<span class="hljs-string">&#x27;&#x27;</span>,serverPort)<br>print(<span class="hljs-string">&quot;The server is ready to receive&quot;</span>)<br><span class="hljs-keyword">while</span> true:<br>    <span class="hljs-regexp">//</span>保存变量<br>    message,clientAddress=serverSocket.recvfrom(<span class="hljs-number">2048</span>)<br>    <span class="hljs-regexp">//</span>小写转大写<br>    modifiedMessage=message.decode.upper()<br>    <span class="hljs-regexp">//</span>将客户的地址附到大写的报文上，并将所得的分组发送到服务器的套接字中<br>    serverSocket.sendto(modifiedMessage.encode(),clientAddress)<br></code></pre></td></tr></table></figure>
 <p>将端口号与套接字绑定：当任何人向位于该服务器的IP地址的端口12000发送一个分组，该分组将导向该套接字</p>
-<h2 id="TCP套接字"><a href="#TCP套接字" class="headerlink" title="TCP套接字"></a>TCP套接字</h2><p>欢迎套接字和连接套接字<br>客户套接字和服务器连接套接字直接通过一根管道连接<br><img src="/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/TCP.png" srcset="/img/loading.gif" lazyload class></p>
+<h2 id="TCP套接字"><a href="#TCP套接字" class="headerlink" title="TCP套接字"></a>TCP套接字</h2><p>欢迎套接字和连接套接字<br>客户套接字和服务器连接套接字直接通过一根管道连接</p>
+<img src="/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/TCP.png" srcset="/img/loading.gif" lazyload class>
+
 <img src="/2022/05/02/%E5%BA%94%E7%94%A8%E5%B1%82/TCP1.png" srcset="/img/loading.gif" lazyload class>
 <h3 id="TCPClient-py"><a href="#TCPClient-py" class="headerlink" title="TCPClient.py"></a>TCPClient.py</h3><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs stata"><span class="hljs-comment">//导包</span><br>from socket import *<br><span class="hljs-comment">//设置变量</span><br>serverName=&#x27;servername&#x27;<br>serverPort=12000<br><span class="hljs-comment">//创建客户套接字</span><br>clientSocket=socket(AF_INET,SOCK_STREAM)<br><span class="hljs-comment">//创建TCP连接</span><br>clientSocket.connect((serverName,serverPort))<br><span class="hljs-comment">//获得句子</span><br>sentence=raw_input(&#x27;<span class="hljs-keyword">input</span> lowercase sentence)<br><span class="hljs-comment">//发送句子,encode方法转字节类型</span><br>clientSocket.send(sentence.<span class="hljs-keyword">encode</span>())<br><span class="hljs-comment">//字符到达服务器时，它们被放置在字符串modifiedSentence中</span><br>modifiedSentence=clientSocket.recv(1024)<br><span class="hljs-keyword">print</span>(&#x27;From Server:&#x27;,modifiedSentence.<span class="hljs-keyword">decode</span>())<br><span class="hljs-comment">//关闭套接字</span><br>clientSocket.<span class="hljs-keyword">close</span>()<br></code></pre></td></tr></table></figure>
 <h3 id="TCPServer-py"><a href="#TCPServer-py" class="headerlink" title="TCPServer.py"></a>TCPServer.py</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs awk">from socket import *<br>serverPort=<span class="hljs-number">12000</span><br><span class="hljs-regexp">//</span>创建服务端套接字<br>serverSocket=socket(AF_INET,SOCK_STREAM)<br><span class="hljs-regexp">//</span>服务器端口与与该套接字关联<br>serverSocket.bind((<span class="hljs-string">&#x27;&#x27;</span>,serverPort))<br><span class="hljs-regexp">//</span>等待某客户敲门<br>serverSocket.listen(<span class="hljs-number">1</span>)<br>print(<span class="hljs-string">&#x27;The server is ready to receive&#x27;</span>)<br><span class="hljs-keyword">while</span> True:<br>    <span class="hljs-regexp">//</span>创建一个新的套接字，由这个特定的客户专用<br>    connectionSocket,addr=serverSocket.accept()<br>    <span class="hljs-regexp">//</span>将二进制解码成字符串<br>    sentence=connectionSocket.recv(<span class="hljs-number">1024</span>).decode()<br>    <span class="hljs-regexp">//</span>转换大小写<br>    capitalizedSentence=sentence.upper()<br>    <span class="hljs-regexp">//</span>将字符串编码省二进制并且发送给客户端<br>    connectionSocket.send(capitalizedSentence.encode())<br>    <span class="hljs-regexp">//</span>关闭套接字<br>    connectionSocket.close()<br></code></pre></td></tr></table></figure>

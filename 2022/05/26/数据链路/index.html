@@ -203,7 +203,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      775 字
+      780 字
     </span>
   
 
@@ -245,9 +245,10 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
             <div class="markdown-body">
               <p><strong>数据链路层的协议定义了通过通信媒介互连的设备之间传输的规范</strong><br>通信媒介包括双绞线电缆、同轴电缆、光纤、电波以及红外线等介质。此外，各个设备之间有时也会通过交换机、网桥、中继器等中转数据</p>
-<h2 id="MAC地址"><a href="#MAC地址" class="headerlink" title="MAC地址"></a>MAC地址</h2><p>MAC地址用于识别数据链路中互连的节点<br>MAC地址长48比特，任何一个网卡的MAC地址都是唯一的<br><img src="/2022/05/26/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF/MAC%E5%9C%B0%E5%9D%80.png" srcset="/img/loading.gif" lazyload class></p>
+<h2 id="MAC地址"><a href="#MAC地址" class="headerlink" title="MAC地址"></a>MAC地址</h2><p>MAC地址用于识别数据链路中互连的节点<br>MAC地址长48比特，任何一个网卡的MAC地址都是唯一的</p>
+<img src="/2022/05/26/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF/MAC%E5%9C%B0%E5%9D%80.png" srcset="/img/loading.gif" lazyload class>
 <h2 id="共享介质型网络"><a href="#共享介质型网络" class="headerlink" title="共享介质型网络"></a>共享介质型网络</h2><p><strong>共享介质型网络是指由多个设备共享一个通信介质的一种网络</strong>，有两种介质访问控制方式：争用方式和令牌传递方式</p>
-<h3 id="争用方式"><a href="#争用方式" class="headerlink" title="争用方式"></a>争用方式</h3><p>争夺获取数据传输的权力，也叫CSMA，采用先到先得的方式占用信道发送数据<br>改良CSMA另一种方式——CSMA/CD</p>
+<h3 id="争用方式"><a href="#争用方式" class="headerlink" title="争用方式"></a>争用方式</h3><p>争夺获取数据传输的权力，也叫CSMA，采用先到先得的方式占用信道发送数据<br>改良CSMA另一种方式——CSMA&#x2F;CD</p>
 <ul>
 <li>如果载波信道上没有数据流动，任何站可以发送数据</li>
 <li>检查是否会发生冲突。一旦发生冲突，放弃发送数据，同时立即释放载波信道</li>
@@ -258,8 +259,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>不会有冲突</li>
 <li>每个站都有通过平等循环获得令牌的机会</li>
 </ul>
-<h2 id="非共享介质网络"><a href="#非共享介质网络" class="headerlink" title="非共享介质网络"></a>非共享介质网络</h2><p>网络中的每个站直连交换机，由交换机负责转发数据帧<br>并且交换机的端口与计算机之间可以实现同时收发的全双工通信<br><img src="/2022/05/26/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF/%E9%9D%9E%E5%85%B1%E4%BA%AB%E4%BB%8B%E8%B4%A8%E7%BD%91%E7%BB%9C.png" srcset="/img/loading.gif" lazyload class></p>
-<h2 id="根据MAC地址转发"><a href="#根据MAC地址转发" class="headerlink" title="根据MAC地址转发"></a>根据MAC地址转发</h2><p><strong>以太网交换机就是持有多个端口的网桥</strong>，此处端口不是操作系统的端口。它们根据数据链路层中每个帧的目标MAC地址，决定从哪个网络接口发送数据。<strong>所参考的，用以记录发送接口的表叫做转发表</strong><br>转发表内容可以自动生成，又叫<strong>自学过程</strong><br><img src="/2022/05/26/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF/%E4%BA%A4%E6%8D%A2%E6%9C%BA%E8%87%AA%E5%AD%A6.png" srcset="/img/loading.gif" lazyload class><br>当连接多个终端时，有必要讲网络分成多个数据链路，采用类似于网络层的IP地址一样对地址进行分层管理<br><strong>交换机转发方式</strong>：</p>
+<h2 id="非共享介质网络"><a href="#非共享介质网络" class="headerlink" title="非共享介质网络"></a>非共享介质网络</h2><p>网络中的每个站直连交换机，由交换机负责转发数据帧<br>并且交换机的端口与计算机之间可以实现同时收发的全双工通信</p>
+<img src="/2022/05/26/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF/%E9%9D%9E%E5%85%B1%E4%BA%AB%E4%BB%8B%E8%B4%A8%E7%BD%91%E7%BB%9C.png" srcset="/img/loading.gif" lazyload class>
+
+<h2 id="根据MAC地址转发"><a href="#根据MAC地址转发" class="headerlink" title="根据MAC地址转发"></a>根据MAC地址转发</h2><p><strong>以太网交换机就是持有多个端口的网桥</strong>，此处端口不是操作系统的端口。它们根据数据链路层中每个帧的目标MAC地址，决定从哪个网络接口发送数据。<strong>所参考的，用以记录发送接口的表叫做转发表</strong><br>转发表内容可以自动生成，又叫<strong>自学过程</strong></p>
+<img src="/2022/05/26/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF/%E4%BA%A4%E6%8D%A2%E6%9C%BA%E8%87%AA%E5%AD%A6.png" srcset="/img/loading.gif" lazyload class>
+<p>当连接多个终端时，有必要讲网络分成多个数据链路，采用类似于网络层的IP地址一样对地址进行分层管理<br><strong>交换机转发方式</strong>：</p>
 <ul>
 <li>存储转发：检查以太网数据帧末尾的FCS位后再进行转发，可以避免由于冲突而被破坏的帧或噪声导致的错误帧</li>
 <li>直通转发：不需要将整个帧全部接收下来以后再进行转发。只需要得知目标地址即可开始转发。具有延迟较短的优势，但可能会发送错误帧</li>
