@@ -24,7 +24,7 @@
 <meta property="og:description" content="JDBC">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-07-04T12:01:26.000Z">
-<meta property="article:modified_time" content="2022-07-04T15:22:47.621Z">
+<meta property="article:modified_time" content="2022-07-05T06:18:31.458Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -199,7 +199,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.7k 字
+      2.1k 字
     </span>
   
 
@@ -208,7 +208,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      15 分钟
+      18 分钟
     </span>
   
 
@@ -241,7 +241,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
             <div class="markdown-body">
               <h1 id="JDBC快速入门"><a href="#JDBC快速入门" class="headerlink" title="JDBC快速入门"></a>JDBC快速入门</h1><p>案例来自《SQL必知必会》</p>
-<figure class="highlight reasonml"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-comment">//注册驱动</span><br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Class</span>.</span></span><span class="hljs-keyword">for</span><span class="hljs-constructor">Name(<span class="hljs-string">&quot;com.mysql.jdbc.Driver&quot;</span>)</span>;<br><span class="hljs-comment">//获取连接</span><br>String url=<span class="hljs-string">&quot;jdbc:mysql://127.0.0.1:3306/practice&quot;</span>;<br>String username=<span class="hljs-string">&quot;root&quot;</span>;<br>String password =<span class="hljs-string">&quot;030628chCH&quot;</span>;<br>Connection conn= <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">DriverManager</span>.</span></span>get<span class="hljs-constructor">Connection(<span class="hljs-params">url</span>,<span class="hljs-params">username</span>,<span class="hljs-params">password</span>)</span>;<br><span class="hljs-comment">//定义sql</span><br>String sql=<span class="hljs-string">&quot;UPDATE customers set cust_country=&#x27;UK&#x27; WHERE cust_id=1000000003&quot;</span>;<br><span class="hljs-comment">//获取执行sql的对象Statement</span><br>Statement stmt=conn.create<span class="hljs-constructor">Statement()</span>;<br><span class="hljs-comment">//执行sql</span><br><span class="hljs-built_in">int</span> count=stmt.execute<span class="hljs-constructor">Update(<span class="hljs-params">sql</span>)</span>;<br><span class="hljs-comment">//处理结果</span><br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(count);<br><span class="hljs-comment">//释放资源</span><br>stmt.close<span class="hljs-literal">()</span>;<br>conn.close<span class="hljs-literal">()</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-comment">//注册驱动</span><br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Class</span>.</span></span><span class="hljs-keyword">for</span><span class="hljs-constructor">Name(<span class="hljs-string">&quot;com.mysql.jdbc.Driver&quot;</span>)</span>;<br><span class="hljs-comment">//获取连接</span><br>String url=<span class="hljs-string">&quot;jdbc:mysql://127.0.0.1:3306/practice&quot;</span>;<br>String username=<span class="hljs-string">&quot;root&quot;</span>;<br>String password =<span class="hljs-string">&quot;xxxxxxxxxxxx&quot;</span>;<br>Connection conn= <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">DriverManager</span>.</span></span>get<span class="hljs-constructor">Connection(<span class="hljs-params">url</span>,<span class="hljs-params">username</span>,<span class="hljs-params">password</span>)</span>;<br><span class="hljs-comment">//定义sql</span><br>String sql=<span class="hljs-string">&quot;UPDATE customers set cust_country=&#x27;UK&#x27; WHERE cust_id=1000000003&quot;</span>;<br><span class="hljs-comment">//获取执行sql的对象Statement</span><br>Statement stmt=conn.create<span class="hljs-constructor">Statement()</span>;<br><span class="hljs-comment">//执行sql</span><br><span class="hljs-built_in">int</span> count=stmt.execute<span class="hljs-constructor">Update(<span class="hljs-params">sql</span>)</span>;<br><span class="hljs-comment">//处理结果</span><br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(count);<br><span class="hljs-comment">//释放资源</span><br>stmt.close<span class="hljs-literal">()</span>;<br>conn.close<span class="hljs-literal">()</span>;<br></code></pre></td></tr></table></figure>
 
 <h1 id="DriverManager"><a href="#DriverManager" class="headerlink" title="DriverManager"></a>DriverManager</h1><ul>
 <li><h3 id="注册驱动"><a href="#注册驱动" class="headerlink" title="注册驱动"></a>注册驱动</h3><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Class</span>.</span></span><span class="hljs-keyword">for</span><span class="hljs-constructor">Name(<span class="hljs-string">&quot;com.mysql.jdbc.Driver&quot;</span>)</span>;<br></code></pre></td></tr></table></figure></li>
@@ -266,8 +266,26 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>循环判断游标是否是最后一行末尾<br><span class="hljs-keyword">while</span>(rs.<span class="hljs-keyword">next</span>())&#123;<br>    <span class="hljs-regexp">//</span>获取数据<br>    rs.getXxx(参数)<br>&#125;<br></code></pre></td></tr></table></figure>
 <h1 id="PreparedStatement"><a href="#PreparedStatement" class="headerlink" title="PreparedStatement"></a>PreparedStatement</h1><p>作用：预编译SQL语句并执行，预防SQL注入的问题</p>
 <ul>
-<li>获取PreparedStatement对象<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">//<span class="hljs-keyword">sql</span>语句中的参数值，用？占位符替代<br>String <span class="hljs-keyword">sql</span>=&quot;SELECT * FROM user WHERE username=? AND password=?&quot;;<br>//通过<span class="hljs-keyword">connection</span>对象获取，并传入对应的<span class="hljs-keyword">sql</span>语句<br>PrepraedStatement psymt=conn.prepareStatement(<span class="hljs-keyword">sql</span>);<br><br></code></pre></td></tr></table></figure></li>
+<li>获取PreparedStatement对象<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">//<span class="hljs-keyword">sql</span>语句中的参数值，用？占位符替代<br>String <span class="hljs-keyword">sql</span>=&quot;SELECT * FROM user WHERE username=? AND password=?&quot;;<br>//通过<span class="hljs-keyword">connection</span>对象获取，并传入对应的<span class="hljs-keyword">sql</span>语句<br>PrepraedStatement pstmt=conn.prepareStatement(<span class="hljs-keyword">sql</span>);<br></code></pre></td></tr></table></figure></li>
+<li>设置参数值<br>PreparedStatement对象：setXxx(参数1,参数2):给?赋值<br>Xxx：数据类型；如setInt(参数1,参数2)<br>参数：<ul>
+<li>参数1：？的位置编号，从1开始</li>
+<li>参数2：？的值</li>
 </ul>
+</li>
+<li>执行SQL<br>executeUpdate();&#x2F;executeQuery()：不再需要再传递SQL</li>
+</ul>
+<p>预编译 url里填写useServerPrepStmts&#x3D;true<br>原理：</p>
+<ol>
+<li>在获取PreparedStatement对象时，将sql语句发送给mysql服务器进行检查，编译</li>
+<li>执行时就不用再进行这些步骤了</li>
+<li>如果sql模板一样，则只需要进行一次检查、编译</li>
+</ol>
+<h1 id="数据库连接池"><a href="#数据库连接池" class="headerlink" title="数据库连接池"></a>数据库连接池</h1><ul>
+<li>数据库连接池是个容器，负责分配、管理数据库连接</li>
+<li>它允许应用程序重复使用一个现有的数据库连接，而不是再重新建立一个</li>
+<li>释放空闲空间超过最大空闲时间的数据库连接来避免因为没有释放数据库连接而因穷的数据库连接遗漏</li>
+</ul>
+<p>标准接口：<strong>dataSource</strong><br>常见的数据库连接池：DBCP、C3P0、Druid</p>
 
             </div>
             <hr>
