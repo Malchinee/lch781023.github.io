@@ -4,6 +4,44 @@
   
   
   <entry>
+    <title>浅记MyBatis</title>
+    <link href="/2022/07/05/%E6%B5%85%E8%AE%B0MyBatis/"/>
+    <url>/2022/07/05/%E6%B5%85%E8%AE%B0MyBatis/</url>
+    
+    <content type="html"><![CDATA[<p>一款持久层框架，用于简化JDBC开发</p><h2 id="持久层"><a href="#持久层" class="headerlink" title="持久层"></a>持久层</h2><ul><li>负责将数据保存到数据库的那一层代码</li><li>javeEE三层架构：表现层、业务层、持久层</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Java Web</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>浅记Maven</title>
+    <link href="/2022/07/05/%E6%B5%85%E8%AE%B0Maven/"/>
+    <url>/2022/07/05/%E6%B5%85%E8%AE%B0Maven/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Maven坐标"><a href="#Maven坐标" class="headerlink" title="Maven坐标"></a>Maven坐标</h1><p>资源的唯一标识、使用坐标来定义项目或引入项目中需要的依赖<br>Maven坐标的主要组成：</p><ul><li>groupId：定义当前Maven项目隶属组织名称</li><li>artifactId：定义当前Maven项目的名称</li><li>version：定义当前面项目的版本号</li></ul><h1 id="导入坐标"><a href="#导入坐标" class="headerlink" title="导入坐标"></a>导入坐标</h1><p>搜索xxx maven，然后复制到pom.xml文件中，点击刷新maven<br>如果本地仓库有，按住alt+insert即可，选择依赖就可导入本地jar包</p><h1 id="依赖范围"><a href="#依赖范围" class="headerlink" title="依赖范围"></a>依赖范围</h1><p>标签：scope</p><img src="/2022/07/05/%E6%B5%85%E8%AE%B0Maven/%E4%BE%9D%E8%B5%96%E8%8C%83%E5%9B%B4.jpg" class>]]></content>
+    
+    
+    <categories>
+      
+      <category>Java Web</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>浅记JDBC</title>
     <link href="/2022/07/04/%E6%B5%85%E8%AE%B0JDBC/"/>
     <url>/2022/07/04/%E6%B5%85%E8%AE%B0JDBC/</url>
