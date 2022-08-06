@@ -4,65 +4,6 @@
   
   
   <entry>
-    <title>浅记MyBatis</title>
-    <link href="/2022/07/05/%E6%B5%85%E8%AE%B0MyBatis/"/>
-    <url>/2022/07/05/%E6%B5%85%E8%AE%B0MyBatis/</url>
-    
-    <content type="html"><![CDATA[<p>一款持久层框架，用于简化JDBC开发</p><h2 id="持久层"><a href="#持久层" class="headerlink" title="持久层"></a>持久层</h2><ul><li>负责将数据保存到数据库的那一层代码</li><li>javeEE三层架构：表现层、业务层、持久层</li></ul>]]></content>
-    
-    
-    <categories>
-      
-      <category>Java Web</category>
-      
-    </categories>
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>浅记Maven</title>
-    <link href="/2022/07/05/%E6%B5%85%E8%AE%B0Maven/"/>
-    <url>/2022/07/05/%E6%B5%85%E8%AE%B0Maven/</url>
-    
-    <content type="html"><![CDATA[<h1 id="Maven坐标"><a href="#Maven坐标" class="headerlink" title="Maven坐标"></a>Maven坐标</h1><p>资源的唯一标识、使用坐标来定义项目或引入项目中需要的依赖<br>Maven坐标的主要组成：</p><ul><li>groupId：定义当前Maven项目隶属组织名称</li><li>artifactId：定义当前Maven项目的名称</li><li>version：定义当前面项目的版本号</li></ul><h1 id="导入坐标"><a href="#导入坐标" class="headerlink" title="导入坐标"></a>导入坐标</h1><p>搜索xxx maven，然后复制到pom.xml文件中，点击刷新maven<br>如果本地仓库有，按住alt+insert即可，选择依赖就可导入本地jar包</p><h1 id="依赖范围"><a href="#依赖范围" class="headerlink" title="依赖范围"></a>依赖范围</h1><p>标签：scope</p><img src="/2022/07/05/%E6%B5%85%E8%AE%B0Maven/%E4%BE%9D%E8%B5%96%E8%8C%83%E5%9B%B4.jpg" class>]]></content>
-    
-    
-    <categories>
-      
-      <category>Java Web</category>
-      
-    </categories>
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>浅记JDBC</title>
-    <link href="/2022/07/04/%E6%B5%85%E8%AE%B0JDBC/"/>
-    <url>/2022/07/04/%E6%B5%85%E8%AE%B0JDBC/</url>
-    
-    <content type="html"><![CDATA[<h1 id="JDBC快速入门"><a href="#JDBC快速入门" class="headerlink" title="JDBC快速入门"></a>JDBC快速入门</h1><p>案例来自《SQL必知必会》</p><figure class="highlight reasonml"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-comment">//注册驱动</span><br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Class</span>.</span></span><span class="hljs-keyword">for</span><span class="hljs-constructor">Name(<span class="hljs-string">&quot;com.mysql.jdbc.Driver&quot;</span>)</span>;<br><span class="hljs-comment">//获取连接</span><br>String url=<span class="hljs-string">&quot;jdbc:mysql://127.0.0.1:3306/practice&quot;</span>;<br>String username=<span class="hljs-string">&quot;root&quot;</span>;<br>String password =<span class="hljs-string">&quot;xxxxxxxxxxxx&quot;</span>;<br>Connection conn= <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">DriverManager</span>.</span></span>get<span class="hljs-constructor">Connection(<span class="hljs-params">url</span>,<span class="hljs-params">username</span>,<span class="hljs-params">password</span>)</span>;<br><span class="hljs-comment">//定义sql</span><br>String sql=<span class="hljs-string">&quot;UPDATE customers set cust_country=&#x27;UK&#x27; WHERE cust_id=1000000003&quot;</span>;<br><span class="hljs-comment">//获取执行sql的对象Statement</span><br>Statement stmt=conn.create<span class="hljs-constructor">Statement()</span>;<br><span class="hljs-comment">//执行sql</span><br><span class="hljs-built_in">int</span> count=stmt.execute<span class="hljs-constructor">Update(<span class="hljs-params">sql</span>)</span>;<br><span class="hljs-comment">//处理结果</span><br><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(count);<br><span class="hljs-comment">//释放资源</span><br>stmt.close<span class="hljs-literal">()</span>;<br>conn.close<span class="hljs-literal">()</span>;<br></code></pre></td></tr></table></figure><h1 id="DriverManager"><a href="#DriverManager" class="headerlink" title="DriverManager"></a>DriverManager</h1><ul><li><h3 id="注册驱动"><a href="#注册驱动" class="headerlink" title="注册驱动"></a>注册驱动</h3><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Class</span>.</span></span><span class="hljs-keyword">for</span><span class="hljs-constructor">Name(<span class="hljs-string">&quot;com.mysql.jdbc.Driver&quot;</span>)</span>;<br></code></pre></td></tr></table></figure></li><li><h3 id="获取数据库连接"><a href="#获取数据库连接" class="headerlink" title="获取数据库连接"></a>获取数据库连接</h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-function"><span class="hljs-type">static</span> Connection <span class="hljs-title">getConnection</span><span class="hljs-params">(<span class="hljs-type">String</span> url,<span class="hljs-type">String</span> user,<span class="hljs-type">String</span> password)</span></span><br></code></pre></td></tr></table></figure><strong>url</strong>：jdbc:mysql:&#x2F;&#x2F;ip地址:端口&#x2F;数据库名称?参数键值对1&amp;参数键值对2…</li></ul><h1 id="Connection"><a href="#Connection" class="headerlink" title="Connection"></a>Connection</h1><ul><li><h3 id="获取执行sql对象"><a href="#获取执行sql对象" class="headerlink" title="获取执行sql对象"></a>获取执行sql对象</h3>普通执行SQL对象：<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-variable">Statement</span> <span class="hljs-function"><span class="hljs-title">createStatement</span>()</span><br></code></pre></td></tr></table></figure>预编译SQL的执行SQL对象：放止SQL注入<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-variable">PreparedStatement</span> <span class="hljs-function"><span class="hljs-title">prepareStatement</span>(<span class="hljs-variable">sql</span>)</span><br></code></pre></td></tr></table></figure>执行存储过程的对象<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-variable">CallableStatement</span> <span class="hljs-function"><span class="hljs-title">prepareCall</span>(<span class="hljs-variable">sql</span>)</span><br></code></pre></td></tr></table></figure></li><li><h3 id="管理事务"><a href="#管理事务" class="headerlink" title="管理事务"></a>管理事务</h3>开启事务：setAutoCommit(boolean autoCommit):true为自动提交事务，false为手动提交事务<br>提交事务：commit()<br>回滚事务：rollback()</li></ul><h1 id="Statement"><a href="#Statement" class="headerlink" title="Statement"></a>Statement</h1><h3 id="执行sql语句"><a href="#执行sql语句" class="headerlink" title="执行sql语句"></a>执行sql语句</h3><p>  执行DML、DDL语言<br>  返回值：执行完DML语句后受影响的行数；DDL语句执行后，可能成功也可能返回0<br>  <figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-built_in">int</span> execute<span class="hljs-constructor">Update(<span class="hljs-params">sql</span>)</span><br></code></pre></td></tr></table></figure><br>  执行DQL语句<br>  返回值：ResultSet结果集对象<br>  <figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-variable">ResultSet</span> <span class="hljs-function"><span class="hljs-title">executeQuery</span>(<span class="hljs-variable">sql</span>)</span><br></code></pre></td></tr></table></figure></p><h1 id="ResultSet"><a href="#ResultSet" class="headerlink" title="ResultSet"></a>ResultSet</h1><h3 id="封装了DQL查询语句的结果"><a href="#封装了DQL查询语句的结果" class="headerlink" title="封装了DQL查询语句的结果"></a>封装了DQL查询语句的结果</h3><p>执行DQL语句，返回ResultSet对象</p><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">ResultSet stmt.execute<span class="hljs-constructor">Query(<span class="hljs-params">sql</span>)</span><br></code></pre></td></tr></table></figure><h3 id="获取查询结果"><a href="#获取查询结果" class="headerlink" title="获取查询结果"></a>获取查询结果</h3><p>将光标从当前位置向前移动一行；判断当前行是否为有效行<br>返回值：true有效行、false无效行</p><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs axapta"><span class="hljs-built_in">boolean</span> <span class="hljs-keyword">next</span>()<br></code></pre></td></tr></table></figure><p>获取数据<br>xxx：数据类型<br>Int：列的编号，从1开始<br>String：列的名称</p><figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-variable">xxx</span> <span class="hljs-function"><span class="hljs-title">getXxx</span>(参数)</span><br></code></pre></td></tr></table></figure><h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h3><p>1、游标向下移动一行，并判断是否有数据<br>2、获取数据</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>循环判断游标是否是最后一行末尾<br><span class="hljs-keyword">while</span>(rs.<span class="hljs-keyword">next</span>())&#123;<br>    <span class="hljs-regexp">//</span>获取数据<br>    rs.getXxx(参数)<br>&#125;<br></code></pre></td></tr></table></figure><h1 id="PreparedStatement"><a href="#PreparedStatement" class="headerlink" title="PreparedStatement"></a>PreparedStatement</h1><p>作用：预编译SQL语句并执行，预防SQL注入的问题</p><ul><li>获取PreparedStatement对象<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">//<span class="hljs-keyword">sql</span>语句中的参数值，用？占位符替代<br>String <span class="hljs-keyword">sql</span>=&quot;SELECT * FROM user WHERE username=? AND password=?&quot;;<br>//通过<span class="hljs-keyword">connection</span>对象获取，并传入对应的<span class="hljs-keyword">sql</span>语句<br>PrepraedStatement pstmt=conn.prepareStatement(<span class="hljs-keyword">sql</span>);<br></code></pre></td></tr></table></figure></li><li>设置参数值<br>PreparedStatement对象：setXxx(参数1,参数2):给?赋值<br>Xxx：数据类型；如setInt(参数1,参数2)<br>参数：<ul><li>参数1：？的位置编号，从1开始</li><li>参数2：？的值</li></ul></li><li>执行SQL<br>executeUpdate();&#x2F;executeQuery()：不再需要再传递SQL</li></ul><p>预编译 url里填写useServerPrepStmts&#x3D;true<br>原理：</p><ol><li>在获取PreparedStatement对象时，将sql语句发送给mysql服务器进行检查，编译</li><li>执行时就不用再进行这些步骤了</li><li>如果sql模板一样，则只需要进行一次检查、编译</li></ol><h1 id="数据库连接池"><a href="#数据库连接池" class="headerlink" title="数据库连接池"></a>数据库连接池</h1><ul><li>数据库连接池是个容器，负责分配、管理数据库连接</li><li>它允许应用程序重复使用一个现有的数据库连接，而不是再重新建立一个</li><li>释放空闲空间超过最大空闲时间的数据库连接来避免因为没有释放数据库连接而因穷的数据库连接遗漏</li></ul><p>标准接口：<strong>dataSource</strong><br>常见的数据库连接池：DBCP、C3P0、Druid</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>Java Web</category>
-      
-      <category>JDBC</category>
-      
-    </categories>
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>lab0</title>
     <link href="/2022/06/27/lab0/"/>
     <url>/2022/06/27/lab0/</url>
