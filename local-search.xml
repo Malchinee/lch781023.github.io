@@ -4,7 +4,26 @@
   
   
   <entry>
-    <title>计算机系统漫游</title>
+    <title>解决：hexo+github本地和线上图片不显示的问题</title>
+    <link href="/2022/09/01/%E8%A7%A3%E5%86%B3%EF%BC%9Ahexo-github%E6%9C%AC%E5%9C%B0%E5%92%8C%E7%BA%BF%E4%B8%8A%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <url>/2022/09/01/%E8%A7%A3%E5%86%B3%EF%BC%9Ahexo-github%E6%9C%AC%E5%9C%B0%E5%92%8C%E7%BA%BF%E4%B8%8A%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    
+    <content type="html"><![CDATA[<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>hexo+github搭建博客之后，使用markdown语法发布的图片无法正常显示，这是因为hexo和markdown图片插入语法不同导致的，</p><p>hexo语法为：</p><figure class="highlight django"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs django"><span class="hljs-template-tag">&#123;% <span class="hljs-name">asset_img</span> 图片名称 %&#125;</span><br></code></pre></td></tr></table></figure><p>markdown语法为：</p><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs scss">!<span class="hljs-selector-attr">[图片名称]</span>(图片位置)<br></code></pre></td></tr></table></figure><h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><ol><li><p>在Typora的偏好设置中设置<img src="/2022/09/01/%E8%A7%A3%E5%86%B3%EF%BC%9Ahexo-github%E6%9C%AC%E5%9C%B0%E5%92%8C%E7%BA%BF%E4%B8%8A%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/image-20220901224329268.png" class title="image-20220901224329268"></p><p>表示引用图片会从当前目录下寻找同名文件夹下的图片</p></li><li><p>在blog根目录下，修改_config.yml中的post_asset_folder，false修改为true，这样修改后就会每次使用指令</p><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs actionscript">hexo <span class="hljs-keyword">new</span> <span class="hljs-string">&quot;文章标题&quot;</span><br></code></pre></td></tr></table></figure><p>时，都会在文章文件同级目录创建一个与文章名称同名的文件夹，在此存放文章的图片</p></li><li><p>安装插件hexo-asset-img：</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css">npm install hexo-asset-<span class="hljs-selector-tag">img</span> <span class="hljs-attr">--save</span><br>hexo clean<br>hexo g<br>hexo d<br></code></pre></td></tr></table></figure><p>这样就可以了</p></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>hexo搭建博客</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>第一章-计算机系统漫游</title>
     <link href="/2022/09/01/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/"/>
     <url>/2022/09/01/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/</url>
     
