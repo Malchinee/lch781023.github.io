@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>hexo-Fluid主题使用数学公式</title>
+    <link href="/2022/09/02/hexo-Fluid%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/"/>
+    <url>/2022/09/02/hexo-Fluid%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/</url>
+    
+    <content type="html"><![CDATA[<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>本人使用hexo+github搭建博客，使用<a href="https://fluid-dev.github.io/hexo-fluid-docs/guide">Fliud主题</a></p><p>另外在本页将常用的数学公式和数学符号记录下来</p><h1 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h1><ol><li><p>在fulid的配置文件/themes/fluid/_config.yml设置</p><figure class="highlight yaml"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">post:</span><br> <span class="hljs-attr">math:</span><br>   <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span><br>   <span class="hljs-attr">engine:</span> <span class="hljs-string">katex</span><br></code></pre></td></tr></table></figure><img src="/2022/09/02/hexo-Fluid%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/image-20220902140632787.png" class title="image-20220902140632787"></li><li><p>更换markdown渲染器</p><p>卸载原有的markdown渲染器：</p><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">npm uninstall hexo-renderer-marked <span class="hljs-comment">--save</span><br></code></pre></td></tr></table></figure><p>然后根据上方配置的不同的<strong>engine</strong>，更换渲染器，这里选择katex:</p><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livescript"><span class="hljs-built_in">npm</span> install @upupming/hexo-renderer-markdown-<span class="hljs-literal">it</span>-plus --save<br></code></pre></td></tr></table></figure></li><li><p>安装完成后执行hexo clean</p></li></ol><h1 id="常用数学符号"><a href="#常用数学符号" class="headerlink" title="常用数学符号"></a>常用数学符号</h1><h4 id><a href="#" class="headerlink" title></a><img src="/2022/09/02/hexo-Fluid%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/2018041621294865.png" class width="2018041621294865"></h4><script type="math/tex; mode=display">\alpha</script><img src="/2022/09/02/hexo-Fluid%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/20180416213036844.png" class width="20180416213036844"><img src="/2022/09/02/hexo-Fluid%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/20180416213119987.png" class width="20180416213119987"><img src="/2022/09/02/hexo-Fluid%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/20180416213126857.png" class width="20180416213126857">]]></content>
+    
+    
+    <categories>
+      
+      <category>hexo搭建博客</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>第二章-信息的表示和处理</title>
     <link href="/2022/09/02/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/"/>
     <url>/2022/09/02/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/</url>
