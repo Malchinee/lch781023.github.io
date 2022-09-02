@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="信息就是 位+上下文每条C语言程序都必须被其他程序转化为一系列的低级机器语言，然后这些指令按照一种称为可执行目标程序的格式打包，并以二进制磁盘文件的形式存放起来，目标程序也称为可执行目标文件 hello.c转化为可执行文件分为四个阶段：  预处理：预处理器 根据预编译头（如*#include&lt;stdio.h*&gt;），然后读取系统头文件的内容，并将其直接插入到程序文本中，得到.i后缀的文件">
+    <meta name="description" content="信息就是 位+上下文每条C语言程序都必须被其他程序转化为一系列的低级机器语言，然后这些指令按照一种称为可执行目标程序的格式打包，并以二进制磁盘文件的形式存放起来，目标程序也称为可执行目标文件 hello.c转化为可执行文件分为四个阶段：  预处理：预处理器 根据预编译头（如#include&lt;stdio.h&gt;），然后读取系统头文件的内容，并将其直接插入到程序文本中，得到.i后缀的文件 编">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第一章-计算机系统漫游">
 <meta property="og:url" content="https://www.example.com/2022/09/01/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="信息就是 位+上下文每条C语言程序都必须被其他程序转化为一系列的低级机器语言，然后这些指令按照一种称为可执行目标程序的格式打包，并以二进制磁盘文件的形式存放起来，目标程序也称为可执行目标文件 hello.c转化为可执行文件分为四个阶段：  预处理：预处理器 根据预编译头（如*#include&lt;stdio.h*&gt;），然后读取系统头文件的内容，并将其直接插入到程序文本中，得到.i后缀的文件">
+<meta property="og:description" content="信息就是 位+上下文每条C语言程序都必须被其他程序转化为一系列的低级机器语言，然后这些指令按照一种称为可执行目标程序的格式打包，并以二进制磁盘文件的形式存放起来，目标程序也称为可执行目标文件 hello.c转化为可执行文件分为四个阶段：  预处理：预处理器 根据预编译头（如#include&lt;stdio.h&gt;），然后读取系统头文件的内容，并将其直接插入到程序文本中，得到.i后缀的文件 编">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www.example.com/2022/09/01/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/image-20220901203132507.png">
 <meta property="og:image" content="https://www.example.com/2022/09/01/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/image-20220901212311906.png">
@@ -206,7 +206,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.7k 字
+      2.6k 字
     </span>
   
 
@@ -215,7 +215,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      23 分钟
+      22 分钟
     </span>
   
 
@@ -250,7 +250,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
               <h1 id="信息就是-位-上下文"><a href="#信息就是-位-上下文" class="headerlink" title="信息就是 位+上下文"></a>信息就是 位+上下文</h1><p>每条C语言程序都必须被其他程序转化为一系列的<em>低级机器语言</em>，然后这些指令按照一种称为<strong>可执行目标程序</strong>的格式打包，并以二进制磁盘文件的形式存放起来，目标程序也称为<strong>可执行目标文件</strong></p>
 <p><em>hello.c</em>转化为可执行文件分为四个阶段：</p>
 <ol>
-<li><strong>预处理</strong>：<em>预处理器</em> 根据预编译头（如*#include&lt;stdio.h*&gt;），然后读取系统头文件的内容，并将其直接插入到程序文本中，得到.i后缀的文件</li>
+<li><strong>预处理</strong>：<em>预处理器</em> 根据预编译头（如<em>#include&lt;stdio.h</em>&gt;），然后读取系统头文件的内容，并将其直接插入到程序文本中，得到.i后缀的文件</li>
 <li><strong>编译阶段</strong>：<em>编译器</em> 将.i后缀的文件编译为.s为后缀的文本文件，包含一个汇编语言程序</li>
 <li><strong>汇编阶段</strong>：<em>汇编器</em> 将.s后缀的文件翻译成机器语言指令，把这些指令打包成一种叫做<strong>可重定位目标程序</strong>的格式，并将结果保存在.o为后缀的二进制文件中</li>
 <li><strong>链接阶段</strong>：C语言库函数存在于一个.o为后缀的单独的预编译好的文件中，<em>链接器</em> 负责合并该文件与总的文件中。最终得到<strong>可执行文件</strong>，可以被加载到内存中，由系统执行</li>
@@ -258,11 +258,11 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <h1 id="系统的硬件组成"><a href="#系统的硬件组成" class="headerlink" title="系统的硬件组成"></a>系统的硬件组成</h1><ul>
 <li><h3 id="总线"><a href="#总线" class="headerlink" title="总线"></a>总线</h3><p>贯穿于整个系统的一组电子管道，它负责携带信息字节并负责在各个部件间传递。<strong>总线被设计成传送定长的字节块</strong>，称为字，字的大小在明确定义的上下文中说明</p>
 </li>
-<li><h3 id="I-x2F-O设备"><a href="#I-x2F-O设备" class="headerlink" title="I&#x2F;O设备"></a>I&#x2F;O设备</h3><p>系统与外部世界的联系通道，每一个I&#x2F;O设备通过一个控制器或适配器与I&#x2F;O总线相连。</p>
+<li><h3 id="I-O设备"><a href="#I-O设备" class="headerlink" title="I/O设备"></a>I/O设备</h3><p>系统与外部世界的联系通道，每一个I/O设备通过一个控制器或适配器与I/O总线相连。</p>
 <p>控制器与适配器的区别是它们的封装方式</p>
 </li>
 <li><h3 id="主存"><a href="#主存" class="headerlink" title="主存"></a>主存</h3><p>临时存储设备，在处理器执行程序时，用来存放程序和程序处理的数据。</p>
-<p>从物理上来说，是由一组<em><strong>动态随机存取存储区（DRAM）</strong></em>芯片组成的。</p>
+<p>从物理上来说，是由一组<strong><em>动态随机存取存储区（DRAM）</em></strong>芯片组成的。</p>
 <p>从逻辑上来说，存储器是一个线性的字节数组，每个字节都有唯一的地址</p>
 </li>
 <li><h3 id="处理器"><a href="#处理器" class="headerlink" title="处理器"></a>处理器</h3><p><em>中央处理单元（CPU）</em> ，简称处理器，是解释、执行存储在主存中的指令的引擎。</p>
@@ -271,7 +271,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>处理器是由<strong>指令集架构</strong>决定的模型决定的。处理器从程序计数器指向的内存处读取指令，解释指令中的位，执行该指令的简单操作，然后更新PC，使其指向下一条指令</p>
 </li>
 </ul>
-<p>上述操作围绕<strong>主存</strong>、<strong>寄存器文件</strong>和<strong>算术&#x2F;逻辑单元（ALU）</strong>进行。</p>
+<p>上述操作围绕<strong>主存</strong>、<strong>寄存器文件</strong>和<strong>算术/逻辑单元（ALU）</strong>进行。</p>
 <p>寄存器文件是一个小的存储设备，由一些单个字长的寄存器组成，每个寄存器都有唯一的名字。</p>
 <p>ALU计算新的数据和地址值。</p>
 <p>CPU在指令的要求下可能执行的操作：</p>
@@ -291,7 +291,6 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>L2高速缓存通过一条特殊的总线连接到处理器，容量位数十万到数百万字节，比L1访问时间长5倍。</p>
 <p>L1和L2高速缓存是用一种<strong>静态随机访问存储器（SRAM）</strong>的硬件技术实现的</p>
 <h3 id="存储设备形成层次结构"><a href="#存储设备形成层次结构" class="headerlink" title="存储设备形成层次结构"></a>存储设备形成层次结构</h3><img src="/2022/09/01/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/image-20220901203132507.png" srcset="/img/loading.gif" lazyload class title="image-20220901203132507">
-
 <p>存储器层次就够的主要思想是上一层的存储器作为低一层存储器的高速缓存。</p>
 <h1 id="操作系统管理硬件"><a href="#操作系统管理硬件" class="headerlink" title="操作系统管理硬件"></a>操作系统管理硬件</h1><p>操作系统的两个基本功能：</p>
 <ul>
@@ -302,9 +301,9 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 </ul>
 <p>操作系统通过几个基本的抽象的概念：</p>
 <ul>
-<li><strong>文件</strong>：对I&#x2F;O设备的抽象表示</li>
-<li><strong>虚拟内存</strong>：对主存和磁盘I&#x2F;O设备的抽象表示</li>
-<li><strong>进程</strong>：对处理器、主存、I&#x2F;O设备的抽象表示、</li>
+<li><strong>文件</strong>：对I/O设备的抽象表示</li>
+<li><strong>虚拟内存</strong>：对主存和磁盘I/O设备的抽象表示</li>
+<li><strong>进程</strong>：对处理器、主存、I/O设备的抽象表示、</li>
 </ul>
 <h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><p>进程是操作系统对一个正在运行的程序的一种抽象。</p>
 <p>一个系统可以运行多个进程，每个进程并发运行，每个进程的指令都是交替进行的</p>
@@ -322,13 +321,11 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>内核虚拟内存不允许应用程序读写这个区域的内容或直接调用内核代码定义的函数</p>
 <p>虚拟内存运作的基本思想是把一个进程虚拟内存的内容存储在磁盘上，然后用主存作为磁盘的高速缓存</p>
 <h3 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h3><p>文件就是字节序列。</p>
-<p>系统中所有输入输出都是通过使用一小组的称为Unix I&#x2F;O的系统调用函数读写文件来实现的</p>
+<p>系统中所有输入输出都是通过使用一小组的称为Unix I/O的系统调用函数读写文件来实现的</p>
 <h1 id="系统之间利用网络通信"><a href="#系统之间利用网络通信" class="headerlink" title="系统之间利用网络通信"></a>系统之间利用网络通信</h1><p>见计算机网络</p>
 <h1 id="Amdahl定律"><a href="#Amdahl定律" class="headerlink" title="Amdahl定律"></a>Amdahl定律</h1><p>主要思想：当我们对系统的某一部分加速时，其对系统整体性能的影响取决于该部分的重要性和加速程度</p>
 <img src="/2022/09/01/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/image-20220901213856413.png" srcset="/img/loading.gif" lazyload class title="image-20220901213856413">
-
 <img src="/2022/09/01/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/image-20220901213914144.png" srcset="/img/loading.gif" lazyload class title="image-20220901213914144">
-
 <h1 id="并发和并行"><a href="#并发和并行" class="headerlink" title="并发和并行"></a>并发和并行</h1><p>并发：通用的概念，一个同时具有多个活动的系统</p>
 <p>并行：用并发来使一个系统运行得更快</p>
 <h3 id="线程级并发"><a href="#线程级并发" class="headerlink" title="线程级并发"></a>线程级并发</h3><ul>
