@@ -26,8 +26,10 @@
 <meta property="og:image" content="https://www.example.com/2022/09/02/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/image-20220902153208373.png">
 <meta property="og:image" content="https://www.example.com/2022/09/02/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/image-20220903220738262.png">
 <meta property="og:image" content="https://www.example.com/2022/09/02/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/image-20220903222111889.png">
+<meta property="og:image" content="https://www.example.com/2022/09/02/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/image-20220904145425862.png">
+<meta property="og:image" content="https://www.example.com/2022/09/02/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/image-20220904145501200.png">
 <meta property="article:published_time" content="2022-09-02T04:46:05.000Z">
-<meta property="article:modified_time" content="2022-09-04T03:04:49.711Z">
+<meta property="article:modified_time" content="2022-09-04T07:09:50.286Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://www.example.com/2022/09/02/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/image-20220902153208373.png">
@@ -203,7 +205,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.2k 字
+      4.4k 字
     </span>
   
 
@@ -212,7 +214,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      36 分钟
+      38 分钟
     </span>
   
 
@@ -344,7 +346,74 @@ U2T_\omega(u)=-u_{\omega-1}2^\omega+u</script><img src="/2022/09/02/%E7%AC%AC%E4
 <p>推导利用属性，对于任何的$i\geq k，2^i mod 2^k=0$</p>
 <p><strong>补码截断</strong>：将最高位转换为符号位，令$\overrightarrow{x}=[x_{\omega-1},x_{\omega-2},···,x_0]$，而$\overrightarrow{x’}$是将其截断$k$位的结果，$\overrightarrow{x’}=[x_{k-1},x_{x-2},···,x_0]$，令$x=B2U_\omega(\overrightarrow{x}),x’=B2T_k(\overrightarrow{x’}),则x’=U2T_k(xmod2^k)$</p>
 <p>推导利用函数$U2T_k$产生的效果是把最高有效位$x_{k-1}$的权重从$2^{k-1}$转变为$-2^{k-1}$</p>
-<h1 id="整数运算"><a href="#整数运算" class="headerlink" title="整数运算"></a>整数运算</h1>
+<h1 id="整数运算"><a href="#整数运算" class="headerlink" title="整数运算"></a>整数运算</h1><h3 id="无符号数加法"><a href="#无符号数加法" class="headerlink" title="无符号数加法"></a>无符号数加法</h3><p>定义运算 $^{u}_{\omega}+$ 其中$0\leqslant x ,y\leqslant 2^\omega$  ，该操作是把整数和x+y截断为$\omega$位得到的结果</p>
+<p><strong>$^{u}_{\omega}+$ 描述</strong>：</p>
+<p>对满足$0\leqslant x ,y\leqslant 2^\omega$ 的$x$和$y$有：</p>
+<script type="math/tex; mode=display">
+x+^{u}_{\omega}y =\left\{
+\begin{aligned}
+x+y, \ \ \ \ \ {x+y<2^\omega}\\
+x+y-2^\omega, \ \ \ \ \ \ {2^\omega\leqslant x+y<2^{\omega+1}}
+\end{aligned}
+\right.</script><p>推导：如果$x+y&lt;2^\omega$ ，和的$\omega+1$位表示中的最高位会等于0，因此不会改变这个数的值；而$2^\omega\leqslant x+y&lt;2^{\omega+1}$ ，和的$\omega+1$位表示中的最高位会减去1，丢弃$2^\omega$</p>
+<p><strong>检测无符号数加法中的溢出</strong>：</p>
+<p>在对范围$0\leqslant x,y \leqslant UMax_\omega$ 中的$x$和$y$，令$s=x+^{u}_{\omega}y$ ，则对计算s，当且仅当$s&lt;x$时，发生了溢出</p>
+<p><strong>无符号数求反</strong>：</p>
+<p>对满足$0\leqslant x&lt;2^\omega$ 的任意$x$，其$\omega$位的无符号逆元$-^{u}_{\omega}x$由下式给出：</p>
+<script type="math/tex; mode=display">
+-^{u}_{\omega}x=\left\{
+\begin{aligned}
+x,{x=0}\\
+2^{\omega}-x,{x>0}
+\end{aligned}
+\right.</script><h3 id="补码加法"><a href="#补码加法" class="headerlink" title="补码加法"></a>补码加法</h3><p><strong>补码加法</strong>：</p>
+<p>对满足$-2^{\omega-1}\leqslant x,y\leqslant 2^{\omega-1}-1$的整数$x,y$，有：</p>
+<script type="math/tex; mode=display">
+x+^{t}_{\omega}y=\left\{
+\begin{aligned}
+x+y-2^\omega ,{2^{\omega-1}\leqslant x+y} \  {负溢出}\\
+x+y,{-2^{\omega-1}\leqslant x+y<2^{\omega-1}} {正常}\\
+x+y+2^\omega,{x+y<-2^{\omega-1}} {负溢出}
+\end{aligned}
+\right.</script><p><strong>检测补码加法中的溢出</strong>：</p>
+<p>对满足$TMin_\omega \leqslant x,y \leqslant TMax_\omega$的$x$和$y$，令$s\doteq x+^{t}_{\omega}y$，当且仅当$x&gt;0,y&gt;0$，但$s\leqslant 0$时，计算$s$发生了正溢出。当且仅当$x&lt;0,y&lt;0$，但$s\geqslant 0$时，计算$s$发生了负溢出</p>
+<h3 id="补码的非"><a href="#补码的非" class="headerlink" title="补码的非"></a>补码的非</h3><p><strong>补码的非</strong>：</p>
+<p>对满足$TMin_\omega \leqslant x\leqslant TMax_\omega$ 的$x$ ，其补码的非$-^{t}_{\omega}x$由下式给出:</p>
+<script type="math/tex; mode=display">
+-^{t}_{\omega}x=\left\{
+\begin{aligned}
+TMin_\omega,{x=TMin_\omega}\\
+-x,{x>TMin_\omega}
+\end{aligned}
+\right.</script><h3 id="无符号乘法"><a href="#无符号乘法" class="headerlink" title="无符号乘法"></a>无符号乘法</h3><p>范围在$0 \leqslant x,y\leqslant 2^\omega-1$内的整数$x$和$y$，它们的乘法取值范围$0$到$(2^\omega-1)^2=2^{2\omega}-2^{\omega+1}+1$之间，这可能需要$2\omega$位来表示</p>
+<p>但是C语言无符号乘法定义为产生$\omega$位的值，所以$2\omega$位到$\omega$位的值将被截断</p>
+<p><strong>无符号乘法</strong>:</p>
+<p>对满足的$0 \leqslant x,y \leqslant UMax_\omega$的$x$和$y$有：</p>
+<script type="math/tex; mode=display">
+x*^{u}_{\omega}y=(x·y)mod 2^\omega</script><h3 id="补码乘法"><a href="#补码乘法" class="headerlink" title="补码乘法"></a>补码乘法</h3><p>将一个补码数截断位$\omega$位相当于先计算该值模$2\omega$，再把无符号数转换为补码</p>
+<p><strong>补码乘法</strong>：</p>
+<p>对满足$TMin_\omega\leqslant x,y \leqslant TMax_\omega$的$x$和$y$有：</p>
+<script type="math/tex; mode=display">
+x*^{t}_{\omega}y=U2T_\omega((x*y)\ mod\ 2^\omega)</script><p><strong>无符号和补码乘法的位级等价性</strong>：</p>
+<p>给定长度位$\omega$的位向量$\overrightarrow{x}$和$\overrightarrow{y}$，用补码的形式的位向量表示来定义整数$x$和$y$：$x=B2T_\omega(\overrightarrow{x}),y=B2T_\omega(\overrightarrow{y})$ 。用无符号形式的位向量来定义非负整数$x’$和$y’$：$x’=B2U_\omega(\overrightarrow{x}),y’=B2U_\omega(\overrightarrow{y})$，则：</p>
+<script type="math/tex; mode=display">
+T2B_\omega(x*^{t}_{\omega}y)=U2B_\omega(x'*^{u}_{\omega}y')</script><h3 id="乘以常数"><a href="#乘以常数" class="headerlink" title="乘以常数"></a>乘以常数</h3><h4 id="乘以2的幂"><a href="#乘以2的幂" class="headerlink" title="乘以2的幂"></a>乘以2的幂</h4><p>以$x$为位模式$[x_{\omega-1},x_{\omega-2},···,x_0]$表示的无符号整数，对于任何的$k\geqslant0$ 都认为$[x_{\omega-1},x_{\omega-2},···,x_0,0,···,0]$给出了$x2^\omega$的$\omega+k$位的无符号表示，这里右边加了$k$个0</p>
+<p>左移一个数值等价于执行一个与2的幂相乘的无符号乘法</p>
+<h4 id="与2的幂相乘的无符号乘法"><a href="#与2的幂相乘的无符号乘法" class="headerlink" title="与2的幂相乘的无符号乘法"></a>与2的幂相乘的无符号乘法</h4><p>C变量$x$和$k$有无符号数值$x$和$k$，且$0\leqslant k &lt;\omega$，则C表达式$x&lt;&lt;k$产生数值$x*^{u}_{\omega}2^k$ </p>
+<h4 id="与2的幂相乘的补码乘法"><a href="#与2的幂相乘的补码乘法" class="headerlink" title="与2的幂相乘的补码乘法"></a>与2的幂相乘的补码乘法</h4><p>C变量$x$和$k$有补码值$x$和无符号数值$k$，且$0\leqslant k &lt;\omega$，则C表达式$x&lt;&lt;k$产生数值$x*^{t}_{\omega}2^k$ </p>
+<p>注意都可能导致溢出，C编译器试图以移位、加法、减法来分解乘法，因为乘法代价更大</p>
+<h3 id="除以2的幂"><a href="#除以2的幂" class="headerlink" title="除以2的幂"></a>除以2的幂</h3><p>使用右移，无符号和补码数分别使用逻辑移位和算术移位</p>
+<h4 id="除以2的幂的无符号除法"><a href="#除以2的幂的无符号除法" class="headerlink" title="除以2的幂的无符号除法"></a>除以2的幂的无符号除法</h4><p>C变量$x$和$k$有无符号数值$x$和$k$，且$0\leqslant k &lt;\omega$，则C表达式$x&gt;&gt;k$产生数值$[x/ 2^k]$ </p>
+<h4 id="除以2的幂的补码除法，向下取舍"><a href="#除以2的幂的补码除法，向下取舍" class="headerlink" title="除以2的幂的补码除法，向下取舍"></a>除以2的幂的补码除法，向下取舍</h4><p>C变量$x$和$k$有补码值$x$和无符号数值$k$，且$0\leqslant k &lt;\omega$，当执行算术移位时，C表达式产生数值$[x/2^k]$</p>
+<h4 id="除以2的幂的补码除法，向上舍入"><a href="#除以2的幂的补码除法，向上舍入" class="headerlink" title="除以2的幂的补码除法，向上舍入"></a>除以2的幂的补码除法，向上舍入</h4><p>C变量$x$和$k$有补码值$x$和无符号数值$k$，且$0\leqslant k &lt;\omega$，当执行算术移位时，C表达式$(x+(1&lt;<k)-1)>&gt;k$产生数值$[x/2^k]$</k)-1)></p>
+<h1 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h1><h3 id="IEEE浮点表示"><a href="#IEEE浮点表示" class="headerlink" title="IEEE浮点表示"></a>IEEE浮点表示</h3><p>IEEE浮点标准用$V=(-1)^s <em> M</em>2^E$的形式表示浮点数</p>
+<ul>
+<li>符号：$s$决定是负数($s=1$)还是正数($s=0$)，而对于数值0的符号位解释作为特殊情况处理</li>
+<li>尾数 M是一个二进制小数，范围位$1 $~$2-\varepsilon $ ,或者是$0$~$1-\varepsilon$ </li>
+<li>阶码 E的作用是对浮点数加权，这个权重是2的E次幂</li>
+</ul>
+<img src="/2022/09/02/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/image-20220904145425862.png" srcset="/img/loading.gif" lazyload class title="image-20220904145425862">
+<img src="/2022/09/02/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/image-20220904145501200.png" srcset="/img/loading.gif" lazyload class title="image-20220904145501200">
             </div>
             <hr>
             <div>
