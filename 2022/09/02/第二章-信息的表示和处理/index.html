@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://www.example.com/2022/09/02/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/image-20220903220738262.png">
 <meta property="og:image" content="https://www.example.com/2022/09/02/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/image-20220903222111889.png">
 <meta property="article:published_time" content="2022-09-02T04:46:05.000Z">
-<meta property="article:modified_time" content="2022-09-03T15:01:30.589Z">
+<meta property="article:modified_time" content="2022-09-04T03:04:49.711Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://www.example.com/2022/09/02/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/image-20220902153208373.png">
@@ -203,7 +203,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.7k 字
+      4.2k 字
     </span>
   
 
@@ -212,7 +212,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      23 分钟
+      36 分钟
     </span>
   
 
@@ -331,7 +331,20 @@ u-2^\omega {u >TMax_\omega}
 U2T_\omega(u)=-u_{\omega-1}2^\omega+u</script><img src="/2022/09/02/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/image-20220903222111889.png" srcset="/img/loading.gif" lazyload class title="image-20220903222111889">
 <p>上图说明对于小的数（$\leqslant TMax_\omega$），从无符号到有符号的转换保留数字原值。对于大的数($&gt;TMax_\omega$)，数字将被转换为一个负数值</p>
 <h3 id="C语言中的有符号数与无符号数"><a href="#C语言中的有符号数与无符号数" class="headerlink" title="C语言中的有符号数与无符号数"></a>C语言中的有符号数与无符号数</h3><p>当执行一个运算时，如果它的一个运算数是有符号的，但是另一个无符号，C语言会隐式地将有符号参数强制转换为无符号数，并且假设这两个数都是非负的，来执行这个运算</p>
-
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">float</span> <span class="hljs-title function_">sun_elements</span><span class="hljs-params">(<span class="hljs-type">float</span> a[],<span class="hljs-type">unsigned</span> length)</span>&#123;<br>	<span class="hljs-type">int</span> i;<br>	<span class="hljs-type">float</span> result=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>,i&lt;=length<span class="hljs-number">-1</span>;i++)&#123;<br>		result+=a[i];<br>	&#125;<br>	<span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>上段代码unsigned类型的length-1，得到的结果为无符号的-1，对应$UMax$，会造成数组越界</p>
+<h3 id="扩展一个数字的位表示"><a href="#扩展一个数字的位表示" class="headerlink" title="扩展一个数字的位表示"></a>扩展一个数字的位表示</h3><p><strong>零扩展</strong>：将一个无符号数转换为一个更大的数据类型，只要在开头添加0就行</p>
+<p>宽度为$\omega$的位向量$\overrightarrow{u}=[u_{\omega-1},u_{\omega-2},···,u_0]$和宽度为$\omega’$的位向量$\overrightarrow{u’}=[0,··,0,u_{\omega-1},u_{\omega-2},···,u_0]$，其中$\omega’&gt;\omega$。则$B2U_\omega(\overrightarrow{u})=B2U_{\omega’}(\overrightarrow{u’})$</p>
+<p>要将一个补码数字转换为一个更大的数据类型，可以执行<strong>符号扩展</strong>，在开头补符号位</p>
+<p>宽度为$\omega$的位向量$\overrightarrow{x}=[x_{\omega-1},x_{\omega-2},···,x_0]$和宽度为$\omega’$的位向量$\overrightarrow{x’}=[x_{\omega’-1},··,0,x_{\omega-1},x_{\omega-2},···,x_0]$，其中$\omega’&gt;\omega$。则$B2U_\omega(\overrightarrow{x})=B2U_{\omega’}(\overrightarrow{x’})$</p>
+<p>证明用数学归纳法</p>
+<p>在C语言中，把short转化为unsigned时，要先改变大小再从有符号转化为无符号</p>
+<h3 id="截断数字"><a href="#截断数字" class="headerlink" title="截断数字"></a>截断数字</h3><p><strong>截断</strong>：将一个$\omega$位的数$\overrightarrow{x}=[x_{\omega-1},x_{\omega-2},···,x_0]$截断为一个$k$位数字时，丢弃高$\omega-k$位，得到一个位向量$\overrightarrow{x’}=[x_{k-1},x_{x-2},···,x_0]$，截断数字很可能改变它的值</p>
+<p><strong>截断无符号数</strong>：令$\overrightarrow{x}=[x_{\omega-1},x_{\omega-2},···,x_0]$，而$\overrightarrow{x’}$是将其截断$k$位的结果，$\overrightarrow{x’}=[x_{k-1},x_{x-2},···,x_0]$，令$x=B2U_\omega(\overrightarrow{x}),x’=B2U_k(\overrightarrow{x’}),则x’=x mod 2^k$</p>
+<p>推导利用属性，对于任何的$i\geq k，2^i mod 2^k=0$</p>
+<p><strong>补码截断</strong>：将最高位转换为符号位，令$\overrightarrow{x}=[x_{\omega-1},x_{\omega-2},···,x_0]$，而$\overrightarrow{x’}$是将其截断$k$位的结果，$\overrightarrow{x’}=[x_{k-1},x_{x-2},···,x_0]$，令$x=B2U_\omega(\overrightarrow{x}),x’=B2T_k(\overrightarrow{x’}),则x’=U2T_k(xmod2^k)$</p>
+<p>推导利用函数$U2T_k$产生的效果是把最高有效位$x_{k-1}$的权重从$2^{k-1}$转变为$-2^{k-1}$</p>
+<h1 id="整数运算"><a href="#整数运算" class="headerlink" title="整数运算"></a>整数运算</h1>
             </div>
             <hr>
             <div>
