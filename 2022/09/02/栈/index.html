@@ -23,10 +23,13 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="这个部分主要写java数据结构，防止自己忘记时候快速查阅">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.example.com/2022/09/02/%E6%A0%88/image-20220908161958270.png">
+<meta property="og:image" content="https://www.example.com/2022/09/02/%E6%A0%88/image-20220908162010932.png">
 <meta property="article:published_time" content="2022-09-02T08:07:39.000Z">
-<meta property="article:modified_time" content="2022-09-02T15:01:07.825Z">
+<meta property="article:modified_time" content="2022-09-08T08:20:46.329Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.example.com/2022/09/02/%E6%A0%88/image-20220908161958270.png">
   
   
   <title>栈 - Hexo</title>
@@ -199,7 +202,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      6.6k 字
+      6.7k 字
     </span>
   
 
@@ -208,7 +211,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      55 分钟
+      56 分钟
     </span>
   
 
@@ -289,7 +292,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> List&lt;String&gt; <span class="hljs-title function_">getListString</span><span class="hljs-params">(String suffixExpression)</span>&#123;<br>        <span class="hljs-comment">//将suffixExpression分割</span><br>        String []split=suffixExpression.split(<span class="hljs-string">&quot; &quot;</span>);<br>        List&lt;String&gt; list=<span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;String&gt;();<br>        <span class="hljs-keyword">for</span>(String ele:split)&#123;<br>            list.add(ele);<br>        &#125;<br>        <span class="hljs-keyword">return</span> list;<br>    &#125;<br></code></pre></td></tr></table></figure>
 <p>完成后缀表达式的计算</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">calculate</span><span class="hljs-params">(List&lt;String&gt; ls)</span>&#123;<br>        <span class="hljs-comment">//创建一个栈</span><br>        Stack&lt;String&gt; st=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();<br>        <span class="hljs-comment">//遍历list</span><br>        <span class="hljs-keyword">for</span>(String item:ls)&#123;<br>            <span class="hljs-comment">//使用正则表达式来取出数</span><br>            <span class="hljs-keyword">if</span>(item.matches(<span class="hljs-string">&quot;\\d+&quot;</span>))&#123;<span class="hljs-comment">//匹配的是多位数</span><br>                <span class="hljs-comment">//入栈</span><br>                st.push(item);<br>            &#125;<span class="hljs-keyword">else</span>&#123;<span class="hljs-comment">//pop出两个数并运算，再入栈</span><br>                <span class="hljs-type">int</span> num2=Integer.parseInt(st.pop());<br>                <span class="hljs-type">int</span> num1=Integer.parseInt(st.pop());<br>                <span class="hljs-type">int</span> res=<span class="hljs-number">0</span>;<br>                <span class="hljs-keyword">if</span>(item.equals(<span class="hljs-string">&quot;+&quot;</span>))&#123;<br>                    res=num1+num2;<br>                &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(item.equals(<span class="hljs-string">&quot;-&quot;</span>))&#123;<br>                    res=num1-num2;<br>                &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(item.equals(<span class="hljs-string">&quot;*&quot;</span>))&#123;<br>                    res=num1*num2;<br>                &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(item.equals(<span class="hljs-string">&quot;/&quot;</span>))&#123;<br>                    res=num1/num2;<br>                &#125;<span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;运算符有误&quot;</span>);<br>                &#125;<br>                st.push(<span class="hljs-string">&quot;&quot;</span>+res);<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">//最后留在stack中的数据为运算结果</span><br>        <span class="hljs-keyword">return</span> Integer.parseInt(st.pop());<br></code></pre></td></tr></table></figure>
-<p>正则表达式”\\d+”匹配的是多位数</p>
+<p>正则表达式”\\\d+”匹配的是多位数</p>
+<p>除了通过以上方法将中缀表达式转为后缀表达式，还可以通过栈+二叉树的方式将中缀表达式转化为后缀表达式</p>
+<p>中序遍历为中缀表达式，后序遍历为后缀表达式</p>
+<img src="/2022/09/02/%E6%A0%88/image-20220908161958270.png" srcset="/img/loading.gif" lazyload class title="image-20220908161958270">
+<img src="/2022/09/02/%E6%A0%88/image-20220908162010932.png" srcset="/img/loading.gif" lazyload class title="image-20220908162010932">
+<p>只需要将这棵树后序遍历就能得到后缀表达式</p>
 
             </div>
             <hr>
