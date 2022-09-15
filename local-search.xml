@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>第三章-程序的机器级表示</title>
+    <link href="/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/"/>
+    <url>/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/</url>
+    
+    <content type="html"><![CDATA[<h1 id="程序编码"><a href="#程序编码" class="headerlink" title="程序编码"></a>程序编码</h1><p>源代码转化为可执行文件：</p><ol><li>C预处理器扩展代码。插入所有用$#include$声明指定的宏</li><li>编译器产生两个源文件的汇编代码</li><li>汇编器将汇编代码转化成二进制目标代码文件后缀.o</li><li><p>链接器将两个目标代码文件与实现库函数的代码合并，最终产生可执行文件</p><h1 id="数据格式"><a href="#数据格式" class="headerlink" title="数据格式"></a>数据格式</h1></li></ol><img src="/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/image-20220915151643901.png" class title="image-20220915151643901"><p>数据传送指令有四种变种：movb（传送字节），movw（传送字），movl（传送双字），movq（传送四字）</p><h1 id="访问信息"><a href="#访问信息" class="headerlink" title="访问信息"></a>访问信息</h1><img src="/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/image-20220915151838502.png" class title="image-20220915151838502"><h3 id="操作数指令符"><a href="#操作数指令符" class="headerlink" title="操作数指令符"></a>操作数指令符</h3><p>各种不同的操作数可能被分为三种类型：</p><ol><li><p>立即数：书写方式是‘$’后面用C表示法表示的整数</p></li><li><p>寄存器：16个寄存器的低位1字节，2字节，4字节或者8字节中的一个作为操作数，这些字节数分别对应于8位，16位，32位或64位</p></li><li><p>内存引用：它会根据计算出来的地址访问内存中的位置</p><p>有效地址$Imm(r_b,r_i,s)$计算为：$Immm+R[r_b]+R[r_i]*s$</p></li></ol><img src="/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/image-20220915152843008.png" class title="image-20220915152843008"><h3 id="数据传送指令"><a href="#数据传送指令" class="headerlink" title="数据传送指令"></a>数据传送指令</h3><p>最简单的形式：MOV类</p><img src="/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/image-20220915152958337.png" class title="image-20220915152958337"><p>MOV  Source Destination ，第一个操作数是源操作数，第二个操作数是目标操作数。本书是ATT格式，其他可能是inter格式的汇编代码会不一样</p><p>x86-64加一条限制：传送指令的两个操作数都不能同时指向内存位置</p><p>MOV指令只会更新目的操作数指定的那些寄存器字节或内存位置。唯一的例外是movl指令以寄存器作为目的时，它会把该寄存器的高位4字节设置为0</p><p>movq指令只能以表示为32位补码数字的立即数作为源操作数，然后把这个值符号扩展得到64位的值，放到目的位置</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>CSAPP</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>哈希表</title>
     <link href="/2022/09/08/%E5%93%88%E5%B8%8C%E8%A1%A8/"/>
     <url>/2022/09/08/%E5%93%88%E5%B8%8C%E8%A1%A8/</url>
