@@ -24,7 +24,7 @@
 <meta property="og:description" content="java数据结构">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-09-08T08:47:06.000Z">
-<meta property="article:modified_time" content="2022-09-08T08:58:35.611Z">
+<meta property="article:modified_time" content="2022-09-08T09:24:51.243Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -199,7 +199,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.1k 字
+      3.3k 字
     </span>
   
 
@@ -208,7 +208,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      26 分钟
+      28 分钟
     </span>
   
 
@@ -240,7 +240,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             <h1 style="display: none">哈希表</h1>
             
             <div class="markdown-body">
-              <p>用链表+数组表示哈希表，哈希函数就是id mod 数组长度</p>
+              <h1 id="散列函数"><a href="#散列函数" class="headerlink" title="散列函数"></a>散列函数</h1><p>如果输入的值是数字：</p>
+<p>若表的大小是10而关键字都以0为个位， Key Mod $Tablesize$ 这种哈希函数不是一个好的选择</p>
+<p>避免上面的情况，最好的方法是保证表的大小是素数，当输入的关键字是随机整数时，散列函数不仅计算起来简单而且关键字的分配也很均匀</p>
+<p>如果输入的值是字符串：</p>
+<p>一种方法是把字符串的ASCLL码或Unicode码值加起来</p>
+<h1 id="哈希表实现"><a href="#哈希表实现" class="headerlink" title="哈希表实现"></a>哈希表实现</h1><p>用链表+数组表示哈希表，哈希函数就是id mod 数组长度</p>
 <p>设计节点Emp表示员工节点</p>
 <figure class="highlight java"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Emp</span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> id;<br>    <span class="hljs-keyword">public</span> String name;<br>    <span class="hljs-keyword">public</span> Emp next;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Emp</span><span class="hljs-params">(<span class="hljs-type">int</span> id,String name)</span>&#123;<br>        <span class="hljs-built_in">super</span>();<br>        <span class="hljs-built_in">this</span>.id=id;<br>        <span class="hljs-built_in">this</span>.name=name;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">toString</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Emp&#123;&quot;</span> +<br>                <span class="hljs-string">&quot;id=&quot;</span> + id +<br>                <span class="hljs-string">&quot;, name=&#x27;&quot;</span> + name + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +<br>                <span class="hljs-string">&#x27;&#125;&#x27;</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>创建EmpLinkedList类，表示同一个关键字下的所有Emp的信息</p>
