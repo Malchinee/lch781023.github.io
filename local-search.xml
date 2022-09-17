@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>datalab</title>
+    <link href="/2022/09/17/datalab/"/>
+    <url>/2022/09/17/datalab/</url>
+    
+    <content type="html"><![CDATA[<p>只需要修改bits.c文件，然后运行如下指令就可以看到得到多少分</p><figure class="highlight 1c"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs 1c">make <span class="hljs-meta">&amp;&amp; ./btest</span><br></code></pre></td></tr></table></figure><p>第一个异或$\bigoplus$，不能使用|，只能用~和&amp;，使用反演率消除并运算</p><script type="math/tex; mode=display">x\bigoplus y= x\overline{y}+\overline{x}y=\overline{\overline{x\overline{y}+\overline{x}y}}=\overline{(x+\overline{y})(\overline{x}+y)}=\overline{\overline{xy}+xy}=\overline{\overline{x}\overline{y}}*\overline{xy}</script><p>第二个返回最小值，int类型有32位，应该是1后跟31个0，1左移31位即可</p><p>第三个判断是否是补码的最大值，如果是最大值</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-attribute">x</span>=01111111<br>x+<span class="hljs-attribute">1</span>=10000000<br>~<span class="hljs-attribute">x</span>=10000000<br></code></pre></td></tr></table></figure><p>可以让x+1与~x进行异或判断是否是最大值</p><p>要排除x为-1的情况，让x+1与0作异或</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-attribute">x</span>=11111111<br>x+<span class="hljs-attribute">1</span>=00000000<br>~<span class="hljs-attribute">x</span>=00000000<br></code></pre></td></tr></table></figure><p>第四个判断二进制的技术位是否都是1，偶数位不做限制。这样每四位就是1010，16进制就是A。x与1010101010这样的数作&amp;运算，再判断与101010这样的数相等就行</p><p>第五个返回x的相反数，直接~x+1</p><p>第六个判断数是否处于0x30和0x39之间，也就是0000…00110000到0000….00111001之间。对于一个x分三个部分判断：11之前的数全为0、倒数第5和第6位数为11、倒数四位数小于0xA。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>CSAPP</category>
+      
+      <category>Lab</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>第三章-程序的机器级表示</title>
     <link href="/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/"/>
     <url>/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/</url>
