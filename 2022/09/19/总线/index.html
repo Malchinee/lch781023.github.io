@@ -16,30 +16,43 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="程序编码源代码转化为可执行文件：  C预处理器扩展代码。插入所有用$#include$声明指定的宏 编译器产生两个源文件的汇编代码 汇编器将汇编代码转化成二进制目标代码文件后缀.o 链接器将两个目标代码文件与实现库函数的代码合并，最终产生可执行文件 数据格式   数据传送指令有四种变种：movb（传送字节），movw（传送字），movl（传送双字），movq（传送四字） 访问信息 操作数指令符各种">
+    <meta name="description" content="总线的基本概念计算机使用总线结构便于增减外设，同时减少了信息传输线的条数 总线是连接各个部件的信息传输线，是各个部件共享的传输介质 总线上信息的传送:  串行 并行  总线结构的计算机举例  单总线结构框图  同一时刻只能由一对设备使用总线，严重影响CPU的效率，时间延迟比较大  面向CPU的双总线结构框图  但是I&#x2F;O设备与主存无信息传输，只能借助CPU，加大CPU的工作负担  以存储器为中心的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第三章-程序的机器级表示">
-<meta property="og:url" content="https://www.example.com/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/index.html">
+<meta property="og:title" content="总线">
+<meta property="og:url" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="程序编码源代码转化为可执行文件：  C预处理器扩展代码。插入所有用$#include$声明指定的宏 编译器产生两个源文件的汇编代码 汇编器将汇编代码转化成二进制目标代码文件后缀.o 链接器将两个目标代码文件与实现库函数的代码合并，最终产生可执行文件 数据格式   数据传送指令有四种变种：movb（传送字节），movw（传送字），movl（传送双字），movq（传送四字） 访问信息 操作数指令符各种">
+<meta property="og:description" content="总线的基本概念计算机使用总线结构便于增减外设，同时减少了信息传输线的条数 总线是连接各个部件的信息传输线，是各个部件共享的传输介质 总线上信息的传送:  串行 并行  总线结构的计算机举例  单总线结构框图  同一时刻只能由一对设备使用总线，严重影响CPU的效率，时间延迟比较大  面向CPU的双总线结构框图  但是I&#x2F;O设备与主存无信息传输，只能借助CPU，加大CPU的工作负担  以存储器为中心的">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www.example.com/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/image-20220915151643901.png">
-<meta property="og:image" content="https://www.example.com/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/image-20220915151838502.png">
-<meta property="og:image" content="https://www.example.com/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/image-20220915152843008.png">
-<meta property="og:image" content="https://www.example.com/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/image-20220915152958337.png">
-<meta property="og:image" content="https://www.example.com/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/image-20220915212856461.png">
-<meta property="og:image" content="https://www.example.com/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/image-20220915212907680.png">
-<meta property="og:image" content="https://www.example.com/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/image-20220915223207358.png">
-<meta property="og:image" content="https://www.example.com/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/image-20220915223340050.png">
-<meta property="og:image" content="https://www.example.com/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/image-20220915225103955.png">
-<meta property="article:published_time" content="2022-09-15T07:02:03.000Z">
-<meta property="article:modified_time" content="2022-09-17T15:29:10.219Z">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919082600169.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919082813507.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919083016272.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919083849672.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919085301338.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919085426322.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919090333681.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919090511913.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919090737580.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919090832871.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919091020142.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919091040727.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919091133204.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919091223786.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919092140883.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919093229866.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919093732560.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919095212767.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919095446029.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919100752288.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919101727665.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919101742518.png">
+<meta property="article:published_time" content="2022-09-19T00:15:20.000Z">
+<meta property="article:modified_time" content="2022-09-19T02:26:25.775Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://www.example.com/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/image-20220915151643901.png">
+<meta name="twitter:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919082600169.png">
   
   
-  <title>第三章-程序的机器级表示 - Hexo</title>
+  <title>总线 - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -188,7 +201,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="第三章-程序的机器级表示">
+            <span class="h2" id="subtitle" title="总线">
               
             </span>
 
@@ -198,8 +211,8 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-09-15 15:02" pubdate>
-        2022年9月15日 下午
+      <time datetime="2022-09-19 08:15" pubdate>
+        2022年9月19日 早上
       </time>
     </span>
   
@@ -209,7 +222,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      1.4k 字
     </span>
   
 
@@ -218,7 +231,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10 分钟
+      12 分钟
     </span>
   
 
@@ -247,61 +260,157 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">第三章-程序的机器级表示</h1>
+            <h1 style="display: none">总线</h1>
             
             <div class="markdown-body">
-              <h1 id="程序编码"><a href="#程序编码" class="headerlink" title="程序编码"></a>程序编码</h1><p>源代码转化为可执行文件：</p>
+              <h1 id="总线的基本概念"><a href="#总线的基本概念" class="headerlink" title="总线的基本概念"></a>总线的基本概念</h1><p>计算机使用总线结构便于增减外设，同时减少了信息传输线的条数</p>
+<p>总线是连接各个部件的信息传输线，是各个部件共享的传输介质</p>
+<p>总线上信息的传送:</p>
+<ul>
+<li>串行</li>
+<li>并行</li>
+</ul>
+<p>总线结构的计算机举例</p>
 <ol>
-<li>C预处理器扩展代码。插入所有用$#include$声明指定的宏</li>
-<li>编译器产生两个源文件的汇编代码</li>
-<li>汇编器将汇编代码转化成二进制目标代码文件后缀.o</li>
-<li><p>链接器将两个目标代码文件与实现库函数的代码合并，最终产生可执行文件</p>
-<h1 id="数据格式"><a href="#数据格式" class="headerlink" title="数据格式"></a>数据格式</h1></li>
+<li><p>单总线结构框图</p>
+<img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919082600169.png" srcset="/img/loading.gif" lazyload class title="image-20220919082600169">
+<p>同一时刻只能由一对设备使用总线，严重影响CPU的效率，时间延迟比较大</p>
+</li>
+<li><p>面向CPU的双总线结构框图</p>
+<img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919082813507.png" srcset="/img/loading.gif" lazyload class title="image-20220919082813507">
+<p>但是I/O设备与主存无信息传输，只能借助CPU，加大CPU的工作负担</p>
+</li>
+<li><p>以存储器为中心的双总线结构框图</p>
+<img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919083016272.png" srcset="/img/loading.gif" lazyload class title="image-20220919083016272">
+</li>
 </ol>
-<img src="/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/image-20220915151643901.png" srcset="/img/loading.gif" lazyload class title="image-20220915151643901">
-<p>数据传送指令有四种变种：movb（传送字节），movw（传送字），movl（传送双字），movq（传送四字）</p>
-<h1 id="访问信息"><a href="#访问信息" class="headerlink" title="访问信息"></a>访问信息</h1><img src="/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/image-20220915151838502.png" srcset="/img/loading.gif" lazyload class title="image-20220915151838502">
-<h3 id="操作数指令符"><a href="#操作数指令符" class="headerlink" title="操作数指令符"></a>操作数指令符</h3><p>各种不同的操作数可能被分为三种类型：</p>
+<h1 id="总线的分类"><a href="#总线的分类" class="headerlink" title="总线的分类"></a>总线的分类</h1><p>根据连接部件不同分类：</p>
 <ol>
-<li><p>立即数：书写方式是‘$’后面用C表示法表示的整数</p>
+<li><p>片内总线：芯片内部的总线</p>
 </li>
-<li><p>寄存器：16个寄存器的低位1字节，2字节，4字节或者8字节中的一个作为操作数，这些字节数分别对应于8位，16位，32位或64位</p>
+<li><p>系统总线：计算机各部件之间的信息传输线</p>
+<ul>
+<li>数据总线：双向，与机器字长、存储字长有关</li>
+<li>地址总线：单向、与存储地址、I/O地址有关</li>
+<li>控制总线：有出、有入</li>
+</ul>
 </li>
-<li><p>内存引用：它会根据计算出来的地址访问内存中的位置</p>
-<p>有效地址$Imm(r_b,r_i,s)$计算为：$Imm+R[r_b]+R[r_i]*s$</p>
-<p>分别是立即数，基址寄存器，变址寄存器，比例因子</p>
+<li><p>通信总线：用于计算机系统之间或者计算机系统与其它系统之间的通信</p>
+<ul>
+<li>串行通信总线</li>
+<li>并行通信总线</li>
+</ul>
 </li>
 </ol>
-<img src="/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/image-20220915152843008.png" srcset="/img/loading.gif" lazyload class title="image-20220915152843008">
-<h3 id="数据传送指令"><a href="#数据传送指令" class="headerlink" title="数据传送指令"></a>数据传送指令</h3><p>最简单的形式：MOV类</p>
-<p>表示目的操作数与源操作数的大小一致的情况</p>
-<img src="/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/image-20220915152958337.png" srcset="/img/loading.gif" lazyload class title="image-20220915152958337">
-<p>MOV  Source Destination ，第一个操作数是源操作数，第二个操作数是目标操作数，目的操作数不能是立即数。本书是ATT格式，其他可能是inter格式的汇编代码会不一样</p>
-<p>x86-64加一条限制：传送指令的两个操作数都不能同时指向内存位置</p>
-<p>MOV指令只会更新目的操作数指定的那些寄存器字节或内存位置。唯一的例外是movl指令以寄存器作为目的时，它会把该寄存器的高位4字节设置为0</p>
-<p>当立即数作为movq指令的源操作数时，只能以表示为32位补码数字形式表示，然后把这个值符号扩展得到64位的值，放到目的位置。当立即数为64位时，引入movabsq，该源操作数可以是任意的64位的立即数，但是目的操作数只能是寄存器</p>
-<p>当源操作数的数位小于目的操作数时：</p>
-<p>使用MOVZ类：对高位进行零扩展或者符号扩展</p>
-<img src="/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/image-20220915212856461.png" srcset="/img/loading.gif" lazyload class title="image-20220915212856461">
-<p>缺少movzlq的原因是可以用movl指令代替</p>
-<img src="/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/image-20220915212907680.png" srcset="/img/loading.gif" lazyload class title="image-20220915212907680">
-<p>cltq的效果总是与这条指令效果一致</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs x86-64">movslq %eax , %rax<br></code></pre></td></tr></table></figure>
-<h3 id="压入和弹出栈数据"><a href="#压入和弹出栈数据" class="headerlink" title="压入和弹出栈数据"></a>压入和弹出栈数据</h3><p>栈指针 <strong>%rsp</strong>保存保存着栈顶元素的地址</p>
-<img src="/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/image-20220915223207358.png" srcset="/img/loading.gif" lazyload class title="image-20220915223207358">
-<p>pushq %rbp等价于</p>
-<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mel">subq $8,%rsp<br>movq $rbp,(%rsp)<br></code></pre></td></tr></table></figure>
-<p>区别在于pushq指令只需要1字节存储，而上面需要8字节</p>
-<img src="/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/image-20220915223340050.png" srcset="/img/loading.gif" lazyload class title="image-20220915223340050">
-<p>popq %rax等价于</p>
-<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs perl">mov<span class="hljs-string">q (%rsp)</span>,%rax<br>addq $8,%rsp<br></code></pre></td></tr></table></figure>
-<h1 id="算术和逻辑操作"><a href="#算术和逻辑操作" class="headerlink" title="算术和逻辑操作"></a>算术和逻辑操作</h1><img src="/2022/09/15/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/image-20220915225103955.png" srcset="/img/loading.gif" lazyload class title="image-20220915225103955">
-<h3 id="加载有效地址"><a href="#加载有效地址" class="headerlink" title="加载有效地址"></a>加载有效地址</h3><p>leaq指令并不是从指定的数据读取数据，而时将有效地址写入到目的数</p>
-<p>还可以进行加法和有限的乘法运算</p>
-<h3 id="一元和二元操作"><a href="#一元和二元操作" class="headerlink" title="一元和二元操作"></a>一元和二元操作</h3><p>一元操作数既是目的也是源</p>
-<p>二元操作数的目的不能是立即数</p>
-<h1 id="控制"><a href="#控制" class="headerlink" title="控制"></a>控制</h1><p>ALU算术逻辑单元除了执行算术和逻辑单元外，还会根据该运算的结果设置条件码寄存器</p>
-<p>条件码寄存器</p>
+<h1 id="总线特性及性能指标"><a href="#总线特性及性能指标" class="headerlink" title="总线特性及性能指标"></a>总线特性及性能指标</h1><h3 id="总线物理实现"><a href="#总线物理实现" class="headerlink" title="总线物理实现"></a>总线物理实现</h3><img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919083849672.png" srcset="/img/loading.gif" lazyload class title="image-20220919083849672">
+<h3 id="总线特性"><a href="#总线特性" class="headerlink" title="总线特性"></a>总线特性</h3><p>机械特性：尺寸、形状、管脚数、线和线之间的排列顺序等</p>
+<p>电气特性：信号的<strong>传输方向</strong>和有效<strong>电平</strong>范围</p>
+<p>功能特性：每根<strong>传输线</strong>的功能—-地址信号、数据信号、控制信号等</p>
+<p>时间特性：信号的<strong>时序关系</strong></p>
+<h3 id="总线的性能指标"><a href="#总线的性能指标" class="headerlink" title="总线的性能指标"></a>总线的性能指标</h3><p>总线宽度： <strong>数据线</strong>的根数</p>
+<p>标准传输率：每秒传输的最大字节数<strong>MBps</strong></p>
+<p>时钟同步/异步：<strong>同步、不同步</strong></p>
+<p>总线复用：<strong>地址线</strong>、<strong>数据线</strong>复用，可以减少总线中信号线的数量</p>
+<p>信号线数：地址线、数据线和控制线的总和</p>
+<p>总线控制方式：突发、自动、仲裁、逻辑、技术</p>
+<p>其他指标：负载能力</p>
+<h3 id="总线标准"><a href="#总线标准" class="headerlink" title="总线标准"></a>总线标准</h3><img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919085301338.png" srcset="/img/loading.gif" lazyload class title="image-20220919085301338">
+<img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919085426322.png" srcset="/img/loading.gif" lazyload class title="image-20220919085426322">
+<h1 id="总线结构"><a href="#总线结构" class="headerlink" title="总线结构"></a>总线结构</h1><h3 id="单总线结构"><a href="#单总线结构" class="headerlink" title="单总线结构"></a>单总线结构</h3><p>如上图</p>
+<h3 id="多总线结构"><a href="#多总线结构" class="headerlink" title="多总线结构"></a>多总线结构</h3><ol>
+<li><p>双总线结构</p>
+<img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919090333681.png" srcset="/img/loading.gif" lazyload class title="image-20220919090333681">
+</li>
+<li><p>三总线结构</p>
+<img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919090511913.png" srcset="/img/loading.gif" lazyload class title="image-20220919090511913">
+</li>
+<li><p>三总线结构的又一形式</p>
+<img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919090737580.png" srcset="/img/loading.gif" lazyload class title="image-20220919090737580">
+<p>但是影响外部设备的工作速度</p>
+</li>
+<li><p>四总线结构</p>
+<img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919090832871.png" srcset="/img/loading.gif" lazyload class title="image-20220919090832871">
+</li>
+</ol>
+<h3 id="总线结构举例"><a href="#总线结构举例" class="headerlink" title="总线结构举例"></a>总线结构举例</h3><ol>
+<li><p>传统的微型计算机总线结构</p>
+<img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919091020142.png" srcset="/img/loading.gif" lazyload class title="image-20220919091020142">
+</li>
+<li><p>VL-BUS局部总线结构</p>
+<img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919091040727.png" srcset="/img/loading.gif" lazyload class title="image-20220919091040727">
+</li>
+<li><p>PCI总线结构</p>
+<img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919091133204.png" srcset="/img/loading.gif" lazyload class title="image-20220919091133204">
+</li>
+<li><p>多层PCI总线结构</p>
+<img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919091223786.png" srcset="/img/loading.gif" lazyload class title="image-20220919091223786">
+</li>
+</ol>
+<h1 id="总线控制"><a href="#总线控制" class="headerlink" title="总线控制"></a>总线控制</h1><h3 id="总线判优控制"><a href="#总线判优控制" class="headerlink" title="总线判优控制"></a>总线判优控制</h3><ul>
+<li>主设备：对总线具有控制权</li>
+<li>从设备：响应从主设备发来的总线命令</li>
+</ul>
+<p>方法：</p>
+<ul>
+<li>集中式：链式查询、计数器定时查询、独立请求方式</li>
+<li>分布式</li>
+</ul>
+<h4 id="链式查询方式"><a href="#链式查询方式" class="headerlink" title="链式查询方式"></a>链式查询方式</h4><img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919092140883.png" srcset="/img/loading.gif" lazyload class title="image-20220919092140883">
+<h4 id="计数器定时查询方式"><a href="#计数器定时查询方式" class="headerlink" title="计数器定时查询方式"></a>计数器定时查询方式</h4><img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919093229866.png" srcset="/img/loading.gif" lazyload class title="image-20220919093229866">
+<p>若设备数量为n，设备地址线至少需要$Log_2^n$位宽度向上取整</p>
+<h4 id="独立请求方式"><a href="#独立请求方式" class="headerlink" title="独立请求方式"></a>独立请求方式</h4><img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919093732560.png" srcset="/img/loading.gif" lazyload class title="image-20220919093732560">
+<p>优先级在控制部件内部有一个排队器</p>
+<p>设备有N个，需要2N条线解决</p>
+<h3 id="总线通信控制"><a href="#总线通信控制" class="headerlink" title="总线通信控制"></a>总线通信控制</h3><p>解决<strong>主设备与从设备之间协调配合</strong>的关系</p>
+<p><strong>总线传输周期</strong>：主设备和从设备之间完成一次完整、可靠的通信的时间</p>
+<ul>
+<li>申请分配阶段：<strong>主模块申请</strong>，总线仲裁决定</li>
+<li>寻址阶段：主模块向从模块给出<strong>地址和命令</strong></li>
+<li>传输阶段：主模块和从模块<strong>交换数据</strong></li>
+<li>结束阶段：主模块<strong>撤销有关消息</strong></li>
+</ul>
+<p>总线通信的四种方式：</p>
+<ul>
+<li><p>同步通信：由统一时标控制数据传送</p>
+</li>
+<li><p>异步通信：采用应答方式、没有公共时钟标准</p>
+</li>
+<li><p>半同步通信：同步、异步结合</p>
+</li>
+<li><p>分离式通信：发掘系统总线每一瞬间的潜力</p>
+</li>
+</ul>
+<p>一个总线传输周期（以输入数据为例）：</p>
+<ul>
+<li>主模块发地址、命令 ：占用总线</li>
+<li>从模块准备数据：不占用总线</li>
+<li>从模块向主模块发数据：占用总线</li>
+</ul>
+<h4 id="同步式"><a href="#同步式" class="headerlink" title="同步式"></a>同步式</h4><p>数据输入：</p>
+<img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919095212767.png" srcset="/img/loading.gif" lazyload class title="image-20220919095212767">
+<p>一定有定宽定距的时钟控制数据、地址的输入，操作等</p>
+<p>数据输出：</p>
+<img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919095446029.png" srcset="/img/loading.gif" lazyload class title="image-20220919095446029">
+<p>应用在总线长度比较短，各个模块存取时间比较一致的情况下</p>
+<h4 id="异步式"><a href="#异步式" class="headerlink" title="异步式"></a>异步式</h4><img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919100752288.png" srcset="/img/loading.gif" lazyload class title="image-20220919100752288">
+<h4 id="半同步通信"><a href="#半同步通信" class="headerlink" title="半同步通信"></a>半同步通信</h4><p>同步：发送方用系统时钟前沿发信号，接收方用系统时钟后沿判断、识别</p>
+<p>异步：允许不同速度的模块和谐工作，增加一条“等待”响应信号，$\overline{WAIT}$</p>
+<img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919101727665.png" srcset="/img/loading.gif" lazyload class title="image-20220919101727665">
+<img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919101742518.png" srcset="/img/loading.gif" lazyload class title="image-20220919101742518">
+<h4 id="分离式通信"><a href="#分离式通信" class="headerlink" title="分离式通信"></a>分离式通信</h4><p>在从模块准备数据的时间内，主模块让出总线的使用权</p>
+<p>一个总线的传输周期：</p>
+<ul>
+<li>子周期1：主模块申请占用总线，使用完后放弃总线的使用权</li>
+<li>子周期2：从模块申请占用总线，将各种信息放到总线上去</li>
+</ul>
+<p>特点：</p>
+<ol>
+<li>各模块有权申请占用总线</li>
+<li>采用同步方式通信，不等对方回答</li>
+<li>各模块准备数据时，不占用总线</li>
+<li>总线被占用时，无空闲</li>
+</ol>
+<p>以上，充分利用总线的带宽</p>
 
             </div>
             <hr>
@@ -311,7 +420,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/CSAPP/">CSAPP</a>
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a>
                     
                   </div>
                 
@@ -329,18 +438,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/09/17/datalab/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">datalab</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/09/08/%E5%93%88%E5%B8%8C%E8%A1%A8/">
-                        <span class="hidden-mobile">哈希表</span>
+                      <a href="/2022/09/17/datalab/">
+                        <span class="hidden-mobile">datalab</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
