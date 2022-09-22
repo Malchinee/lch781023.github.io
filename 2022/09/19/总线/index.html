@@ -48,7 +48,7 @@
 <meta property="og:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919101727665.png">
 <meta property="og:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919101742518.png">
 <meta property="article:published_time" content="2022-09-19T00:15:20.000Z">
-<meta property="article:modified_time" content="2022-09-20T01:42:19.088Z">
+<meta property="article:modified_time" content="2022-09-22T00:50:10.640Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://www.example.com/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919082600169.png">
@@ -224,7 +224,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.1k 字
+      2.3k 字
     </span>
   
 
@@ -233,7 +233,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      18 分钟
+      20 分钟
     </span>
   
 
@@ -402,7 +402,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 </ul>
 <p>总线通信的四种方式：</p>
 <ul>
-<li><p>同步通信：由定宽、定距的时标控制数据传送</p>
+<li><p>同步通信：由<strong>定宽、定距的时标</strong>控制数据传送</p>
 </li>
 <li><p>异步通信：采用应答方式、没有公共时钟标准</p>
 </li>
@@ -419,19 +419,34 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 </ul>
 <h4 id="同步式"><a href="#同步式" class="headerlink" title="同步式"></a>同步式</h4><p>特点：</p>
 <ul>
-<li>强制性同步，采用同一时钟，简单易控制</li>
+<li><strong>强制性同步，采用同一时钟</strong>，简单易控制</li>
 <li>对于每一个操作，每一时间都有明确的规定，显得比较死板</li>
 <li>必须按照<strong>工作速度最慢的部件</strong>来设计时钟</li>
 <li>当各个模块的存取时间相差较大时，会大大损失总线的工作效率</li>
 <li>适用于<strong>总线时间较短</strong>，各模块部件存取时间比较一致的场合</li>
 </ul>
 <p>数据输入：</p>
+<p>地址：平为无地址数据，分叉后为有地址数据</p>
+<p>读命令：高电平为无效、低电平有效</p>
+<p>数据线同理</p>
 <img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919095212767.png" srcset="/img/loading.gif" lazyload class title="image-20220919095212767">
 <p>数据输出：</p>
 <img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919095446029.png" srcset="/img/loading.gif" lazyload class title="image-20220919095446029">
+<p>写命令需要两个时钟周期，读命令只需要一个</p>
 <p>应用在总线长度比较短，各个模块存取时间比较一致的情况下</p>
-<h4 id="异步式"><a href="#异步式" class="headerlink" title="异步式"></a>异步式</h4><img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919100752288.png" srcset="/img/loading.gif" lazyload class title="image-20220919100752288">
-<h4 id="半同步通信"><a href="#半同步通信" class="headerlink" title="半同步通信"></a>半同步通信</h4><p>同步：发送方用系统时钟前沿发信号，接收方用系统时钟后沿判断、识别</p>
+<h4 id="异步式"><a href="#异步式" class="headerlink" title="异步式"></a>异步式</h4><p>参与通信的两个部件需要感知对方操作，通过“握手”信号实现</p>
+<ul>
+<li>单边控制：由源部件<strong>或</strong>目的部件控制</li>
+<li>双边控制：由源部件<strong>和</strong>目的部件控制</li>
+</ul>
+<p>特点：</p>
+<ul>
+<li>没有公共时钟</li>
+<li>采用握手方式，请求应答方式</li>
+<li>相互通信的设备的工作速度参差不齐</li>
+</ul>
+<img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919100752288.png" srcset="/img/loading.gif" lazyload class title="image-20220919100752288">
+<h4 id="半同步通信"><a href="#半同步通信" class="headerlink" title="半同步通信"></a>半同步通信</h4><p>同步：发送方用<strong>系统时钟前沿</strong>发信号，接收方用<strong>系统时钟后沿</strong>判断、识别</p>
 <p>异步：允许不同速度的模块和谐工作，增加一条“等待”响应信号，$\overline{WAIT}$</p>
 <img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919101727665.png" srcset="/img/loading.gif" lazyload class title="image-20220919101727665">
 <img src="/2022/09/19/%E6%80%BB%E7%BA%BF/image-20220919101742518.png" srcset="/img/loading.gif" lazyload class title="image-20220919101742518">
