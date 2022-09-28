@@ -16,30 +16,30 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="数据结构Redis是一个key-value的数据库，key一般是String类型，Value类型多种多样  通用命令KEYS：查看符合模版的所有key，不建议在生产环境下使用  DEL：删除一个key EXISTS：判断一个key是否存在 EXPIRE：给一个key设置有效期，到期自动删除，单位为秒 TTL：查看一个key的剩余有效期 String字符串类型，其value是字符串，根据字符串的格式">
+    <meta name="description" content="存储器的分类与性能评价存储器的分类第一种分类方式：   所有半导体存储器都是随机访问存储器 所有磁表面存储器和光盘存储器都是非易失性存储器 第二种分类方式：   直接访问：首先直接指出该存储器中的某个小区域（磁道） 串行访问：然后再顺序寻访，直至找到最终位置（扇区）  存储器的性能评价 容量：存储二进制信息的数量 一个存储系统通常有若干哥存储芯片组成，存储芯片的规格表示为： 存储单元数目×存储字长">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis基础">
-<meta property="og:url" content="https://www.example.com/2022/09/27/Redis%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:title" content="存储技术">
+<meta property="og:url" content="https://www.example.com/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="数据结构Redis是一个key-value的数据库，key一般是String类型，Value类型多种多样  通用命令KEYS：查看符合模版的所有key，不建议在生产环境下使用  DEL：删除一个key EXISTS：判断一个key是否存在 EXPIRE：给一个key设置有效期，到期自动删除，单位为秒 TTL：查看一个key的剩余有效期 String字符串类型，其value是字符串，根据字符串的格式">
+<meta property="og:description" content="存储器的分类与性能评价存储器的分类第一种分类方式：   所有半导体存储器都是随机访问存储器 所有磁表面存储器和光盘存储器都是非易失性存储器 第二种分类方式：   直接访问：首先直接指出该存储器中的某个小区域（磁道） 串行访问：然后再顺序寻访，直至找到最终位置（扇区）  存储器的性能评价 容量：存储二进制信息的数量 一个存储系统通常有若干哥存储芯片组成，存储芯片的规格表示为： 存储单元数目×存储字长">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www.example.com/2022/09/27/Redis%E5%9F%BA%E7%A1%80/image-20220927225748023.png">
-<meta property="og:image" content="https://www.example.com/2022/09/27/Redis%E5%9F%BA%E7%A1%80/image-20220927231044718.png">
-<meta property="og:image" content="https://www.example.com/2022/09/27/Redis%E5%9F%BA%E7%A1%80/image-20220928215937157.png">
-<meta property="og:image" content="https://www.example.com/2022/09/27/Redis%E5%9F%BA%E7%A1%80/image-20220928220053571.png">
-<meta property="og:image" content="https://www.example.com/2022/09/27/Redis%E5%9F%BA%E7%A1%80/image-20220928222655380.png">
-<meta property="og:image" content="https://www.example.com/2022/09/27/Redis%E5%9F%BA%E7%A1%80/image-20220928223957141.png">
-<meta property="og:image" content="https://www.example.com/2022/09/27/Redis%E5%9F%BA%E7%A1%80/image-20220928225606047.png">
-<meta property="og:image" content="https://www.example.com/2022/09/27/Redis%E5%9F%BA%E7%A1%80/image-20220928225844835.png">
-<meta property="og:image" content="https://www.example.com/2022/09/27/Redis%E5%9F%BA%E7%A1%80/image-20220928230432141.png">
-<meta property="article:published_time" content="2022-09-27T14:54:05.000Z">
-<meta property="article:modified_time" content="2022-09-28T15:49:12.414Z">
+<meta property="og:image" content="https://www.example.com/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929000624196.png">
+<meta property="og:image" content="https://www.example.com/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929000636712.png">
+<meta property="og:image" content="https://www.example.com/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929000729392.png">
+<meta property="og:image" content="https://www.example.com/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929000818546.png">
+<meta property="og:image" content="https://www.example.com/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929000909198.png">
+<meta property="og:image" content="https://www.example.com/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929001125721.png">
+<meta property="og:image" content="https://www.example.com/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929001307798.png">
+<meta property="og:image" content="https://www.example.com/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929001425384.png">
+<meta property="og:image" content="https://www.example.com/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929001640522.png">
+<meta property="article:published_time" content="2022-09-28T16:01:00.000Z">
+<meta property="article:modified_time" content="2022-09-28T16:18:00.259Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://www.example.com/2022/09/27/Redis%E5%9F%BA%E7%A1%80/image-20220927225748023.png">
+<meta name="twitter:image" content="https://www.example.com/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929000624196.png">
   
   
-  <title>Redis基础 - Hexo</title>
+  <title>存储技术 - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -188,7 +188,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Redis基础">
+            <span class="h2" id="subtitle" title="存储技术">
               
             </span>
 
@@ -198,8 +198,8 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-09-27 22:54" pubdate>
-        2022年9月27日 晚上
+      <time datetime="2022-09-29 00:01" pubdate>
+        2022年9月29日 凌晨
       </time>
     </span>
   
@@ -209,7 +209,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      741 字
+      350 字
     </span>
   
 
@@ -218,7 +218,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7 分钟
+      3 分钟
     </span>
   
 
@@ -247,62 +247,55 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Redis基础</h1>
+            <h1 style="display: none">存储技术</h1>
             
             <div class="markdown-body">
-              <h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><p>Redis是一个key-value的数据库，key一般是String类型，Value类型多种多样</p>
-<img src="/2022/09/27/Redis%E5%9F%BA%E7%A1%80/image-20220927225748023.png" srcset="/img/loading.gif" lazyload class title="image-20220927225748023">
-<h2 id="通用命令"><a href="#通用命令" class="headerlink" title="通用命令"></a>通用命令</h2><p>KEYS：查看符合模版的所有key，不建议在生产环境下使用</p>
-<img src="/2022/09/27/Redis%E5%9F%BA%E7%A1%80/image-20220927231044718.png" srcset="/img/loading.gif" lazyload class title="image-20220927231044718">
-<p>DEL：删除一个key</p>
-<p>EXISTS：判断一个key是否存在</p>
-<p>EXPIRE：给一个key设置有效期，到期自动删除，单位为秒</p>
-<p>TTL：查看一个key的剩余有效期</p>
-<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><p>字符串类型，其value是字符串，根据字符串的格式不同，分三类：</p>
-<ul>
-<li>string：普通字符串</li>
-<li>int：整数类型，可以自增自减</li>
-<li>float：浮点类型，可以自增、自减操作</li>
+              <h1 id="存储器的分类与性能评价"><a href="#存储器的分类与性能评价" class="headerlink" title="存储器的分类与性能评价"></a>存储器的分类与性能评价</h1><h2 id="存储器的分类"><a href="#存储器的分类" class="headerlink" title="存储器的分类"></a>存储器的分类</h2><p><strong>第一种分类方式</strong>：</p>
+<img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929000624196.png" srcset="/img/loading.gif" lazyload class title="image-20220929000624196">
+<img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929000636712.png" srcset="/img/loading.gif" lazyload class title="image-20220929000636712">
+<p>所有半导体存储器都是<strong>随机访问存储器</strong></p>
+<p>所有磁表面存储器和光盘存储器都是<strong>非易失性存储器</strong></p>
+<p><strong>第二种分类方式</strong>：</p>
+<img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929000729392.png" srcset="/img/loading.gif" lazyload class title="image-20220929000729392">
+<img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929000818546.png" srcset="/img/loading.gif" lazyload class title="image-20220929000818546">
+<p>直接访问：首先直接指出该存储器中的某个小区域（磁道）</p>
+<p>串行访问：然后再顺序寻访，直至找到最终位置（扇区）</p>
+<img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929000909198.png" srcset="/img/loading.gif" lazyload class title="image-20220929000909198">
+<h2 id="存储器的性能评价"><a href="#存储器的性能评价" class="headerlink" title="存储器的性能评价"></a>存储器的性能评价</h2><ul>
+<li><p><strong>容量</strong>：存储二进制信息的数量</p>
+<p>一个存储系统通常有若干哥存储芯片组成，存储芯片的规格表示为：</p>
+<p><strong>存储单元数目×存储字长</strong></p>
+<img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929001125721.png" srcset="/img/loading.gif" lazyload class title="image-20220929001125721">
+</li>
+<li><p><strong>速度</strong>：</p>
+<img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929001307798.png" srcset="/img/loading.gif" lazyload class title="image-20220929001307798">
+<ol>
+<li><p><strong>存取时间</strong>Ta：从CPU给出有效地址启动依次存取操作到该操作完成所需的时间</p>
+<p>也就是：从读/写存储器开始到存储器发出完成信号的时间</p>
+<img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929001425384.png" srcset="/img/loading.gif" lazyload class title="image-20220929001425384">
+</li>
+<li><p><strong>存取周期</strong>Tc：指连续两次存储器操作之间的最小时间间隔</p>
+<p>也就是：指从一个读/写存储器操作开始到下一个存储器操作能够开始的最小时间间隔</p>
+<img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929001640522.png" srcset="/img/loading.gif" lazyload class title="image-20220929001640522">
+</li>
+<li><p>存储器带宽：每秒传送的二进制位数</p>
+<p>也就是：单位时间里存储器所存取的信息量</p>
+</li>
+</ol>
+</li>
 </ul>
-<p>底层都是字节数组存储，只不过是编码方式不同，最大不能超过512M</p>
-<img src="/2022/09/27/Redis%E5%9F%BA%E7%A1%80/image-20220928215937157.png" srcset="/img/loading.gif" lazyload class title="image-20220928215937157">
-<h2 id="Key的层级命令"><a href="#Key的层级命令" class="headerlink" title="Key的层级命令"></a>Key的层级命令</h2><p>Redis的key允许有多个单词形成层级结构，多个单词之间用：隔开</p>
-<img src="/2022/09/27/Redis%E5%9F%BA%E7%A1%80/image-20220928220053571.png" srcset="/img/loading.gif" lazyload class title="image-20220928220053571">
-<h2 id="Hash类型"><a href="#Hash类型" class="headerlink" title="Hash类型"></a>Hash类型</h2><p>其Value是一个无序字典，类似于java中的HashMap</p>
-<p>String结构是将对象序列化为Json字符串后存储，需要修改某个字段不方便</p>
-<p>Hash结构可以将对象中的每个字段独立存储</p>
-<img src="/2022/09/27/Redis%E5%9F%BA%E7%A1%80/image-20220928222655380.png" srcset="/img/loading.gif" lazyload class title="image-20220928222655380">
-<h2 id="List类型"><a href="#List类型" class="headerlink" title="List类型"></a>List类型</h2><p>可以看作双向链表的结构，既可以支持正向检索和反向检索</p>
-<p>特征与LinkedList类似：</p>
-<ul>
-<li>有序</li>
-<li>元素可以重复</li>
-<li>插入和删除快</li>
-<li>查询速度一般</li>
-</ul>
-<img src="/2022/09/27/Redis%E5%9F%BA%E7%A1%80/image-20220928223957141.png" srcset="/img/loading.gif" lazyload class title="image-20220928223957141">
-<h2 id="Set类型"><a href="#Set类型" class="headerlink" title="Set类型"></a>Set类型</h2><p>与java中的HashSet类型，可以看作value为null的HashSet</p>
-<ul>
-<li>无序</li>
-<li>元素不可重复</li>
-<li>查找快</li>
-<li>支持交集、并集、差集等功能</li>
-</ul>
-<img src="/2022/09/27/Redis%E5%9F%BA%E7%A1%80/image-20220928225606047.png" srcset="/img/loading.gif" lazyload class title="image-20220928225606047">
-<img src="/2022/09/27/Redis%E5%9F%BA%E7%A1%80/image-20220928225844835.png" srcset="/img/loading.gif" lazyload class title="image-20220928225844835">
-<h2 id="SortedSet类型"><a href="#SortedSet类型" class="headerlink" title="SortedSet类型"></a>SortedSet类型</h2><p>Redis的SortedSet类型是一个可排序的set集合，与java中的TreeSet有些类似，但是底层数据结构差别较大。SortedSet中的每一个元素都带有一个score属性，可以基于score属性对元素进行排序，底层的实现是一个跳表加hash表</p>
-<ul>
-<li>可排序</li>
-<li>元素不重复</li>
-<li>查询速度快</li>
-</ul>
-<img src="/2022/09/27/Redis%E5%9F%BA%E7%A1%80/image-20220928230432141.png" srcset="/img/loading.gif" lazyload class title="image-20220928230432141">
-<p>所有排名都是升序的，如果要降序还要在Z后面加上REV即可</p>
-<h1 id="Redis的java客户端"><a href="#Redis的java客户端" class="headerlink" title="Redis的java客户端"></a>Redis的java客户端</h1>
+
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a>
+                    
+                  </div>
                 
                 
               </div>
@@ -318,18 +311,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">存储技术</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/09/26/%E4%B8%8D%E7%9B%B8%E4%BA%A4%E9%9B%86/">
-                        <span class="hidden-mobile">不相交集</span>
+                      <a href="/2022/09/27/Redis%E5%9F%BA%E7%A1%80/">
+                        <span class="hidden-mobile">Redis基础</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

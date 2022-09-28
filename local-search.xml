@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>存储技术</title>
+    <link href="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/"/>
+    <url>/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/</url>
+    
+    <content type="html"><![CDATA[<h1 id="存储器的分类与性能评价"><a href="#存储器的分类与性能评价" class="headerlink" title="存储器的分类与性能评价"></a>存储器的分类与性能评价</h1><h2 id="存储器的分类"><a href="#存储器的分类" class="headerlink" title="存储器的分类"></a>存储器的分类</h2><p><strong>第一种分类方式</strong>：</p><img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929000624196.png" class title="image-20220929000624196"><img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929000636712.png" class title="image-20220929000636712"><p>所有半导体存储器都是<strong>随机访问存储器</strong></p><p>所有磁表面存储器和光盘存储器都是<strong>非易失性存储器</strong></p><p><strong>第二种分类方式</strong>：</p><img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929000729392.png" class title="image-20220929000729392"><img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929000818546.png" class title="image-20220929000818546"><p>直接访问：首先直接指出该存储器中的某个小区域（磁道）</p><p>串行访问：然后再顺序寻访，直至找到最终位置（扇区）</p><img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929000909198.png" class title="image-20220929000909198"><h2 id="存储器的性能评价"><a href="#存储器的性能评价" class="headerlink" title="存储器的性能评价"></a>存储器的性能评价</h2><ul><li><p><strong>容量</strong>：存储二进制信息的数量</p><p>一个存储系统通常有若干哥存储芯片组成，存储芯片的规格表示为：</p><p><strong>存储单元数目×存储字长</strong></p><img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929001125721.png" class title="image-20220929001125721"></li><li><p><strong>速度</strong>：</p><img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929001307798.png" class title="image-20220929001307798"><ol><li><p><strong>存取时间</strong>Ta：从CPU给出有效地址启动依次存取操作到该操作完成所需的时间</p><p>也就是：从读/写存储器开始到存储器发出完成信号的时间</p><img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929001425384.png" class title="image-20220929001425384"></li><li><p><strong>存取周期</strong>Tc：指连续两次存储器操作之间的最小时间间隔</p><p>也就是：指从一个读/写存储器操作开始到下一个存储器操作能够开始的最小时间间隔</p><img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929001640522.png" class title="image-20220929001640522"></li><li><p>存储器带宽：每秒传送的二进制位数</p><p>也就是：单位时间里存储器所存取的信息量</p></li></ol></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>计算机组成原理</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Redis基础</title>
     <link href="/2022/09/27/Redis%E5%9F%BA%E7%A1%80/"/>
     <url>/2022/09/27/Redis%E5%9F%BA%E7%A1%80/</url>
