@@ -49,8 +49,14 @@
 <meta property="og:image" content="https://www.example.com/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929093422683.png">
 <meta property="og:image" content="https://www.example.com/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929093504452.png">
 <meta property="og:image" content="https://www.example.com/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929093954272.png">
+<meta property="og:image" content="https://www.example.com/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20221004081232488.png">
+<meta property="og:image" content="https://www.example.com/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20221004081311009.png">
+<meta property="og:image" content="https://www.example.com/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20221004081622418.png">
+<meta property="og:image" content="https://www.example.com/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20221004081818640.png">
+<meta property="og:image" content="https://www.example.com/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20221004082230503.png">
+<meta property="og:image" content="https://www.example.com/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20221004093039954.png">
 <meta property="article:published_time" content="2022-09-28T16:01:00.000Z">
-<meta property="article:modified_time" content="2022-09-29T01:42:52.513Z">
+<meta property="article:modified_time" content="2022-10-04T01:30:55.180Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://www.example.com/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929000624196.png">
@@ -226,7 +232,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.7k 字
+      2k 字
     </span>
   
 
@@ -235,7 +241,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      14 分钟
+      17 分钟
     </span>
   
 
@@ -364,6 +370,36 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929093422683.png" srcset="/img/loading.gif" lazyload class title="image-20220929093422683">
 <img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929093504452.png" srcset="/img/loading.gif" lazyload class title="image-20220929093504452">
 <h2 id="DRAM"><a href="#DRAM" class="headerlink" title="DRAM"></a>DRAM</h2><img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20220929093954272.png" srcset="/img/loading.gif" lazyload class title="image-20220929093954272">
+<p>SRAM不适合大体积大容量</p>
+<p>DRAM只需要一个MOS管和一个电容就能存储0/1</p>
+<p>DRAM靠电容存储的电荷来表示信息 -&gt;电容上的电荷会发生泄漏 -&gt;需要定时充电以维持存储内容 -&gt;需要外加<strong>刷新电路</strong></p>
+<h4 id="刷新："><a href="#刷新：" class="headerlink" title="刷新："></a>刷新：</h4><img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20221004081232488.png" srcset="/img/loading.gif" lazyload class title="image-20221004081232488">
+<p><strong>刷新周期：</strong></p>
+<img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20221004081311009.png" srcset="/img/loading.gif" lazyload class title="image-20221004081311009">
+<p>集中刷新：</p>
+<img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20221004081622418.png" srcset="/img/loading.gif" lazyload class title="image-20221004081622418">
+<p>分散刷新：使内存的工作周期变长</p>
+<img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20221004081818640.png" srcset="/img/loading.gif" lazyload class title="image-20221004081818640">
+<p>异步刷新：在一个刷新间隔内，均匀进行逐行刷新</p>
+<img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20221004082230503.png" srcset="/img/loading.gif" lazyload class title="image-20221004082230503">
+<h2 id="ROM"><a href="#ROM" class="headerlink" title="ROM"></a>ROM</h2><p>向ROM写入原始信息的过程为“编程”，“编程”方法不同，分类：</p>
+<ul>
+<li><p>掩膜型MROM</p>
+<p>包含MOS管：0；不包含MOS管：1</p>
+</li>
+<li><p>可编程PROM</p>
+<p>出厂数据全为0，用户可写入1，分类：</p>
+<ul>
+<li>熔丝烧断型：熔丝断为1；熔丝未断为0</li>
+<li>PN节击穿型</li>
+</ul>
+</li>
+<li><p>可擦除的可编程的EPROM</p>
+</li>
+<li><p>可用电擦除的可编程EEPROM</p>
+</li>
+</ul>
+<img src="/2022/09/29/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/image-20221004093039954.png" srcset="/img/loading.gif" lazyload class title="image-20221004093039954">
             </div>
             <hr>
             <div>
