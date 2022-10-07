@@ -1,0 +1,533 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/touxiang.png">
+  <link rel="icon" href="/img/touxiang.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="BSTMap用二叉搜索树结构实现一个Map，要求至少实现get，size，put方法 可选的实现remove方法和迭代器iterator，KeySet 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lab9-TreeMap、HashMap">
+<meta property="og:url" content="https://www.example.com/2022/10/07/lab9-TreeMap%E3%80%81HashMap/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="BSTMap用二叉搜索树结构实现一个Map，要求至少实现get，size，put方法 可选的实现remove方法和迭代器iterator，KeySet 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-10-07T06:03:05.000Z">
+<meta property="article:modified_time" content="2022-10-07T07:28:02.024Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>lab9-TreeMap、HashMap - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<!--动态线条背景-->
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>这里有即用配件</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/fengmian.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="lab9-TreeMap、HashMap">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-10-07 14:03" pubdate>
+        2022年10月7日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      9.4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      78 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">lab9-TreeMap、HashMap</h1>
+            
+            <div class="markdown-body">
+              <h1 id="BSTMap"><a href="#BSTMap" class="headerlink" title="BSTMap"></a>BSTMap</h1><p>用<a target="_blank" rel="noopener" href="https://www.malchinee.top/2022/09/02/%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/">二叉搜索树</a>结构实现一个Map，要求至少实现get，size，put方法</p>
+<p>可选的实现remove方法和迭代器iterator，KeySet</p>
+<figure class="highlight java"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br></pre></div></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BSTMap</span>&lt;K <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Comparable</span>&lt;K&gt;, V&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Map61B</span>&lt;K, V&gt; &#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span> &#123;<br>        <span class="hljs-comment">/* (K, V) pair stored in this Node. */</span><br>        <span class="hljs-keyword">private</span> K key;<br>        <span class="hljs-keyword">private</span> V value;<br><br>        <span class="hljs-comment">/* Children of this Node. */</span><br>        <span class="hljs-keyword">private</span> Node left;<br>        <span class="hljs-keyword">private</span> Node right;<br><br>        <span class="hljs-keyword">private</span> <span class="hljs-title function_">Node</span><span class="hljs-params">(K k, V v)</span> &#123;<br>            key = k;<br>            value = v;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> Node root;  <span class="hljs-comment">/* Root node of the tree. */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> size; <span class="hljs-comment">/* The number of key-value pairs in the tree */</span><br>    <span class="hljs-comment">/* Creates an empty BSTMap. */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">BSTMap</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-built_in">this</span>.clear();<br>    &#125;<br><br>    <span class="hljs-comment">/* Removes all of the mappings from this map. */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">clear</span><span class="hljs-params">()</span> &#123;<br>        root = <span class="hljs-literal">null</span>;<br>        size = <span class="hljs-number">0</span>;<br>    &#125;<br><br>    <span class="hljs-comment">/** Returns the value mapped to by KEY in the subtree rooted in P.</span><br><span class="hljs-comment">     *  or null if this map contains no mapping for the key.</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> V <span class="hljs-title function_">getHelper</span><span class="hljs-params">(K key, Node p)</span> &#123;<br>        <span class="hljs-keyword">if</span>(p==<span class="hljs-literal">null</span>)<span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">if</span> (key.compareTo(p.key)&lt;<span class="hljs-number">0</span>)<span class="hljs-keyword">return</span> getHelper(key,p.left);<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (key.compareTo(p.key)&gt;<span class="hljs-number">0</span>)<span class="hljs-keyword">return</span> getHelper(key, p.right);<br>        <span class="hljs-keyword">return</span> p.value;<br>    &#125;<br><br>    <span class="hljs-comment">/** Returns the value to which the specified key is mapped, or null if this</span><br><span class="hljs-comment">     *  map contains no mapping for the key.</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> V <span class="hljs-title function_">get</span><span class="hljs-params">(K key)</span> &#123;<br>        <span class="hljs-keyword">return</span> getHelper(key,root);<br>    &#125;<br><br>    <span class="hljs-comment">/** Returns a BSTMap rooted in p with (KEY, VALUE) added as a key-value mapping.</span><br><span class="hljs-comment">      * Or if p is null, it returns a one node BSTMap containing (KEY, VALUE).</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> Node <span class="hljs-title function_">putHelper</span><span class="hljs-params">(K key, V value, Node p)</span> &#123;<br>        <span class="hljs-keyword">if</span> (p==<span class="hljs-literal">null</span>)&#123;<br>            size++;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Node</span>(key, value);<br>        &#125;<br>        <span class="hljs-keyword">if</span> (key.compareTo(p.key)&lt;<span class="hljs-number">0</span>)p.left=putHelper(key,value,p.left);<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (key.compareTo(p.key)&gt;<span class="hljs-number">0</span>)p.right=putHelper(key,value,p.right);<br>        <span class="hljs-keyword">else</span> p.value=value;<br>        <span class="hljs-keyword">return</span> p;<br><br>    &#125;<br><br>    <span class="hljs-comment">/** Inserts the key KEY</span><br><span class="hljs-comment">     *  If it is already present, updates value to be VALUE.</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">put</span><span class="hljs-params">(K key, V value)</span> &#123;<br>        root=putHelper(key,value,root);<br>    &#125;<br><br>    <span class="hljs-comment">/* Returns the number of key-value mappings in this map. */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">size</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> size;<br>    &#125;<br><br>    <span class="hljs-comment">//////////////// EVERYTHING BELOW THIS LINE IS OPTIONAL ////////////////</span><br><br>    <span class="hljs-comment">/* Returns a Set view of the keys contained in this map. */</span><br>    <span class="hljs-comment">//将所有的key保存为一个set集合</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Set&lt;K&gt; <span class="hljs-title function_">keySet</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">if</span>(root==<span class="hljs-literal">null</span>)&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>        &#125;<br>        Set&lt;K&gt; keySet=<span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeSet</span>&lt;&gt;();<br>        keySetHelper(root,keySet);<br>        <span class="hljs-keyword">return</span> keySet;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">keySetHelper</span><span class="hljs-params">(Node node,Set&lt;K&gt; keySet)</span>&#123;<br>        <span class="hljs-keyword">if</span>(node==<span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span>;<br>        keySetHelper(node.left,keySet);<br>        keySet.add(node.key);<br>        keySetHelper(node.right,keySet);<br><br>    &#125;<br><br>    <span class="hljs-comment">/** Removes KEY from the tree if present</span><br><span class="hljs-comment">     *  returns VALUE removed,</span><br><span class="hljs-comment">     *  null on failed removal.</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> V <span class="hljs-title function_">remove</span><span class="hljs-params">(K key)</span> &#123;<br>        <span class="hljs-keyword">if</span>(root==<span class="hljs-literal">null</span>)&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>        &#125;<br>        <span class="hljs-comment">//待删除节点</span><br>        Node targetNode=search(key);<br>        <span class="hljs-comment">//待删除节点为空</span><br>        <span class="hljs-keyword">if</span>(targetNode==<span class="hljs-literal">null</span>)&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>        &#125;<br>        <span class="hljs-comment">//保存待删除节点的value</span><br>        V val=targetNode.value;<br>        <span class="hljs-comment">//如果要删除根节点并且该TreeMap只有一个节点</span><br>        <span class="hljs-keyword">if</span>(root.left==<span class="hljs-literal">null</span>&amp;&amp;root.right==<span class="hljs-literal">null</span>&amp;&amp;root.key.compareTo(key)==<span class="hljs-number">0</span>)&#123;<br>            root=<span class="hljs-literal">null</span>;<br>            size--;<br>            <span class="hljs-keyword">return</span> val;<br>        &#125;<br>        <span class="hljs-comment">//待删除节点的父节点</span><br>        Node parent=searchParent(key);<br>        <span class="hljs-comment">//待删除的节点是叶子节点</span><br>        <span class="hljs-keyword">if</span>(targetNode.left==<span class="hljs-literal">null</span>&amp;&amp;targetNode.right==<span class="hljs-literal">null</span>)&#123;<br>            <span class="hljs-keyword">if</span>(parent.left!=<span class="hljs-literal">null</span>&amp;&amp;parent.left==targetNode)&#123;<br>                parent.left=<span class="hljs-literal">null</span>;<br>            &#125;<span class="hljs-keyword">else</span> parent.right=<span class="hljs-literal">null</span>;<br>        &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(targetNode.left!=<span class="hljs-literal">null</span>&amp;&amp;targetNode.right!=<span class="hljs-literal">null</span>)&#123;<span class="hljs-comment">//待删除节点是两棵子树的节点</span><br>            <span class="hljs-comment">//找到该节点的右子树的最小值</span><br>            Node minNode=delRightTreeMin(targetNode);<br>            targetNode.key=minNode.key;<br>            targetNode.value= minNode.value;<br>        &#125;<span class="hljs-keyword">else</span>&#123;<span class="hljs-comment">//只有左子树或者右子树</span><br>            <span class="hljs-keyword">if</span>(targetNode.left!=<span class="hljs-literal">null</span>)&#123;<span class="hljs-comment">//有左子树</span><br>                <span class="hljs-keyword">if</span>(parent!=<span class="hljs-literal">null</span>)&#123;<br>                    <span class="hljs-keyword">if</span>(parent.left==targetNode)&#123;<br>                        parent.left=targetNode.left;<br>                    &#125;<span class="hljs-keyword">else</span>&#123;<br>                        parent.right=targetNode.left;<br>                    &#125;<br>                &#125;<span class="hljs-keyword">else</span>&#123;<br>                    root=targetNode.left;<br>                &#125;<br>            &#125;<span class="hljs-keyword">else</span>&#123;<span class="hljs-comment">//有右子树</span><br>                <span class="hljs-keyword">if</span>(parent!=<span class="hljs-literal">null</span>)&#123;<span class="hljs-comment">//有父节点</span><br>                    <span class="hljs-keyword">if</span>(parent.left==targetNode)&#123;<span class="hljs-comment">//父节点的左子树是targetNode</span><br>                        parent.left=targetNode.right;<br>                    &#125;<span class="hljs-keyword">else</span>&#123;<span class="hljs-comment">//父节点的右子树是targetNode</span><br>                        parent.right=targetNode.right;<br>                    &#125;<br>                &#125;<span class="hljs-keyword">else</span>&#123;<br>                    <span class="hljs-comment">//无父节点，即删除根节点</span><br>                    root=targetNode.right;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> val;<br>    &#125;<br>    <span class="hljs-keyword">private</span> Node <span class="hljs-title function_">delRightTreeMin</span><span class="hljs-params">(Node node)</span>&#123;<br>        Node target=node;<br>        <span class="hljs-keyword">while</span>(target.left!=<span class="hljs-literal">null</span>)&#123;<br>            target=target.left;<br>        &#125;<br>        remove(target.key);<br>        <span class="hljs-keyword">return</span> target;<br>    &#125;<br>    <span class="hljs-comment">/** Removes the key-value entry for the specified key only if it is</span><br><span class="hljs-comment">     *  currently mapped to the specified value.  Returns the VALUE removed,</span><br><span class="hljs-comment">     *  null on failed removal.</span><br><span class="hljs-comment">     **/</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> V <span class="hljs-title function_">remove</span><span class="hljs-params">(K key, V value)</span> &#123;<br>        <span class="hljs-comment">//找到要删除的节点</span><br>        Node node=search(key);<br>        <span class="hljs-keyword">if</span>(node.value!=value)&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> remove(key);<br>    &#125;<br><br>    <span class="hljs-comment">//找到删除的节点，如果找不到就返回null</span><br>    <span class="hljs-keyword">private</span> Node <span class="hljs-title function_">search</span><span class="hljs-params">(K key)</span>&#123;<br>        <span class="hljs-keyword">if</span>(root==<span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">return</span> searchHelper(key,root);<br>    &#125;<br>    <span class="hljs-keyword">private</span> Node <span class="hljs-title function_">searchHelper</span><span class="hljs-params">(K key,Node node)</span>&#123;<br>        <span class="hljs-keyword">if</span>(key.compareTo(node.key)==<span class="hljs-number">0</span>)&#123;<br>            <span class="hljs-keyword">return</span> node;<br>        &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(key.compareTo(node.key)&lt;<span class="hljs-number">0</span>)&#123;<br>            <span class="hljs-keyword">if</span>(node.left==<span class="hljs-literal">null</span>)&#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>            &#125;<br>            <span class="hljs-keyword">return</span> searchHelper(key,node.left);<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>            <span class="hljs-keyword">if</span>(node.right==<span class="hljs-literal">null</span>)&#123;<br>               <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>            &#125;<br>            <span class="hljs-keyword">return</span> searchHelper(key,node.right);<br>        &#125;<br>    &#125;<br>    <span class="hljs-comment">//找到删除节点的父节点</span><br>    <span class="hljs-keyword">private</span> Node <span class="hljs-title function_">searchParent</span><span class="hljs-params">(K key)</span>&#123;<br>        <span class="hljs-keyword">return</span> searchParentHelper(key,root);<br>    &#125;<br>    <span class="hljs-keyword">private</span> Node <span class="hljs-title function_">searchParentHelper</span><span class="hljs-params">(K key,Node node)</span>&#123;<br>        <span class="hljs-keyword">if</span>((node.left!=<span class="hljs-literal">null</span>&amp;&amp;node.left.key.compareTo(key)==<span class="hljs-number">0</span>)||<br>                (node.right!=<span class="hljs-literal">null</span>&amp;&amp;node.right.key.compareTo(key)==<span class="hljs-number">0</span>))&#123;<br>            <span class="hljs-keyword">return</span> node;<br>        &#125;<br>       <span class="hljs-keyword">if</span>(key.compareTo(node.key)&lt;<span class="hljs-number">0</span>&amp;&amp;node.left!=<span class="hljs-literal">null</span>)&#123;<br>           <span class="hljs-keyword">return</span> searchParentHelper(key,node.left);<br>       &#125;<br>       <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(key.compareTo(node.key)&gt;<span class="hljs-number">0</span>&amp;&amp;node.right!=<span class="hljs-literal">null</span>)&#123;<br>           <span class="hljs-keyword">return</span> searchParentHelper(key,node.right);<br>       &#125;<span class="hljs-keyword">else</span>&#123;<br>           <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>       &#125;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Iterator&lt;K&gt; <span class="hljs-title function_">iterator</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BSTIterator</span>();<br>    &#125;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BSTIterator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Iterator</span>&lt;K&gt;&#123;<br>        <span class="hljs-keyword">private</span> Iterator &lt;K&gt; curr;<br><br>        <span class="hljs-keyword">public</span> <span class="hljs-title function_">BSTIterator</span><span class="hljs-params">()</span>&#123;<br>            curr=keySet().iterator();<br>        &#125;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">hasNext</span><span class="hljs-params">()</span> &#123;<br>            <span class="hljs-keyword">return</span> curr.hasNext();<br>        &#125;<br><br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-keyword">public</span> K <span class="hljs-title function_">next</span><span class="hljs-params">()</span> &#123;<br>            <span class="hljs-keyword">return</span> curr.next();<br>        &#125;<br>    &#125;<br>   <br>&#125;<br></code></pre></td></tr></table></figure>
+<p>之前没有实现过的是Iterator迭代器和KeySet方法</p>
+<p>新建迭代器方法实现一个构造函数、hasNext()、next()方法即可，其实是利用了Set集合的iterator</p>
+<h1 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h1><p>MyHashMap类用到了已经提供的ArrayMap类，ArrayMap类用两条数组，一条表示key，另一条表示value。</p>
+<p>在加入一条key-value时先计算key的hash值，然后再在对应的ArrayMap[hash(key)]中插入这条key-value</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyHashMap</span>&lt;K, V&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Map61B</span>&lt;K, V&gt; &#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">DEFAULT_SIZE</span> <span class="hljs-operator">=</span> <span class="hljs-number">16</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">double</span> <span class="hljs-variable">MAX_LF</span> <span class="hljs-operator">=</span> <span class="hljs-number">0.75</span>;<br><br>    <span class="hljs-keyword">private</span> ArrayMap&lt;K, V&gt;[] buckets;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> size;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">loadFactor</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> size / buckets.length;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">MyHashMap</span><span class="hljs-params">()</span> &#123;<br>        buckets = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayMap</span>[DEFAULT_SIZE];<br>        <span class="hljs-built_in">this</span>.clear();<br>    &#125;<br><br>    <span class="hljs-comment">/* Removes all of the mappings from this map. */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">clear</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-built_in">this</span>.size = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">this</span>.buckets.length; i += <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-built_in">this</span>.buckets[i] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayMap</span>&lt;&gt;();<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">/** Computes the hash function of the given key. Consists of</span><br><span class="hljs-comment">     *  computing the hashcode, followed by modding by the number of buckets.</span><br><span class="hljs-comment">     *  To handle negative numbers properly, uses floorMod instead of %.</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hash</span><span class="hljs-params">(K key)</span> &#123;<br>        <span class="hljs-keyword">if</span> (key == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">numBuckets</span> <span class="hljs-operator">=</span> buckets.length;<br>        <span class="hljs-keyword">return</span> Math.floorMod(key.hashCode(), numBuckets);<br>    &#125;<br><br>    <span class="hljs-comment">/* Returns the value to which the specified key is mapped, or null if this</span><br><span class="hljs-comment">     * map contains no mapping for the key.</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> V <span class="hljs-title function_">get</span><span class="hljs-params">(K key)</span> &#123;<br>       <span class="hljs-keyword">return</span> buckets[hash(key)].get(key);<br>    &#125;<br><br>    <span class="hljs-comment">/* Associates the specified value with the specified key in this map. */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">put</span><span class="hljs-params">(K key, V value)</span> &#123;<br>        <span class="hljs-comment">//需要扩充buckets</span><br>        <span class="hljs-keyword">if</span>(loadFactor()&gt;MAX_LF)&#123;<br>            resize(buckets.length*<span class="hljs-number">2</span>);<br>        &#125;<br>        <span class="hljs-comment">//只有第一次加才会size++</span><br>        <span class="hljs-keyword">if</span>(!containsKey(key))&#123;<br>            size++;<br>        &#125;<br>        buckets[hash(key)].put(key,value);<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">resize</span><span class="hljs-params">(<span class="hljs-type">int</span> newLength)</span>&#123;<br>        ArrayMap&lt;K, V&gt;[] temp=buckets;<br>        buckets=<span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayMap</span>[newLength];<br>        clear();<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;temp.length;i++)&#123;<br>            Set&lt;K&gt; set=temp[i].keySet();<br>            Iterator&lt;K&gt; it=set.iterator();<br>            <span class="hljs-keyword">while</span>(it.hasNext())&#123;<br>                K nextKey=it.next();<br>                put(nextKey,temp[i].get(nextKey));<br>            &#125;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">/* Returns the number of key-value mappings in this map. */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">size</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> size;<br>    &#125;<br><br>    <span class="hljs-comment">//////////////// EVERYTHING BELOW THIS LINE IS OPTIONAL ////////////////</span><br><br>    <span class="hljs-comment">/* Returns a Set view of the keys contained in this map. */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Set&lt;K&gt; <span class="hljs-title function_">keySet</span><span class="hljs-params">()</span> &#123;<br>        Set&lt;K&gt; keySet=<span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt; buckets.length;i++)&#123;<br>            keySet.addAll(buckets[i].keySet());<br>        &#125;<br>        <span class="hljs-keyword">return</span> keySet;<br>    &#125;<br><br>    <span class="hljs-comment">/* Removes the mapping for the specified key from this map if exists.</span><br><span class="hljs-comment">     * Not required for this lab. If you don&#x27;t implement this, throw an</span><br><span class="hljs-comment">     * UnsupportedOperationException. */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> V <span class="hljs-title function_">remove</span><span class="hljs-params">(K key)</span> &#123;<br>        <span class="hljs-comment">//如果不包含这个key</span><br>        <span class="hljs-keyword">if</span>(!containsKey(key))&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>        &#125;<br>        V val=buckets[hash(key)].remove(key);<br>        <span class="hljs-keyword">return</span> val;<br>    &#125;<br><br>    <span class="hljs-comment">/* Removes the entry for the specified key only if it is currently mapped to</span><br><span class="hljs-comment">     * the specified value. Not required for this lab. If you don&#x27;t implement this,</span><br><span class="hljs-comment">     * throw an UnsupportedOperationException.*/</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> V <span class="hljs-title function_">remove</span><span class="hljs-params">(K key, V value)</span> &#123;<br>        <span class="hljs-keyword">if</span>(!containsKey(key))&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>        &#125;<br>        V val=buckets[hash(key)].remove(key);<br>        <span class="hljs-keyword">if</span>(val!=value) <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">return</span> val;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Iterator&lt;K&gt; <span class="hljs-title function_">iterator</span><span class="hljs-params">()</span> &#123;<br>       <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMapIterator</span>();<br><br>    &#125;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HashMapIterator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Iterator</span>&#123;<br>       <span class="hljs-keyword">private</span> Iterator&lt;K&gt; curr;<br><br>       <span class="hljs-keyword">public</span> <span class="hljs-title function_">HashMapIterator</span><span class="hljs-params">()</span>&#123;<br>           curr=keySet().iterator();<br>       &#125;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">hasNext</span><span class="hljs-params">()</span> &#123;<br>            <span class="hljs-keyword">return</span> curr.hasNext();<br>        &#125;<br><br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">next</span><span class="hljs-params">()</span> &#123;<br>            <span class="hljs-keyword">return</span> curr.next();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/CS61B/">CS61B</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/10/05/%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F2/">
+                        <span class="hidden-mobile">存储系统2</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"FVOHeWkJmFW4IL0Dyt3XhY5f-gzGzoHsz","appKey":"aguFoKPPLq6Qvk8DAkOgsdkz","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"https://fvohewkj.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/10/2018 17:38:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.8},"log":false});</script></body>
+</html>
