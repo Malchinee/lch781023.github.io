@@ -41,8 +41,14 @@
 <meta property="og:image" content="https://www.example.com/2022/10/05/%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F2/image-20221013082528613.png">
 <meta property="og:image" content="https://www.example.com/2022/10/05/%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F2/image-20220901203132507.png">
 <meta property="og:image" content="https://www.example.com/2022/10/05/%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F2/image-20221013093940817.png">
+<meta property="og:image" content="https://www.example.com/2022/10/05/%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F2/image-20221018162333530.png">
+<meta property="og:image" content="https://www.example.com/2022/10/05/%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F2/image-20221018164739579.png">
+<meta property="og:image" content="https://www.example.com/2022/10/05/%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F2/image-20221018165928404.png">
+<meta property="og:image" content="https://www.example.com/2022/10/05/%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F2/image-20221018171047994.png">
+<meta property="og:image" content="https://www.example.com/2022/10/05/%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F2/image-20221025080950130.png">
+<meta property="og:image" content="https://www.example.com/2022/10/05/%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F2/image-20221025081650895.png">
 <meta property="article:published_time" content="2022-10-05T15:30:07.000Z">
-<meta property="article:modified_time" content="2022-10-13T01:44:58.555Z">
+<meta property="article:modified_time" content="2022-10-25T00:43:03.579Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://www.example.com/2022/10/05/%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F2/image-20221006081708991.png">
@@ -218,7 +224,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2k 字
+      3.2k 字
     </span>
   
 
@@ -227,7 +233,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      17 分钟
+      27 分钟
     </span>
   
 
@@ -344,7 +350,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>缺点：可靠性差，一个存储体失效，整个存储将崩溃</p>
 </li>
 </ul>
-<h1 id="高速缓存存储器Cache"><a href="#高速缓存存储器Cache" class="headerlink" title="高速缓存存储器Cache"></a>高速缓存存储器Cache</h1><p>解决：主存储器的速度始终赶不上处理器的速度</p>
+<h1 id="高速缓冲存储器Cache"><a href="#高速缓冲存储器Cache" class="headerlink" title="高速缓冲存储器Cache"></a>高速缓冲存储器Cache</h1><p>解决：主存储器的速度始终赶不上处理器的速度</p>
 <p>用SRAM实现，容量小于主存容量，速度高于DRAM</p>
 <p><strong>程序访问的局部性原理</strong>：在一段较短的时间间隔内，CPU所访问的程序在内存中的地址往往集中在内存某一个地址范围内</p>
 <img src="/2022/10/05/%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F2/image-20220901203132507.png" srcset="/img/loading.gif" lazyload class title="image-20220901203132507">
@@ -358,8 +364,81 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>Cache块数：$C=2^c$块长 $B=2^b$</p>
 <p>$M&gt;&gt;C$</p>
 <img src="/2022/10/05/%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F2/image-20221013093940817.png" srcset="/img/loading.gif" lazyload class title="image-20221013093940817">
-<p>Cache标记： 表示当前存放的是哪一个主存快，相当于主存块的块号，CPU访问Cache时用贮存地址的m位与标记比较，确定是否命中</p>
+<p><strong>Cache标记</strong>： 表示当前存放的是哪一个主存快，相当于主存块的块号，CPU访问Cache时用贮存地址的m位与标记比较，确定是否命中</p>
 <p>标记存放在CAM（相联存储器）中</p>
+<p>块长一般取4~8个可编址单位</p>
+<img src="/2022/10/05/%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F2/image-20221018162333530.png" srcset="/img/loading.gif" lazyload class title="image-20221018162333530">
+<h2 id="Cache的地址映象："><a href="#Cache的地址映象：" class="headerlink" title="Cache的地址映象："></a>Cache的地址映象：</h2><p>由于块内地址一致，是主存块号与Cache块间的转换</p>
+<p>主存Cache地址映象变换机构：完成主存地址到Cache地址的变换</p>
+<ul>
+<li><p><strong>直接映射方法</strong>：</p>
+<script type="math/tex; mode=display">
+i=j\ mod\ C\ (C=2^c)</script><p>i：Cache块号；j：主存块号；C：Cache的总块数量</p>
+<p>Cache块与主存块一对多</p>
+<img src="/2022/10/05/%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F2/image-20221018164739579.png" srcset="/img/loading.gif" lazyload class title="image-20221018164739579">
+<p><strong>流程</strong>：当缓存接到CPU传来的主存地址后，根据中间的c位，找到Cache子块。然后根据前t位判断是否与Cache的高t位判断是否相等</p>
+</li>
+<li><p><strong>全相联映射方式</strong>:</p>
+<p>主存中的任一块可映射到Cache中的任一块，完全自由</p>
+<img src="/2022/10/05/%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F2/image-20221018165928404.png" srcset="/img/loading.gif" lazyload class title="image-20221018165928404">
+<p>主存共有$2^m$块，可以映射到cache中的任一块。标记位为m=t+c，访问Cache时需与全部的Cache块的标记进行比较</p>
+</li>
+<li><p><strong>组相联映射方式</strong>：</p>
+<p>Cache分为Q组，每组R块</p>
+<p>$i=j\ mod\ Q$</p>
+<p>Q：Cache共分为Q组；j：主存某块号；i：主存j块对应的Cache组号</p>
+<p>主存块与Cache组之间是直接映射，主存块同Cache特定组内的块时全相联映射</p>
+<img src="/2022/10/05/%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F2/image-20221018171047994.png" srcset="/img/loading.gif" lazyload class title="image-20221018171047994">
+</li>
+<li><p><strong>段相联映射方式：</strong></p>
+<p>将Cache和内存分为若干包含相同块数的段</p>
+<p>段之间全相联映射，段内块之间直接映射</p>
+</li>
+</ul>
+<h2 id="替换算法"><a href="#替换算法" class="headerlink" title="替换算法"></a>替换算法</h2><p>替换：当一个新的主存块需要拷贝到Cache，而允许存放此块的位置被其他的主存快占用时，就需要替换</p>
+<p><strong>先进先出算法（FIFO）</strong>：将最先调入Cache的子块替换出去</p>
+<p><strong>近期最少使用算法（LRU）</strong>：将近期内最少使用的子块替换出去</p>
+<h2 id="Cache写操作"><a href="#Cache写操作" class="headerlink" title="Cache写操作"></a>Cache写操作</h2><ul>
+<li><strong>写回法</strong>：<ul>
+<li>CPU写Cache命中时，只修改Cache中的内容，而不立即写入主存，只有当该块被换出到内存时才写回主存</li>
+<li>未命中时，将此块拷贝到Cache中进行修改，而主存的写操作统一留到该块被换出时才进行</li>
+</ul>
+</li>
+<li><p><strong>全写法</strong>：</p>
+<ul>
+<li>Cache命中时，内存和Cache同时进行写操作</li>
+<li>未命中时，只写入内存</li>
+</ul>
+</li>
+<li><p><strong>只写主存法</strong>：</p>
+<ul>
+<li>写Cache命中时，信息只写入主存，同时将Cache块置为失效</li>
+<li>写Cache未命中时，此时被写入的单元根本不在Cache中，因此只写入主存</li>
+</ul>
+</li>
+</ul>
+<h1 id="123"><a href="#123" class="headerlink" title="123"></a>123</h1><h2 id="循环冗余校验码"><a href="#循环冗余校验码" class="headerlink" title="循环冗余校验码"></a>循环冗余校验码</h2><p>CRC码是基于模2运算建立的校验码制</p>
+<p>原则：</p>
+<ul>
+<li>部分余数首位是1，上商1；部分余数首位为0，上商0；</li>
+<li>部分余数位数小于除数位数时，即为最后余数</li>
+</ul>
+<p>待编码信息：<script type="math/tex">D_{n-1}D_{n-2}...D_2D_1D_0</script></p>
+<p>编码结果：<script type="math/tex">D_{n-1}D_{n-2}....D_2D_1D_0\ XXX... X</script>（后面共k位）</p>
+<img src="/2022/10/05/%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F2/image-20221025080950130.png" srcset="/img/loading.gif" lazyload class title="image-20221025080950130">
+<p><strong>结论</strong>：<script type="math/tex">M(X)X^k+R(X)</script>可以被给定的多项式<script type="math/tex">G(X)</script>除尽</p>
+<p><strong>精髓</strong>：CRC码就是用多项式<script type="math/tex">M(x)x^k</script>除以给定的生成多项式G(X)，所得余数为校验位。为了得到k位余数，G(x)必须是k+1位</p>
+<img src="/2022/10/05/%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F2/image-20221025081650895.png" srcset="/img/loading.gif" lazyload class title="image-20221025081650895">
+<p><strong>检错</strong>：接收方将收到的CRC码模2除G(X)，若传输无误，则余数为0</p>
+<ul>
+<li>如果某一位出错，则余数不为0</li>
+<li>不同的出错位，其余数也不同</li>
+</ul>
+<p>纠错：</p>
+<ul>
+<li>出错位与余数有一定的对应关系，该对应关系与码制及G(x)有关系</li>
+<li>纠错过程：某位出错，余数不为0，将余数补0继续作模2除，得到下一信息为的出错余数。即出错信息位对应的余数构成一个循环——“循环码”</li>
+</ul>
 
             </div>
             <hr>
