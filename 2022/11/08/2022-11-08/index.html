@@ -16,20 +16,20 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="17.电话号码的字母组合回溯三部曲：  确定回溯的参数： 用一个索引index表示现在到dights的哪一个 result保存最后的结果 string类型的s用于保存某个数字对应的字母，比如2对应“abc”，那么s保存这个字符串的子串  终止条件： 当index等于dights的长度时，递归终止  单层处理逻辑： 将index对应的字符串letters取出来，然后用for循环处理这个字符串   1">
+    <meta name="description" content="3.无重复字符的最长字串用一个滑动窗口和哈希表，从0处开始，用right如果碰到没有被加入的就加入，如果碰到已经加入的，就计算i到right之间的距离，与以前计算出来的比较，取较大值 1234567891011121314151617181920212223class Solution &amp;#123;public:    int lengthOfLongestSubstring(string s)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2022.11.07">
-<meta property="og:url" content="https://www.example.com/2022/11/07/2022-11-07/index.html">
+<meta property="og:title" content="2022.11.08">
+<meta property="og:url" content="https://www.example.com/2022/11/08/2022-11-08/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="17.电话号码的字母组合回溯三部曲：  确定回溯的参数： 用一个索引index表示现在到dights的哪一个 result保存最后的结果 string类型的s用于保存某个数字对应的字母，比如2对应“abc”，那么s保存这个字符串的子串  终止条件： 当index等于dights的长度时，递归终止  单层处理逻辑： 将index对应的字符串letters取出来，然后用for循环处理这个字符串   1">
+<meta property="og:description" content="3.无重复字符的最长字串用一个滑动窗口和哈希表，从0处开始，用right如果碰到没有被加入的就加入，如果碰到已经加入的，就计算i到right之间的距离，与以前计算出来的比较，取较大值 1234567891011121314151617181920212223class Solution &amp;#123;public:    int lengthOfLongestSubstring(string s)">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-11-07T02:46:09.000Z">
-<meta property="article:modified_time" content="2022-11-07T07:02:36.111Z">
+<meta property="article:published_time" content="2022-11-08T11:39:37.000Z">
+<meta property="article:modified_time" content="2022-11-08T12:29:46.437Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>2022.11.07 - Hexo</title>
+  <title>2022.11.08 - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -178,7 +178,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="2022.11.07">
+            <span class="h2" id="subtitle" title="2022.11.08">
               
             </span>
 
@@ -188,8 +188,8 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-11-07 10:46" pubdate>
-        2022年11月7日 上午
+      <time datetime="2022-11-08 19:39" pubdate>
+        2022年11月8日 晚上
       </time>
     </span>
   
@@ -199,7 +199,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.9k 字
+      1.7k 字
     </span>
   
 
@@ -208,7 +208,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      16 分钟
+      15 分钟
     </span>
   
 
@@ -237,30 +237,16 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">2022.11.07</h1>
+            <h1 style="display: none">2022.11.08</h1>
             
             <div class="markdown-body">
-              <h1 id="17-电话号码的字母组合"><a href="#17-电话号码的字母组合" class="headerlink" title="17.电话号码的字母组合"></a>17.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/letter-combinations-of-a-phone-number/description/">电话号码的字母组合</a></h1><p>回溯三部曲：</p>
-<ol>
-<li><p>确定回溯的参数：</p>
-<p>用一个索引index表示现在到dights的哪一个</p>
-<p>result保存最后的结果</p>
-<p>string类型的s用于保存某个数字对应的字母，比如2对应“abc”，那么s保存这个字符串的子串</p>
-</li>
-<li><p>终止条件：</p>
-<p>当index等于dights的长度时，递归终止</p>
-</li>
-<li><p>单层处理逻辑：</p>
-<p>将index对应的字符串letters取出来，然后用for循环处理这个字符串</p>
-</li>
-</ol>
-<figure class="highlight cpp"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    vector&lt;string&gt; result;<br>    string s;<br>    string mp[<span class="hljs-number">10</span>]=&#123;<br>        <span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;abc&quot;</span>,<span class="hljs-string">&quot;def&quot;</span>,<span class="hljs-string">&quot;ghi&quot;</span>,<span class="hljs-string">&quot;jkl&quot;</span>,<span class="hljs-string">&quot;mno&quot;</span>,<span class="hljs-string">&quot;pqrs&quot;</span>,<span class="hljs-string">&quot;tuv&quot;</span>,<span class="hljs-string">&quot;wxyz&quot;</span><br>    &#125;;<br>    <span class="hljs-function">vector&lt;string&gt; <span class="hljs-title">letterCombinations</span><span class="hljs-params">(string digits)</span> </span>&#123;<br>        s.<span class="hljs-built_in">clear</span>();<br>        result.<span class="hljs-built_in">clear</span>();<br>        <span class="hljs-keyword">if</span>(digits.<span class="hljs-built_in">size</span>() == <span class="hljs-number">0</span>)&#123;<br>            <span class="hljs-keyword">return</span> result;<br>        &#125;<br>        <span class="hljs-built_in">traversal</span>(digits,<span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">traversal</span><span class="hljs-params">(<span class="hljs-type">const</span> string&amp; digits,<span class="hljs-type">int</span> index)</span></span>&#123;<br>        <span class="hljs-keyword">if</span>(index == digits.<span class="hljs-built_in">size</span>())&#123;<br>            result.<span class="hljs-built_in">push_back</span>(s);<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-type">int</span> digit = digits[index]-<span class="hljs-string">&#x27;0&#x27;</span>;<br>        string letters = mp[digit];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;letters.<span class="hljs-built_in">size</span>();i++)&#123;<br>            s.<span class="hljs-built_in">push_back</span>(letters[i]);<br>            <span class="hljs-built_in">traversal</span>(digits,index+<span class="hljs-number">1</span>);<br>            s.<span class="hljs-built_in">pop_back</span>();<br>        &#125;<br>    &#125;<br>    <br>&#125;;<br></code></pre></td></tr></table></figure>
-<h1 id="49-字母异位词分组"><a href="#49-字母异位词分组" class="headerlink" title="49.字母异位词分组"></a>49.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/group-anagrams/">字母异位词分组</a></h1><p>同一组字母异位词有相同数量的字母，用key-value的形式保存它们的关键字和对应的字母</p>
-<p>将每个字母异位词排序，如果是一组它们就有相同的key，用map保存</p>
-<p>最后再取出这些vector<string\> </string\></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;string&gt;&gt; <span class="hljs-built_in">groupAnagrams</span>(vector&lt;string&gt;&amp; strs) &#123;<br>        unordered_map&lt;string,vector&lt;string&gt;&gt; mp;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> &amp;str : strs)&#123;<br>            string key = str;<br>            <span class="hljs-built_in">sort</span>(key.<span class="hljs-built_in">begin</span>(),key.<span class="hljs-built_in">end</span>());<br>            mp[key].<span class="hljs-built_in">emplace_back</span>(str);<br>        &#125;<br>        vector&lt;vector&lt;string&gt;&gt; result;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> it = mp.<span class="hljs-built_in">begin</span>();it != mp.<span class="hljs-built_in">end</span>(); it++)&#123;<br>            result.<span class="hljs-built_in">emplace_back</span>(it-&gt;second);<br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
-<h1 id="448-找到所有数组中消失的数字"><a href="#448-找到所有数组中消失的数字" class="headerlink" title="448.找到所有数组中消失的数字"></a>448.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-all-numbers-disappeared-in-an-array/">找到所有数组中消失的数字</a></h1><p>用set保存存在的数字，再去检查[1,n]里是否有这个数字，没有就加进答案</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">findDisappearedNumbers</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        unordered_set&lt;<span class="hljs-type">int</span>&gt; set;<br>        vector&lt;<span class="hljs-type">int</span>&gt; result;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span> ;i&lt;nums.<span class="hljs-built_in">size</span>();i++)&#123;<br>            set.<span class="hljs-built_in">insert</span>(nums[i]);<br>        &#125;   <br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=nums.<span class="hljs-built_in">size</span>();i++)&#123;<br>            <span class="hljs-keyword">if</span>(!set.<span class="hljs-built_in">count</span>(i))&#123;<br>                result.<span class="hljs-built_in">push_back</span>(i);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+              <h1 id="3-无重复字符的最长字串"><a href="#3-无重复字符的最长字串" class="headerlink" title="3.无重复字符的最长字串"></a>3.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/description/">无重复字符的最长字串</a></h1><p>用一个滑动窗口和哈希表，从0处开始，用right如果碰到没有被加入的就加入，如果碰到已经加入的，就计算i到right之间的距离，与以前计算出来的比较，取较大值</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">lengthOfLongestSubstring</span><span class="hljs-params">(string s)</span> </span>&#123;<br>        <span class="hljs-type">int</span> right = <span class="hljs-number">-1</span>;<br>        unordered_set&lt;<span class="hljs-type">char</span>&gt; set;<br>        <span class="hljs-type">int</span> len = s.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-type">int</span> res;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;i &lt; len ; i++)&#123;<br>            <span class="hljs-comment">//去除i之前的一位</span><br>            <span class="hljs-keyword">if</span>(i != <span class="hljs-number">0</span>)&#123;<br>                set.<span class="hljs-built_in">erase</span>(s[i<span class="hljs-number">-1</span>]);<br>            &#125;<br>            <span class="hljs-comment">//只要没碰到，就往set里加</span><br>            <span class="hljs-keyword">while</span>(right+<span class="hljs-number">1</span> &lt;len &amp;&amp; !set.<span class="hljs-built_in">count</span>(s[right+<span class="hljs-number">1</span>]))&#123;<br>                ++right;<br>                set.<span class="hljs-built_in">insert</span>(s[right]);<br>            &#125;<br>            <span class="hljs-comment">//得到的长度与之前的比较，取较大值</span><br>            res = <span class="hljs-built_in">max</span>(res,right-i+<span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h1 id="128-最长连续序列"><a href="#128-最长连续序列" class="headerlink" title="128.最长连续序列"></a>128.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-consecutive-sequence/">最长连续序列</a></h1><p>将nums的所有元素都保存到set里，然后遍历set</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">longestConsecutive</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        unordered_set&lt;<span class="hljs-type">int</span>&gt; set;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;i&lt;nums.<span class="hljs-built_in">size</span>();i++)&#123;<br>            set.<span class="hljs-built_in">insert</span>(nums[i]);<br>        &#125;<br>        <span class="hljs-type">int</span> res = <span class="hljs-number">0</span>;<br>       <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> &amp;item:set)&#123;<br>           <span class="hljs-comment">//如果没有该数的上一位</span><br>           <span class="hljs-keyword">if</span>(!set.<span class="hljs-built_in">count</span>(item<span class="hljs-number">-1</span>))&#123;<br>               <span class="hljs-type">int</span> currentNum = item;<br>               <span class="hljs-type">int</span> currentLen = <span class="hljs-number">1</span>;<br>               <span class="hljs-comment">//继续看有没有下一位</span><br>               <span class="hljs-keyword">while</span>(set.<span class="hljs-built_in">count</span>(currentNum+<span class="hljs-number">1</span>))&#123;<br>                   currentLen++;<br>                   currentNum++;<br>               &#125;<br>               res = <span class="hljs-built_in">max</span>(res,currentLen);<br>           &#125;<br>       &#125;<br>       <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h1 id="438-找到字符串中所有字母异位词"><a href="#438-找到字符串中所有字母异位词" class="headerlink" title="438.找到字符串中所有字母异位词"></a>438.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-all-anagrams-in-a-string/">找到字符串中所有字母异位词</a></h1><p>用滑动窗口，在字符串s中构造一个长度与p相同的滑动窗口，维护窗口中每种字母的数量；当窗口中的字母的数量种类和p中的字母的数量种类相同时，说明是异位词</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">findAnagrams</span><span class="hljs-params">(string s, string p)</span> </span>&#123;<br>        vector&lt;<span class="hljs-type">int</span>&gt; res;<br>        <span class="hljs-type">int</span> sLen = s.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-type">int</span> pLen = p.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-keyword">if</span>(pLen &gt; sLen )<span class="hljs-keyword">return</span> res;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">sSet</span><span class="hljs-params">(<span class="hljs-number">26</span>)</span></span>;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">pSet</span><span class="hljs-params">(<span class="hljs-number">26</span>)</span></span>;<br>        <span class="hljs-comment">//找到p字符串中的字母的数量种类</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;i &lt; pLen;i++)&#123;<br>            pSet[p[i]-<span class="hljs-string">&#x27;a&#x27;</span>]++;<br>            sSet[s[i]-<span class="hljs-string">&#x27;a&#x27;</span>]++;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(sSet == pSet) res.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">0</span>);<br>        <span class="hljs-comment">//此时开始查找0+1位的情况</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;i &lt; sLen-pLen;i++)&#123;<br>            sSet[s[i]-<span class="hljs-string">&#x27;a&#x27;</span>]--;<br>            sSet[s[i+pLen]-<span class="hljs-string">&#x27;a&#x27;</span>]++;<br>            <span class="hljs-keyword">if</span>(sSet == pSet)&#123;<br>                res.<span class="hljs-built_in">push_back</span>(i+<span class="hljs-number">1</span>);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
             </div>
             <hr>
             <div>
@@ -287,18 +273,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/11/08/2022-11-08/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">2022.11.08</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/11/06/2022-11-06/">
-                        <span class="hidden-mobile">2022.11.06</span>
+                      <a href="/2022/11/07/2022-11-07/">
+                        <span class="hidden-mobile">2022.11.07</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
