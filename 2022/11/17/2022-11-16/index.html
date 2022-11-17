@@ -16,20 +16,20 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="283.移动零两次遍历，将不等于0的元素依次向前，记下0元素的位置index，把后面的元素全变为0 1234567891011121314151617class Solution &amp;#123;public:    void moveZeroes(vector&lt;int&gt;&amp; nums) &amp;#123;       if(nums.size() &#x3D;&#x3D; 0)&amp;#123;">
+    <meta name="description" content="31.下一个排列从后向前找到第一个小于后一个元素的值，记为i 再从后向前找到第一个大于nums[i]的值的索引，记为j 交换nums[i]和nums[j]，再将i+1到结尾的序列反转 1234567891011121314151617class Solution &amp;#123;public:    void nextPermutation(vector&lt;int&gt;&amp; nums) &amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2022.11.15">
-<meta property="og:url" content="https://www.example.com/2022/11/15/2022-11-15/index.html">
+<meta property="og:title" content="2022.11.16">
+<meta property="og:url" content="https://www.example.com/2022/11/17/2022-11-16/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="283.移动零两次遍历，将不等于0的元素依次向前，记下0元素的位置index，把后面的元素全变为0 1234567891011121314151617class Solution &amp;#123;public:    void moveZeroes(vector&lt;int&gt;&amp; nums) &amp;#123;       if(nums.size() &#x3D;&#x3D; 0)&amp;#123;">
+<meta property="og:description" content="31.下一个排列从后向前找到第一个小于后一个元素的值，记为i 再从后向前找到第一个大于nums[i]的值的索引，记为j 交换nums[i]和nums[j]，再将i+1到结尾的序列反转 1234567891011121314151617class Solution &amp;#123;public:    void nextPermutation(vector&lt;int&gt;&amp; nums) &amp;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-11-15T11:25:40.000Z">
-<meta property="article:modified_time" content="2022-11-15T12:23:31.884Z">
+<meta property="article:published_time" content="2022-11-17T15:28:38.000Z">
+<meta property="article:modified_time" content="2022-11-17T16:08:58.768Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>2022.11.15 - Hexo</title>
+  <title>2022.11.16 - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -178,7 +178,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="2022.11.15">
+            <span class="h2" id="subtitle" title="2022.11.16">
               
             </span>
 
@@ -188,8 +188,8 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-11-15 19:25" pubdate>
-        2022年11月15日 晚上
+      <time datetime="2022-11-17 23:28" pubdate>
+        2022年11月17日 晚上
       </time>
     </span>
   
@@ -199,7 +199,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.7k 字
+      1.3k 字
     </span>
   
 
@@ -208,7 +208,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      15 分钟
+      12 分钟
     </span>
   
 
@@ -237,16 +237,20 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">2022.11.15</h1>
+            <h1 style="display: none">2022.11.16</h1>
             
             <div class="markdown-body">
-              <h1 id="283-移动零"><a href="#283-移动零" class="headerlink" title="283.移动零"></a>283.移动零</h1><p>两次遍历，将不等于0的元素依次向前，记下0元素的位置index，把后面的元素全变为0</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">moveZeroes</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>&#123;<br>       <span class="hljs-keyword">if</span>(nums.<span class="hljs-built_in">size</span>() == <span class="hljs-number">0</span>)&#123;<br>           <span class="hljs-keyword">return</span> ;<br>       &#125;<br>       <span class="hljs-type">int</span> index = <span class="hljs-number">0</span>;<br>       <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;i&lt;nums.<span class="hljs-built_in">size</span>();i++)&#123;<br>           <span class="hljs-keyword">if</span>(nums[i] != <span class="hljs-number">0</span>)&#123;<br>               nums[index++] = nums[i];<br>           &#125;<br>       &#125;<br>       <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = index ;i &lt;nums.<span class="hljs-built_in">size</span>();i++)&#123;<br>           nums[i] = <span class="hljs-number">0</span>;<br>       &#125;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
-<p>一次遍历：利用快排的思想，选取中间元素0，将不等于0的元素和等于0的元素交换</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">moveZeroes</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(nums.<span class="hljs-built_in">size</span>() == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span>;<br>        <span class="hljs-type">int</span> index = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i =<span class="hljs-number">0</span>;i&lt;nums.<span class="hljs-built_in">size</span>();i++)&#123;<br>            <span class="hljs-keyword">if</span>(nums[i] != <span class="hljs-number">0</span>)&#123;<br>                <span class="hljs-type">int</span> temp = nums[i];<br>                nums[i] = <span class="hljs-number">0</span>;<br>                nums[index++] = temp;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
-<h1 id="15-三数之和"><a href="#15-三数之和" class="headerlink" title="15.三数之和"></a>15.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/3sum/description/">三数之和</a></h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">threeSum</span>(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums) &#123;<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<br>        <span class="hljs-built_in">sort</span>(nums.<span class="hljs-built_in">begin</span>(),nums.<span class="hljs-built_in">end</span>());<br>        <span class="hljs-keyword">if</span>(nums[<span class="hljs-number">0</span>] &gt; <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> result;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;i &lt; nums.<span class="hljs-built_in">size</span>() ;i++)&#123;<br>            <span class="hljs-comment">//对a去重</span><br>            <span class="hljs-keyword">if</span>(i &gt; <span class="hljs-number">0</span> &amp;&amp; nums[i] == nums[i<span class="hljs-number">-1</span>]) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-type">int</span> left = i+<span class="hljs-number">1</span>;<br>            <span class="hljs-type">int</span> right = nums.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">while</span>(left &lt; right)&#123;<br>                <span class="hljs-keyword">if</span>(nums[i] + nums[left] + nums[right] &gt; <span class="hljs-number">0</span>) right--;<br>                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(nums[i] + nums[left] + nums[right] &lt; <span class="hljs-number">0</span>) left++;<br>                <span class="hljs-keyword">else</span>&#123;<br>                    result.<span class="hljs-built_in">push_back</span>(vector&lt;<span class="hljs-type">int</span>&gt;&#123;nums[i],nums[left],nums[right]&#125;);<br>                    <span class="hljs-comment">//对b、c去重</span><br>                    <span class="hljs-keyword">while</span>(left &lt; right &amp;&amp; nums[right] == nums[right<span class="hljs-number">-1</span>]) right--;<br>                    <span class="hljs-keyword">while</span>(left &lt; right &amp;&amp; nums[left] == nums[left+<span class="hljs-number">1</span>]) left++;<br>                    left++;<br>                    right --;<br>                &#125;<br>            &#125; <br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
-<h1 id="11-盛最多水的容器"><a href="#11-盛最多水的容器" class="headerlink" title="11.盛最多水的容器"></a>11.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/container-with-most-water/description/">盛最多水的容器</a></h1><p>每次移动比较矮的板子</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">maxArea</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; height)</span> </span>&#123;<br><br>       <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;<br>       <span class="hljs-type">int</span> j = height.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>;<br>       <span class="hljs-type">int</span> res = <span class="hljs-number">0</span>;<br>       <span class="hljs-keyword">while</span>(i &lt; j)&#123;<br>           res = height[i] &lt; height[j]?<br>           <span class="hljs-built_in">max</span>(res,(j-i)*height[i++]):<br>           <span class="hljs-built_in">max</span>(res,(j-i)*height[j--]);<br>       &#125;<br>       <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+              <h1 id="31-下一个排列"><a href="#31-下一个排列" class="headerlink" title="31.下一个排列"></a>31.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/next-permutation/">下一个排列</a></h1><p>从后向前找到第一个小于后一个元素的值，记为i</p>
+<p>再从后向前找到第一个大于nums[i]的值的索引，记为j</p>
+<p>交换nums[i]和nums[j]，再将i+1到结尾的序列反转</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">nextPermutation</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-type">int</span> i = nums.<span class="hljs-built_in">size</span>()<span class="hljs-number">-2</span>;<br>        <span class="hljs-keyword">while</span>(i &gt;= <span class="hljs-number">0</span> &amp;&amp; nums[i] &gt;= nums[i+<span class="hljs-number">1</span>])&#123;<br>            i--;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(i &gt;= <span class="hljs-number">0</span>)&#123;<br>            <span class="hljs-type">int</span> j = nums.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>;<br>            <span class="hljs-keyword">while</span>(j&gt;=<span class="hljs-number">0</span> &amp;&amp; nums[i] &gt;= nums[j])&#123;<br>                j--;<br>            &#125;<br>            <span class="hljs-built_in">swap</span>(nums[i],nums[j]);<br>        &#125;<br>        <span class="hljs-built_in">reverse</span>(nums.<span class="hljs-built_in">begin</span>()+i+<span class="hljs-number">1</span>,nums.<span class="hljs-built_in">end</span>());<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h1 id="75-颜色分类"><a href="#75-颜色分类" class="headerlink" title="75.颜色分类"></a>75.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sort-colors/description/">颜色分类</a></h1><p>双指针，zero保存0，two保存2，中间碰到1只让i加1就行</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">sortColors</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(nums.<span class="hljs-built_in">size</span>() &lt; <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span>;<br>        <span class="hljs-type">int</span> zero = <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> two = nums.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-keyword">while</span>(i &lt; two)&#123;<br>            <span class="hljs-keyword">if</span>(nums[i] == <span class="hljs-number">0</span>)&#123;<br>                <span class="hljs-built_in">swap</span>(nums[i],nums[zero]);<br>                zero++;<br>                i++;<br>            &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(nums[i] == <span class="hljs-number">1</span>)&#123;<br>                i++;<br>            &#125;<span class="hljs-keyword">else</span>&#123;<br>                two--;<br>                <span class="hljs-built_in">swap</span>(nums[i],nums[two]);<br>            &#125;<br>        &#125;   <br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h1 id="287-寻找重复数"><a href="#287-寻找重复数" class="headerlink" title="287.寻找重复数"></a>287.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-duplicate-number/description/">寻找重复数</a></h1><p>利用快慢指针，仿照环形链表II，把两个重复数和之间的看成一个环</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">node = nums[node];<br></code></pre></td></tr></table></figure>
+<p>让fast每次移动两个，slow每次移动一个，找到有环之后，再让finder从0开始，slow从当前位置开始，当finder和slow相遇就是重复数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">findDuplicate</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-type">int</span> fast = <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> slow = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>)&#123;<br>            fast = nums[nums[fast]];<br>            slow = nums[slow];<br>            <span class="hljs-keyword">if</span>(fast == slow)&#123;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-type">int</span> finder = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>)&#123;<br>            finder = nums[finder];<br>            slow = nums[slow];<br>            <span class="hljs-keyword">if</span>(finder == slow)&#123;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> slow;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
             </div>
             <hr>
             <div>
@@ -273,18 +277,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/11/17/2022-11-17/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">2022.11.17</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/11/14/2022-11-14/">
-                        <span class="hidden-mobile">2022.11.14</span>
+                      <a href="/2022/11/17/2022-11-17/">
+                        <span class="hidden-mobile">2022.11.17</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
