@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://www.example.com/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221206162634026.png">
 <meta property="og:image" content="https://www.example.com/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221206212000288.png">
 <meta property="article:published_time" content="2022-12-02T14:04:05.000Z">
-<meta property="article:modified_time" content="2022-12-06T15:22:46.816Z">
+<meta property="article:modified_time" content="2022-12-07T14:29:15.464Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://www.example.com/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221202233047379.png">
@@ -205,7 +205,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3k 字
+      5k 字
     </span>
   
 
@@ -214,7 +214,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      25 分钟
+      43 分钟
     </span>
   
 
@@ -331,7 +331,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>System V进程间通信方式：消息队列、共享内存、信号量</li>
 </ul>
 <p>不同主机间：Socket</p>
-<h2 id="匿名管道"><a href="#匿名管道" class="headerlink" title="匿名管道"></a>匿名管道</h2><p>所有的UNIX系统都支持。</p>
+<h2 id="匿名管道PIPE"><a href="#匿名管道PIPE" class="headerlink" title="匿名管道PIPE"></a>匿名管道PIPE</h2><p>所有的UNIX系统都支持。</p>
 <p>例如统计一个目录中文件的数目命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ls | wc -l<br></code></pre></td></tr></table></figure>
 <p>shell创建了两个进程来执行ls和wc</p>
@@ -351,10 +351,70 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>匿名管道只能在具有共同祖先的进程之间使用</li>
 </ul>
 <p>管道的数据结构：<strong>循环队列</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">pipe</span><span class="hljs-params">(<span class="hljs-type">int</span> pipefd[<span class="hljs-number">2</span>])</span>;<br><span class="hljs-comment">//pipefd[0]读端，pipefd[1]写端</span><br><span class="hljs-comment">//成功返回0，失败返回-1</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-type">int</span> pipefd[<span class="hljs-number">2</span>];<br><span class="hljs-type">int</span> <span class="hljs-title function_">pipe</span><span class="hljs-params">(<span class="hljs-type">int</span> pipefd[<span class="hljs-number">2</span>])</span>;<br><span class="hljs-comment">//pipefd[0]读端，pipefd[1]写端</span><br><span class="hljs-comment">//成功返回0，失败返回-1</span><br></code></pre></td></tr></table></figure>
 <p>管道默认是阻塞的；如果管道中没有数据，read阻塞；如果管道满了，write阻塞。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ulimit -a 查看管道缓冲大小<br></code></pre></td></tr></table></figure>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">long</span> <span class="hljs-title function_">fpathconf</span><span class="hljs-params">(pipefd[<span class="hljs-number">0</span>], <span class="hljs-type">int</span> name)</span>;<br><span class="hljs-comment">//查看管道缓冲大小</span><br></code></pre></td></tr></table></figure>
+<p>设置管道为非阻塞：（如将管道读端设置为非阻塞）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> flags = fcntl(fd[<span class="hljs-number">0</span>], F_GETFL);  <span class="hljs-comment">//获取原来的flag</span><br>flags |= O_NOBLOCK;                 <span class="hljs-comment">//设置新的flag</span><br>fcntl(fd[<span class="hljs-number">0</span>], F_SETFL, flags);       <span class="hljs-comment">//设置新的宏值</span><br></code></pre></td></tr></table></figure>
+<p>匿名管道通信实例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*</span><br><span class="hljs-comment">    实现 ps aux | grep xxx父子进程间通信</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">    子进程： ps aux，子进程结束后，将数据发送给父进程</span><br><span class="hljs-comment">    父进程： 获取到数据，过滤</span><br><span class="hljs-comment">*/</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;wait.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-comment">//创建一个管道</span><br>    <span class="hljs-type">int</span> fd[<span class="hljs-number">2</span>];<br>    <span class="hljs-type">int</span> ret = pipe(fd);<br><br>    <span class="hljs-keyword">if</span>(ret == <span class="hljs-number">-1</span>)&#123;<br>        perror(<span class="hljs-string">&quot;pipe&quot;</span>);<br>        <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>    &#125;<br><br>    <span class="hljs-comment">//创建子进程</span><br>    <span class="hljs-type">pid_t</span> pid = fork();<br><br>    <span class="hljs-keyword">if</span>(pid &gt; <span class="hljs-number">0</span>)&#123;<br>        <span class="hljs-comment">//父进程</span><br>        <span class="hljs-comment">//从管道里读取</span><br>        close(fd[<span class="hljs-number">1</span>]);<br>        <span class="hljs-type">char</span> buf[<span class="hljs-number">1024</span>] = &#123;<span class="hljs-number">0</span>&#125;;<br><br>        <span class="hljs-type">int</span> len = <span class="hljs-number">-1</span>;<br>        <span class="hljs-keyword">while</span>((len = read(fd[<span class="hljs-number">0</span>], buf, <span class="hljs-keyword">sizeof</span>(buf) - <span class="hljs-number">1</span>)) &gt; <span class="hljs-number">0</span>)&#123;<br>            <span class="hljs-comment">//过滤数据输出</span><br>           <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>,buf);<br>           <span class="hljs-built_in">memset</span>(buf,<span class="hljs-number">0</span>,<span class="hljs-number">1024</span>);<br>        &#125;<br>        wait(<span class="hljs-literal">NULL</span>);<br>        <br>    &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(pid  == <span class="hljs-number">0</span>)&#123;<br>        <span class="hljs-comment">//子进程</span><br>        <span class="hljs-comment">//关闭读端</span><br>        close(fd[<span class="hljs-number">0</span>]);<br>        <span class="hljs-comment">//文件描述符的重定向 stdout_fileno -&gt; fd[1]</span><br>        dup2(fd[<span class="hljs-number">1</span>], STDOUT_FILENO);<br>        <span class="hljs-comment">//执行ps auxaz  </span><br>        execlp(<span class="hljs-string">&quot;ps&quot;</span>, <span class="hljs-string">&quot;ps&quot;</span>, <span class="hljs-string">&quot;aux&quot;</span>,<span class="hljs-literal">NULL</span>);<br>        perror(<span class="hljs-string">&quot;execlp&quot;</span>);<br>        <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>    &#125;<span class="hljs-keyword">else</span>&#123;<br>        perror(<span class="hljs-string">&quot;fork&quot;</span>);<br>        <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h2 id="管道的读写特点"><a href="#管道的读写特点" class="headerlink" title="管道的读写特点"></a>管道的读写特点</h2><p>读管道：</p>
+<ul>
+<li>管道中有数据，read返回实际读到的字节数</li>
+<li>管道中无数据<ul>
+<li>写端被全部关闭，read返回0</li>
+<li>写端没有完全关闭，read阻塞等待</li>
+</ul>
+</li>
+</ul>
+<p>写管道：</p>
+<ul>
+<li>管道读端全部被关闭，进程异常终止（进程受到SIGPIPE信号）</li>
+<li>管道读端没有全部关闭<ul>
+<li>管道已满，write阻塞</li>
+<li>管道没有满，write将数据写入，并返回实际写入的字节数</li>
+</ul>
+</li>
+</ul>
+<h2 id="有名管道FIFO"><a href="#有名管道FIFO" class="headerlink" title="有名管道FIFO"></a>有名管道FIFO</h2><p>有名管道(<strong>FIFO</strong>)可以在无亲缘关系的进程间通信。</p>
+<p>不同于匿名管道之处在于它提供了一个路径名与之关联，以FIFO的文件形式存在于文件系统中</p>
+<p>与PIPE的不同之处</p>
+<ul>
+<li>FIFO是文件系统的特殊文件，内容存放于内存中</li>
+<li>FIFO的进程退出后，FIFO文件将继续保存在文件系统中以便以后使用</li>
+<li>FIFO有名字，不相关的进程可以通过打开有名管道进行通信</li>
+</ul>
+<p>创建有名管道：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkfifo 名字<br></code></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">mkfifo</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *pathname, <span class="hljs-type">mode_t</span> mode)</span>;<br>- pathname: 管道名称的路径<br>- mode :文件的权限<br></code></pre></td></tr></table></figure>
+<h2 id="内存映射Memory-mapped-I-O"><a href="#内存映射Memory-mapped-I-O" class="headerlink" title="内存映射Memory-mapped I/O"></a>内存映射Memory-mapped I/O</h2><p>将磁盘文件的数据映射到内存，用户通过修改内存就能修改磁盘文件</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/mman.h&gt;</span></span><br><span class="hljs-type">void</span> *<span class="hljs-title function_">mmap</span><span class="hljs-params">(<span class="hljs-type">void</span> *addr, <span class="hljs-type">size_t</span> length, <span class="hljs-type">int</span> prot, <span class="hljs-type">int</span> flags, <span class="hljs-type">int</span> fd, <span class="hljs-type">off_t</span> offset)</span>;<br><span class="hljs-comment">//返回创建的内存的首地址，失败返回</span><br></code></pre></td></tr></table></figure>
+<p>参数介绍：</p>
+<ul>
+<li><strong>void *addr：NULL</strong>，由内核指定</li>
+<li><strong>length</strong>：要映射的数据的长度，建议使用文件的长度<br>  获取文件的长度：stat lseek</li>
+<li><strong>prot</strong>：对申请的内存映射区的操作权限<ul>
+<li>PROT_EXEC : 可执行</li>
+<li>PROT_READ : 读</li>
+<li>PROT_WRITE : 写</li>
+<li>PROT_NONE : 没有权限<br>常用：PROT_READ、PROT_WRITE|PROT_READ</li>
+</ul>
+</li>
+<li><strong>flags</strong>：<ul>
+<li>MAP_SHARED ：映射区的数据会自动和磁盘文件进行同步</li>
+<li>MAP_PRIVATE : 不同步</li>
+</ul>
+</li>
+<li><strong>fd</strong> : 需要映射的那个文件的文件描述符<br>  通过open得到，文件的大小不为0，并且指定的权限不能和prot有冲突</li>
+<li><strong>offset</strong> : 偏移量，一般不用，必须指定4K的整数倍</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">munmap</span><span class="hljs-params">(<span class="hljs-type">void</span> *addr, <span class="hljs-type">size_t</span> length)</span>;)<br><span class="hljs-comment">//释放内存映射</span><br></code></pre></td></tr></table></figure>
+<p>参数介绍：</p>
+<ul>
+<li><strong>addr</strong>：释放的内存的首地址</li>
+<li><strong>length</strong>：要释放的内存的值的大小，要和mmap函数中的值的大小一致</li>
+</ul>
 
             </div>
             <hr>
