@@ -1,0 +1,578 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/touxiang.png">
+  <link rel="icon" href="/img/touxiang.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="select主旨：  先构造一个关于文件描述符的列表，将要监听的文件描述符添加到该列表中  调用一个系统函数，监听该列表中的文件描述符，直到这些描述符中的一个或者多个进行IO操作时，该函数才返回。 这个函数是阻塞的；函数对文件描述符的检测的操作是由内核完成的  在返回时，它告诉进程有多少（哪些）描述符进行IO操作   1234567891011121314151617181920212223242">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IO多路复用">
+<meta property="og:url" content="https://www.example.com/2022/12/17/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="select主旨：  先构造一个关于文件描述符的列表，将要监听的文件描述符添加到该列表中  调用一个系统函数，监听该列表中的文件描述符，直到这些描述符中的一个或者多个进行IO操作时，该函数才返回。 这个函数是阻塞的；函数对文件描述符的检测的操作是由内核完成的  在返回时，它告诉进程有多少（哪些）描述符进行IO操作   1234567891011121314151617181920212223242">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-12-17T04:39:19.000Z">
+<meta property="article:modified_time" content="2022-12-17T12:17:53.371Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>IO多路复用 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<!--动态线条背景-->
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>这里有即用配件</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/fengmian.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="IO多路复用">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-12-17 12:39" pubdate>
+        2022年12月17日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.8k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      49 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">IO多路复用</h1>
+            
+            <div class="markdown-body">
+              <h1 id="select"><a href="#select" class="headerlink" title="select"></a>select</h1><p>主旨：</p>
+<ol>
+<li><p>先构造一个关于文件描述符的列表，将要监听的文件描述符添加到该列表中</p>
+</li>
+<li><p>调用一个系统函数，监听该列表中的文件描述符，直到这些描述符中的一个或者多个进行IO操作时，该函数才返回。</p>
+<p>这个函数是阻塞的；函数对文件描述符的检测的操作是由内核完成的</p>
+</li>
+<li><p>在返回时，它告诉进程有多少（哪些）描述符进行IO操作</p>
+</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/time.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-type">int</span> <span class="hljs-title function_">select</span><span class="hljs-params">(<span class="hljs-type">int</span> nfds, fd_set *readfds, fd_set *writefds,</span><br><span class="hljs-params">                  fd_set *exceptfds, <span class="hljs-keyword">struct</span> timeval *timeout)</span>;<br>	- 参数：<br>        -nfds:委托内核检测的最大文件描述符的值+<span class="hljs-number">1</span><br>        -readfds：要检测的文件描述符的读的集合，委托内核检测哪些文件符的属性<br>            - 一般检测读操作<br>            - 对应的是发送方发送过来的数据，因为读是接收数据，检测的是读缓冲区<br>            - 是一个传入传出参数<br>        -writefds:要检测的文件描述符的写的集合，委托内核检测哪些文件符的属性<br>            委托内核检测写缓冲区是不是还可以写数据<br>        -exceptfds：检测发生异常的文件描述符的集合<br>        -timeout：设置的超时时间<br>    - 返回值：<br>       	<span class="hljs-number">-1</span>：失败<br>        &gt;<span class="hljs-number">0</span>：检测的集合中有n个文件描述符发生了变化<br><span class="hljs-comment">//将参数文件描述符fd对象的标志位设置为0</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">FD_CLR</span><span class="hljs-params">(<span class="hljs-type">int</span> fd, fd_set *<span class="hljs-built_in">set</span>)</span>;<br><span class="hljs-comment">//判断对应的标志位是0还是1</span><br><span class="hljs-type">int</span>  <span class="hljs-title function_">FD_ISSET</span><span class="hljs-params">(<span class="hljs-type">int</span> fd, fd_set *<span class="hljs-built_in">set</span>)</span>;<br><span class="hljs-comment">//讲参数文件描述符fd对应的标志位设置为1</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">FD_SET</span><span class="hljs-params">(<span class="hljs-type">int</span> fd, fd_set *<span class="hljs-built_in">set</span>)</span>;<br><span class="hljs-comment">//fdset一共有1024bit，全部初始化为0</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">FD_ZERO</span><span class="hljs-params">(fd_set *<span class="hljs-built_in">set</span>)</span>;<br></code></pre></td></tr></table></figure>
+<p>实现服务器：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//创建一个fd_set的集合，存放的是需要检测的文件描述符</span><br>   fd_set rdset, tmp;<br>   FD_ZERO(&amp;rdset);<br>   FD_SET(lfd, &amp;rdset);<br>   <span class="hljs-type">int</span> maxfd = lfd;<br><br>   <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) &#123;<br>       tmp = rdset;<br>       <span class="hljs-comment">//调用select系统函数让内核检测哪些文件描述符有数据</span><br>       <span class="hljs-type">int</span> ret = select(maxfd + <span class="hljs-number">1</span>, &amp;tmp, <span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>);<br>       <span class="hljs-keyword">if</span>(ret == <span class="hljs-number">-1</span>)&#123;<br>           perror(<span class="hljs-string">&quot;select&quot;</span>);<br>           <span class="hljs-built_in">exit</span>(<span class="hljs-number">-1</span>);<br>       &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(ret == <span class="hljs-number">0</span>) &#123;<br>           <span class="hljs-keyword">continue</span>;<br>       &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(ret &gt; <span class="hljs-number">0</span>) &#123;<br>           <span class="hljs-comment">//检测到了有文件描述符的对应的缓冲区的数据发生了改变</span><br>           <span class="hljs-keyword">if</span>(FD_ISSET(lfd, &amp;tmp)) &#123;<br>               <span class="hljs-comment">//有新的客户端连接进来</span><br>               <span class="hljs-keyword">struct</span> sockaddr_in cliaddr;<br>               <span class="hljs-type">int</span> len = <span class="hljs-keyword">sizeof</span>(cliaddr);<br>               <span class="hljs-type">int</span> cfd = accept(lfd, (<span class="hljs-keyword">struct</span> sockaddr *)&amp;cliaddr, &amp;len);<br><br>               <span class="hljs-comment">//将新的文件描述符加入到rdset中</span><br>               FD_SET(cfd, &amp;rdset);<br>               <span class="hljs-comment">//更新最大的文件描述符</span><br>               maxfd = maxfd &gt; cfd ? maxfd : cfd;<br>           &#125;<br><br>           <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = lfd + <span class="hljs-number">1</span>; i &lt;= maxfd; i++)&#123;<br>               <span class="hljs-keyword">if</span>(FD_ISSET(i, &amp;tmp)) &#123;<br>                   <span class="hljs-comment">//说明文件描述符对应的客户端发来了数据</span><br>                   <span class="hljs-type">char</span> buf[<span class="hljs-number">1024</span>] = &#123;<span class="hljs-number">0</span>&#125;;<br>                   <span class="hljs-type">int</span> len = read(i, buf, <span class="hljs-keyword">sizeof</span>(buf));<br>                   <span class="hljs-keyword">if</span>(len == <span class="hljs-number">-1</span>)&#123;<br>                       perror(<span class="hljs-string">&quot;read&quot;</span>);<br>                       <span class="hljs-built_in">exit</span>(<span class="hljs-number">-1</span>);<br>                   &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(len == <span class="hljs-number">0</span>) &#123;<br>                       <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;client closed ...\n&quot;</span>);<br>                       close(i);<br>                       FD_CLR(i, &amp;rdset);<br>                   &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(len &gt; <span class="hljs-number">0</span>) &#123;<br>                       <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;read buf : %s\n&quot;</span>, buf);<br>                       write(i, buf, <span class="hljs-built_in">strlen</span>(buf));<br>                   &#125;<br>               &#125;<br>           &#125;<br>       &#125;<br>   &#125;<br></code></pre></td></tr></table></figure>
+<p>select的缺点：</p>
+<ul>
+<li>每次需要将fds从用户态拷贝到内核态</li>
+<li>每次调用select都需要在内核遍历传递进来的所有fd</li>
+<li>select支持的文件描述符数量太小，默认1024</li>
+<li>fds集合不能重用，每次都需要重置</li>
+</ul>
+<h1 id="poll"><a href="#poll" class="headerlink" title="poll"></a>poll</h1><p>poll基本上是对select的改进</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;poll.h&gt;</span></span><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pollfd</span> &#123;</span><br>               <span class="hljs-type">int</span>   fd;       <span class="hljs-comment">/* 委托内核检测的文件描述符 */</span><br>               <span class="hljs-type">short</span> events;   <span class="hljs-comment">/* 委托内核检测文件描述符的什么事件 */</span><br>               <span class="hljs-type">short</span> revents;  <span class="hljs-comment">/* 文件描述符实际发生的事件 */</span><br>&#125;;<br><span class="hljs-type">int</span> <span class="hljs-title function_">poll</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> pollfd *fds, <span class="hljs-type">nfds_t</span> nfds, <span class="hljs-type">int</span> timeout)</span>;<br>	- 参数：<br>        -fds：需要检测的文件描述符的集合<br>        -nfds：第一个参数数组中最后一个有效元素的下标+<span class="hljs-number">1</span><br>        -timeout：阻塞时长<br>    - 返回值：<br>        <span class="hljs-number">-1</span>：失败<br>        &gt;<span class="hljs-number">0</span>:成功，检测的集合中有n个文件描述符发生变化<br></code></pre></td></tr></table></figure>
+<p>poll多路复用编写服务器：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//初始化检测的文件描述符的数组</span><br>   <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pollfd</span> <span class="hljs-title">fds</span>[1024];</span><br>   <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">1024</span>; i++)&#123;<br>       fds[i].fd = <span class="hljs-number">-1</span>;<br>       fds[i].events = POLLIN;<br>   &#125;<br>   fds[<span class="hljs-number">0</span>].fd = lfd; <br><br>   <span class="hljs-type">int</span> nfds = <span class="hljs-number">0</span>; <span class="hljs-comment">//最大的文件描述符的索引</span><br>   <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) &#123;<br>       <span class="hljs-comment">//调用poll系统函数</span><br>       <span class="hljs-type">int</span> ret = poll(fds, nfds + <span class="hljs-number">1</span>, <span class="hljs-number">-1</span>);<br>       <span class="hljs-keyword">if</span>(ret == <span class="hljs-number">-1</span>)&#123;<br>           perror(<span class="hljs-string">&quot;poll&quot;</span>);<br>           <span class="hljs-built_in">exit</span>(<span class="hljs-number">-1</span>);<br>       &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(ret == <span class="hljs-number">0</span>) &#123;<br>           <span class="hljs-keyword">continue</span>;<br>       &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(ret &gt; <span class="hljs-number">0</span>) &#123;<br>           <span class="hljs-comment">//检测到了有文件描述符的对应的缓冲区的数据发生了改变</span><br>           <span class="hljs-keyword">if</span>(fds[<span class="hljs-number">0</span>].revents &amp; POLLIN) &#123;<br>               <span class="hljs-comment">//有新的客户端连接进来</span><br>               <span class="hljs-keyword">struct</span> sockaddr_in cliaddr;<br>               <span class="hljs-type">int</span> len = <span class="hljs-keyword">sizeof</span>(cliaddr);<br>               <span class="hljs-type">int</span> cfd = accept(lfd, (<span class="hljs-keyword">struct</span> sockaddr *)&amp;cliaddr, &amp;len);<br><br>               <span class="hljs-comment">//将新的文件描述符加入到rdset中</span><br>               <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">1024</span>; i++)&#123;<br>                   <span class="hljs-keyword">if</span>(fds[i].fd == <span class="hljs-number">-1</span>)&#123;<br>                       fds[i].fd = cfd;<br>                       fds[i].events = POLLIN;<br>                       <span class="hljs-keyword">break</span>;<br>                   &#125;<br>               &#125;<br>               <span class="hljs-comment">//更新最大的文件描述符</span><br>               nfds = nfds &gt; cfd ? nfds : cfd;<br>           &#125;<br><br>           <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= nfds; i++)&#123;<br>               <span class="hljs-keyword">if</span>(fds[i].revents &amp; POLLIN) &#123;<br>                   <span class="hljs-comment">//说明文件描述符对应的客户端发来了数据</span><br>                   <span class="hljs-type">char</span> buf[<span class="hljs-number">1024</span>] = &#123;<span class="hljs-number">0</span>&#125;;<br>                   <span class="hljs-type">int</span> len = read(fds[i].fd, buf, <span class="hljs-keyword">sizeof</span>(buf));<br>                   <span class="hljs-keyword">if</span>(len == <span class="hljs-number">-1</span>)&#123;<br>                       perror(<span class="hljs-string">&quot;read&quot;</span>);<br>                       <span class="hljs-built_in">exit</span>(<span class="hljs-number">-1</span>);<br>                   &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(len == <span class="hljs-number">0</span>) &#123;<br>                       <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;client closed ...\n&quot;</span>);<br>                       close(fds[i].fd);<br>                       fds[i].fd = <span class="hljs-number">-1</span>;<br>                   &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(len &gt; <span class="hljs-number">0</span>) &#123;<br>                       <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;read buf : %s\n&quot;</span>, buf);<br>                       write(fds[i].fd, buf, <span class="hljs-built_in">strlen</span>(buf) + <span class="hljs-number">1</span>);<br>                   &#125;<br>               &#125;<br>           &#125;<br>       &#125;<br>   &#125;<br>   close(lfd);<br></code></pre></td></tr></table></figure>
+<p>缺点：</p>
+<ul>
+<li>每次都需要将fd集合拷贝到内核态</li>
+<li>每次需要在内核遍历传进来的所有fd</li>
+</ul>
+<h1 id="epoll"><a href="#epoll" class="headerlink" title="epoll"></a>epoll</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/epoll.h&gt;</span></span><br><br><span class="hljs-comment">//创建一个新的epoll实例，在内核中创建了一个数据</span><br><span class="hljs-comment">//红黑树、就绪列表（存放检测到数据发送改变的文件描述符信息）</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">epoll_create</span><span class="hljs-params">(<span class="hljs-type">int</span> size)</span>;<br>	-参数： size无意义<br>    -返回值：文件描述符<br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">union</span> <span class="hljs-title">epoll_data</span>&#123;</span><br>    <span class="hljs-type">void</span>     *ptr;<br>    <span class="hljs-type">int</span>       fd;<br>    <span class="hljs-type">uint32_t</span>  u32;<br>    <span class="hljs-type">uint64_t</span>  u64;<br>&#125;<span class="hljs-type">epoll_data_t</span>;<br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">epoll_event</span> &#123;</span><br>    <span class="hljs-type">uint32_t</span>     events;  <span class="hljs-comment">//事件</span><br>    <span class="hljs-type">epoll_data_t</span> data;   <span class="hljs-comment">//用户数据信息</span><br>&#125;;<br>常见的epoll检测事件：<br>    - EPOLLIN<br>    - EPOLLOUT<br>    - EPOLLERR<br><span class="hljs-comment">//对epoll实例进行管理，添加文件描述符信息，删除信息，修改信息</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">epoll_ctl</span><span class="hljs-params">(<span class="hljs-type">int</span> epfd, <span class="hljs-type">int</span> op, <span class="hljs-type">int</span> fd, <span class="hljs-keyword">struct</span> epoll_event 				*event)</span>;<br>	- 参数：<br>        - epfd:epoll实例对应的文件描述符<br>        - op：要进行什么操作<br>        	EPOLL_CTL_ADD、EPOLL_CTL_DEL、EPOLL_CTL_MOD<br>        - fd：要检测的文件描述符<br>        - event：检测文件描述符具体的事情<br><span class="hljs-comment">//检测函数</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">epoll_wait</span><span class="hljs-params">(<span class="hljs-type">int</span> epfd, <span class="hljs-keyword">struct</span> epoll_event *events, <span class="hljs-type">int</span> 				maxevents, <span class="hljs-type">int</span> timeout)</span>;<br>	- 参数：<br>        - epfd：epoll实例对应的文件描述符<br>        - events：传出参数，保存了发生了变化的文件描述符的信息<br>        - maxevents：第二个参数结构体数组的大小<br>        - timeout：阻塞时间<br>        	<span class="hljs-number">0</span>：不阻塞；<span class="hljs-number">-1</span>：阻塞，直到检测到数据发生变化；&gt;<span class="hljs-number">0</span>:阻塞时长<br></code></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//调用epoll_create创建一个epoll实例</span><br>  <span class="hljs-type">int</span> epfd = epoll_create(<span class="hljs-number">100</span>);<br><br>  <span class="hljs-comment">//将监听的文件描述符的相关的检测信息添加到epoll实例中</span><br>  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">epoll_event</span> <span class="hljs-title">epev</span>;</span><br>  epev.events = EPOLLIN;<br>  epev.data.fd = lfd;<br>  epoll_ctl(epfd, EPOLL_CTL_ADD, lfd, &amp;epev);<br><br>  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">epoll_event</span> <span class="hljs-title">epevs</span>[1024];</span><br>  <br>  <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) &#123;<br><br>      <span class="hljs-type">int</span> ret = epoll_wait(epfd, epevs, <span class="hljs-number">1024</span>, <span class="hljs-number">-1</span>);<br>      <span class="hljs-keyword">if</span>(ret == <span class="hljs-number">-1</span>)&#123;<br>          perror(<span class="hljs-string">&quot;epoll_wait&quot;</span>);<br>          <span class="hljs-built_in">exit</span>(<span class="hljs-number">-1</span>);<br>      &#125;<br>      <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;ret = %d\n&quot;</span>, ret);<br><br>      <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; ret; i++)&#123;<br><br>          <span class="hljs-type">int</span> curfd = epevs[i].data.fd;<br><br>          <span class="hljs-keyword">if</span>(curfd == lfd)&#123;<br>              <span class="hljs-comment">//监听的文件描述符有数据到达，有客户端连接</span><br>              <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr_in</span> <span class="hljs-title">cliaddr</span>;</span><br>              <span class="hljs-type">int</span> len = <span class="hljs-keyword">sizeof</span>(cliaddr);<br>              <span class="hljs-type">int</span> cfd = accept(lfd, (<span class="hljs-keyword">struct</span> sockaddr *)&amp;cliaddr, &amp;len);<br><br>              epev.events = EPOLLIN;<br>              epev.data.fd = cfd;<br>              epoll_ctl(epfd, EPOLL_CTL_ADD, cfd, &amp;epev);<br>          &#125;<span class="hljs-keyword">else</span> &#123;<br>              <span class="hljs-comment">//有数据到达</span><br>              <span class="hljs-type">char</span> buf[<span class="hljs-number">1024</span>] = &#123;<span class="hljs-number">0</span>&#125;;<br>              <span class="hljs-built_in">memset</span>(buf, <span class="hljs-number">0</span>, <span class="hljs-number">1024</span>);<br>              <span class="hljs-type">int</span> len = read(curfd, buf, <span class="hljs-keyword">sizeof</span>(buf));<br>              <span class="hljs-keyword">if</span>(len == <span class="hljs-number">-1</span>) &#123;<br>                  perror(<span class="hljs-string">&quot;read&quot;</span>);<br>                  <span class="hljs-built_in">exit</span>(<span class="hljs-number">-1</span>);<br>              &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (len == <span class="hljs-number">0</span>) &#123;<br>                  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;client closed ...\n&quot;</span>);<br>                  epoll_ctl(epfd, EPOLL_CTL_DEL, curfd, <span class="hljs-literal">NULL</span>);<br>                  close(curfd);<br>              &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(len &gt; <span class="hljs-number">0</span>) &#123;<br>                  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;read buf : %s\n&quot;</span>, buf);<br>                  write(curfd, buf, <span class="hljs-built_in">strlen</span>(buf) + <span class="hljs-number">1</span>);<br>              &#125;<br>          &#125;<br>      &#125;<br>  &#125;<br>  close(lfd);<br>  close(epfd);<br></code></pre></td></tr></table></figure>
+<p>epoll的工作模式：</p>
+<ul>
+<li><p>LT模式：水平触发</p>
+<p>假设委托内核检测读事件-&gt;检测fd的读缓冲区</p>
+<div class="code-wrapper"><pre><code class="hljs"> 读缓冲区有数据-&gt;epoll检测到了会给用户通知
+</code></pre></div><p>​            a.用户不读数据，数据一直在缓冲区，epoll会一直通知</p>
+<p>​            b.用户只读了一部分数据，epoll会通知</p>
+<p>​            c.缓冲区的数据读完了，不通知</p>
+</li>
+<li><p>ET模式：边沿触发</p>
+<p>假设委托内核检测读事件-&gt;检测fd的读缓冲区</p>
+<p>​    读缓冲区有数据-&gt;epoll检测到了会给用户通知</p>
+<p>​        a.用户不读数据，数据一直在缓冲区中，epoll下次检测的时候就不通知了</p>
+<p>​        b.用户只读了一部分数据，epoll不通知</p>
+<p>​        c.缓冲区的数据读完了，不通知</p>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/webServer/">webServer</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/01/02/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">基础算法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/">
+                        <span class="hidden-mobile">Linux多进程开发</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"FVOHeWkJmFW4IL0Dyt3XhY5f-gzGzoHsz","appKey":"aguFoKPPLq6Qvk8DAkOgsdkz","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"https://fvohewkj.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/10/2018 17:38:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.8},"log":false});</script></body>
+</html>

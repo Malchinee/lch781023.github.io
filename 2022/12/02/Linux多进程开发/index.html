@@ -28,8 +28,12 @@
 <meta property="og:image" content="https://www.example.com/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221206160645458.png">
 <meta property="og:image" content="https://www.example.com/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221206162634026.png">
 <meta property="og:image" content="https://www.example.com/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221206212000288.png">
+<meta property="og:image" content="https://www.example.com/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221208100340784.png">
+<meta property="og:image" content="https://www.example.com/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221208101612238.png">
+<meta property="og:image" content="https://www.example.com/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221208101802836.png">
+<meta property="og:image" content="https://www.example.com/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221208101821351.png">
 <meta property="article:published_time" content="2022-12-02T14:04:05.000Z">
-<meta property="article:modified_time" content="2022-12-07T14:29:15.464Z">
+<meta property="article:modified_time" content="2022-12-09T06:26:01.227Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://www.example.com/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221202233047379.png">
@@ -205,7 +209,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      5k 字
+      7.3k 字
     </span>
   
 
@@ -214,7 +218,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      43 分钟
+      61 分钟
     </span>
   
 
@@ -415,6 +419,70 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li><strong>addr</strong>：释放的内存的首地址</li>
 <li><strong>length</strong>：要释放的内存的值的大小，要和mmap函数中的值的大小一致</li>
 </ul>
+<p>一些问题：</p>
+<ul>
+<li>可以对mmap的返回值进行++操作，但是munmap()会错误</li>
+<li>open()函数中的权限建一和PROT参数的权限保持一致</li>
+<li>文件偏移量必须是1024的整数倍</li>
+<li>mmap后关闭文件描述符，对mmap映射没有影响</li>
+<li>ptr越界操作的是非法内存，属于段错误</li>
+</ul>
+<h2 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h2><p>是事件发生时对进程的通知机制，有时称为<strong>软件中断</strong>，是一种异步通信的方式</p>
+<p>使用信号的目的：</p>
+<ul>
+<li>让进程知道已经发生了一个特定的事情</li>
+<li>强迫进程执行它自己代码中的信号处理程序</li>
+</ul>
+<img src="/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221208100340784.png" srcset="/img/loading.gif" lazyload class title="image-20221208100340784">
+<img src="/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221208101612238.png" srcset="/img/loading.gif" lazyload class title="image-20221208101612238">
+<img src="/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221208101802836.png" srcset="/img/loading.gif" lazyload class title="image-20221208101802836">
+<img src="/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221208101821351.png" srcset="/img/loading.gif" lazyload class title="image-20221208101821351">
+<p>查看信号的详细信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">man 7 signal<br></code></pre></td></tr></table></figure>
+<p>信号的五种默认处理动作</p>
+<ul>
+<li>Term : 终止进程</li>
+<li>Ign : 当前进程忽略掉这个信号</li>
+<li>Core : 终止进程，并生成一个Core文件</li>
+<li>Stop：暂停当前进程</li>
+<li>Cont：继续执行当前被暂停的进程</li>
+</ul>
+<p>信号的几种状态：产生、未决、递达</p>
+<p>SIGKILL和SIGSTOP信号不能被捕捉、阻塞或者忽略，只能执行默认动作</p>
+<p>常用的函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-comment">//给某个进程pid，发送某个信号sig</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">kill</span><span class="hljs-params">(<span class="hljs-type">pid_t</span> pid, <span class="hljs-type">int</span> sig)</span><br></code></pre></td></tr></table></figure>
+<p>pid：&gt;0发给指定进程； =0发送给当前进程； =-1发送给每一个有权接收这个信号的进程； &lt;-1这个pid等于某个进程组的ID取反</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//给当前进程发送信号</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">reise</span><span class="hljs-params">(<span class="hljs-type">int</span> sig)</span>;<br></code></pre></td></tr></table></figure>
+<p>sig：要发送的信号</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//发送SIGABORT信号发送给当前的进程，杀死当前的进程</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">abort</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//设置定时器，函数调用时开始倒计时，当倒数计时为0时，函数给当前进程发送SIGALARM信号</span><br>unsighed <span class="hljs-type">int</span> <span class="hljs-title function_">alarm</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> seconds)</span>;<br></code></pre></td></tr></table></figure>
+<p>返回值：倒计时剩余的时间</p>
+<p>SIGALARM ： 默认终止当前的进程，每一个进程都有且只有唯一的一个定时器</p>
+<p>但是实际时间 = 内核时间 + 用户时间 + 消耗的时间</p>
+<p>定时器与进程的状态无关（自然定时法）。无论进程处于什么状态，alarm都会计时</p>
+<p>多次调用alarm只会有一个生效，后定义的alarm会把前面的取消掉</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//设置定时器，代替alarm函数，精度为微秒，可以周期性定时</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">setitimer</span><span class="hljs-params">(<span class="hljs-type">int</span> which, <span class="hljs-type">const</span> <span class="hljs-keyword">struct</span> itimerval *new_value, </span><br><span class="hljs-params">								<span class="hljs-keyword">struct</span> itimerval *old_value)</span>;<br></code></pre></td></tr></table></figure>
+<p>which：定时器以什么时间计时</p>
+<div class="code-wrapper"><pre><code class="hljs">- ITIME_REAL：真实时间SIGALRM
+- ITIME_VIRTUAL：用户时间，发送SIGVTALRM
+- ITIMER_PROF：以该进程在用户态和内核态下消耗的时间来计算，发送SIGPROF
+</code></pre></div><p>new_value ：设置定时器的属性</p>
+<p>old_value：记录上一次的定时的时间参数</p>
+<p>信号捕捉函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//设置某个信号的捕捉行为</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;signal.h&gt;</span></span><br><span class="hljs-keyword">typedef</span> <span class="hljs-title function_">void</span> <span class="hljs-params">(*<span class="hljs-type">sighandler_t</span>)</span><span class="hljs-params">(<span class="hljs-type">int</span>)</span>;<br><span class="hljs-type">sighandler_t</span> <span class="hljs-title function_">signal</span><span class="hljs-params">(<span class="hljs-type">int</span> signum, <span class="hljs-type">sighandler_t</span> handler)</span>;<br></code></pre></td></tr></table></figure>
+<p>signum： 要捕捉的信号</p>
+<p>handler：捕捉到的信号要怎么处理</p>
+<div class="code-wrapper"><pre><code class="hljs">- SIG_IGN:忽略信号
+- SIG_DFL:使用信号的默认行为
+- 回调函数：内核调用，程序员只负责写
+</code></pre></div><p>函数指针：int类型的参数表示捕捉到的信号的值</p>
+<p>返回值</p>
+<div class="code-wrapper"><pre><code class="hljs">- 成功：返回上一次注册的信号处理函数的地址。第一次返回NULL
+- 失败：返回SIG_ERR，设置错误号
+</code></pre></div><p>不能捕捉SIHKILL、SIGSTOP</p>
+<h2 id="信号集"><a href="#信号集" class="headerlink" title="信号集"></a>信号集</h2><p>对自定义的信号集的操作：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//清空信号集中的数据，将信号集中的所有的标志位记为0</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">sigemptyset</span><span class="hljs-params">(<span class="hljs-type">sigset_t</span> *<span class="hljs-built_in">set</span>)</span>;<br><span class="hljs-comment">//将信号集中的所有数据标为1</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">sigfillset</span><span class="hljs-params">(<span class="hljs-type">sigset_t</span> *<span class="hljs-built_in">set</span>)</span>;<br><span class="hljs-comment">//将信号集的某一信号对应的标志位为1</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">sigaddset</span><span class="hljs-params">(<span class="hljs-type">sigset_t</span> *<span class="hljs-built_in">set</span>, <span class="hljs-type">int</span> signum)</span>;<br><span class="hljs-comment">//将信号集的某一信号对应的标志位为1，表示不阻塞</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">sigdelset</span><span class="hljs-params">(<span class="hljs-type">sigset_t</span> *<span class="hljs-built_in">set</span>, <span class="hljs-type">int</span> signum)</span>;<br><span class="hljs-comment">//判断某个信号是否阻塞</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">sigismember</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">sigset_t</span> *<span class="hljs-built_in">set</span>,<span class="hljs-type">int</span> signum)</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;signal.h&gt;</span></span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 检查或修改信号阻塞集，根据 how 指定的⽅法对进程的阻塞集合进⾏修改，</span><br><span class="hljs-comment">* 新的信号阻塞集由 set 指定，⽽原先的信号阻塞集合由 oldset 保存.</span><br><span class="hljs-comment">*</span><br><span class="hljs-comment">* @param how 信号阻塞集合的修改⽅法，有 3 种情况:</span><br><span class="hljs-comment">* (1) SIG_BLOCK：向信号阻塞集合中添加 set 信号集，</span><br><span class="hljs-comment">* 新的信号掩码是set和旧信号掩码的并集。相当于 mask =</span><br><span class="hljs-comment">mask|set;</span><br><span class="hljs-comment">* (2) SIG_UNBLOCK：从信号阻塞集合中删除 set 信号集，</span><br><span class="hljs-comment">* 从当前信号掩码中去除 set 中的信号。相当于 mask = mask &amp; ~</span><br><span class="hljs-comment">set;</span><br><span class="hljs-comment">* (3) SIG_SETMASK：将信号阻塞集合设为 set 信号集，</span><br><span class="hljs-comment">* 相当于原来信号阻塞集的内容清空，然后按照 set 中的信号重新设置</span><br><span class="hljs-comment">信号阻塞集。相当于mask = set.</span><br><span class="hljs-comment">*</span><br><span class="hljs-comment">* @set 要操作的信号集地址,若 set 为 NULL，则不改变信号阻塞集合，函数只把当前信</span><br><span class="hljs-comment">号阻塞集合保存到 oldset 中.</span><br><span class="hljs-comment">* @oldset 保存原先信号阻塞集地址.</span><br><span class="hljs-comment">* @return 成功: 0; 失败: -1，失败时错误代码只可能是 EINVAL，表示参数 how 不</span><br><span class="hljs-comment">合法.</span><br><span class="hljs-comment">*/</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">sigprocmask</span><span class="hljs-params">(<span class="hljs-type">int</span> how, <span class="hljs-type">const</span> <span class="hljs-type">sigset_t</span> *<span class="hljs-built_in">set</span>, <span class="hljs-type">sigset_t</span> *oldset)</span>;<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -441,6 +509,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/12/17/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">IO多路复用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
