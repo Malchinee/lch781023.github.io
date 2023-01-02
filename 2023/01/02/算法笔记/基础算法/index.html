@@ -1,0 +1,647 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/touxiang.png">
+  <link rel="icon" href="/img/touxiang.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="快速排序快速排序 快排模板： 123456789101112void quick_sort(int l, int r, int q[]) &amp;#123;    if(l &gt;&#x3D; r) return;    int i &#x3D; l - 1, j &#x3D; r + 1;    int x &#x3D; q[(l + r + 1) &#x2F; 2];    while(l &lt; r) &amp;#123;        do i +">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基础算法">
+<meta property="og:url" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="快速排序快速排序 快排模板： 123456789101112void quick_sort(int l, int r, int q[]) &amp;#123;    if(l &gt;&#x3D; r) return;    int i &#x3D; l - 1, j &#x3D; r + 1;    int x &#x3D; q[(l + r + 1) &#x2F; 2];    while(l &lt; r) &amp;#123;        do i +">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225184417149.png">
+<meta property="og:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225184512979.png">
+<meta property="og:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225194942046.png">
+<meta property="og:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225195637618.png">
+<meta property="og:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225201446079.png">
+<meta property="og:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225201547657.png">
+<meta property="og:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225204003821.png">
+<meta property="og:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225204051146.png">
+<meta property="og:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225211802809.png">
+<meta property="og:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225211820710.png">
+<meta property="og:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225215223597.png">
+<meta property="og:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225235036134.png">
+<meta property="og:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221226000156078.png">
+<meta property="og:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221226001408407.png">
+<meta property="og:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221226104720069.png">
+<meta property="og:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221226002854832.png">
+<meta property="og:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221226104911468.png">
+<meta property="og:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221226110714696.png">
+<meta property="og:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221226112750337.png">
+<meta property="og:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221226114158638.png">
+<meta property="og:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221226115836277.png">
+<meta property="og:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221226120015732.png">
+<meta property="og:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221226121019709.png">
+<meta property="og:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221226163636258.png">
+<meta property="article:published_time" content="2023-01-02T09:48:26.000Z">
+<meta property="article:modified_time" content="2023-01-02T09:50:39.394Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.example.com/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225184417149.png">
+  
+  
+  <title>基础算法 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<!--动态线条背景-->
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>这里有即用配件</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/fengmian.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="基础算法">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-01-02 17:48" pubdate>
+        2023年1月2日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8.3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      70 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">基础算法</h1>
+            
+            <div class="markdown-body">
+              <h1 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h1><h2 id="快速排序-1"><a href="#快速排序-1" class="headerlink" title="快速排序"></a>快速排序</h2><img src="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225184417149.png" srcset="/img/loading.gif" lazyload class title="image-20221225184417149">
+<p>快排模板：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">quick_sort</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r, <span class="hljs-type">int</span> q[])</span> </span>&#123;<br>    <span class="hljs-keyword">if</span>(l &gt;= r) <span class="hljs-keyword">return</span>;<br>    <span class="hljs-type">int</span> i = l - <span class="hljs-number">1</span>, j = r + <span class="hljs-number">1</span>;<br>    <span class="hljs-type">int</span> x = q[(l + r + <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>];<br>    <span class="hljs-keyword">while</span>(l &lt; r) &#123;<br>        <span class="hljs-keyword">do</span> i ++;  <span class="hljs-keyword">while</span>(q[i] &lt; x);<br>        <span class="hljs-keyword">do</span> j --;  <span class="hljs-keyword">while</span>(q[j] &gt; x);<br>        <span class="hljs-keyword">if</span>(i &lt; j) <span class="hljs-built_in">swap</span>(q[i], q[j]);<br>    &#125;<br>    <span class="hljs-built_in">quick_sort</span>(l, i - <span class="hljs-number">1</span>, q);<br>    <span class="hljs-built_in">quick_sort</span>(i, r, q);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="第k个数"><a href="#第k个数" class="headerlink" title="第k个数"></a>第k个数</h2><img src="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225184512979.png" srcset="/img/loading.gif" lazyload class title="image-20221225184512979">
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">quick_sort</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r, <span class="hljs-type">int</span> k)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(l == r) <span class="hljs-keyword">return</span> q[l];<br>    <span class="hljs-type">int</span> i = l - <span class="hljs-number">1</span>, j = r + <span class="hljs-number">1</span>, x = q[l];<br>    <span class="hljs-keyword">while</span>(i &lt; j) &#123;<br>        <span class="hljs-keyword">do</span> i ++; <span class="hljs-keyword">while</span>(q[i] &lt; x);<br>        <span class="hljs-keyword">do</span> j --; <span class="hljs-keyword">while</span>(q[j] &gt; x);<br>        <span class="hljs-keyword">if</span>(i &lt; j) <span class="hljs-built_in">swap</span>(q[i], q[j]);<br>    &#125;<br>    <span class="hljs-type">int</span> sl = j - l + <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span>(sl &gt;= k) <span class="hljs-keyword">return</span> <span class="hljs-built_in">quick_sort</span>(l, j, k);<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">quick_sort</span>(j + <span class="hljs-number">1</span>, r, k - sl);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h1><h2 id="归并排序-1"><a href="#归并排序-1" class="headerlink" title="归并排序"></a>归并排序</h2><img src="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225194942046.png" srcset="/img/loading.gif" lazyload class title="image-20221225194942046">
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">merge_sort</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r, <span class="hljs-type">int</span> q[])</span> </span>&#123;<br>    <span class="hljs-keyword">if</span>(l &gt;= r) <span class="hljs-keyword">return</span>;<br>    <br>    <span class="hljs-type">int</span> mid = l + r &gt;&gt; <span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">merge_sort</span>(l, mid, q);<br>    <span class="hljs-built_in">merge_sort</span>(mid + <span class="hljs-number">1</span>, r, q);<br>    <br>    <span class="hljs-type">int</span> i = l, j = mid + <span class="hljs-number">1</span>, k = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span>(i &lt;= mid &amp;&amp; j &lt;= r) &#123;<br>        <span class="hljs-keyword">if</span>(q[i] &lt; q[j]) tmp[k++] = q[i++];<br>        <span class="hljs-keyword">else</span> tmp[k++] = q[j++];<br>    &#125;<br>    <br>    <span class="hljs-keyword">while</span>(i &lt;= mid) tmp[k++] = q[i++];<br>    <span class="hljs-keyword">while</span>(j &lt;= r) tmp[k++] = q[j++];<br><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = l, j = <span class="hljs-number">0</span>; i &lt;= r; i++) q[i] = tmp[j++];<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="逆序对的数量"><a href="#逆序对的数量" class="headerlink" title="逆序对的数量"></a>逆序对的数量</h2><img src="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225195637618.png" srcset="/img/loading.gif" lazyload class title="image-20221225195637618">
+<p>要注意此题的数值范围，要用long long类型</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> LL;<br><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">100010</span>;<br><span class="hljs-type">int</span> q[N], tmp[N];<br><span class="hljs-type">int</span> n;<br><br><span class="hljs-function">LL <span class="hljs-title">merge_sort</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> </span>&#123;<br>    <br>    <br>    <span class="hljs-keyword">if</span>(l &gt;= r) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-type">int</span> mid = (l + r) &gt;&gt; <span class="hljs-number">1</span>;<br>    <br>    LL res = <span class="hljs-built_in">merge_sort</span>(l, mid) + <span class="hljs-built_in">merge_sort</span>(mid + <span class="hljs-number">1</span>, r);<br>    <br>    <span class="hljs-type">int</span> i = l, j = mid + <span class="hljs-number">1</span>, k = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span>(i &lt;= mid &amp;&amp; j &lt;= r) &#123;<br>        <span class="hljs-keyword">if</span>(q[i] &gt; q[j]) &#123;<br>            tmp[k++] = q[j++];<br>            res += mid - i + <span class="hljs-number">1</span>;<br>        &#125;<span class="hljs-keyword">else</span> tmp[k++] = q[i++];<br>    &#125;<br>    <br>    <span class="hljs-keyword">while</span>(i &lt;= mid) tmp[k++] = q[i++];<br>    <span class="hljs-keyword">while</span>(j &lt;= r) tmp[k++] = q[j++];<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = l, j = <span class="hljs-number">0</span>; i &lt;= r; i++, j++) &#123;<br>        q[i] = tmp[j];<br>    &#125;<br>    <br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="二分"><a href="#二分" class="headerlink" title="二分"></a>二分</h1><p>模板：</p>
+<img src="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225201446079.png" srcset="/img/loading.gif" lazyload class title="image-20221225201446079">
+<p>注意当 l = mid的时候，可能会陷入死循环，必须得 + 1</p>
+<h2 id="数的范围"><a href="#数的范围" class="headerlink" title="数的范围"></a>数的范围</h2><img src="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225201547657.png" srcset="/img/loading.gif" lazyload class title="image-20221225201547657">
+<p>要找出左边界和右边界</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">100010</span>;<br><span class="hljs-type">int</span> n, q, k;<br><span class="hljs-type">int</span> a[N];<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <br>    cin &gt;&gt; n &gt;&gt; q;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) cin &gt;&gt; a[i];<br>    <br>    <span class="hljs-keyword">while</span>(q--) &#123;<br>        cin &gt;&gt; k;<br>        <br>        <span class="hljs-comment">//找左边界</span><br>        <span class="hljs-type">int</span> l = <span class="hljs-number">0</span>, r = n - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span>(l &lt; r) &#123;<br>            <span class="hljs-type">int</span> mid = l + r &gt;&gt; <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span>(a[mid] &gt;= k) r = mid;<br>            <span class="hljs-keyword">else</span> l = mid + <span class="hljs-number">1</span>;<br>        &#125;<br>        <br>        <span class="hljs-keyword">if</span>(a[l] != k) cout &lt;&lt; <span class="hljs-string">&quot;-1 -1&quot;</span> &lt;&lt; endl;<br>        <span class="hljs-comment">//找有边界</span><br>        <span class="hljs-keyword">else</span> &#123;<br>            cout &lt;&lt; l &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;<br>            l = <span class="hljs-number">0</span>, r = n - <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">while</span>(l &lt; r) &#123;<br>                <span class="hljs-type">int</span> mid = l + r + <span class="hljs-number">1</span> &gt;&gt; <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">if</span>(a[mid] &lt;= k) l = mid;<br>                <span class="hljs-keyword">else</span> r = mid - <span class="hljs-number">1</span>;<br>            &#125;<br>            cout &lt;&lt; r &lt;&lt; endl;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="数的三次方根"><a href="#数的三次方根" class="headerlink" title="数的三次方根"></a>数的三次方根</h2><img src="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225204003821.png" srcset="/img/loading.gif" lazyload class title="image-20221225204003821">
+<img src="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225204051146.png" srcset="/img/loading.gif" lazyload class title="image-20221225204051146">
+<p>模板代码：</p>
+<p>注意终止条件和最后的格式化输出</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-type">double</span> n;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <br>    cin &gt;&gt; n;  <br>    <br>    <span class="hljs-type">double</span> l = <span class="hljs-number">-10000</span>, r = <span class="hljs-number">10000</span>;<br>    <br>    <span class="hljs-keyword">while</span>(r - l &gt; <span class="hljs-number">1e-8</span>) &#123;<br>        <span class="hljs-type">double</span> mid = (l + r ) / <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">if</span>(mid * mid * mid &gt;= n) r = mid;<br>        <span class="hljs-keyword">else</span> l = mid;<br>    &#125;<br>    <br>   <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lf\n&quot;</span>, l);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="高精度"><a href="#高精度" class="headerlink" title="高精度"></a>高精度</h1><p>存储：采用大端法，数字的高位保存在数组的高位，即个位保存在vector\<int>的第一位</int></p>
+<img src="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225211802809.png" srcset="/img/loading.gif" lazyload class title="image-20221225211802809">
+<h2 id="高精度加法"><a href="#高精度加法" class="headerlink" title="高精度加法"></a>高精度加法</h2><p>add函数是重点</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br>vector&lt;<span class="hljs-type">int</span>&gt; A, B;<br><br><span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">add</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt; &amp;A, vector&lt;<span class="hljs-type">int</span>&gt; &amp;B)</span></span>&#123;<br>    vector&lt;<span class="hljs-type">int</span>&gt; res;<br>    <br>    <span class="hljs-type">int</span> t = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; A.<span class="hljs-built_in">size</span>() || i &lt; B.<span class="hljs-built_in">size</span>(); i++) &#123;<br>        <span class="hljs-keyword">if</span>(i &lt; A.<span class="hljs-built_in">size</span>()) t += A[i];<br>        <span class="hljs-keyword">if</span>(i &lt; B.<span class="hljs-built_in">size</span>()) t += B[i];<br>        res.<span class="hljs-built_in">push_back</span>(t % <span class="hljs-number">10</span>);<br>        t /= <span class="hljs-number">10</span>; <span class="hljs-comment">//是否需要进位</span><br>    &#125;<br>    <span class="hljs-comment">//如果最后有进位，在最高位补1</span><br>    <span class="hljs-keyword">if</span>(t) res.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">1</span>);<br>    <span class="hljs-keyword">return</span> res;<br>    <br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <br>    string a, b;<br>    cin &gt;&gt; a &gt;&gt; b;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = a.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) A.<span class="hljs-built_in">push_back</span>(a[i] - <span class="hljs-string">&#x27;0&#x27;</span>);<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = b.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) B.<span class="hljs-built_in">push_back</span>(b[i] - <span class="hljs-string">&#x27;0&#x27;</span>);<br>    <br>    vector&lt;<span class="hljs-type">int</span>&gt; C = <span class="hljs-built_in">add</span>(A, B);<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = C.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>, C[i]);<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="高精度减法"><a href="#高精度减法" class="headerlink" title="高精度减法"></a>高精度减法</h2><img src="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225211820710.png" srcset="/img/loading.gif" lazyload class title="image-20221225211820710">
+<p>比较函数：（返回A是否大于等于B）</p>
+<ol>
+<li>当A和B的长度不相等时，判断A和B哪个长度大</li>
+<li>当A和B的长度不相等时，从高位开始判断哪个数字大</li>
+</ol>
+<p>减法函数：</p>
+<p>t表示是否从高位借位，1为需要，0为不需要，默认为0</p>
+<p>同样从个位数开始相减</p>
+<p>针对每次向结果中添加的t，当<script type="math/tex">t < 0</script>时，添加10 - t；当<script type="math/tex">t >= 0</script>时，添加t。可以用<script type="math/tex">(t + 10) \% 10</script> 代替，避免分类讨论</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//A &gt;= B ?</span><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt; &amp;A, vector&lt;<span class="hljs-type">int</span>&gt; &amp;B)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span>(A.<span class="hljs-built_in">size</span>() != B.<span class="hljs-built_in">size</span>()) <span class="hljs-keyword">return</span> A.<span class="hljs-built_in">size</span>() &gt; B.<span class="hljs-built_in">size</span>();<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = A.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;<br>        <span class="hljs-keyword">if</span>(A[i] != B[i]) <span class="hljs-keyword">return</span> A[i] &gt; B[i];<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-comment">// 默认A &gt;= B</span><br><span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">sub</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt; &amp;A, vector&lt;<span class="hljs-type">int</span>&gt; &amp;B)</span> </span>&#123;<br>    vector&lt;<span class="hljs-type">int</span>&gt; res;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>, t = <span class="hljs-number">0</span>; i &lt; A.<span class="hljs-built_in">size</span>(); i++) &#123;<br>        t = A[i] - t;<br>        <span class="hljs-keyword">if</span>(i &lt; B.<span class="hljs-built_in">size</span>()) t -= B[i];<br>        res.<span class="hljs-built_in">push_back</span>((t + <span class="hljs-number">10</span>) % <span class="hljs-number">10</span>);<br>        <span class="hljs-keyword">if</span>(t &lt; <span class="hljs-number">0</span>) t = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">else</span> t = <span class="hljs-number">0</span>;<br>    &#125;<br>    <br>    <span class="hljs-keyword">while</span>(res.<span class="hljs-built_in">size</span>() &gt; <span class="hljs-number">1</span> &amp;&amp; res.<span class="hljs-built_in">back</span>() == <span class="hljs-number">0</span>) res.<span class="hljs-built_in">pop_back</span>(); <br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="高精度乘法"><a href="#高精度乘法" class="headerlink" title="高精度乘法"></a>高精度乘法</h2><img src="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225215223597.png" srcset="/img/loading.gif" lazyload class title="image-20221225215223597">
+<p>这里只是一个很多位数的×一个位数比较小的</p>
+<p>与加法类似</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">mul</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt; &amp;A, <span class="hljs-type">int</span> b)</span> </span>&#123;<br>    vector&lt;<span class="hljs-type">int</span>&gt; res;<br>    <br>    <span class="hljs-type">int</span> t = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; A.<span class="hljs-built_in">size</span>() || t; i++) &#123;<br>        <span class="hljs-keyword">if</span>(i &lt; A.<span class="hljs-built_in">size</span>()) t += A[i] * b;<br>        res.<span class="hljs-built_in">push_back</span>(t % <span class="hljs-number">10</span>);<br>        t /= <span class="hljs-number">10</span>;<br>    &#125;<br>    <span class="hljs-keyword">while</span>(res.<span class="hljs-built_in">size</span>() &gt; <span class="hljs-number">1</span> &amp;&amp; res.<span class="hljs-built_in">back</span>() == <span class="hljs-number">0</span>) res.<span class="hljs-built_in">pop_back</span>();<br><br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h2 id="高精度除法"><a href="#高精度除法" class="headerlink" title="高精度除法"></a>高精度除法</h2><p>存储方式与加减乘一样</p>
+<p>除法从高位开始算，结果需要反转一下</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br>vector&lt;<span class="hljs-type">int</span>&gt; A;<br><br><span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">div</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt; &amp;A, <span class="hljs-type">int</span> b, <span class="hljs-type">int</span> &amp;r)</span> </span>&#123;<br>    <br>    vector&lt;<span class="hljs-type">int</span>&gt; res;<br>    r = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = A.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--)&#123;<br>        r = r * <span class="hljs-number">10</span> + A[i];<br>        res.<span class="hljs-built_in">push_back</span>(r / b);<br>        r %= b;<br>    &#125;<br>    <span class="hljs-built_in">reverse</span>(res.<span class="hljs-built_in">begin</span>(), res.<span class="hljs-built_in">end</span>());<br>    <span class="hljs-keyword">while</span>(res.<span class="hljs-built_in">size</span>() &gt; <span class="hljs-number">1</span> &amp;&amp; res.<span class="hljs-built_in">back</span>() == <span class="hljs-number">0</span>) res.<span class="hljs-built_in">pop_back</span>();<br>    <span class="hljs-keyword">return</span> res;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="前缀和与差分"><a href="#前缀和与差分" class="headerlink" title="前缀和与差分"></a>前缀和与差分</h1><p>以下的数组下标全从1开始</p>
+<h2 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h2><img src="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221225235036134.png" srcset="/img/loading.gif" lazyload class title="image-20221225235036134">
+<p>前缀和就是数列的前n项和</p>
+<p>生成时:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)&#123;<br>	s[i] = s[i - <span class="hljs-number">1</span>] + a[i];<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>[l, r]的和：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">s[r] - s[l - <span class="hljs-number">1</span>];<br></code></pre></td></tr></table></figure>
+<h2 id="子矩阵的和"><a href="#子矩阵的和" class="headerlink" title="子矩阵的和"></a>子矩阵的和</h2><img src="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221226000156078.png" srcset="/img/loading.gif" lazyload class title="image-20221226000156078">
+<p>生成s[i]时:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">s[i][j] = s[i - <span class="hljs-number">1</span>][j] + s[i][j - <span class="hljs-number">1</span>] - s[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>] + a[i][j];<br></code></pre></td></tr></table></figure>
+<p>算子矩阵时：(第二幅图中的阴影)</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">s[x2][y2] - s[x1 - <span class="hljs-number">1</span>][y2] - s[x2][y1 - <span class="hljs-number">1</span>] + s[x1 - <span class="hljs-number">1</span>][y1 - <span class="hljs-number">1</span>];<br></code></pre></td></tr></table></figure>
+<h2 id="差分"><a href="#差分" class="headerlink" title="差分"></a>差分</h2><img src="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221226001408407.png" srcset="/img/loading.gif" lazyload class title="image-20221226001408407">
+<p>目的是让O(n)复杂度变成O(1)</p>
+<p>应用在让[l, r]上的每个数都加c</p>
+<p>首先写出insert函数:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r, <span class="hljs-type">int</span> c)</span> </span>&#123;<br>    b[l] += c;<br>    b[r + <span class="hljs-number">1</span>] -= c;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>构造b数组时：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-built_in">insert</span>(i, i, a[i]);<br></code></pre></td></tr></table></figure>
+<p>计算时:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-built_in">insert</span>(l, r, c);<br></code></pre></td></tr></table></figure>
+<p>计算完成之后同时别忘记还原a数组:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">b[i] += b[i - <span class="hljs-number">1</span>];<br></code></pre></td></tr></table></figure>
+<h2 id="差分矩阵"><a href="#差分矩阵" class="headerlink" title="差分矩阵"></a>差分矩阵</h2><p>比如要给数组阴影部分全部加上常数c</p>
+<img src="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221226104720069.png" srcset="/img/loading.gif" lazyload class title="image-20221226104720069">
+<img src="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221226002854832.png" srcset="/img/loading.gif" lazyload class title="image-20221226002854832">
+<p>insert函数:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp">b[x1][y1] += c;<br>b[x2 + <span class="hljs-number">1</span>][y1] -= c;<br>b[x1][y2 + <span class="hljs-number">1</span>] -= c;<br>b[x2 + <span class="hljs-number">1</span>][y2 + <span class="hljs-number">1</span>] += c;<br></code></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">1010</span>;<br><span class="hljs-type">int</span> a[N][N], b[N][N];<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(<span class="hljs-type">int</span> x1, <span class="hljs-type">int</span> y1, <span class="hljs-type">int</span> x2, <span class="hljs-type">int</span> y2, <span class="hljs-type">int</span> c)</span> </span>&#123;<br>    b[x1][y1] += c;<br>    b[x1][y2 + <span class="hljs-number">1</span>] -= c;<br>    b[x2 + <span class="hljs-number">1</span>][y1] -= c;<br>    b[x2 + <span class="hljs-number">1</span>][y2 + <span class="hljs-number">1</span>] += c;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <br>    <span class="hljs-type">int</span> n, m, q;<br>    cin &gt;&gt; n &gt;&gt; m &gt;&gt; q;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= m; j++) &#123;<br>            cin &gt;&gt; a[i][j];<br>            <span class="hljs-built_in">insert</span>(i, j, i, j, a[i][j]);<br>        &#125;<br>    &#125;<br>    <br>    <span class="hljs-keyword">while</span>(q--) &#123;<br>        <span class="hljs-type">int</span> x1, y1, x2, y2, c;<br>        cin &gt;&gt; x1 &gt;&gt; y1 &gt;&gt; x2 &gt;&gt; y2 &gt;&gt; c;<br>        <span class="hljs-built_in">insert</span>(x1, y1, x2, y2, c);<br>    &#125;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= m; j++) &#123;<br>            b[i][j] += b[i][j - <span class="hljs-number">1</span>] + b[i - <span class="hljs-number">1</span>][j] - b[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>];<br>            cout &lt;&lt; b[i][j] &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;<br>        &#125;<br>        cout &lt;&lt; endl;<br>    &#125;<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="双指针算法"><a href="#双指针算法" class="headerlink" title="双指针算法"></a>双指针算法</h1><p>模板：</p>
+<img src="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221226104911468.png" srcset="/img/loading.gif" lazyload class title="image-20221226104911468">
+<h2 id="最长连续不重复子序列"><a href="#最长连续不重复子序列" class="headerlink" title="最长连续不重复子序列"></a>最长连续不重复子序列</h2><p>用一个数组s存放a[i]的个数，如果数据过于分散可以用哈希表</p>
+<p>i和j都是从左往右移动，当发现s[a[i]] &gt; 1时，说明有元素重复，j到i的这一段一定不是不重复子串</p>
+<img src="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221226110714696.png" srcset="/img/loading.gif" lazyload class title="image-20221226110714696">
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> res = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>        s[a[i]] ++;<br>        <span class="hljs-keyword">while</span>(s[a[i]] &gt; <span class="hljs-number">1</span>) &#123;<br>            s[a[j]] --;<br>            j ++;<br>        &#125;<br>        res = <span class="hljs-built_in">max</span>(res, i - j + <span class="hljs-number">1</span>);<br>    &#125;<br>    cout &lt;&lt; res ;<br></code></pre></td></tr></table></figure>
+<h2 id="数组元素的目标和"><a href="#数组元素的目标和" class="headerlink" title="数组元素的目标和"></a>数组元素的目标和</h2><img src="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221226112750337.png" srcset="/img/loading.gif" lazyload class title="image-20221226112750337">
+<p>i指A数组从左往右，j指B数组从右往左，利用单调性</p>
+<img src="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221226114158638.png" srcset="/img/loading.gif" lazyload class title="image-20221226114158638">
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>, j = m - <span class="hljs-number">1</span>; i &lt; n; i++) &#123;<br>       <span class="hljs-keyword">while</span>(j &gt;= <span class="hljs-number">0</span> &amp;&amp; a[i] + b[j] &gt; x) &#123;<br>           j --;<br>       &#125;<br>       <span class="hljs-keyword">if</span>(a[i] + b[j] == x) cout &lt;&lt; i &lt;&lt; <span class="hljs-string">&quot; &quot;</span> &lt;&lt; j;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="判断子序列"><a href="#判断子序列" class="headerlink" title="判断子序列"></a>判断子序列</h2><img src="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221226115836277.png" srcset="/img/loading.gif" lazyload class title="image-20221226115836277">
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span>(i &lt; n &amp;&amp; j &lt; m) &#123;<br>        <span class="hljs-keyword">if</span>(a[i] == b[j]) i++;<br>        j++;<br>    &#125;<br>    <br>    <span class="hljs-keyword">if</span>(i == n) cout &lt;&lt; <span class="hljs-string">&quot;Yes&quot;</span>;<br>    <span class="hljs-keyword">else</span> cout &lt;&lt; <span class="hljs-string">&quot;No&quot;</span>;<br></code></pre></td></tr></table></figure>
+<h1 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h1><img src="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221226120015732.png" srcset="/img/loading.gif" lazyload class title="image-20221226120015732">
+<h2 id="二进制中1的个数"><a href="#二进制中1的个数" class="headerlink" title="二进制中1的个数"></a>二进制中1的个数</h2><img src="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221226121019709.png" srcset="/img/loading.gif" lazyload class title="image-20221226121019709">
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> res = <span class="hljs-number">0</span>;<br>       <span class="hljs-type">int</span> x;<br>       cin &gt;&gt; x;<br>       <span class="hljs-keyword">while</span>(x)&#123;<br>           x -= <span class="hljs-built_in">lowbit</span>(x);<br>           res++;<br>       &#125;<br>       cout &lt;&lt; res &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;<br></code></pre></td></tr></table></figure>
+<h1 id="离散化"><a href="#离散化" class="headerlink" title="离散化"></a>离散化</h1><h2 id="区间和"><a href="#区间和" class="headerlink" title="区间和"></a>区间和</h2><img src="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/image-20221226163636258.png" srcset="/img/loading.gif" lazyload class title="image-20221226163636258">
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">typedef</span> pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt; PII;<br><br><span class="hljs-type">int</span> n, m;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">300010</span>;<br><span class="hljs-type">int</span> a[N], s[N];<br><br>vector&lt;<span class="hljs-type">int</span>&gt; alls;<br>vector&lt;PII&gt; add, query;<br> <br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>&#123;<br>    <span class="hljs-type">int</span> l = <span class="hljs-number">0</span>, r = alls.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">while</span>(l &lt; r) &#123;<br>        <span class="hljs-type">int</span> mid = l + r &gt;&gt; <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span>(alls[mid] &gt;= x) r = mid;<br>        <span class="hljs-keyword">else</span> l = mid + <span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-comment">//前缀和从1开始</span><br>    <span class="hljs-keyword">return</span> r + <span class="hljs-number">1</span>;<br>&#125; <br><br>vector&lt;<span class="hljs-type">int</span>&gt;::<span class="hljs-function">iterator <span class="hljs-title">unique</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt; &amp;a)</span> </span>&#123;<br>    <span class="hljs-type">int</span> j = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; a.<span class="hljs-built_in">size</span>(); i++) &#123;<br>        <span class="hljs-keyword">if</span>(!i || a[i] != a[i - <span class="hljs-number">1</span>]) <br>            a[j ++] = a[i];<br>        <span class="hljs-comment">//a[0] ~ a[j - 1] 所有a中不重复的数</span><br>    &#125;<br>    <br>    <span class="hljs-keyword">return</span> a.<span class="hljs-built_in">begin</span>() + j;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span> </span>&#123;<br>    <br>    cin &gt;&gt; n &gt;&gt; m;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>        <span class="hljs-type">int</span> x, c;<br>        cin &gt;&gt; x &gt;&gt; c;<br>        add.<span class="hljs-built_in">push_back</span>(&#123;x, c&#125;);<br>        <br>        alls.<span class="hljs-built_in">push_back</span>(x);<br>        <br>    &#125;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123;<br>        <span class="hljs-type">int</span> l, r;<br>        cin &gt;&gt; l &gt;&gt; r;<br>        query.<span class="hljs-built_in">push_back</span>(&#123;l ,r&#125;);<br>        <br>        alls.<span class="hljs-built_in">push_back</span>(l);<br>        alls.<span class="hljs-built_in">push_back</span>(r);<br>    &#125;<br>    <br>    <span class="hljs-comment">//去重</span><br>    <span class="hljs-built_in">sort</span>(alls.<span class="hljs-built_in">begin</span>(), alls.<span class="hljs-built_in">end</span>());<br>    alls.<span class="hljs-built_in">erase</span>(<span class="hljs-built_in">unique</span>(alls), alls.<span class="hljs-built_in">end</span>());<br>    <br>    <span class="hljs-comment">//处理插入</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> item : add) &#123;<br>        <span class="hljs-type">int</span> x = <span class="hljs-built_in">find</span>(item.first);<br>        a[x] += item.second;<br>    &#125;<br>    <br>    <span class="hljs-comment">//预处理前缀和</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= alls.<span class="hljs-built_in">size</span>(); i++) s[i] = s[i - <span class="hljs-number">1</span>] + a[i];<br>    <br>    <span class="hljs-comment">//处理询问</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> item : query)&#123;<br>        <span class="hljs-type">int</span> l = <span class="hljs-built_in">find</span>(item.first), r = <span class="hljs-built_in">find</span>(item.second);<br>        cout &lt;&lt; s[r] - s[l - <span class="hljs-number">1</span>] &lt;&lt; endl;<br>    &#125;<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="区间和并"><a href="#区间和并" class="headerlink" title="区间和并"></a>区间和并</h1><h2 id="区间和并-1"><a href="#区间和并-1" class="headerlink" title="区间和并"></a>区间和并</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">merge</span><span class="hljs-params">(vector&lt;pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;&gt; &amp;segs)</span> </span>&#123;<br>    <br>    vector&lt;pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;&gt; res;<br>    <br>    <span class="hljs-built_in">sort</span>(segs.<span class="hljs-built_in">begin</span>(), segs.<span class="hljs-built_in">end</span>());<br>    <br>    <span class="hljs-type">int</span> st = <span class="hljs-number">-2e9</span>, ed = <span class="hljs-number">-2e9</span>;<br>    <span class="hljs-keyword">for</span>(pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt; seg : segs) &#123;<br>        <span class="hljs-keyword">if</span>(ed &lt; seg.first) &#123;<br>            <span class="hljs-keyword">if</span>(st != <span class="hljs-number">-2e9</span>) res.<span class="hljs-built_in">push_back</span>(&#123;st, ed&#125;);<br>            st = seg.first;<br>            ed = seg.second;<br>        &#125;<span class="hljs-keyword">else</span> ed = <span class="hljs-built_in">max</span>(ed, seg.second);<br>    &#125;<br>    <br>    <span class="hljs-keyword">if</span>(st != <span class="hljs-number">-2e9</span>) res.<span class="hljs-built_in">push_back</span>(&#123;st, ed&#125;);<br>    <br>    segs = res;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/">算法笔记</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE/">算法基础课</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/01/02/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数据结构</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/12/17/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">
+                        <span class="hidden-mobile">IO多路复用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"FVOHeWkJmFW4IL0Dyt3XhY5f-gzGzoHsz","appKey":"aguFoKPPLq6Qvk8DAkOgsdkz","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"https://fvohewkj.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/10/2018 17:38:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.8},"log":false});</script></body>
+</html>
