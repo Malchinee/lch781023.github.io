@@ -19,24 +19,24 @@
     <meta name="description" content="进程概述进程是一个独立的资源分配单元。  二进制格式标识：每个程序文件都包含用于描述可执行文件格式的元信息，内核利用此信息来解释文件中的其他信息（ELF可执行连接格式）  机器语言指令：对程序算法进行编码  程序入口地址：标识程序开始执行时的起始指令位置  数据：程序文件包含的变量初始值和程序使用的字面量值  符号表及重定位表：描述程序中函数和变量的位置及名称 共享库和动态链接信息：程序文件所包含">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux多进程开发">
-<meta property="og:url" content="https://www.example.com/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:url" content="https://www.example.com/2022/12/02/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="进程概述进程是一个独立的资源分配单元。  二进制格式标识：每个程序文件都包含用于描述可执行文件格式的元信息，内核利用此信息来解释文件中的其他信息（ELF可执行连接格式）  机器语言指令：对程序算法进行编码  程序入口地址：标识程序开始执行时的起始指令位置  数据：程序文件包含的变量初始值和程序使用的字面量值  符号表及重定位表：描述程序中函数和变量的位置及名称 共享库和动态链接信息：程序文件所包含">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www.example.com/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221202233047379.png">
-<meta property="og:image" content="https://www.example.com/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221203164901201.png">
-<meta property="og:image" content="https://www.example.com/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221206160645458.png">
-<meta property="og:image" content="https://www.example.com/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221206162634026.png">
-<meta property="og:image" content="https://www.example.com/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221206212000288.png">
-<meta property="og:image" content="https://www.example.com/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221208100340784.png">
-<meta property="og:image" content="https://www.example.com/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221208101612238.png">
-<meta property="og:image" content="https://www.example.com/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221208101802836.png">
-<meta property="og:image" content="https://www.example.com/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221208101821351.png">
+<meta property="og:image" content="https://www.example.com/2022/12/02/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221202233047379.png">
+<meta property="og:image" content="https://www.example.com/2022/12/02/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221203164901201.png">
+<meta property="og:image" content="https://www.example.com/2022/12/02/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221206160645458.png">
+<meta property="og:image" content="https://www.example.com/2022/12/02/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221206162634026.png">
+<meta property="og:image" content="https://www.example.com/2022/12/02/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221206212000288.png">
+<meta property="og:image" content="https://www.example.com/2022/12/02/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221208100340784.png">
+<meta property="og:image" content="https://www.example.com/2022/12/02/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221208101612238.png">
+<meta property="og:image" content="https://www.example.com/2022/12/02/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221208101802836.png">
+<meta property="og:image" content="https://www.example.com/2022/12/02/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221208101821351.png">
 <meta property="article:published_time" content="2022-12-02T14:04:05.000Z">
 <meta property="article:modified_time" content="2022-12-09T06:26:01.227Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://www.example.com/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221202233047379.png">
+<meta name="twitter:image" content="https://www.example.com/2022/12/02/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221202233047379.png">
   
   
   <title>Linux多进程开发 - Hexo</title>
@@ -292,12 +292,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>就绪态：进程具备运行条件，等待系统分配处理器以便运行。</li>
 <li>阻塞态：进程不具备运行条件，正在等待某个事件的完成</li>
 </ul>
-<img src="/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221202233047379.png" srcset="/img/loading.gif" lazyload class title="image-20221202233047379">
+<img src="/2022/12/02/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221202233047379.png" srcset="/img/loading.gif" lazyload class title="image-20221202233047379">
 <ul>
 <li>新建态：进程背创建时的状态，尚未进入就绪队列</li>
 <li>终止态：进程完成任务到达正常结束点，或出现无法克服的错误而异常终止，或被操作系统及有终止权的进程所终止时所处的状态。进入终止态的进程以后不再执行，但依然保留在操作系统中等待善后。一旦其他进程完成了对终止态进程的信息抽取后，操作系统将删除该进程。</li>
 </ul>
-<img src="/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221203164901201.png" srcset="/img/loading.gif" lazyload class title="image-20221203164901201">
+<img src="/2022/12/02/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221203164901201.png" srcset="/img/loading.gif" lazyload class title="image-20221203164901201">
 <p>查看进程信息：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><pre><code class="hljs shell">ps aux<br>ps ajx //显示父进程、组进程、会话id<br></code></pre></td></tr></table></figure>
 <p>实时显示进程动态：</p>
@@ -313,13 +313,13 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">info inferiors 查看调试的进程<br>inferior id 切换当前调试的进程<br>detach inferiors id 使进程脱离gdb调试<br></code></pre></td></tr></table></figure>
 <h1 id="exec函数族"><a href="#exec函数族" class="headerlink" title="exec函数族"></a>exec函数族</h1><p>exec函数族作用是根据指定的文件名找到可执行文件，并用它来取代调用进程的内存，就是在<strong>调用进程内部执行一个可执行文件</strong></p>
 <p>exec 函数族的函数<strong>执行成功后不会返回</strong>，因为调用进程的实体，都被新的内容取代，只留下进程ID等一些表面上的信息仍保持原样。只有调用失败了，它们才会返回-1。</p>
-<img src="/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221206160645458.png" srcset="/img/loading.gif" lazyload class title="image-20221206160645458">
+<img src="/2022/12/02/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221206160645458.png" srcset="/img/loading.gif" lazyload class title="image-20221206160645458">
 <p>l：list，参数地址列表，以空指针结尾</p>
 <p>v：vector，村有个参数地址的指针数组的地址</p>
 <p>p：path，按path环境变量制定的目录搜索可执行文件</p>
 <p>e：存有环境变量字符串地址的指针数组的地址</p>
 <h1 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h1><h2 id="进程退出"><a href="#进程退出" class="headerlink" title="进程退出"></a>进程退出</h2><p>exit：标准C库；_exit：标准UNIX库</p>
-<img src="/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221206162634026.png" srcset="/img/loading.gif" lazyload class title="image-20221206162634026">
+<img src="/2022/12/02/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221206162634026.png" srcset="/img/loading.gif" lazyload class title="image-20221206162634026">
 <h2 id="孤儿进程"><a href="#孤儿进程" class="headerlink" title="孤儿进程"></a>孤儿进程</h2><p>父进程运行结束，子进程还在运行</p>
 <p>当出现孤儿进程时，内核就把孤儿进程的父进程设置为init，jinit进程会循环地wait()它的已经退出的子进程。</p>
 <h2 id="僵尸进程"><a href="#僵尸进程" class="headerlink" title="僵尸进程"></a>僵尸进程</h2><p>进程终止时，父进程尚未回收，子进程残留资源（PCB）存放于内核中，变成僵尸进程，僵尸进程不能被kill -9 杀死</p>
@@ -339,7 +339,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>例如统计一个目录中文件的数目命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ls | wc -l<br></code></pre></td></tr></table></figure>
 <p>shell创建了两个进程来执行ls和wc</p>
-<img src="/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221206212000288.png" srcset="/img/loading.gif" lazyload class title="image-20221206212000288">
+<img src="/2022/12/02/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221206212000288.png" srcset="/img/loading.gif" lazyload class title="image-20221206212000288">
 <ul>
 <li><p>管道是一个在内核内存中维护的缓冲器，这个缓冲器的存储能力有限。</p>
 </li>
@@ -433,10 +433,10 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>让进程知道已经发生了一个特定的事情</li>
 <li>强迫进程执行它自己代码中的信号处理程序</li>
 </ul>
-<img src="/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221208100340784.png" srcset="/img/loading.gif" lazyload class title="image-20221208100340784">
-<img src="/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221208101612238.png" srcset="/img/loading.gif" lazyload class title="image-20221208101612238">
-<img src="/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221208101802836.png" srcset="/img/loading.gif" lazyload class title="image-20221208101802836">
-<img src="/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221208101821351.png" srcset="/img/loading.gif" lazyload class title="image-20221208101821351">
+<img src="/2022/12/02/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221208100340784.png" srcset="/img/loading.gif" lazyload class title="image-20221208100340784">
+<img src="/2022/12/02/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221208101612238.png" srcset="/img/loading.gif" lazyload class title="image-20221208101612238">
+<img src="/2022/12/02/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221208101802836.png" srcset="/img/loading.gif" lazyload class title="image-20221208101802836">
+<img src="/2022/12/02/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/image-20221208101821351.png" srcset="/img/loading.gif" lazyload class title="image-20221208101821351">
 <p>查看信号的详细信息</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">man 7 signal<br></code></pre></td></tr></table></figure>
 <p>信号的五种默认处理动作</p>
@@ -489,6 +489,13 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/webServer/">webServer</a>
+                    
+                  </div>
+                
                 
               </div>
               
@@ -503,9 +510,9 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/12/17/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/">
+                      <a href="/2022/12/02/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">IO多路复用</span>
+                        <span class="hidden-mobile">Linux多进程开发</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -513,8 +520,8 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/12/02/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%BC%80%E5%8F%91/">
-                        <span class="hidden-mobile">Linux多进程开发</span>
+                      <a href="/2022/12/02/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF/">
+                        <span class="hidden-mobile">算法模板</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
