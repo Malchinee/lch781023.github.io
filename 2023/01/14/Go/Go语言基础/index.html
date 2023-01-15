@@ -1,0 +1,640 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/touxiang.png">
+  <link rel="icon" href="/img/touxiang.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Go快速上手变量通过var声明变量，类型与其他语言类似，如string、int、float等。如果不指定类型，go语言可以推断类型 同时也能指定const类型 if-elseif-else语句没有括号（），但是必须加大括号{} 1234567if num :&#x3D; 9; num &lt; 0 &amp;#123;	&#x2F;&#x2F;&amp;#125;else if num &lt; 10 &amp;#123;	&#x2F;&#x2F;&amp;#125;else">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go语言基础">
+<meta property="og:url" content="https://www.example.com/2023/01/14/Go/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Go快速上手变量通过var声明变量，类型与其他语言类似，如string、int、float等。如果不指定类型，go语言可以推断类型 同时也能指定const类型 if-elseif-else语句没有括号（），但是必须加大括号{} 1234567if num :&#x3D; 9; num &lt; 0 &amp;#123;	&#x2F;&#x2F;&amp;#125;else if num &lt; 10 &amp;#123;	&#x2F;&#x2F;&amp;#125;else">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.example.com/2023/01/14/Go/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/image-20230114232438654.png">
+<meta property="og:image" content="https://www.example.com/2023/01/14/Go/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/image-20230114233236951.png">
+<meta property="og:image" content="https://www.example.com/2023/01/14/Go/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/image-20230115130144547.png">
+<meta property="og:image" content="https://www.example.com/2023/01/14/Go/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/image-20230115135304484.png">
+<meta property="og:image" content="https://www.example.com/2023/01/14/Go/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/image-20230115135248293.png">
+<meta property="article:published_time" content="2023-01-14T11:14:33.000Z">
+<meta property="article:modified_time" content="2023-01-15T06:18:48.437Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.example.com/2023/01/14/Go/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/image-20230114232438654.png">
+  
+  
+  <title>Go语言基础 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<!--动态线条背景-->
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>这里有即用配件</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/fengmian.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Go语言基础">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-01-14 19:14" pubdate>
+        2023年1月14日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.7k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      57 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Go语言基础</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Go快速上手"><a href="#Go快速上手" class="headerlink" title="Go快速上手"></a>Go快速上手</h1><h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>通过var声明变量，类型与其他语言类似，如string、int、float等。如果不指定类型，go语言可以推断类型</p>
+<p>同时也能指定const类型</p>
+<h2 id="if-else"><a href="#if-else" class="headerlink" title="if-else"></a>if-else</h2><p>if-else语句没有括号（），但是必须加大括号{}</p>
+<figure class="highlight go"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">if</span> num := <span class="hljs-number">9</span>; num &lt; <span class="hljs-number">0</span> &#123;<br>	<span class="hljs-comment">//</span><br>&#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> num &lt; <span class="hljs-number">10</span> &#123;<br>	<span class="hljs-comment">//</span><br>&#125;<span class="hljs-keyword">else</span> &#123;<br>	<span class="hljs-comment">//</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><p>只有for循环，for循环中的三项可以任意忽略。</p>
+<p>同样和if-else一样不需要小括号</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">for</span> i := <span class="hljs-number">7</span>; i &lt; <span class="hljs-number">10</span>; i ++ &#123;<br>	fmt.Println(i)<br>&#125;<br><span class="hljs-keyword">for</span> &#123;<br>    <span class="hljs-keyword">if</span> xxx &#123;<br>        <span class="hljs-keyword">break</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h2><p>switch后跟变量名，case后跟变量的情况。case后面可以不跟大括号</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go">a := <span class="hljs-number">2</span>;<br><span class="hljs-keyword">switch</span> a&#123;<br><span class="hljs-keyword">case</span> <span class="hljs-number">1</span> : <span class="hljs-comment">//</span><br><span class="hljs-keyword">case</span> <span class="hljs-number">2</span> :<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>很少使用，定义的方法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">var</span> a [<span class="hljs-number">5</span>]<span class="hljs-type">int</span><br><span class="hljs-keyword">var</span> b [<span class="hljs-number">5</span>][<span class="hljs-number">5</span>]<span class="hljs-type">int</span>;<br><span class="hljs-keyword">var</span> c := [<span class="hljs-number">5</span>]<span class="hljs-type">int</span>&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h2><p>切片相当于vector，是不定长的数组，使用make创建。可以像数组一样去取值，也可以用append追加元素，但是必须赋值给原切片</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go">s := <span class="hljs-built_in">make</span>([]<span class="hljs-type">string</span>, <span class="hljs-number">3</span>)<br>s = <span class="hljs-built_in">append</span>(s, <span class="hljs-string">&quot;d&quot;</span>)<br><span class="hljs-keyword">var</span> c := <span class="hljs-built_in">make</span>([]<span class="hljs-type">string</span>, <span class="hljs-built_in">len</span>(s))<br></code></pre></td></tr></table></figure>
+<h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><p>同其他语言一样，是一种键值对的数据结构。golang里面的map是无序存放的，在输出它的时候会乱序输出</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go">m := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]<span class="hljs-type">int</span>)<br>m[<span class="hljs-string">&quot;one&quot;</span>] = <span class="hljs-number">1</span><br>m[<span class="hljs-string">&quot;two&quot;</span>] = <span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
+<h2 id="range"><a href="#range" class="headerlink" title="range"></a>range</h2><p>对于一个切片slice或者map来说，用range可以更使代码更简介</p>
+<p>用range遍历时，第一个返回的值为索引，第二个返回的值为数据</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs go">nums := []<span class="hljs-type">int</span>&#123;<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>&#125;<br>sum := <span class="hljs-number">0</span><br><span class="hljs-keyword">for</span> i, num := <span class="hljs-keyword">range</span> nums &#123;<br>	sum += num;<br>	<span class="hljs-keyword">if</span> num == <span class="hljs-number">2</span> &#123;<br>		fmt.Println(<span class="hljs-string">&quot;index :&quot;</span>, i, <span class="hljs-string">&quot;,num:&quot;</span>, num)<br>	&#125;<br>&#125;<br>m := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]<span class="hljs-type">string</span>&#123;<span class="hljs-string">&quot;a&quot;</span> : <span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;b&quot;</span> : <span class="hljs-string">&quot;B&quot;</span>&#125;<br><span class="hljs-keyword">for</span> k, v := <span class="hljs-keyword">range</span> m &#123;<br>    fmt.Println&#123;k, v&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>用func声明，不同于其他语言的是名字在前，类型在后。并且可以返回两个变量</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> 函数名 <span class="hljs-params">(变量a a的类型, 变量b, b的类型)</span></span> (返回类型，可以返回两个值)<br></code></pre></td></tr></table></figure>
+<h2 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h2><p>相比C++指针的功能已经少很多，代表传入引用修改这个变量的值</p>
+<h2 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h2><p>类似C/C++，关键词是type</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> user <span class="hljs-keyword">struct</span> &#123;<br>    name <span class="hljs-type">string</span><br>    password <span class="hljs-type">string</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>结构体方法：类似成员函数；实现的方法是将结构体变量放到函数前面，并加上小括号</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(u user)</span></span> checkPassword(password <span class="hljs-type">string</span>) <span class="hljs-type">bool</span> &#123;<br>	<span class="hljs-keyword">return</span> u.password == password<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2><p>函数的返回值有两个，第二个返回值返回错误信息</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">findUser</span><span class="hljs-params">(users []user, name <span class="hljs-type">string</span>)</span></span> (v *user, err <span class="hljs-type">error</span>) &#123;<br>	<span class="hljs-keyword">for</span> _, u := <span class="hljs-keyword">range</span> users &#123;<br>		<span class="hljs-keyword">if</span> u.name == name &#123;<br>			<span class="hljs-keyword">return</span> &amp;u, <span class="hljs-literal">nil</span>;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, errors.New(<span class="hljs-string">&quot;not found&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h2><p>举例说明：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs go">a := <span class="hljs-string">&quot;hello&quot;</span><br>strings.Contains(a, <span class="hljs-string">&quot;ll&quot;</span>)<br>strings.Count(a, <span class="hljs-string">&quot;l&quot;</span>)<br>strings.HasPrefix(a, <span class="hljs-string">&quot;he&quot;</span>)<br>strings.HasSuffix(a, <span class="hljs-string">&quot;llo&quot;</span>)<br>strings.Index(a, <span class="hljs-string">&quot;ll&quot;</span>)<br>strings.Join([]<span class="hljs-type">string</span>&#123;<span class="hljs-string">&quot;he&quot;</span>, <span class="hljs-string">&quot;llo&quot;</span>&#125;, <span class="hljs-string">&quot;-&quot;</span>)<br>strings.Repeat(a, <span class="hljs-number">2</span>) 		<span class="hljs-comment">// hellohello</span><br>strings.Replace(a, <span class="hljs-string">&quot;e&quot;</span>, <span class="hljs-string">&quot;E&quot;</span>, <span class="hljs-number">-1</span>) 	<span class="hljs-comment">//hEllo</span><br>strings.Splist(<span class="hljs-string">&quot;a-b-c&quot;</span>, <span class="hljs-string">&quot;-&quot;</span>)<br><span class="hljs-type">string</span>.ToLower(a)<br><span class="hljs-type">string</span>.ToUpper(a)<br><span class="hljs-built_in">len</span>(a)<br></code></pre></td></tr></table></figure>
+<p>字符串格式化(Printf)：可以加%v打印任何变量，使用%+v、%#v打印更详细</p>
+<h2 id="Json处理"><a href="#Json处理" class="headerlink" title="Json处理"></a>Json处理</h2><p>在每个字段的首字母都大写的结构体的字段后面加上    ‘json : “字段名”‘</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> userInfo &#123;<br>	Name <span class="hljs-type">string</span><br>	Age  <span class="hljs-type">int</span> <span class="hljs-string">`json:&quot;age&quot;`</span><br>	Hobby  []<span class="hljs-type">string</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>使用JSON.marshaler序列化，JSON.unmarshaler反序列化</p>
+<h2 id="时间处理"><a href="#时间处理" class="headerlink" title="时间处理"></a>时间处理</h2><p>time.now() 获取当前时间，time.Date()构造带时区的时间， .UNIX()获取时间戳</p>
+<p>在生成随机数时，需要“播种”，用到</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">rand.Seed(time.Now().UnixNano())<br></code></pre></td></tr></table></figure>
+<h2 id="数字解析"><a href="#数字解析" class="headerlink" title="数字解析"></a>数字解析</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go">f, _ := strconv.ParseFloat(<span class="hljs-string">&quot;1.234&quot;</span>, <span class="hljs-number">64</span>)		<span class="hljs-comment">// 1.234</span><br>n, _ := strconv.ParseInt(<span class="hljs-string">&quot;111&quot;</span>, <span class="hljs-number">10</span>, <span class="hljs-number">64</span>)		<span class="hljs-comment">// 111</span><br>n, _ := strconv.ParseInt(<span class="hljs-string">&quot;0x1000&quot;</span>, <span class="hljs-number">0</span>, <span class="hljs-number">64</span>)	<span class="hljs-comment">// 4096</span><br>n2, _ := strconv.Atoi(<span class="hljs-string">&quot;123&quot;</span>)				<span class="hljs-comment">// 整形123</span><br></code></pre></td></tr></table></figure>
+<h1 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h1><p>都按最终版本实现了一次</p>
+<h2 id="猜数游戏"><a href="#猜数游戏" class="headerlink" title="猜数游戏"></a><a target="_blank" rel="noopener" href="https://github.com/lch781023/TraingCamp/tree/main/chapter1/guess_number">猜数游戏</a></h2><p>用到的输入比较麻烦，是因为熟悉一下bufio这种方式</p>
+<p>大致的流程：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// 生成随机数</span><br>maxNum := <span class="hljs-number">100</span><br>rand.Seed(time.Now().UnixNano())<br>secretNum := rand.Intn(maxNum)<br><span class="hljs-comment">// 读入数据</span><br>reader := bufio.NewReader(os.Stdin)<br>input, err := reader.ReadString(<span class="hljs-string">&#x27;\n&#x27;</span>)<br>guess, err := strconv.Atoi(input)<br></code></pre></td></tr></table></figure>
+<p>简化的读取方式：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">var</span> guess <span class="hljs-type">int</span><br>_, err := fmt.Scanf(<span class="hljs-string">&quot;%d&quot;</span>, &amp;guess)<br></code></pre></td></tr></table></figure>
+<p>标准化输入和输出不一样，输入不能使用%v</p>
+<h2 id="在线词典"><a href="#在线词典" class="headerlink" title="在线词典"></a><a target="_blank" rel="noopener" href="https://github.com/lch781023/TraingCamp/tree/main/chapter1/dict">在线词典</a></h2><p><strong>v1：</strong></p>
+<p>利用<a target="_blank" rel="noopener" href="https://curlconverter.com/go/">网站</a>，根据请求报文的cURL生成go代码</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// 创建请求</span><br>client := &amp;http.Clinet&#123;&#125;<br><span class="hljs-keyword">var</span> data = strings.NewReader(<span class="hljs-string">`&#123;&quot;trans_type&quot;:&quot;en2zh&quot;,&quot;source&quot;:&quot;good&quot;,&quot;user_id&quot;:&quot;632f1a87342fe300152e1e24&quot;&#125;`</span>) 	<span class="hljs-comment">// 请求报文的一些信息</span><br>req, err := http.NewRequset(<span class="hljs-string">&quot;POST&quot;</span>, URL, data)		<span class="hljs-comment">// 请求报文的方法体，请求资源的信息</span><br><span class="hljs-comment">// 继续添加请求报文的字段信息，设置请求头</span><br><span class="hljs-comment">// ......</span><br><br><span class="hljs-comment">// 发起请求</span><br>resp, err := client.Do(req)<br><span class="hljs-keyword">defer</span> resp.Body.Close()			<span class="hljs-comment">// 会在函数结束时候执行</span><br><br><span class="hljs-comment">// 读取响应</span><br>bodyText, err := iotil.ReadAll(resp.Body)	<span class="hljs-comment">// 这里就是响应报文的信息了</span><br></code></pre></td></tr></table></figure>
+<p><strong>v2：</strong></p>
+<p>需要让一个变量代替输入，需要用到JSON序列化</p>
+<p>创建一个结构体：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> DictRequest <span class="hljs-keyword">struct</span> &#123;<br>	TransType <span class="hljs-type">string</span> <span class="hljs-string">`json:&quot;trans_type&quot;`</span><br>	Source    <span class="hljs-type">string</span> <span class="hljs-string">`json:&quot;source&quot;`</span><br>	UserID    <span class="hljs-type">string</span> <span class="hljs-string">`json:&quot;user_id&quot;`</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>用自定义的字段创建请求：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go">request := DictRequest&#123;TransType : <span class="hljs-string">&quot;en2zh&quot;</span>, Source : <span class="hljs-string">&quot;good&quot;</span>, UserID : <span class="hljs-string">&quot;xxxx&quot;</span>&#125;<br>buf, err := json.Marshal(request)<br><span class="hljs-keyword">var</span> data = bytes.NewReader(buf)<br></code></pre></td></tr></table></figure>
+<p>代替上一段的创建请求</p>
+<p><strong>v3：</strong></p>
+<p>我们要解析响应报文，利用<a target="_blank" rel="noopener" href="https://oktools.net/json2go">OkTools网站</a>将json转换为go语言的结构体：</p>
+<img src="/2023/01/14/Go/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/image-20230114232438654.png" srcset="/img/loading.gif" lazyload class title="image-20230114232438654">
+<p>添加结构体之后，我们最后只需要将bodyText这个json字符串反序列化成该结构体的字段就行</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">var</span> dictResponse DictResponse<br>err = json.unmarshal(bodyText, &amp;dictResponse)<br>fmt.Printf(<span class="hljs-string">&quot;#v&quot;</span>, dictRespnse)<br></code></pre></td></tr></table></figure>
+<p>这样输出的信息就有了比较清楚的信息：<img src="/2023/01/14/Go/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/image-20230114233236951.png" srcset="/img/loading.gif" lazyload class title="image-20230114233236951"></p>
+<p><strong>v4：</strong></p>
+<p>最后我们想要任意输入，最后输出它的中文解释</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go">fmt.Println(word, <span class="hljs-string">&quot;UK:&quot;</span>, dictResponse.Dictionary.Prons.En, <span class="hljs-string">&quot;, US:&quot;</span>, dictResponse.Dictionary.Prons.EnUs)<br><span class="hljs-keyword">for</span> _, item := <span class="hljs-keyword">range</span> dictResponse.Dictionary.Explanations &#123;<br>	fmt.Println(item)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>输入的话标准化输入、命令行输入都行</p>
+<ul>
+<li>添加另一种翻译引擎：按照上面的方法添加百度翻译等</li>
+<li>并行请求两个翻译引擎：使用goroutinue来完成</li>
+</ul>
+<h2 id="SOCKS5代理"><a href="#SOCKS5代理" class="headerlink" title="SOCKS5代理"></a><a target="_blank" rel="noopener" href="https://github.com/lch781023/TraingCamp/tree/main/chapter1/proxy">SOCKS5代理</a></h2><img src="/2023/01/14/Go/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/image-20230115130144547.png" srcset="/img/loading.gif" lazyload class title="image-20230115130144547">
+<p>浏览器与socks5代理建立TCP连接，代理再和真正的服务器建立连接。</p>
+<p>分为四个阶段：握手阶段、认证阶段、请求阶段、relay阶段</p>
+<p><strong>握手阶段</strong>与简单的socket通信类似，在process函数里面实现逻辑</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	server, err := net.Listen(<span class="hljs-string">&quot;tcp&quot;</span>, <span class="hljs-string">&quot;127.0.0.1:1080&quot;</span>)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-built_in">panic</span>(err)<br>	&#125;<br>	<span class="hljs-keyword">for</span> &#123;<br>		client, err := server.Accept()<br>		<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>			log.Printf(<span class="hljs-string">&quot;Accept failed %v&quot;</span>, err)<br>			<span class="hljs-keyword">continue</span><br>		&#125;<br>		<span class="hljs-keyword">go</span> process(client)<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>认证阶段：</strong></p>
+<p>浏览器先给代理服务器一个包，这个包有三个字段：version：协议版本号；methods：认证的方法数目；每个method的编码。</p>
+<p>实现auth认证函数，在process函数里调用</p>
+<img src="/2023/01/14/Go/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/image-20230115135304484.png" srcset="/img/loading.gif" lazyload class title="image-20230115135304484">
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">process</span><span class="hljs-params">(conn net.Conn)</span></span> &#123;<br>	<span class="hljs-keyword">defer</span> conn.Close()<br>	reader := bufio.NewReader(conn)<br>	err := auth(reader, conn)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Printf(<span class="hljs-string">&quot;Client %v auth failed:%v&quot;</span>, conn.RemoteAddr(), err)<br>		<span class="hljs-keyword">return</span><br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>把版本号读出来：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs go">ver, err := reader.ReadByte()<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>	<span class="hljs-keyword">return</span> fmt.Errorf(<span class="hljs-string">&quot;read ver failed:%w&quot;</span>, err)<br>&#125;<br><span class="hljs-keyword">if</span> ver != socks5Ver &#123;<br>	<span class="hljs-keyword">return</span> fmt.Errorf(<span class="hljs-string">&quot;not supported ver :%v&quot;</span>, ver)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>然后读取认证方式：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs go">methodSize, err := reader.ReadByte()<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-keyword">return</span> fmt.Errorf(<span class="hljs-string">&quot;read methodSize failed: %w&quot;</span>, err)<br>	&#125;<br>	method := <span class="hljs-built_in">make</span>([]<span class="hljs-type">byte</span>, methodSize)<br><span class="hljs-comment">// readFill填充method</span><br>	_, err = io.ReadFull(reader, method)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-keyword">return</span> fmt.Errorf(<span class="hljs-string">&quot;read method failed:%w&quot;</span>, err)<br>	&#125;<br>	log.Println(<span class="hljs-string">&quot;ver&quot;</span>, ver, <span class="hljs-string">&quot;methond&quot;</span>, method)<br></code></pre></td></tr></table></figure>
+<p><strong>请求阶段：</strong></p>
+<p>浏览器发送一个包，有6个字段：</p>
+<img src="/2023/01/14/Go/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/image-20230115135248293.png" srcset="/img/loading.gif" lazyload class title="image-20230115135248293">
+<p>然后创建connect函数，在process函数里调用，代码和上面认证阶段读取报文差不多</p>
+<p>读取版本号ver、Connect请求cmd、目标地址类型atyp：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go">buf := <span class="hljs-built_in">make</span>([]<span class="hljs-type">byte</span>, <span class="hljs-number">4</span>)<br>_, err = io.ReadFull(reader, buf)<br>ver, cmd, atyp := buf[<span class="hljs-number">0</span>], buf[<span class="hljs-number">1</span>], buf[<span class="hljs-number">3</span>]<br></code></pre></td></tr></table></figure>
+<p>判断目标地址类型：</p>
+<ul>
+<li><p>IPV4：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs go">_, err = io.ReadFull(reader, buf)<br>addr = fmt.Sprintf(<span class="hljs-string">&quot;%d.%d.%d.%d&quot;</span>, buf[<span class="hljs-number">0</span>], buf[<span class="hljs-number">1</span>], buf[<span class="hljs-number">2</span>], buf[<span class="hljs-number">3</span>])<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>HOST:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go">hostSize, err := reader.ReadByte()		<br>host := <span class="hljs-built_in">make</span>([]<span class="hljs-type">byte</span>, hostSize)<br>_, err = io.ReadFull(reader, host)<br>addr = <span class="hljs-type">string</span>(host)<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>IPV6：暂不支持</p>
+</li>
+</ul>
+<p>最后读取端口：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go">_, err = io.ReadFull(reader, buf[:<span class="hljs-number">2</span>])<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>	<span class="hljs-keyword">return</span> fmt.Errorf(<span class="hljs-string">&quot;read port failed:%w&quot;</span>, err)<br>&#125;<br>port := binary.BigEndian.Uint16(buf[:<span class="hljs-number">2</span>])		<span class="hljs-comment">// 大端字节序</span><br></code></pre></td></tr></table></figure>
+<p><strong>relay阶段：</strong></p>
+<p>用net.dial建立一个TCP连接</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go">dest, err := net.Dial(<span class="hljs-string">&quot;tcp&quot;</span>, fmt.Sprintf(<span class="hljs-string">&quot;%v : %v&quot;</span>, addr, port))<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>	<span class="hljs-keyword">return</span> fmt.Errorf(<span class="hljs-string">&quot;dial dst failed:%w&quot;</span>, err)<br>&#125;<br><span class="hljs-keyword">defer</span> dest.Close()<br></code></pre></td></tr></table></figure>
+<p>用io.Copy可以实现单向数据转发，双向需要启动两个goroutinue</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs go">_, err = conn.Write([]<span class="hljs-type">byte</span>&#123;<span class="hljs-number">0x05</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x01</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>&#125;)<br>ctx, cancel := context.WithCancel(context.Background())<br><span class="hljs-keyword">defer</span> cancel()<br><span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>	_, _ = io.Copy(dest, reader)<br>	cancel()<br>&#125;()<br><br><span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>	_, _ = io.Copy(conn, dest)<br>	cancel()<br>&#125;()<br>&lt;-ctx.Done()<br></code></pre></td></tr></table></figure>
+<p>完成后，打开两个终端</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">go run chapter1/proxy/v4/main.go <br>curl --socks5 127.0.0.1:1080 -v http://www.qq.com<br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/">青训营</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/Go%E8%AF%AD%E8%A8%80%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/">Go语言原理与实践</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/01/09/WebServer/%E9%A1%B9%E7%9B%AE/">
+                        <span class="hidden-mobile">项目</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"FVOHeWkJmFW4IL0Dyt3XhY5f-gzGzoHsz","appKey":"aguFoKPPLq6Qvk8DAkOgsdkz","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"https://fvohewkj.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/10/2018 17:38:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.8},"log":false});</script></body>
+</html>
