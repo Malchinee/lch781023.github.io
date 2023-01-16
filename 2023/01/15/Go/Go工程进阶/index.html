@@ -1,0 +1,650 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/touxiang.png">
+  <link rel="icon" href="/img/touxiang.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="语言进阶 并发编程Go可以充分发挥多个核的优势，多线程程序在一个核上分片执行，利用多核可以在同一时间并行执行，提高效率 有比线程更轻量的协程  goroutine快速打印5次hello 123456789101112func Hello(i int) &amp;#123;	fmt.Println(&quot;hello goroutine : &quot;, i)&amp;#125;func HelloGoRou">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go工程进阶">
+<meta property="og:url" content="https://www.example.com/2023/01/15/Go/Go%E5%B7%A5%E7%A8%8B%E8%BF%9B%E9%98%B6/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="语言进阶 并发编程Go可以充分发挥多个核的优势，多线程程序在一个核上分片执行，利用多核可以在同一时间并行执行，提高效率 有比线程更轻量的协程  goroutine快速打印5次hello 123456789101112func Hello(i int) &amp;#123;	fmt.Println(&quot;hello goroutine : &quot;, i)&amp;#125;func HelloGoRou">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.example.com/2023/01/15/Go/Go%E5%B7%A5%E7%A8%8B%E8%BF%9B%E9%98%B6/image-20230115143558529.png">
+<meta property="og:image" content="https://www.example.com/2023/01/15/Go/Go%E5%B7%A5%E7%A8%8B%E8%BF%9B%E9%98%B6/image-20230115150710884.png">
+<meta property="og:image" content="https://www.example.com/2023/01/15/Go/Go%E5%B7%A5%E7%A8%8B%E8%BF%9B%E9%98%B6/image-20230115155924920.png">
+<meta property="og:image" content="https://www.example.com/2023/01/15/Go/Go%E5%B7%A5%E7%A8%8B%E8%BF%9B%E9%98%B6/image-20230115155526641.png">
+<meta property="og:image" content="https://www.example.com/2023/01/15/Go/Go%E5%B7%A5%E7%A8%8B%E8%BF%9B%E9%98%B6/image-20230115160938187.png">
+<meta property="og:image" content="https://www.example.com/2023/01/15/Go/Go%E5%B7%A5%E7%A8%8B%E8%BF%9B%E9%98%B6/image-20230115160842967.png">
+<meta property="og:image" content="https://www.example.com/2023/01/15/Go/Go%E5%B7%A5%E7%A8%8B%E8%BF%9B%E9%98%B6/image-20230116181018146.png">
+<meta property="article:published_time" content="2023-01-15T06:27:21.000Z">
+<meta property="article:modified_time" content="2023-01-16T10:20:53.411Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.example.com/2023/01/15/Go/Go%E5%B7%A5%E7%A8%8B%E8%BF%9B%E9%98%B6/image-20230115143558529.png">
+  
+  
+  <title>Go工程进阶 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<!--动态线条背景-->
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>这里有即用配件</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/fengmian.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Go工程进阶">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-01-15 14:27" pubdate>
+        2023年1月15日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.1k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      60 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Go工程进阶</h1>
+            
+            <div class="markdown-body">
+              <h1 id="语言进阶-并发编程"><a href="#语言进阶-并发编程" class="headerlink" title="语言进阶 并发编程"></a>语言进阶 并发编程</h1><p>Go可以充分发挥多个核的优势，多线程程序在一个核上分片执行，利用多核可以在同一时间并行执行，提高效率</p>
+<p>有比线程更轻量的协程</p>
+<img src="/2023/01/15/Go/Go%E5%B7%A5%E7%A8%8B%E8%BF%9B%E9%98%B6/image-20230115143558529.png" srcset="/img/loading.gif" lazyload class title="image-20230115143558529">
+<h2 id="goroutine"><a href="#goroutine" class="headerlink" title="goroutine"></a>goroutine</h2><p>快速打印5次hello</p>
+<figure class="highlight go"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Hello</span><span class="hljs-params">(i <span class="hljs-type">int</span>)</span></span> &#123;<br>	fmt.Println(<span class="hljs-string">&quot;hello goroutine : &quot;</span>, i)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">HelloGoRoutine</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++ &#123;<br>		<span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(j <span class="hljs-type">int</span>)</span></span> &#123;<br>			Hello(j)<br>		&#125;(i)<br>	&#125;<br>	time.Sleep(time.Second)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="CSP"><a href="#CSP" class="headerlink" title="CSP"></a>CSP</h2><p>C/C++使用管道、共享内存等方式实现进程间通信</p>
+<p>Go提倡通过通信来实现共享内存</p>
+<img src="/2023/01/15/Go/Go%E5%B7%A5%E7%A8%8B%E8%BF%9B%E9%98%B6/image-20230115150710884.png" srcset="/img/loading.gif" lazyload class title="image-20230115150710884">
+<h2 id="channel通道"><a href="#channel通道" class="headerlink" title="channel通道"></a>channel通道</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> 元素类型,[缓冲大小])<br></code></pre></td></tr></table></figure>
+<p>类似生产者-消费者模型，先有第一个子协程生成0~9，再由另一个子协程读取数字并进行平方操作</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">CalSquare</span><span class="hljs-params">()</span></span> &#123;<br>	src := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>)<br>	dest := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-type">int</span>, <span class="hljs-number">3</span>)<br>	<br>    <span class="hljs-comment">// 生产者</span><br>	<span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>		<span class="hljs-keyword">defer</span> <span class="hljs-built_in">close</span>(src)<br>		<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++ &#123;<br>			src &lt;- i<br>		&#125;<br>	&#125;()<br>    <span class="hljs-comment">// 消费者</span><br>	<span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>		<span class="hljs-keyword">defer</span> <span class="hljs-built_in">close</span>(dest)<br>		<span class="hljs-keyword">for</span> i := <span class="hljs-keyword">range</span> src &#123;<br>			dest &lt;- i * i<br>		&#125;<br>	&#125;()<br><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-keyword">range</span> dest &#123;<br>		fmt.Println(i)<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="并发安全"><a href="#并发安全" class="headerlink" title="并发安全"></a>并发安全</h2><p>如果没有锁，上述代码可能会出现两个协程竞争的情况，同时对一个变量进行操作，稳妥的方法是一个协程拿到资源后就对资源进行加锁，等它操作完成之后再解锁。加锁期间其他协程都无法对该资源进行读写</p>
+<p>同C/C++，使用sync.Mutex互斥锁进行加速、解锁操作</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">addWithLock</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">2000</span>; i++ &#123;<br>		lock.Lock()<br>		x++<br>		lock.Unlock()<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="WaitGroup"><a href="#WaitGroup" class="headerlink" title="WaitGroup"></a>WaitGroup</h2><p>正常情况下，新激活的goroutine是不知道什么时候结束的，我们需要直到goroutine什么时候完成，需要借助sync的WaitGroup来实现</p>
+<ul>
+<li><p>Add() 每次激活想要被等待完成的goroutine之前，先调用Add()，用来设置或添加要等待完成的goroutine的数量。</p>
+<p>Add(5)设置计数器的值为5，需要等待5个goroutine完成</p>
+</li>
+<li><p>Done()：每次需要等待的goroutine在完成之前，应该调用Done()方法来表示goroutine完成了，调用后会让计数器值-1</p>
+</li>
+<li><p>Wait()：在等待计数器减为0之前，Wait()会阻塞当前协程</p>
+</li>
+</ul>
+<p>有点类似于信号量</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">hello</span><span class="hljs-params">(x <span class="hljs-type">int</span>)</span></span> &#123;<br>	fmt.Printf(<span class="hljs-string">&quot;hello wait group : %v\n&quot;</span>, x)<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">ManyGoWait</span><span class="hljs-params">()</span></span> &#123;<br><br>	<span class="hljs-keyword">var</span> wg sync.WaitGroup<br>	wg.Add(<span class="hljs-number">5</span>)		<span class="hljs-comment">// 设置计数器的值为5</span><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++ &#123;<br>		<span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(j <span class="hljs-type">int</span>)</span></span> &#123;<br>			<span class="hljs-keyword">defer</span> wg.Done()  <span class="hljs-comment">// 告知这个协程进行完之后要让计数器-1</span><br>			hello(j)<br>		&#125;(i)<br>	&#125;<br>	wg.Wait()		<span class="hljs-comment">// 只有当运行了5个goroutine之后才会退出函数</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="依赖管理"><a href="#依赖管理" class="headerlink" title="依赖管理"></a>依赖管理</h1><p>目前应用最多：Go Module（类似于java的Maven）</p>
+<p>$GOPATH、Go Vender不作记录</p>
+<ul>
+<li>通过go.mod文件管理依赖包版本（类似maven的pom.xml）</li>
+<li>通过go mod指令下载等</li>
+</ul>
+<p>依赖管理三要素：</p>
+<ul>
+<li>配置文件、描述依赖： go.mod</li>
+<li>中心仓库管理依赖库： Proxy</li>
+<li>本地工具：         go get/mod</li>
+</ul>
+<p>go.mod文件的格式</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-class"><span class="hljs-keyword">module</span> <span class="hljs-title">example</span>/<span class="hljs-title">project</span>/<span class="hljs-title">app</span>：依赖管理基本单元</span><br><br>go xxx    原生库<br><br><span class="hljs-keyword">require</span>(<br>	example/<span class="hljs-class"><span class="hljs-keyword">lib</span>   <span class="hljs-title">v1</span>.0.2</span><br>)<br></code></pre></td></tr></table></figure>
+<p>常用的go mod指令：</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs maxima"><span class="hljs-built_in">go</span> <span class="hljs-built_in">mod</span> init     // 初始化，创建<span class="hljs-built_in">go</span>.<span class="hljs-built_in">mod</span>文件<br><span class="hljs-built_in">go</span> <span class="hljs-built_in">mod</span> download  // 下载模块到本地缓存<br><span class="hljs-built_in">go</span> <span class="hljs-built_in">mod</span> tidy		// 增加需要的依赖，删除不需要的依赖<br></code></pre></td></tr></table></figure>
+<p>依赖的东西会有版本的区别，这里分语义版本：{MAJOR}.$MINOR.${PATCH}和基于commit提交的伪版本</p>
+<img src="/2023/01/15/Go/Go%E5%B7%A5%E7%A8%8B%E8%BF%9B%E9%98%B6/image-20230115155924920.png" srcset="/img/loading.gif" lazyload class title="image-20230115155924920">
+<p>依赖会选择最低兼容的版本，如下图，最终编译时会采用V1.4版本</p>
+<img src="/2023/01/15/Go/Go%E5%B7%A5%E7%A8%8B%E8%BF%9B%E9%98%B6/image-20230115155526641.png" srcset="/img/loading.gif" lazyload class title="image-20230115155526641">
+<p>go proxy是一个缓存站点，会缓存第三方代码托管平台的一些代码，可以使依赖稳定（应该像maven的本地仓库、中心仓库）</p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>规则：</p>
+<ul>
+<li><p>所有测试文件以_test.go结尾</p>
+<img src="/2023/01/15/Go/Go%E5%B7%A5%E7%A8%8B%E8%BF%9B%E9%98%B6/image-20230115160938187.png" srcset="/img/loading.gif" lazyload class title="image-20230115160938187">
+</li>
+<li><p>函数命名规范：func TestXxx(* testing T)</p>
+<img src="/2023/01/15/Go/Go%E5%B7%A5%E7%A8%8B%E8%BF%9B%E9%98%B6/image-20230115160842967.png" srcset="/img/loading.gif" lazyload class title="image-20230115160842967">
+</li>
+<li><p>初始化逻辑放到TestMain中</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">TestMain</span><span class="hljs-params">(m *testing.M)</span></span> &#123;<br><br>	<span class="hljs-comment">// 测试前：数据状态、配置初始化等前置工作</span><br>	<br>	code := m.Run()  <span class="hljs-comment">// 测试所有 </span><br>	<br>	<span class="hljs-comment">// 测试后：释放资源等收尾工作</span><br>	os.Exit(code)<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>代码覆盖率：表示测试用例的覆盖度</p>
+<h1 id="实战"><a href="#实战" class="headerlink" title="实战"></a><a target="_blank" rel="noopener" href="https://github.com/lch781023/TraingCamp/tree/main/chapter1/go_community">实战</a></h1><p>社区话题页面：</p>
+<ul>
+<li>实现一个展示话题（标题，文字描述）和回帖列表的后端http接口；</li>
+<li>本地文件存储数据</li>
+</ul>
+<p>用到的技术点：</p>
+<ul>
+<li>web框架：Gin</li>
+<li>分层结构设计：MVC架构</li>
+<li>文件操作</li>
+<li>数据查询</li>
+</ul>
+<p><strong>Repository层：</strong></p>
+<p>在db_init.go中建立索引map：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">var</span> (<br>	topicIndexMap <span class="hljs-keyword">map</span>[<span class="hljs-type">int64</span>]*Topic		<span class="hljs-comment">// 话题</span><br>	postIndexMap  <span class="hljs-keyword">map</span>[<span class="hljs-type">int64</span>][]*Post		<span class="hljs-comment">// 回帖</span><br>)<br></code></pre></td></tr></table></figure>
+<p>repository用到单例模式：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">NewPostDaoInstance</span><span class="hljs-params">()</span></span> *PostDao &#123;<br>	postOnce.Do(<br>		<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>			postDao = &amp;PostDao&#123;&#125;<br>		&#125;)<br>	<span class="hljs-keyword">return</span> postDao<br>&#125;<br><br><span class="hljs-comment">// 查询回帖可以直接</span><br>repository.NewPostDaoInstance.QueryTopicById(id)<br></code></pre></td></tr></table></figure>
+<p>然后在topic.go中编写根据话题id查找话题：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(*TopicDao)</span></span> QueryTopicById(id <span class="hljs-type">int64</span>) *Topic &#123;<br>	<span class="hljs-keyword">return</span> topicIndexMap[id]<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>service层：</strong></p>
+<p>结构体pageInfo表示一个完整帖子</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> PageInfo <span class="hljs-keyword">struct</span> &#123;<br>	Topic    *repository.Topic<br>	PostList []*repository.Post<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>查询的流程：参数校验-&gt;准备数据-&gt;组装实体</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(f *QueryPageInfoFlow)</span></span> Do() (*PageInfo, <span class="hljs-type">error</span>) &#123;<br>	<span class="hljs-keyword">if</span> err := f.checkParam(); err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, err<br>	&#125;<br>	<span class="hljs-keyword">if</span> err := f.prepareInfo(); err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, err<br>	&#125;<br>	<span class="hljs-keyword">if</span> err := f.packPageInfo(); err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, err<br>	&#125;<br>	<span class="hljs-keyword">return</span> f.pageInfo, <span class="hljs-literal">nil</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>其中，准备数据这个操作需要用到repository层给的数据，这里并行执行查询话题和回帖的消息</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(f *QueryPageInfoFlow)</span></span> prepareInfo() <span class="hljs-type">error</span> &#123;<br>	<span class="hljs-comment">//获取topic信息</span><br>	<span class="hljs-keyword">var</span> wg sync.WaitGroup<br>	wg.Add(<span class="hljs-number">2</span>)	<span class="hljs-comment">// 需要两个协程执行</span><br>	<span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>		<span class="hljs-keyword">defer</span> wg.Done()<br>		topic := repository.NewTopicDaoInstance().QueryTopicById(f.topicId)<br>		f.topic = topic<br>	&#125;()<br>	<span class="hljs-comment">//获取post列表</span><br>	<span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>		<span class="hljs-keyword">defer</span> wg.Done()<br>		posts := repository.NewPostDaoInstance().QueryPostsByParentId(f.topicId)<br>		f.posts = posts<br>	&#125;()<br>	wg.Wait()		<span class="hljs-comment">// 等待两个goroutine执行完</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>Controller层：</strong></p>
+<p>定义了一个结构体返回消息</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// 根据上面传来的topicID来查询Topic</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">QueryPageInfo</span><span class="hljs-params">(topicIdStr <span class="hljs-type">string</span>)</span></span> *PageData &#123;<br>	topicId, err := strconv.ParseInt(topicIdStr, <span class="hljs-number">10</span>, <span class="hljs-number">64</span>)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-keyword">return</span> &amp;PageData&#123;<br>			Code: <span class="hljs-number">-1</span>,<br>			Msg:  err.Error(),<br>		&#125;<br>	&#125;<br>	pageInfo, err := service.QueryPageInfo(topicId)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-keyword">return</span> &amp;PageData&#123;<br>			Code: <span class="hljs-number">-1</span>,<br>			Msg:  err.Error(),<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> &amp;PageData&#123;<br>		Code: <span class="hljs-number">0</span>,<br>		Msg:  <span class="hljs-string">&quot;success&quot;</span>,<br>		Data: pageInfo,<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>main.go:</strong></p>
+<p>用到Gin框架，流程：初始化数据索引-&gt;初始化引擎配置-&gt;构建路由-&gt;启动服务</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">if</span> err := Init(<span class="hljs-string">&quot;./data/&quot;</span>); err != <span class="hljs-literal">nil</span> &#123;<br>		os.Exit(<span class="hljs-number">-1</span>)<br>	&#125;<br>	r := gin.Default()<br>	r.GET(<span class="hljs-string">&quot;/community/page/get/:id&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(c *gin.Context)</span></span> &#123;<br>		topicId := c.Param(<span class="hljs-string">&quot;id&quot;</span>)<br>		data := cotroller.QueryPageInfo(topicId)<br>		c.JSON(<span class="hljs-number">200</span>, data)<br>	&#125;)<br>	err := r.Run()<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-keyword">return</span><br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>运行程序后，使用curl命令来测试接口：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">curl</span> <span class="hljs-literal">--location</span> <span class="hljs-literal">--request</span> GET <span class="hljs-string">&#x27;http://0.0.0.0:8080/community/page/get/2&#x27;</span> <br></code></pre></td></tr></table></figure>
+<p>作业：</p>
+<ul>
+<li>支持对话题发布回帖</li>
+<li>回帖id生成需要保证不重复、唯一性</li>
+<li>新加回帖追加到本地文件，同时需要更新索引，注意Map的并发安全问题</li>
+</ul>
+<p>首先在repository层，我们根据传进来的post，加入到文件系统并更新索引</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// 发布帖子，根据传来的Post实体</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(*PostDao)</span></span> AddPost(post *Post) <span class="hljs-type">error</span> &#123;<br>	f, err := os.OpenFile(<span class="hljs-string">&quot;./data/post&quot;</span>, os.O_APPEND|os.O_WRONLY|os.O_CREATE, <span class="hljs-number">0600</span>)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-keyword">return</span> err<br>	&#125;<br>	<span class="hljs-keyword">defer</span> f.Close()<br><br>	appendPost, _ := json.Marshal(post)		<span class="hljs-comment">// 将帖子序列化</span><br>	<span class="hljs-keyword">if</span> _, err = f.WriteString(<span class="hljs-type">string</span>(appendPost) + <span class="hljs-string">&quot;\n&quot;</span>); err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-keyword">return</span> err<br>	&#125;<br><br>	rwMutex.Lock()<br>	postList, ok := postIndexMap[post.ParentId]<br><br>	<span class="hljs-keyword">if</span> !ok &#123; <span class="hljs-comment">// 如果没有查询到，说明这个话题下没有post，创建一个新的post</span><br>		postIndexMap[post.ParentId] = []*Post&#123;post&#125;<br>	&#125; <span class="hljs-keyword">else</span> &#123;<br>		<span class="hljs-comment">// 添加post</span><br>		postList = <span class="hljs-built_in">append</span>(postList, post)<br>		<span class="hljs-comment">// 更新索引</span><br>		postIndexMap[post.ParentId] = postList<br>	&#125;<br><br>	rwMutex.Unlock()<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>然后在service层处理业务逻辑：</p>
+<p>个人的想法：把post的id做成连续的，然后添加post的时候查询最新的到哪里，然后把这个数 + 1就是新的post的id，更好的方法是采用IdWorker，先全局随机变量：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">import</span> (<br>	idworker <span class="hljs-string">&quot;github.com/gitstliu/go-id-worker&quot;</span><br>)<br><span class="hljs-keyword">var</span> idGen *idWorker.IdWorker<br></code></pre></td></tr></table></figure>
+<p>然后在需要id的时候：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Init</span><span class="hljs-params">()</span></span> &#123;<br>	idGen = &amp;idworker.IdWorker&#123;&#125;<br>	idGen.InitIdWorker(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>)<br>&#125;<br>id, err := idGen.NextId()<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-keyword">return</span> err<br>	&#125;<br>post.Id = id<br></code></pre></td></tr></table></figure>
+<p>Post一共有4个字段，除去id有三个字段：topicId、content由上面传，time由系统生成，这三个字段先组成一个结构体PublishPostFlow</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> PublishPostFlow <span class="hljs-keyword">struct</span> &#123;<br>	content <span class="hljs-type">string</span><br>	topicId <span class="hljs-type">int64</span><br>	postId  <span class="hljs-type">int64</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>所以在service层的逻辑是：</p>
+<p>上面传来topicId、content，然后生成PublishPostFlow，然后调用PublishPostFlow里的Do方法，这个Do方法分成两步：检查参数、发布回帖</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// 检查参数</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(f *PublishPostFlow)</span></span> checkParam() <span class="hljs-type">error</span> &#123;<br>	<span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(utf16.Encode([]<span class="hljs-type">rune</span>(f.content))) &gt;= <span class="hljs-number">500</span> &#123;<br>		<span class="hljs-keyword">return</span> errors.New(<span class="hljs-string">&quot;content length must be less than 500&quot;</span>)<br>&#125;	<br><span class="hljs-comment">// 发布回帖</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(f *PublishPostFlow)</span></span> publish() <span class="hljs-type">error</span> &#123;<br>	post := &amp;repository.Post&#123;<br>		ParentId:   f.topicId,<br>		Content:    f.content,<br>		CreateTime: time.Now().Unix(),<br>	&#125;<br>	id, err := idGen.NextId()<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-keyword">return</span> err<br>	&#125;<br>	post.Id = id<br>	<span class="hljs-keyword">if</span> err := repository.NewPostDaoInstance().AddPost(post); err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-keyword">return</span> err<br>	&#125;<br>	f.postId = post.Id<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>&#125;  <br></code></pre></td></tr></table></figure>
+<p>Controller层的逻辑就是将上层传来的string类型的topicId转化成int64，然后调用service层的方法得到PostId，然后返回给上层</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">PublishPost</span><span class="hljs-params">(topicIdStr <span class="hljs-type">string</span>, content <span class="hljs-type">string</span>)</span></span> *PageData &#123;<br>	topicId, _ := strconv.ParseInt(topicIdStr, <span class="hljs-number">10</span>, <span class="hljs-number">64</span>)<br>	postId, err := service.PublishPost(topicId, content)<br><br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-keyword">return</span> &amp;PageData&#123;<br>			Code: <span class="hljs-number">-1</span>,<br>			Msg:  err.Error(),<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> &amp;PageData&#123;<br>		Code: <span class="hljs-number">0</span>,<br>		Msg:  <span class="hljs-string">&quot;success&quot;</span>,<br>		Data: <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]<span class="hljs-type">int64</span>&#123;<br>			<span class="hljs-string">&quot;post_id&quot;</span>: postId,<br>		&#125;,<br>	&#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>main函数里的更新：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs go">r.POST(<span class="hljs-string">&quot;/community/post/do&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(c *gin.Context)</span></span> &#123;<br>		topicId, _ := c.GetPostForm(<span class="hljs-string">&quot;topic_id&quot;</span>)<br>		content, _ := c.GetPostForm(<span class="hljs-string">&quot;content&quot;</span>)<br>		data := controller.PublishPost(topicId, content)<br>		c.JSON(<span class="hljs-number">200</span>, data)<br>&#125;)<br></code></pre></td></tr></table></figure>
+<img src="/2023/01/15/Go/Go%E5%B7%A5%E7%A8%8B%E8%BF%9B%E9%98%B6/image-20230116181018146.png" srcset="/img/loading.gif" lazyload class title="image-20230116181018146">
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/">青训营</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/Go%E8%AF%AD%E8%A8%80%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/">Go语言原理与实践</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/01/14/Go/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">
+                        <span class="hidden-mobile">Go语言基础</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"FVOHeWkJmFW4IL0Dyt3XhY5f-gzGzoHsz","appKey":"aguFoKPPLq6Qvk8DAkOgsdkz","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"https://fvohewkj.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/10/2018 17:38:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.8},"log":false});</script></body>
+</html>
