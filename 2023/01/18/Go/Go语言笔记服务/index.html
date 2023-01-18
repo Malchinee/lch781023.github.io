@@ -16,15 +16,20 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="项目准备hertzHertz是一个高可用性的、高性能和高扩展性的Golang HTTP框架。 快速开始 如果是windows系统，编写代码，然后初始化go.mod文件，然后拉取依赖就行即可： 1234567891011121314151617181920package mainimport (    &quot;context&quot;    &quot;github.com&#x2F;cloudwego">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Go语言笔记服务">
 <meta property="og:url" content="https://www.example.com/2023/01/18/Go/Go%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0%E6%9C%8D%E5%8A%A1/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="项目准备hertzHertz是一个高可用性的、高性能和高扩展性的Golang HTTP框架。 快速开始 如果是windows系统，编写代码，然后初始化go.mod文件，然后拉取依赖就行即可： 1234567891011121314151617181920package mainimport (    &quot;context&quot;    &quot;github.com&#x2F;cloudwego">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.example.com/2023/01/18/Go/Go%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0%E6%9C%8D%E5%8A%A1/image-20230118195614238.png">
+<meta property="og:image" content="https://www.example.com/2023/01/18/Go/Go%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0%E6%9C%8D%E5%8A%A1/image-20230118203128168.png">
 <meta property="article:published_time" content="2023-01-18T03:24:52.000Z">
-<meta property="article:modified_time" content="2023-01-18T03:39:20.066Z">
+<meta property="article:modified_time" content="2023-01-18T15:02:33.549Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.example.com/2023/01/18/Go/Go%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0%E6%9C%8D%E5%8A%A1/image-20230118195614238.png">
   
   
   <title>Go语言笔记服务 - Hexo</title>
@@ -197,7 +202,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      2.7k 字
     </span>
   
 
@@ -206,7 +211,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1 分钟
+      23 分钟
     </span>
   
 
@@ -238,7 +243,73 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             <h1 style="display: none">Go语言笔记服务</h1>
             
             <div class="markdown-body">
-              
+              <h1 id="项目准备"><a href="#项目准备" class="headerlink" title="项目准备"></a>项目准备</h1><h2 id="hertz"><a href="#hertz" class="headerlink" title="hertz"></a>hertz</h2><p>Hertz是一个高可用性的、高性能和高扩展性的Golang HTTP框架。</p>
+<p><a target="_blank" rel="noopener" href="https://www.cloudwego.io/zh/docs/hertz/getting-started/">快速开始</a></p>
+<p>如果是windows系统，编写代码，然后初始化go.mod文件，然后拉取依赖就行即可：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;context&quot;</span><br><br>    <span class="hljs-string">&quot;github.com/cloudwego/hertz/pkg/app&quot;</span><br>    <span class="hljs-string">&quot;github.com/cloudwego/hertz/pkg/app/server&quot;</span><br>    <span class="hljs-string">&quot;github.com/cloudwego/hertz/pkg/common/utils&quot;</span><br>    <span class="hljs-string">&quot;github.com/cloudwego/hertz/pkg/protocol/consts&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    h := server.Default()<br><br>    h.GET(<span class="hljs-string">&quot;/ping&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(c context.Context, ctx *app.RequestContext)</span></span> &#123;<br>            ctx.JSON(consts.StatusOK, utils.H&#123;<span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;pong&quot;</span>&#125;)<br>    &#125;)<br><br>    h.Spin()<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>如果是linux系统，创建一个空文件夹，执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">hz new <br></code></pre></td></tr></table></figure>
+<p>就生成了代码，运行后，在本机8888端口访问</p>
+<h2 id="Kitex"><a href="#Kitex" class="headerlink" title="Kitex"></a><a target="_blank" rel="noopener" href="https://www.cloudwego.io/zh/docs/kitex/getting-started/">Kitex</a></h2><h3 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h3><p>Kitex是一个RPC框架，RPC协议是一种通过网络从远程计算上请求服务，而不需要了解底层网络技术的协议。RPC它假定某些协议存在，如TCP/UDP，为通过程序之间携带信息数据。</p>
+<p>在OSI七层网络模型中，RPC跨越了传输层和应用层</p>
+<p>RPC的三个过程：</p>
+<ul>
+<li>通讯协议</li>
+<li>寻址</li>
+<li>数字序列化</li>
+</ul>
+<p><strong>RPC的处理流程：</strong></p>
+<ol>
+<li>客户端处理过程中调用client sub，就像调用本地方法一样，传入参数</li>
+<li>client sub将参数编组为消息，然后通过系统调用向服务端发送消息</li>
+<li>客户端本地的操作系统将消息发送到服务端</li>
+<li>服务端将接收到的数据包传递给server sub</li>
+<li>server sub将接收到的数据解组为参数</li>
+<li>server sub再调用服务端的过程，过程执行的结果以反方向的相同步骤响应给客户端</li>
+</ol>
+<p><strong>核心概念：</strong></p>
+<ul>
+<li>client：客户端</li>
+<li>server：服务端</li>
+<li>calls：请求</li>
+<li>replier：响应</li>
+<li>services：一个网络服务由一个或多个远程程序集构成</li>
+<li>programs：一个远程程序实现一个或多个远程程序</li>
+<li>procedures：过程、过程的参数、结果在程序协议说明书中定义说明</li>
+<li>version：为兼容程序协议变更，一个服务端可能支持多个版本的远程程序</li>
+</ul>
+<p><strong>RPC协议</strong>：RPC调用过程中需要将消息进行编组然后发送，接收方需要将消息解组为参数，处理结果也需要经过编组、解组。消息由哪些部分构成以及消息的表示形式就构成了消息协议。RPC协议规定请求消息、响应消息的格式。</p>
+<h3 id="Kitex-1"><a href="#Kitex-1" class="headerlink" title="Kitex"></a>Kitex</h3><p>Kitex框架及命令行工具，默认支持thrift和proto3两种IDL(接口定义语言)，对应的Kitex支持thrift和protobuf两种序列化协议。thrift既是IDL格式，同时也是序列化协议和传输协议</p>
+<p>使用：Ubuntu</p>
+<p>新建文件夹，新建xxx.thrift的IDL文件，然后在里面定义服务：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs idl">namespace go api<br><br>struct Request &#123;<br>  1: string message<br>&#125;<br><br>struct Response &#123;<br>  1: string message<br>&#125;<br><br>service Echo &#123;<br>    Response echo(1: Request req)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>然后终端输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">kitex -module example -service example echo.thrift<br></code></pre></td></tr></table></figure>
+<p>然后项目的目录：</p>
+<img src="/2023/01/18/Go/Go%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0%E6%9C%8D%E5%8A%A1/image-20230118195614238.png" srcset="/img/loading.gif" lazyload class title="image-20230118195614238">
+<p>服务端逻辑都在handler.go文件下，编写服务端逻辑</p>
+<p>然后编译运行，build.sh存放着编译脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sh build.sh<br></code></pre></td></tr></table></figure>
+<p>编译过后在output目录存放编译产物，运行它，服务端就开始运行了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sh putput/bootstrap.sh<br></code></pre></td></tr></table></figure>
+<p>然后再编写客户端：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir client &amp;&amp; cd client<br></code></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;context&quot;</span><br>	<span class="hljs-string">&quot;kitex-demo/kitex_gen/api&quot;</span><br>	<span class="hljs-string">&quot;kitex-demo/kitex_gen/api/echo&quot;</span><br>	<span class="hljs-string">&quot;log&quot;</span><br>	<span class="hljs-string">&quot;time&quot;</span><br><br>	<span class="hljs-string">&quot;github.com/cloudwego/kitex/client/callopt&quot;</span><br><br>	<span class="hljs-string">&quot;github.com/cloudwego/kitex/client&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-comment">// 创建客户端</span><br>	c, err := echo.NewClient(<span class="hljs-string">&quot;kitex-demo&quot;</span>, client.WithHostPorts(<span class="hljs-string">&quot;0.0.0.0:8888&quot;</span>))<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Fatal(err)<br>	&#125;<br>	<br>    <span class="hljs-comment">// 发起调用</span><br>	req := &amp;api.Request&#123;Message: <span class="hljs-string">&quot;my request&quot;</span>&#125;	<span class="hljs-comment">// 创建请求</span><br>	<span class="hljs-comment">// 通过c.Echo发起调用</span><br>    resp, err := c.Echo(context.Background(), req, callopt.WithRPCTimeout(<span class="hljs-number">3</span>*time.Second))<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Fatal(err)<br>	&#125;<br>	log.Println(resp)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>然后运行main.go，就可以收到服务器发来的回应：</p>
+<img src="/2023/01/18/Go/Go%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0%E6%9C%8D%E5%8A%A1/image-20230118203128168.png" srcset="/img/loading.gif" lazyload class title="image-20230118203128168">
+<p>Kitex的基本用法：</p>
+<ul>
+<li><p>生成客户端代码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">kitex path_to_your_idl.thrift<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>生成服务端代码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">kitex -service service_name path_to_your_idl.thrift<br></code></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Gorm"><a href="#Gorm" class="headerlink" title="Gorm"></a><a target="_blank" rel="noopener" href="https://github.com/lch781023/TraingCamp/tree/main/chapter1/go-note-project/gorm-demo">Gorm</a></h2><p><a target="_blank" rel="noopener" href="https://www.malchinee.top/2023/01/17/Go/DATABASE-SQL%E4%B8%8EGORM%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/#GORM%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8">基本用法</a>在这篇笔记有介绍</p>
+<h2 id="Etcd、OpenTracing"><a href="#Etcd、OpenTracing" class="headerlink" title="Etcd、OpenTracing"></a><a target="_blank" rel="noopener" href="https://www.redhat.com/zh/topics/containers/what-is-etcd">Etcd</a>、<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/34318538">OpenTracing</a></h2><p>Etcd：一种开源的分布式键值存储，用于分布式系统或计算机集群的共享配置、服务发现和调度协调</p>
+<p>OpenTracing：链路追踪</p>
+<h1 id="未完"><a href="#未完" class="headerlink" title="未完"></a>未完</h1>
             </div>
             <hr>
             <div>
