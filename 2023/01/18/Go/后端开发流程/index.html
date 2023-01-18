@@ -16,23 +16,34 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="项目准备hertzHertz是一个高可用性的、高性能和高扩展性的Golang HTTP框架。 快速开始 如果是windows系统，编写代码，然后初始化go.mod文件，然后拉取依赖就行即可： 1234567891011121314151617181920package mainimport (    &quot;context&quot;    &quot;github.com&#x2F;cloudwego">
+    <meta name="description" content="为什么传统瀑布模型 工作流程直观表达、定义了标准的研发阶段、以流程为本，理想化模型 这种模型适用于对安全等要求比较高的，如银行等企业 但是这种模型太注重流程，不适用于市场 敏捷开发 以小团队快速迭代 团队成员之间的合作更加紧密 以人为本、和用户沟通   SAFeThe Scaled Agile Framework是一套管理框架，多个team相互配合 有哪些需求阶段 MVP（minimum viab">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Go语言笔记服务">
-<meta property="og:url" content="https://www.example.com/2023/01/18/Go/Go%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0%E6%9C%8D%E5%8A%A1/index.html">
+<meta property="og:title" content="后端开发流程">
+<meta property="og:url" content="https://www.example.com/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="项目准备hertzHertz是一个高可用性的、高性能和高扩展性的Golang HTTP框架。 快速开始 如果是windows系统，编写代码，然后初始化go.mod文件，然后拉取依赖就行即可： 1234567891011121314151617181920package mainimport (    &quot;context&quot;    &quot;github.com&#x2F;cloudwego">
+<meta property="og:description" content="为什么传统瀑布模型 工作流程直观表达、定义了标准的研发阶段、以流程为本，理想化模型 这种模型适用于对安全等要求比较高的，如银行等企业 但是这种模型太注重流程，不适用于市场 敏捷开发 以小团队快速迭代 团队成员之间的合作更加紧密 以人为本、和用户沟通   SAFeThe Scaled Agile Framework是一套管理框架，多个team相互配合 有哪些需求阶段 MVP（minimum viab">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www.example.com/2023/01/18/Go/Go%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0%E6%9C%8D%E5%8A%A1/image-20230118195614238.png">
-<meta property="og:image" content="https://www.example.com/2023/01/18/Go/Go%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0%E6%9C%8D%E5%8A%A1/image-20230118203128168.png">
-<meta property="article:published_time" content="2023-01-18T03:24:52.000Z">
-<meta property="article:modified_time" content="2023-01-18T15:02:33.549Z">
+<meta property="og:image" content="https://www.example.com/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230118230910676.png">
+<meta property="og:image" content="https://www.example.com/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230118231309937.png">
+<meta property="og:image" content="https://www.example.com/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230118232525016.png">
+<meta property="og:image" content="https://www.example.com/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230118235845598.png">
+<meta property="og:image" content="https://www.example.com/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230119000144002.png">
+<meta property="og:image" content="https://www.example.com/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230119000649990.png">
+<meta property="og:image" content="https://www.example.com/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230119000822918.png">
+<meta property="og:image" content="https://www.example.com/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230119000941010.png">
+<meta property="og:image" content="https://www.example.com/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230119001016946.png">
+<meta property="og:image" content="https://www.example.com/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230119001134918.png">
+<meta property="og:image" content="https://www.example.com/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230119001209594.png">
+<meta property="og:image" content="https://www.example.com/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230119001727810.png">
+<meta property="og:image" content="https://www.example.com/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230119001849288.png">
+<meta property="article:published_time" content="2023-01-18T15:07:52.000Z">
+<meta property="article:modified_time" content="2023-01-18T16:24:15.510Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://www.example.com/2023/01/18/Go/Go%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0%E6%9C%8D%E5%8A%A1/image-20230118195614238.png">
+<meta name="twitter:image" content="https://www.example.com/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230118230910676.png">
   
   
-  <title>Go语言笔记服务 - Hexo</title>
+  <title>后端开发流程 - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -181,7 +192,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Go语言笔记服务">
+            <span class="h2" id="subtitle" title="后端开发流程">
               
             </span>
 
@@ -191,8 +202,8 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-01-18 11:24" pubdate>
-        2023年1月18日 上午
+      <time datetime="2023-01-18 23:07" pubdate>
+        2023年1月18日 晚上
       </time>
     </span>
   
@@ -202,7 +213,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.7k 字
+      928 字
     </span>
   
 
@@ -211,7 +222,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      23 分钟
+      8 分钟
     </span>
   
 
@@ -240,76 +251,88 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Go语言笔记服务</h1>
+            <h1 style="display: none">后端开发流程</h1>
             
             <div class="markdown-body">
-              <h1 id="项目准备"><a href="#项目准备" class="headerlink" title="项目准备"></a>项目准备</h1><h2 id="hertz"><a href="#hertz" class="headerlink" title="hertz"></a>hertz</h2><p>Hertz是一个高可用性的、高性能和高扩展性的Golang HTTP框架。</p>
-<p><a target="_blank" rel="noopener" href="https://www.cloudwego.io/zh/docs/hertz/getting-started/">快速开始</a></p>
-<p>如果是windows系统，编写代码，然后初始化go.mod文件，然后拉取依赖就行即可：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;context&quot;</span><br><br>    <span class="hljs-string">&quot;github.com/cloudwego/hertz/pkg/app&quot;</span><br>    <span class="hljs-string">&quot;github.com/cloudwego/hertz/pkg/app/server&quot;</span><br>    <span class="hljs-string">&quot;github.com/cloudwego/hertz/pkg/common/utils&quot;</span><br>    <span class="hljs-string">&quot;github.com/cloudwego/hertz/pkg/protocol/consts&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    h := server.Default()<br><br>    h.GET(<span class="hljs-string">&quot;/ping&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(c context.Context, ctx *app.RequestContext)</span></span> &#123;<br>            ctx.JSON(consts.StatusOK, utils.H&#123;<span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;pong&quot;</span>&#125;)<br>    &#125;)<br><br>    h.Spin()<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>如果是linux系统，创建一个空文件夹，执行</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">hz new <br></code></pre></td></tr></table></figure>
-<p>就生成了代码，运行后，在本机8888端口访问</p>
-<h2 id="Kitex"><a href="#Kitex" class="headerlink" title="Kitex"></a><a target="_blank" rel="noopener" href="https://www.cloudwego.io/zh/docs/kitex/getting-started/">Kitex</a></h2><h3 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h3><p>Kitex是一个RPC框架，RPC协议是一种通过网络从远程计算上请求服务，而不需要了解底层网络技术的协议。RPC它假定某些协议存在，如TCP/UDP，为通过程序之间携带信息数据。</p>
-<p>在OSI七层网络模型中，RPC跨越了传输层和应用层</p>
-<p>RPC的三个过程：</p>
-<ul>
-<li>通讯协议</li>
-<li>寻址</li>
-<li>数字序列化</li>
+              <h1 id="为什么"><a href="#为什么" class="headerlink" title="为什么"></a>为什么</h1><h2 id="传统瀑布模型"><a href="#传统瀑布模型" class="headerlink" title="传统瀑布模型"></a>传统瀑布模型</h2><img src="/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230118230910676.png" srcset="/img/loading.gif" lazyload class title="image-20230118230910676">
+<p>工作流程直观表达、定义了标准的研发阶段、以流程为本，理想化模型</p>
+<p>这种模型适用于对安全等要求比较高的，如银行等企业</p>
+<p>但是这种模型太注重流程，不适用于市场</p>
+<h2 id="敏捷开发"><a href="#敏捷开发" class="headerlink" title="敏捷开发"></a>敏捷开发</h2><ul>
+<li>以小团队快速迭代</li>
+<li>团队成员之间的合作更加紧密</li>
+<li>以人为本、和用户沟通</li>
 </ul>
-<p><strong>RPC的处理流程：</strong></p>
-<ol>
-<li>客户端处理过程中调用client sub，就像调用本地方法一样，传入参数</li>
-<li>client sub将参数编组为消息，然后通过系统调用向服务端发送消息</li>
-<li>客户端本地的操作系统将消息发送到服务端</li>
-<li>服务端将接收到的数据包传递给server sub</li>
-<li>server sub将接收到的数据解组为参数</li>
-<li>server sub再调用服务端的过程，过程执行的结果以反方向的相同步骤响应给客户端</li>
+<img src="/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230118231309937.png" srcset="/img/loading.gif" lazyload class title="image-20230118231309937">
+<h2 id="SAFe"><a href="#SAFe" class="headerlink" title="SAFe"></a>SAFe</h2><p>The Scaled Agile Framework是一套管理框架，多个team相互配合</p>
+<h1 id="有哪些"><a href="#有哪些" class="headerlink" title="有哪些"></a>有哪些</h1><h2 id="需求阶段"><a href="#需求阶段" class="headerlink" title="需求阶段"></a>需求阶段</h2><ol>
+<li><p>MVP（minimum viable product）最小可行产品思想</p>
+<p>站在用户的角度思考，收集用户反馈，快速迭代</p>
+</li>
+<li><p>四象限法：</p>
+<img src="/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230118232525016.png" srcset="/img/loading.gif" lazyload class title="image-20230118232525016">
+</li>
 </ol>
-<p><strong>核心概念：</strong></p>
+<h2 id="开发阶段"><a href="#开发阶段" class="headerlink" title="开发阶段"></a>开发阶段</h2><p>传统方式：</p>
 <ul>
-<li>client：客户端</li>
-<li>server：服务端</li>
-<li>calls：请求</li>
-<li>replier：响应</li>
-<li>services：一个网络服务由一个或多个远程程序集构成</li>
-<li>programs：一个远程程序实现一个或多个远程程序</li>
-<li>procedures：过程、过程的参数、结果在程序协议说明书中定义说明</li>
-<li>version：为兼容程序协议变更，一个服务端可能支持多个版本的远程程序</li>
-</ul>
-<p><strong>RPC协议</strong>：RPC调用过程中需要将消息进行编组然后发送，接收方需要将消息解组为参数，处理结果也需要经过编组、解组。消息由哪些部分构成以及消息的表示形式就构成了消息协议。RPC协议规定请求消息、响应消息的格式。</p>
-<h3 id="Kitex-1"><a href="#Kitex-1" class="headerlink" title="Kitex"></a>Kitex</h3><p>Kitex框架及命令行工具，默认支持thrift和proto3两种IDL(接口定义语言)，对应的Kitex支持thrift和protobuf两种序列化协议。thrift既是IDL格式，同时也是序列化协议和传输协议</p>
-<p>使用：Ubuntu</p>
-<p>新建文件夹，新建xxx.thrift的IDL文件，然后在里面定义服务：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs idl">namespace go api<br><br>struct Request &#123;<br>  1: string message<br>&#125;<br><br>struct Response &#123;<br>  1: string message<br>&#125;<br><br>service Echo &#123;<br>    Response echo(1: Request req)<br>&#125;<br><br></code></pre></td></tr></table></figure>
-<p>然后终端输入：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">kitex -module example -service example echo.thrift<br></code></pre></td></tr></table></figure>
-<p>然后项目的目录：</p>
-<img src="/2023/01/18/Go/Go%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0%E6%9C%8D%E5%8A%A1/image-20230118195614238.png" srcset="/img/loading.gif" lazyload class title="image-20230118195614238">
-<p>服务端逻辑都在handler.go文件下，编写服务端逻辑</p>
-<p>然后编译运行，build.sh存放着编译脚本</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sh build.sh<br></code></pre></td></tr></table></figure>
-<p>编译过后在output目录存放编译产物，运行它，服务端就开始运行了</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sh putput/bootstrap.sh<br></code></pre></td></tr></table></figure>
-<p>然后再编写客户端：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir client &amp;&amp; cd client<br></code></pre></td></tr></table></figure>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;context&quot;</span><br>	<span class="hljs-string">&quot;kitex-demo/kitex_gen/api&quot;</span><br>	<span class="hljs-string">&quot;kitex-demo/kitex_gen/api/echo&quot;</span><br>	<span class="hljs-string">&quot;log&quot;</span><br>	<span class="hljs-string">&quot;time&quot;</span><br><br>	<span class="hljs-string">&quot;github.com/cloudwego/kitex/client/callopt&quot;</span><br><br>	<span class="hljs-string">&quot;github.com/cloudwego/kitex/client&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-comment">// 创建客户端</span><br>	c, err := echo.NewClient(<span class="hljs-string">&quot;kitex-demo&quot;</span>, client.WithHostPorts(<span class="hljs-string">&quot;0.0.0.0:8888&quot;</span>))<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Fatal(err)<br>	&#125;<br>	<br>    <span class="hljs-comment">// 发起调用</span><br>	req := &amp;api.Request&#123;Message: <span class="hljs-string">&quot;my request&quot;</span>&#125;	<span class="hljs-comment">// 创建请求</span><br>	<span class="hljs-comment">// 通过c.Echo发起调用</span><br>    resp, err := c.Echo(context.Background(), req, callopt.WithRPCTimeout(<span class="hljs-number">3</span>*time.Second))<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Fatal(err)<br>	&#125;<br>	log.Println(resp)<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>然后运行main.go，就可以收到服务器发来的回应：</p>
-<img src="/2023/01/18/Go/Go%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0%E6%9C%8D%E5%8A%A1/image-20230118203128168.png" srcset="/img/loading.gif" lazyload class title="image-20230118203128168">
-<p>Kitex的基本用法：</p>
-<ul>
-<li><p>生成客户端代码：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">kitex path_to_your_idl.thrift<br></code></pre></td></tr></table></figure>
+<li><p>虚拟机</p>
+<p>在物理主机中虚拟出多个虚拟机，每个虚拟机拥有自己的操作系统。运维人员负责维护和交付虚拟机。每个虚拟机都要安装相应的依赖环境</p>
 </li>
-<li><p>生成服务端代码：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">kitex -service service_name path_to_your_idl.thrift<br></code></pre></td></tr></table></figure>
+<li><p>单体架构</p>
+<p>多个模块共同组成一个服务，服务体量比较大。模块之间直接调用，不需要RPC通信。服务整体扩缩容量。多人开发一个代码仓库，需要充分集成测试</p>
 </li>
 </ul>
-<h2 id="Gorm"><a href="#Gorm" class="headerlink" title="Gorm"></a><a target="_blank" rel="noopener" href="https://github.com/lch781023/TraingCamp/tree/main/chapter1/go-note-project/gorm-demo">Gorm</a></h2><p><a target="_blank" rel="noopener" href="https://www.malchinee.top/2023/01/17/Go/DATABASE-SQL%E4%B8%8EGORM%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/#GORM%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8">基本用法</a>在这篇笔记有介绍</p>
-<h2 id="Etcd、OpenTracing"><a href="#Etcd、OpenTracing" class="headerlink" title="Etcd、OpenTracing"></a><a target="_blank" rel="noopener" href="https://www.redhat.com/zh/topics/containers/what-is-etcd">Etcd</a>、<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/34318538">OpenTracing</a></h2><p>Etcd：一种开源的分布式键值存储，用于分布式系统或计算机集群的共享配置、服务发现和调度协调</p>
-<p>OpenTracing：链路追踪</p>
-<h1 id="未完"><a href="#未完" class="headerlink" title="未完"></a>未完</h1>
+<p>云原生：</p>
+<ul>
+<li><p>容器化</p>
+<p>容器是在操作系统中虚拟出来的。通过cgroup，namespace和Union Mount等技术实现了容器之间的相互隔离，同时容器只有很低的开销。内容和其依赖作为一个整体，打包成镜像交付</p>
+</li>
+<li><p>微服务架构</p>
+<p>各个功能在不同的服务中。每个服务需要RPC通信。不同模块可以独立扩缩容。每个服务的代码仓库仅由少部分人维护</p>
+</li>
+</ul>
+<p>注意代码规范、自测、文档</p>
+<img src="/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230118235845598.png" srcset="/img/loading.gif" lazyload class title="image-20230118235845598">
+<h2 id="测试阶段"><a href="#测试阶段" class="headerlink" title="测试阶段"></a>测试阶段</h2><img src="/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230119000144002.png" srcset="/img/loading.gif" lazyload class title="image-20230119000144002">
+<p>功能环境</p>
+<ul>
+<li>需要一个能模拟线上的环境进行开发和测试</li>
+<li>环境和环境之间能够隔离，不影响其他功能的开发</li>
+</ul>
+<p>集成环境</p>
+<ul>
+<li>不同人开发的功能合并在一起，相互之间的影响可能会产生缺陷</li>
+<li>迭代发布的所有功能合并在一起测试，确保发布的所有功能之间的影响不产生缺陷</li>
+</ul>
+<p>回归环境</p>
+<ul>
+<li>确保新的功能不对老的功能产生影响</li>
+<li>回归测试一般会借助自动化测试脚本</li>
+</ul>
+<h2 id="发布阶段"><a href="#发布阶段" class="headerlink" title="发布阶段"></a>发布阶段</h2><img src="/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230119000649990.png" srcset="/img/loading.gif" lazyload class title="image-20230119000649990">
+<p><strong>发布模式：</strong></p>
+<ul>
+<li><p>蛮力发布：直接用新版本覆盖老版本</p>
+<img src="/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230119000822918.png" srcset="/img/loading.gif" lazyload class title="image-20230119000822918">
+</li>
+<li><p>金丝燕发布：在一台机器发布，再扩散，增大用户数量</p>
+<img src="/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230119000941010.png" srcset="/img/loading.gif" lazyload class title="image-20230119000941010">
+</li>
+<li><p>滚动发布：每个实例都通过金丝雀的方式逐步放大流量，对用户影响小</p>
+<img src="/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230119001016946.png" srcset="/img/loading.gif" lazyload class title="image-20230119001016946">
+</li>
+<li><p>蓝绿发布：把服务分成蓝绿两组，先把蓝组流量摘掉然后升级，只用绿组，之后切换全部流量，只用蓝组服务，然后升级绿组服务，最终两组全部发布</p>
+<img src="/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230119001134918.png" srcset="/img/loading.gif" lazyload class title="image-20230119001134918">
+</li>
+<li><p>红黑发布：发布时动态扩容出一组新的服务</p>
+<img src="/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230119001209594.png" srcset="/img/loading.gif" lazyload class title="image-20230119001209594">
+</li>
+</ul>
+<h2 id="运维阶段"><a href="#运维阶段" class="headerlink" title="运维阶段"></a>运维阶段</h2><p>一般有查大规模的微服务体系，在微服务中添加埋点采集Metrics、Logging、分布式Trace等多种数据</p>
+<h1 id="如何优化"><a href="#如何优化" class="headerlink" title="如何优化"></a>如何优化</h1><p><strong>DevOps：</strong></p>
+<img src="/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230119001727810.png" srcset="/img/loading.gif" lazyload class title="image-20230119001727810">
+<img src="/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/image-20230119001849288.png" srcset="/img/loading.gif" lazyload class title="image-20230119001849288">
+
             </div>
             <hr>
             <div>
@@ -320,7 +343,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                     
                       <a class="hover-with-bg" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/">青训营</a>
                     
-                      <a class="hover-with-bg" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/Go%E8%AF%AD%E8%A8%80%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/">Go语言原理与实践</a>
+                      <a class="hover-with-bg" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/%E5%BC%80%E5%8F%91%E4%B8%8E%E8%BF%AD%E4%BB%A3/">开发与迭代</a>
                     
                   </div>
                 
@@ -338,18 +361,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">后端开发流程</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/01/17/Go/DATABASE-SQL%E4%B8%8EGORM%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/">
-                        <span class="hidden-mobile">DATABASE/SQL与GORM设计与实践</span>
+                      <a href="/2023/01/18/Go/Go%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0%E6%9C%8D%E5%8A%A1/">
+                        <span class="hidden-mobile">Go语言笔记服务</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
