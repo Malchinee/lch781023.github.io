@@ -1,0 +1,652 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/touxiang.png">
+  <link rel="icon" href="/img/touxiang.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="网络接入互联网框架：  丢包、卡顿问题一般出现在“最后一公里”，运营商一般不会出现故障 路由路由工作在IP层，路由不是改IP地址，而是改MAC地址。 路由是为了找目标的路，一旦找到下一跳，是为了告诉二层交换时下一跳往哪个MAC地址发 掩码：决定子网的范围是多大。如果一个ip在子网掩码以内的，称为同网段。 同网段不仅有直连的方式，更多的方式是交换机&#x2F;逻辑交换机  同网段不一定接入同一个物理逻辑的交换">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络">
+<meta property="og:url" content="https://www.example.com/2023/01/19/Go/%E7%BD%91%E7%BB%9C/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="网络接入互联网框架：  丢包、卡顿问题一般出现在“最后一公里”，运营商一般不会出现故障 路由路由工作在IP层，路由不是改IP地址，而是改MAC地址。 路由是为了找目标的路，一旦找到下一跳，是为了告诉二层交换时下一跳往哪个MAC地址发 掩码：决定子网的范围是多大。如果一个ip在子网掩码以内的，称为同网段。 同网段不仅有直连的方式，更多的方式是交换机&#x2F;逻辑交换机  同网段不一定接入同一个物理逻辑的交换">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119151512426.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119152119221.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119154655240.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119154804761.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119155650396.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119160527110.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119160729061.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119160956768.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119161108361.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119161343618.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119171630947.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119172629327.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119172745714.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119173134483.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119173351632.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119173450967.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119173733281.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119173912320.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119174118407.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119174247400.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119182213465.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119182345895.png">
+<meta property="article:published_time" content="2023-01-19T07:01:05.000Z">
+<meta property="article:modified_time" content="2023-01-19T10:57:47.772Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.example.com/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119151512426.png">
+  
+  
+  <title>网络 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<!--动态线条背景-->
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>这里有即用配件</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/fengmian.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="网络">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-01-19 15:01" pubdate>
+        2023年1月19日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      14 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">网络</h1>
+            
+            <div class="markdown-body">
+              <h1 id="网络接入"><a href="#网络接入" class="headerlink" title="网络接入"></a>网络接入</h1><p><strong>互联网框架：</strong></p>
+<img src="/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119151512426.png" srcset="/img/loading.gif" lazyload class title="image-20230119151512426">
+<p>丢包、卡顿问题一般出现在“最后一公里”，运营商一般不会出现故障</p>
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>路由工作在IP层，路由不是改IP地址，而是改MAC地址。</p>
+<p>路由是为了找目标的路，一旦找到下一跳，是为了告诉二层交换时下一跳往哪个MAC地址发</p>
+<p><strong>掩码：</strong>决定子网的范围是多大。如果一个ip在子网掩码以内的，称为同网段。</p>
+<p>同网段不仅有直连的方式，更多的方式是交换机/逻辑交换机</p>
+<img src="/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119152119221.png" srcset="/img/loading.gif" lazyload class title="image-20230119152119221">
+<p>同网段不一定接入同一个物理逻辑的交换机，可能是软件定义网络的虚拟的同网段</p>
+<p>在同网段下已知目标ip，查询ip的mac地址，然后发送报文</p>
+<p>在不同网段：</p>
+<img src="/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119154655240.png" srcset="/img/loading.gif" lazyload class title="image-20230119154655240">
+<p>路由不一定是对称的：</p>
+<img src="/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119154804761.png" srcset="/img/loading.gif" lazyload class title="image-20230119154804761">
+<p>用户A到用户H，出发和返回的路不一定是一条路，但一般是一条路</p>
+<h2 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h2><p>ARP的本质时查找下一跳的MAC，不是请求目标地址</p>
+<p>逻辑的同网段才能发送ARP请求，不同网段不能发送ARP。如果是不同网段需要路由器执行下一跳，跳到对应的网段才能发送ARP</p>
+<p>ARP请求广播，ARP应答单播</p>
+<p>免费ARP：不用请求就告诉ARP地址。常用局域网里新加一台设备，新加的设备通常会发送免费ARP</p>
+<img src="/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119155650396.png" srcset="/img/loading.gif" lazyload class title="image-20230119155650396">
+<h2 id="IP协议"><a href="#IP协议" class="headerlink" title="IP协议"></a>IP协议</h2><p>唯一标识，互联网通用。抖音客户端一个、服务端一个</p>
+<p>IP协议产生的原因：地址的统一问题，二层协议有很多不兼容的地方，比如有的支持MAC，有的不支持MAC，所以向上又封装了一层，统一用IP地址去标识</p>
+<p>IPV4不够用的解决方法：IPV6、net（路由器）</p>
+<img src="/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119160527110.png" srcset="/img/loading.gif" lazyload class title="image-20230119160527110">
+<p>net不仅修改IP，还改端口。解决多个内网客户端访问同一个目标地址+端口，源端口恰好一样的问题</p>
+<h1 id="网络传输"><a href="#网络传输" class="headerlink" title="网络传输"></a>网络传输</h1><img src="/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119160729061.png" srcset="/img/loading.gif" lazyload class title="image-20230119160729061">
+<p>数据包：见计算机网络。按层去分的</p>
+<p>数据包的发送：</p>
+<img src="/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119160956768.png" srcset="/img/loading.gif" lazyload class title="image-20230119160956768">
+<p>DNS协议：</p>
+<img src="/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119161108361.png" srcset="/img/loading.gif" lazyload class title="image-20230119161108361">
+<p>关注递归迭代，客户端递归请求递归解析器，递归解析器迭代请求DNS服务器</p>
+<p><strong>UDP协议</strong></p>
+<img src="/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119161343618.png" srcset="/img/loading.gif" lazyload class title="image-20230119161343618">
+<p>UDP很难用好，比如用UDP实现可靠视频流</p>
+<p><strong>TCP协议、HTTP协议、HTTPS协议</strong></p>
+<p>重要概念等都在计网，这里不再写</p>
+<h1 id="网络架构给抖音做提质"><a href="#网络架构给抖音做提质" class="headerlink" title="网络架构给抖音做提质"></a>网络架构给抖音做提质</h1><p><strong>网络提速：HTTP 2.0</strong></p>
+<p>最主要的思想：多路复用</p>
+<img src="/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119171630947.png" srcset="/img/loading.gif" lazyload class title="image-20230119171630947">
+<p>多个stream在一个TCP连接通道里面串行访问，看起来像并行访问</p>
+<img src="/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119172629327.png" srcset="/img/loading.gif" lazyload class title="image-20230119172629327">
+<p>QUIC HTTP3.0</p>
+<img src="/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119172745714.png" srcset="/img/loading.gif" lazyload class title="image-20230119172745714">
+<p>使用UDP协议、在用户态实现</p>
+<p><strong>网络路径优化：</strong></p>
+<p>数据中心分布</p>
+<img src="/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119173134483.png" srcset="/img/loading.gif" lazyload class title="image-20230119173134483">
+<p>POP接入是字节服务器接入运营商的机房</p>
+<p>同运营商访问，电信用户接入电信网络等</p>
+<p>静态资源（图片视频）路径优化：缓存</p>
+<img src="/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119173351632.png" srcset="/img/loading.gif" lazyload class title="image-20230119173351632">
+<p>动态API(播放/评论接口)路径优化：</p>
+<img src="/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119173450967.png" srcset="/img/loading.gif" lazyload class title="image-20230119173450967">
+<h1 id="网络提速的优化"><a href="#网络提速的优化" class="headerlink" title="网络提速的优化"></a>网络提速的优化</h1><p><strong>容灾概念：故障发生、故障感知、自动切换、服务回复</strong></p>
+<p>案例一：<img src="/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119173733281.png" srcset="/img/loading.gif" lazyload class title="image-20230119173733281"></p>
+<p>一般走专线调用，专线不可用调外网容灾</p>
+<p>案例二：</p>
+<img src="/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119173912320.png" srcset="/img/loading.gif" lazyload class title="image-20230119173912320">
+<p>A命令，当发现A机房不可用之后，域名解析自动换成B机房的IP</p>
+<p>案例三：</p>
+<img src="/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119174118407.png" srcset="/img/loading.gif" lazyload class title="image-20230119174118407">
+<p>云到端：通过SDK主动降级容灾，但是有场景局限性（用户统一）</p>
+<p>案例四：</p>
+<img src="/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119174247400.png" srcset="/img/loading.gif" lazyload class title="image-20230119174247400">
+<p>Bug导致Crash，可以做前置兜底（Cache）。本质上是做降级，将上一层的数据返回去</p>
+<p><strong>如果没有容灾系统：</strong></p>
+<p>故障明确：</p>
+<ul>
+<li>什么业务、什么接口故障</li>
+<li>故障体现在哪里</li>
+<li>访问其他目标是否正常</li>
+<li>是否是修改导致的异常</li>
+</ul>
+<p>故障止损：先止损再排查</p>
+<p>分段排查：</p>
+<p>客户端排查、服务端排查、中间链路排查</p>
+<p>常见的排查命令：</p>
+<ul>
+<li>dig查询DNS问题</li>
+<li>ping/telnet/nmap查询三层/四层连通性</li>
+<li>Traceroute排查中间链路</li>
+<li>iptabels</li>
+<li>tcpdump</li>
+</ul>
+<h1 id="企业接入升级打怪之路"><a href="#企业接入升级打怪之路" class="headerlink" title="企业接入升级打怪之路"></a>企业接入升级打怪之路</h1><p>假设一家example公司</p>
+<h2 id="域名管理"><a href="#域名管理" class="headerlink" title="域名管理"></a>域名管理</h2><p><strong>Host管理：</strong>用一张主机表存储域名解析</p>
+<img src="/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119182213465.png" srcset="/img/loading.gif" lazyload class title="image-20230119182213465">
+<p><strong>使用域名系统替换Host</strong></p>
+<p>域名空间：树形结构，划分zone的方式进行分层授权管理，全球公共域名空间仅一棵树。根域名服务器：查询节点</p>
+<img src="/2023/01/19/Go/%E7%BD%91%E7%BB%9C/image-20230119182345895.png" srcset="/img/loading.gif" lazyload class title="image-20230119182345895">
+<p>要想拿到域名，首先得在云服务厂商购买域名。</p>
+<p>买到域名之后还要域名备案。</p>
+<p>example公司可以清除/etc/hosts文件，然后配置/etc/resolv.conf中nameservers为公共DNS迁移原配置，通过控制台添加解析记录即可</p>
+<p><strong>开放外部用户访问：</strong></p>
+<p>方案：租赁外网ip，专用于外部用户访问门户网站，将www.example.com解析到外网ip上，将改ip绑定到一台物理机上，并发布公网route，用于外部用户访问</p>
+<p><strong>自建DNS服务器</strong></p>
+<p>目前的问题：</p>
+<ul>
+<li>内网域名解析也得出公网获取，效率低下</li>
+<li>外网用户能看到内网ip地址，容易被攻击</li>
+<li>云厂商权威DNS容易出故障，影响用户体验</li>
+</ul>
+<h1 id="未完"><a href="#未完" class="headerlink" title="未完"></a>未完</h1>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/">青训营</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/%E7%BD%91%E7%BB%9C%E4%B8%8E%E9%83%A8%E7%BD%B2/">网络与部署</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/01/19/Go/Git/">
+                        <span class="hidden-mobile">Git</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"FVOHeWkJmFW4IL0Dyt3XhY5f-gzGzoHsz","appKey":"aguFoKPPLq6Qvk8DAkOgsdkz","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"https://fvohewkj.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/10/2018 17:38:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.8},"log":false});</script></body>
+</html>
