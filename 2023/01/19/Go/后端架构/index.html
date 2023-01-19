@@ -1,0 +1,684 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/touxiang.png">
+  <link rel="icon" href="/img/touxiang.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="架构的定义 有关软件整体结构与组件的抽象描述  用于指导软件系统各个方面的设计   单机：把所有功能都实现在一个进程里，并部署在一台机器上  C10K问题 运维需要停服  单体架构：分布式部署。  垂直应用架构：按应用切分的单体   水平扩容、运维不需要停服 职责太多，开发效率不高。爆炸半径大  SOA架构  将应用在不同功能单元抽象为服务 定义服务之间的通信标准   微服务架构：SOA的去中心化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="后端架构">
+<meta property="og:url" content="https://www.example.com/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="架构的定义 有关软件整体结构与组件的抽象描述  用于指导软件系统各个方面的设计   单机：把所有功能都实现在一个进程里，并部署在一台机器上  C10K问题 运维需要停服  单体架构：分布式部署。  垂直应用架构：按应用切分的单体   水平扩容、运维不需要停服 职责太多，开发效率不高。爆炸半径大  SOA架构  将应用在不同功能单元抽象为服务 定义服务之间的通信标准   微服务架构：SOA的去中心化">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119003422659.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119003430052.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119003700901.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119003727935.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119093340202.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119093857052.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119094350247.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119094514272.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119094744340.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119095108382.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119095509043.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119095752588.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119100148517.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119101528943.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119102525814.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119102840271.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119104935607.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119105130036.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119105334030.png">
+<meta property="og:image" content="https://www.example.com/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119105542198.png">
+<meta property="article:published_time" content="2023-01-18T16:25:18.000Z">
+<meta property="article:modified_time" content="2023-01-19T02:56:20.824Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.example.com/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119003422659.png">
+  
+  
+  <title>后端架构 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<!--动态线条背景-->
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>这里有即用配件</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/fengmian.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="后端架构">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-01-19 00:25" pubdate>
+        2023年1月19日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      12 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">后端架构</h1>
+            
+            <div class="markdown-body">
+              <h1 id="架构的定义"><a href="#架构的定义" class="headerlink" title="架构的定义"></a>架构的定义</h1><ul>
+<li><p>有关软件整体结构与组件的抽象描述</p>
+</li>
+<li><p>用于指导软件系统各个方面的设计</p>
+</li>
+</ul>
+<p><strong>单机</strong>：把所有功能都实现在一个进程里，并部署在一台机器上</p>
+<ul>
+<li>C10K问题</li>
+<li>运维需要停服</li>
+</ul>
+<p><strong>单体架构</strong>：分布式部署。</p>
+<img src="/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119003422659.png" srcset="/img/loading.gif" lazyload class title="image-20230119003422659">
+<p><strong>垂直应用架构</strong>：按应用切分的单体</p>
+<img src="/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119003430052.png" srcset="/img/loading.gif" lazyload class title="image-20230119003430052">
+<ul>
+<li>水平扩容、运维不需要停服</li>
+<li>职责太多，开发效率不高。爆炸半径大</li>
+</ul>
+<p><strong>SOA架构</strong></p>
+<ul>
+<li>将应用在不同功能单元抽象为服务</li>
+<li>定义服务之间的通信标准</li>
+</ul>
+<img src="/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119003700901.png" srcset="/img/loading.gif" lazyload class title="image-20230119003700901">
+<p><strong>微服务架构</strong>：SOA的去中心化演进方向</p>
+<img src="/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119003727935.png" srcset="/img/loading.gif" lazyload class title="image-20230119003727935">
+<p>问题：</p>
+<p>数据一致性、高可用性、治理、解耦 vs 过微</p>
+<h1 id="企业级后端架构剖析"><a href="#企业级后端架构剖析" class="headerlink" title="企业级后端架构剖析"></a>企业级后端架构剖析</h1><p><strong>云计算：</strong>通过软件自动化管理，提供计算资源的服务网站，是现在互联网大规模熟悉分析和存储的基石</p>
+ <img src="/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119093340202.png" srcset="/img/loading.gif" lazyload class title="image-20230119093340202">
+<p><strong>云原生：</strong></p>
+<img src="/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119093857052.png" srcset="/img/loading.gif" lazyload class title="image-20230119093857052">
+<img src="/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119094350247.png" srcset="/img/loading.gif" lazyload class title="image-20230119094350247">
+<img src="/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119094514272.png" srcset="/img/loading.gif" lazyload class title="image-20230119094514272">
+<p><strong>DevOps：</strong>云原生时代软件交付的利器，提供每个阶段的快速开发、测试、回滚等的解决方案</p>
+<p>软件的生命周期：</p>
+<img src="/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119094744340.png" srcset="/img/loading.gif" lazyload class title="image-20230119094744340">
+<p><strong>微服务架构：</strong></p>
+<p>通信标准：HTTP（Restful API）、RPC（Thrift、gRPC）</p>
+<img src="/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119095108382.png" srcset="/img/loading.gif" lazyload class title="image-20230119095108382">
+<p>微服务大可不必在业务逻辑中实现符合通信标准的交互逻辑，而是交给框架来做</p>
+<p>服务网络：</p>
+<ul>
+<li>微服务之间通讯的中间层</li>
+<li>高性能网络代理</li>
+<li>业务代码与治理解耦</li>
+</ul>
+<img src="/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119095509043.png" srcset="/img/loading.gif" lazyload class title="image-20230119095509043">
+<img src="/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119095752588.png" srcset="/img/loading.gif" lazyload class title="image-20230119095752588">
+<h1 id="企业级后端架构的挑战"><a href="#企业级后端架构的挑战" class="headerlink" title="企业级后端架构的挑战"></a>企业级后端架构的挑战</h1><p>挑战：</p>
+<ul>
+<li><p>基础设施层面</p>
+<ul>
+<li>物理资源有限：机器、带宽</li>
+<li>资源利用率受制于部署服务</li>
+</ul>
+</li>
+<li><p>用户层面</p>
+<ul>
+<li>网络通信开销较大</li>
+<li>网络抖动导致运维成本提高</li>
+<li>异构环境下，不同实例资源水位不均</li>
+</ul>
+<img src="/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119100148517.png" srcset="/img/loading.gif" lazyload class title="image-20230119100148517">
+</li>
+</ul>
+<p>核心收益：降低物理资源成本、提供更多的弹性资源，增加收入——<strong>解决思路：离在线资源并池</strong></p>
+<p>在线服务的特点：IO密集型为主、潮汐性、实时性</p>
+<p>离线服务的特点：计算密集型占多数、非实时性</p>
+<img src="/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119101528943.png" srcset="/img/loading.gif" lazyload class title="image-20230119101528943">
+<p>同一个机器怎么做在线隔离：离线资源用离线进程，在线资源用在线进程，用CGroup或虚拟化方式对CPU核心做隔离，离线使用离线CPU，在线使用在线CPU</p>
+<p>自动扩缩容：利用在线业务潮汐性自动扩缩容。但是基于IO进行扩缩容比较难</p>
+<p>扩缩容指标：使用CPU某一个统计的分位数</p>
+<p>另一种方式：<strong>微服务亲和性部署</strong></p>
+<p>将满足亲和性条件的容器调度到一台宿主机。微服务中间件与服务网格通过共享内存通信。服务网格控制面实施灵活、动态的流量调度</p>
+<img src="/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119102525814.png" srcset="/img/loading.gif" lazyload class title="image-20230119102525814">
+<p>核心收益：提高微服务调用容错性、容灾、进一步提高开发效率，DevOps发挥到极致</p>
+<p>第三种方式：<strong>基于微服务中间件 &amp; 服务网格的流量治理</strong></p>
+<p>核心收益：打平异构环境算力差异，为自动扩缩容提供正向输入</p>
+<img src="/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119102840271.png" srcset="/img/loading.gif" lazyload class title="image-20230119102840271">
+<p>解决思路：<strong>CPU水位均衡</strong></p>
+<p>IaaS：提供资源探针；服务网格：动态负载均衡。</p>
+<h1 id="后端架构实战"><a href="#后端架构实战" class="headerlink" title="后端架构实战"></a>后端架构实战</h1><p>CPU水位负载均衡设计：</p>
+<ul>
+<li>明确哪些输入<ul>
+<li>服务网格数据面<ul>
+<li>支持带权重的负载均衡策略</li>
+</ul>
+</li>
+<li>注册中心存储了所有容器的权重信息</li>
+<li>宿主机提供<ul>
+<li>容器的资源使用情况</li>
+<li>物理资源信息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>设计时需要哪些关键点<ul>
+<li>紧急回滚能力</li>
+<li>大规模</li>
+<li>极端场景</li>
+</ul>
+</li>
+</ul>
+<p>自适应静态权重</p>
+<img src="/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119104935607.png" srcset="/img/loading.gif" lazyload class title="image-20230119104935607">
+<ul>
+<li>方案：采集宿主机物理资源信息，调整容器注册的权重</li>
+<li>优势：复杂度低。完全分布式，可用性高。微服务中间件无适配成本</li>
+<li>缺点：无紧急回滚能力。缺乏运行时自适应能力</li>
+</ul>
+<p>Alpha版本：</p>
+<img src="/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119105130036.png" srcset="/img/loading.gif" lazyload class title="image-20230119105130036">
+<p>方案：容器动态权重的自适应调整。服务网格的服务发现 &amp; 流量调度能力</p>
+<p>演进方向：解决无紧急回滚的能力，运行时权重自适应</p>
+<p>缺点：过度流量倾斜可能会有异常情况</p>
+<p>Beta版本：</p>
+<img src="/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119105334030.png" srcset="/img/loading.gif" lazyload class title="image-20230119105334030">
+<p>方案：服务网格上报RPC指标</p>
+<p>演进方向：极端场景处理成为可能</p>
+<p>缺点：时序数据库压力较大。动态权重决策中心职责越来越多，迭代 -&gt; 变更 -&gt; 风险</p>
+<p>Release版本：（主要对动态权重决策中心进行划分）</p>
+<img src="/2023/01/19/Go/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84/image-20230119105542198.png" srcset="/img/loading.gif" lazyload class title="image-20230119105542198">
+<p>演进方向：</p>
+<ul>
+<li>微服务化</li>
+<li>引入消息队列削峰、解耦</li>
+<li>离在线链路切分</li>
+<li>梳理强弱依赖</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/">青训营</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/%E5%BC%80%E5%8F%91%E4%B8%8E%E8%BF%AD%E4%BB%A3/">开发与迭代</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/01/19/Go/Git/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Git</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/01/18/Go/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/">
+                        <span class="hidden-mobile">后端开发流程</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"FVOHeWkJmFW4IL0Dyt3XhY5f-gzGzoHsz","appKey":"aguFoKPPLq6Qvk8DAkOgsdkz","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"https://fvohewkj.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/10/2018 17:38:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.8},"log":false});</script></body>
+</html>
