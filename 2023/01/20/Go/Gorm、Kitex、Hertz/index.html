@@ -1,0 +1,615 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/touxiang.png">
+  <link rel="icon" href="/img/touxiang.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="三件套的使用建议查文档，这里只是短暂记录下 Gorm基本使用Gorm Model的约定：  Gorm使用名为ID的字段为主键 使用结构体的蛇形负数的表名 字段名的蛇形为列名 使用CreateAt、UpdateAt字段作为创建、更新时间  定义Gorm Model 12345678type Product struct &amp;#123;	Code  string	Price uint&amp;#125;func">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gorm、Kitex、Hertz 的使用">
+<meta property="og:url" content="https://www.example.com/2023/01/20/Go/Gorm%E3%80%81Kitex%E3%80%81Hertz/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="三件套的使用建议查文档，这里只是短暂记录下 Gorm基本使用Gorm Model的约定：  Gorm使用名为ID的字段为主键 使用结构体的蛇形负数的表名 字段名的蛇形为列名 使用CreateAt、UpdateAt字段作为创建、更新时间  定义Gorm Model 12345678type Product struct &amp;#123;	Code  string	Price uint&amp;#125;func">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.example.com/2023/01/20/Go/Gorm%E3%80%81Kitex%E3%80%81Hertz/image-20230120212744757.png">
+<meta property="og:image" content="https://www.example.com/2023/01/20/Go/Gorm%E3%80%81Kitex%E3%80%81Hertz/image-20230120213550558.png">
+<meta property="og:image" content="https://www.example.com/2023/01/20/Go/Gorm%E3%80%81Kitex%E3%80%81Hertz/image-20230120222225687.png">
+<meta property="og:image" content="https://www.example.com/2023/01/20/Go/Gorm%E3%80%81Kitex%E3%80%81Hertz/image-20230122233045543.png">
+<meta property="og:image" content="https://www.example.com/2023/01/20/Go/Gorm%E3%80%81Kitex%E3%80%81Hertz/image-20230123211854157.png">
+<meta property="og:image" content="https://www.example.com/2023/01/20/Go/Gorm%E3%80%81Kitex%E3%80%81Hertz/image-20230123123240582.png">
+<meta property="og:image" content="https://www.example.com/2023/01/20/Go/Gorm%E3%80%81Kitex%E3%80%81Hertz/image-20230123123759324.png">
+<meta property="og:image" content="https://www.example.com/2023/01/20/Go/Gorm%E3%80%81Kitex%E3%80%81Hertz/image-20230123212838794.png">
+<meta property="article:published_time" content="2023-01-20T05:16:06.000Z">
+<meta property="article:modified_time" content="2023-01-23T13:29:52.408Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.example.com/2023/01/20/Go/Gorm%E3%80%81Kitex%E3%80%81Hertz/image-20230120212744757.png">
+  
+  
+  <title>Gorm、Kitex、Hertz 的使用 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<!--动态线条背景-->
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>这里有即用配件</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/fengmian.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Gorm、Kitex、Hertz 的使用">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-01-20 13:16" pubdate>
+        2023年1月20日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      12k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      99 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Gorm、Kitex、Hertz 的使用</h1>
+            
+            <div class="markdown-body">
+              <h1 id="三件套的使用"><a href="#三件套的使用" class="headerlink" title="三件套的使用"></a>三件套的使用</h1><p>建议查<a target="_blank" rel="noopener" href="https://www.cloudwego.io/zh/">文档</a>，这里只是短暂记录下</p>
+<h2 id="Gorm"><a href="#Gorm" class="headerlink" title="Gorm"></a>Gorm</h2><h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>Gorm Model的约定：</p>
+<ul>
+<li>Gorm使用名为ID的字段为主键</li>
+<li>使用结构体的蛇形负数的表名</li>
+<li>字段名的蛇形为列名</li>
+<li>使用CreateAt、UpdateAt字段作为创建、更新时间</li>
+</ul>
+<p>定义Gorm Model</p>
+<figure class="highlight go"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Product <span class="hljs-keyword">struct</span> &#123;<br>	Code  <span class="hljs-type">string</span><br>	Price <span class="hljs-type">uint</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(p Product)</span></span> TableName() <span class="hljs-type">string</span> &#123;<br>	<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;product&quot;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>连接数据库：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs go">db, err := gorm.Open(<br>		mysql.Open(<span class="hljs-string">&quot;user:password@tcp(127.0.0.1:3306)/dbname?charset=utf8&amp;mb4&amp;parseTime=True&amp;loc=Local&quot;</span>),<br>		&amp;gorm.Config&#123;&#125;)<br><br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-built_in">panic</span>(<span class="hljs-string">&quot;faild to connect database&quot;</span>)<br>	&#125;<br><br></code></pre></td></tr></table></figure>
+<p>增删改查：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs go">db.Create(&amp;Product&#123;Code: <span class="hljs-string">&quot;D42&quot;</span>, Price: <span class="hljs-number">100</span>&#125;)<br><br>	<span class="hljs-keyword">var</span> product Product<br>	db.First(&amp;product, <span class="hljs-number">1</span>)<br>	db.First(&amp;product, <span class="hljs-string">&quot;code = ?&quot;</span>, <span class="hljs-string">&quot;D42&quot;</span>)<br><br>	db.Model(&amp;product).Update(<span class="hljs-string">&quot;Price&quot;</span>, <span class="hljs-number">200</span>)<br><br>	db.Model(&amp;product).Updates(Product&#123;Price: <span class="hljs-number">200</span>, Code: <span class="hljs-string">&quot;F42&quot;</span>&#125;)<br>	db.Model(&amp;product).Updates(<span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]<span class="hljs-keyword">interface</span>&#123;&#125;&#123;<span class="hljs-string">&quot;Price&quot;</span>: <span class="hljs-number">200</span>, <span class="hljs-string">&quot;Code&quot;</span>: <span class="hljs-string">&quot;F42&quot;</span>&#125;)<br><br>	db.Delete(&amp;product, <span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
+<h3 id="支持的数据库"><a href="#支持的数据库" class="headerlink" title="支持的数据库"></a>支持的数据库</h3><p>Gorm目前支持MySQL、SQLServer、PostgreSQL、SQLite</p>
+<h3 id="创建数据"><a href="#创建数据" class="headerlink" title="创建数据"></a>创建数据</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Product <span class="hljs-keyword">struct</span> &#123;<br>	ID    <span class="hljs-type">uint</span>   <span class="hljs-string">`gorm: &quot;primarykey&quot;`</span><br>	Code  <span class="hljs-type">string</span> <span class="hljs-string">`gorm: &quot;column&quot;: &quot;code`</span><br>	Price <span class="hljs-type">uint</span>   <span class="hljs-string">`gorm:&quot;column&quot;: &quot;user_id&quot;`</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-comment">// 连接数据库</span><br>	db, err := gorm.Open(mysql.Open(<span class="hljs-string">&quot;username:password@tcp(localhost:9910)/database?charset=utf8&quot;</span>),<br>		&amp;gorm.Config&#123;&#125;)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-built_in">panic</span>(<span class="hljs-string">&quot;faild to connect database&quot;</span>)<br>	&#125;<br>	<br>	p := &amp;Product&#123;Code: <span class="hljs-string">&quot;D42&quot;</span>&#125;<br>	<span class="hljs-comment">// 添加单条数据</span><br>    res := db.Create(p)<br>	fmt.Println(res.Error)<br>	fmt.Println(p.ID)<br>	<br>    <span class="hljs-comment">// 添加多条数据</span><br>	products := []*Product&#123;&#123;Code: <span class="hljs-string">&quot;D41&quot;</span>&#125;, &#123;Code: <span class="hljs-string">&quot;D42&quot;</span>&#125;, &#123;Code: <span class="hljs-string">&quot;D43&quot;</span>&#125;&#125;<br>	res = db.Create(products)<br>	fmt.Println(res.Error)<br>	<span class="hljs-keyword">for</span> _, p := <span class="hljs-keyword">range</span> products &#123;<br>		fmt.Println(p.ID)<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>如果产生数据冲突：使用clause.OnConflict处理数据冲突</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs go">p := &amp;product&#123;Code: <span class="hljs-string">&quot;D42&quot;</span>, ID: <span class="hljs-number">1</span>&#125;<br>db.Clauses(clause.OnConflict&#123;DoNoting: <span class="hljs-literal">true</span>&#125;).Create(&amp;p)<br></code></pre></td></tr></table></figure>
+<p>使用默认值：通过使用default标签为字段定义默认值</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> User <span class="hljs-keyword">struct</span> &#123;<br>	ID   <span class="hljs-type">int64</span><br>	Name <span class="hljs-type">string</span> <span class="hljs-string">`gorm: &quot;default:galeone&quot;`</span><br>	Age  <span class="hljs-type">int64</span>  <span class="hljs-string">`gorm: default:18`</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h3><p>使用First注意：</p>
+<ul>
+<li>查询不到数据会返回ErrRecordNotFound</li>
+<li>使用Find查询多条数据，查询不到数据不会返回错误</li>
+</ul>
+<p>使用结构体作为查询条件：</p>
+<p>GORM只会查询非0值字段：这意为着如果字段值为“0”、“false”或者其他0值，该字段不会用于构建查询条件，使用Map来构建查询条件</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs go">   <span class="hljs-comment">// 获取第一条记录</span><br>u := &amp;User&#123;&#125;<br>db.First(u)<br><br>users := <span class="hljs-built_in">make</span>([]*User, <span class="hljs-number">0</span>)<br><span class="hljs-comment">// SELECT * FROM users WHERE age &gt; 10</span><br>result := db.Where(<span class="hljs-string">&quot;age &gt; 10&quot;</span>).Find(&amp;users)<br>fmt.Println(result.RowsAffected) <span class="hljs-comment">// 返回查找到的记录数</span><br>fmt.Println(result.Error)<br><br><span class="hljs-comment">// SELECT * FROM users WHERE name IN (&#x27;jinzhu&#x27;, &#x27;jinzhu2&#x27;)</span><br>db.Where(<span class="hljs-string">&quot;name IN ?&quot;</span>, []<span class="hljs-type">string</span>&#123;<span class="hljs-string">&quot;jinzhu&quot;</span>, <span class="hljs-string">&quot;jinzhu2&quot;</span>&#125;).Find(&amp;users)<br><br><span class="hljs-comment">// SELECT * FROM users WHERE name LIKE &#x27;%jin%&#x27;</span><br>db.Where(<span class="hljs-string">&quot;name LIKE ?&quot;</span>, <span class="hljs-string">&quot;%jin%&quot;</span>).Find(&amp;users)<br><br><span class="hljs-comment">// SELECT * FROM users WHERE name = jinzhu AND age &gt;= 22</span><br>db.Where(<span class="hljs-string">&quot;name = ? AND age &gt;= ?&quot;</span>, <span class="hljs-string">&quot;jinzhu&quot;</span>, <span class="hljs-string">&quot;22&quot;</span>).Find(&amp;users)<br><br><span class="hljs-comment">// SELECT * FROM users WHERE name = &quot;jinzhu&quot;</span><br>db.Where(&amp;User&#123;Name: <span class="hljs-string">&quot;jinzhu&quot;</span>, Age: <span class="hljs-number">0</span>&#125;).Find(&amp;users)<br><br><span class="hljs-comment">// SELECT * FROM users WHERE name = &quot;jinzhu&quot; AND age = 0</span><br>db.Where(<span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]<span class="hljs-keyword">interface</span>&#123;&#125;&#123;<span class="hljs-string">&quot;Name&quot;</span>: <span class="hljs-string">&quot;jinzhu&quot;</span>, <span class="hljs-string">&quot;Age&quot;</span>: <span class="hljs-number">0</span>&#125;).Find(&amp;users)<br></code></pre></td></tr></table></figure>
+<h3 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h3><p>使用Struct更新时，只会更新非0值，如果需要更新零值可以使用Map更新或使用Select字段</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// 条件更新单个列</span><br>	<span class="hljs-comment">// UPDATE users SET name = &quot;hello&quot;, updated_at = &#x27;xxxx-xx-xx xx:xx:xx&#x27; WHERE age &gt; 10</span><br>	db.Model(&amp;User&#123;ID: <span class="hljs-number">111</span>&#125;).Where(<span class="hljs-string">&quot;age &gt; ?&quot;</span>, <span class="hljs-number">18</span>).Update(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;hello&quot;</span>)<br><br>	<span class="hljs-comment">// 更新多个列。根据struct更新属性，只会更新非零值的字段</span><br>	<span class="hljs-comment">// UPDATE users SET name = &quot;hello&quot;, age = 18, updateed_at &#x27;xxx&#x27; WHERE id = 111</span><br>	db.Model(&amp;User&#123;ID: <span class="hljs-number">111</span>&#125;).Updates(User&#123;Name: <span class="hljs-string">&quot;hello&quot;</span>, Age: <span class="hljs-number">18</span>&#125;)<br><br>	<span class="hljs-comment">// 根据map更新属性</span><br>	<span class="hljs-comment">// UPDATE users SET name = &#x27;hello&#x27;, age = &#x27;18&#x27;, actived = false, updated_at = &#x27;xxx&#x27; WHERE id = 111</span><br>	db.Model(&amp;User&#123;ID: <span class="hljs-number">111</span>&#125;).Updates(<span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]<span class="hljs-keyword">interface</span>&#123;&#125;&#123;<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;hello&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">18</span>, <span class="hljs-string">&quot;actived&quot;</span>: <span class="hljs-literal">false</span>&#125;)<br>	<br>	<span class="hljs-comment">// 更新选定字段</span><br>	<span class="hljs-comment">// UPDATE users SET name = &#x27;hello&#x27; WHERE id = 111</span><br>	db.Model(&amp;User&#123;ID: <span class="hljs-number">111</span>&#125;).Select(<span class="hljs-string">&quot;name&quot;</span>).Updates(<span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]<span class="hljs-keyword">interface</span>&#123;&#125;&#123;<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;hello&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">18</span>, <span class="hljs-string">&quot;actived&quot;</span>: <span class="hljs-literal">false</span>&#125;)<br>	<br>	<span class="hljs-comment">// SQL表达式更新</span><br>	<span class="hljs-comment">// UPDATE users SET &quot;age&quot; = age * 2 + 100, &quot;updated_at&quot; = xxx WHERE id = 111</span><br>	db.Model(&amp;User&#123;ID: <span class="hljs-number">111</span>&#125;).Update(<span class="hljs-string">&quot;age&quot;</span>, gorm.Expr(<span class="hljs-string">&quot;age * ? + ?&quot;</span>, <span class="hljs-number">2</span>, <span class="hljs-number">100</span>))<br></code></pre></td></tr></table></figure>
+<h3 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h3><p>物理删除</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// DELETE FROM users WHERE id = 10	</span><br>db.Delete(&amp;User&#123;&#125;, <span class="hljs-number">10</span>)                           <br><span class="hljs-comment">// DELETE FROM users WHERE id = 10	</span><br>db.Delete(&amp;User&#123;&#125;, <span class="hljs-string">&quot;10&quot;</span>)                           <br> <span class="hljs-comment">// DELETE FROM users WHERE id IN (1, 2, 3)	</span><br>db.Delete(&amp;User&#123;&#125;, []<span class="hljs-type">int</span>&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>&#125;)                <br><span class="hljs-comment">// DELETE from users where name LIKE &quot;%jinzhu%&quot;</span><br>db.Where(<span class="hljs-string">&quot;name LIKE ?&quot;</span>, <span class="hljs-string">&quot;%jinzhu%&quot;</span>).Delete(User&#123;&#125;) <br><span class="hljs-comment">// DELETE from users WHERE name LIKE &quot;%jinzhu%&quot;</span><br>db.Delete(User&#123;&#125;, <span class="hljs-string">&quot;name LIKE ?&quot;</span>, <span class="hljs-string">&quot;%jinzhu%&quot;</span>)       <br></code></pre></td></tr></table></figure>
+<p>软删除</p>
+<p>Gorm提供了gorm.DeleteAt用于帮助用户实现软删除</p>
+<p>拥有软删除能力的Model调用Delete时，记录不会被数据真正删除，但Gorm会将DeleteAt置为当前时间，冰倩不能再通过正常的查询方法找到该记录</p>
+<p>使用UnScoped可以查询到软删除的数据</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">db.UnScoped().Where(<span class="hljs-string">&quot;age = 20&quot;</span>).Find(&amp;users)<br></code></pre></td></tr></table></figure>
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><p>Gorm提供了Begin、Commit、Rollback方法用于使用事务</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs go">tx := db.Begin()	<span class="hljs-comment">// 开启事务</span><br><br><span class="hljs-comment">// 执行db操作</span><br><span class="hljs-keyword">if</span> err = tx.Create(&amp;User&#123;Name: <span class="hljs-string">&quot;name&quot;</span>&#125;).Error; err != <span class="hljs-literal">nil</span> &#123;<br>	tx.Rollback()<br>	<span class="hljs-keyword">return</span><br>&#125;<br><br><span class="hljs-keyword">if</span> err = tx.Create(&amp;User&#123;Name: <span class="hljs-string">&quot;name1&quot;</span>&#125;).Error; err != <span class="hljs-literal">nil</span> &#123;<br>	tx.Rollback()<br>	<span class="hljs-keyword">return</span><br>&#125;<br><span class="hljs-comment">// 提交事务</span><br>tx.Commit()<br></code></pre></td></tr></table></figure>
+<p>另外还提供了Transaction方法用于自动提交事务</p>
+<img src="/2023/01/20/Go/Gorm%E3%80%81Kitex%E3%80%81Hertz/image-20230120212744757.png" srcset="/img/loading.gif" lazyload class title="image-20230120212744757">
+<h3 id="GORM-HOOK"><a href="#GORM-HOOK" class="headerlink" title="GORM HOOK"></a>GORM HOOK</h3><p>HOOK是在创建、查询、更新、删除等操作之前后，自动调用的函数。</p>
+<p>如果任何Hook返回错误，Gorm将停止后续的操作并回滚事务</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> User <span class="hljs-keyword">struct</span> &#123;<br>	ID   <span class="hljs-type">int64</span><br>	Name <span class="hljs-type">string</span> <span class="hljs-string">`gorm: &quot;default:galeone&quot;`</span><br>	Age  <span class="hljs-type">int64</span>  <span class="hljs-string">`gorm: default:18`</span><br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(u *User)</span></span> BeforeCreate(tx *gorm.db) (err Error) &#123;<br>	<span class="hljs-keyword">if</span> u.Age &lt; <span class="hljs-number">0</span> &#123;<br>		<span class="hljs-keyword">return</span> errors.New(<span class="hljs-string">&quot;Xxxx&quot;</span>)<br>	&#125;<br>	<span class="hljs-keyword">return</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(u *User)</span></span> AfterCreate(tx * gorm.db) (err Error) &#123;<br>	xxxx<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Gorm性能提高"><a href="#Gorm性能提高" class="headerlink" title="Gorm性能提高"></a>Gorm性能提高</h3><p>对于写操作，为了保证数据的完整性，GORM会将它们风状态事务内运行，但这会降低性能，可以使用SkipDefaultTransaction关闭默认事务</p>
+<p>使用PrepareStmt缓存预编译语句可以提高后续调用的速度</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go">db, err := gorm.Open(mysql.Open(<span class="hljs-string">&quot;username:password@tcp(localhost:9910)/database?charset=utf8&quot;</span>),<br>		&amp;gorm.Config&#123;<br>		SkipDefaultTransaction: <span class="hljs-literal">true</span>,<br>		PrepareStmt:            <span class="hljs-literal">true</span>&#125;,<br>)<br></code></pre></td></tr></table></figure>
+<h3 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h3><img src="/2023/01/20/Go/Gorm%E3%80%81Kitex%E3%80%81Hertz/image-20230120213550558.png" srcset="/img/loading.gif" lazyload class title="image-20230120213550558">
+<h2 id="Kitex"><a href="#Kitex" class="headerlink" title="Kitex"></a>Kitex</h2><p>使用IDL定义接口与服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs idl">namespace go api<br><br>struct Request &#123;<br>    1: string message<br>&#125;<br><br>struct Response &#123;<br>    1: string message<br>&#125;<br><br>service Echo &#123;<br>    Response echo(1 :Request req)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>使用kitex生成代码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">kitex -module example -service example note.thrift<br></code></pre></td></tr></table></figure>
+<img src="/2023/01/20/Go/Gorm%E3%80%81Kitex%E3%80%81Hertz/image-20230120222225687.png" srcset="/img/loading.gif" lazyload class title="image-20230120222225687">
+<p>目录介绍：</p>
+<ul>
+<li>build.sh：构建脚本</li>
+<li>kitex_gen：IDL内容相关的生成代码，主要是最基础的Server/Client代码</li>
+<li>main.go：程序入口</li>
+<li>handler.go：用户在该文件里实现IDL</li>
+<li>server：定义的方法</li>
+</ul>
+<h3 id="基本使用-1"><a href="#基本使用-1" class="headerlink" title="基本使用"></a>基本使用</h3><p>服务默认监听8888端口</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;context&quot;</span><br>	api <span class="hljs-string">&quot;example/kitex_gen/api&quot;</span><br>)<br><br><span class="hljs-comment">// EchoImpl implements the last service interface defined in the IDL.</span><br><span class="hljs-keyword">type</span> EchoImpl <span class="hljs-keyword">struct</span>&#123;&#125;<br><br><span class="hljs-comment">// Echo implements the EchoImpl interface.</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(s *EchoImpl)</span></span> Echo(ctx context.Context, req *api.Request) (resp *api.Response, err <span class="hljs-type">error</span>) &#123;<br>	<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Your code here...</span><br>	<span class="hljs-keyword">return</span><br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h3 id="Kitex-Client发起请求"><a href="#Kitex-Client发起请求" class="headerlink" title="Kitex Client发起请求"></a>Kitex Client发起请求</h3><p>创建client目录，在里面创建main.go</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;context&quot;</span><br>	<span class="hljs-string">&quot;example/kitex_gen/api&quot;</span><br>	<span class="hljs-string">&quot;example/kitex_gen/api/echo&quot;</span><br>	<span class="hljs-string">&quot;log&quot;</span><br>	<span class="hljs-string">&quot;time&quot;</span><br><br>	<span class="hljs-string">&quot;github.com/cloudwego/kitex/client&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-comment">// 创建客户端</span><br>	c, err := echo.Client(<span class="hljs-string">&quot;example&quot;</span>, client.WithHostPorts(<span class="hljs-string">&quot;0.0.0.0:8888&quot;</span>))<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Fatal(err)<br>	&#125;<br>	<br>    <span class="hljs-comment">// 发起请求</span><br>	req := &amp;api.Request&#123;Message: <span class="hljs-string">&quot;my request&quot;</span>&#125;<br>	resp, err := c.Echo(context.Background(), req, callopt.WithHostPorts(<span class="hljs-number">3</span>*time.Second))<br><br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Fatal(err)<br>	&#125;<br><br>	log.Fatal(resp)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Kitex服务的注册与发现"><a href="#Kitex服务的注册与发现" class="headerlink" title="Kitex服务的注册与发现"></a>Kitex服务的注册与发现</h3><p>目前Kitex的服务注册与发现已经对接了的主流的服务注册与发现中心，如ETCD，Nacos等</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> HelloImpl <span class="hljs-keyword">struct</span>&#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(h *HelloImpl)</span></span> Echo(ctx context.Context, req *api.Request) (resp *api.Response, err <span class="hljs-type">error</span>) &#123;<br>	resp = &amp;api.Response&#123;<br>		Message: req.Message<br>	&#125;<br>	<span class="hljs-keyword">return</span><br>&#125;<br><br><span class="hljs-comment">// 服务端</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	r, err := etcd.NewEtcdRegister([]<span class="hljs-type">string</span>&#123;<span class="hljs-string">&quot;127.0.0.1:2379&quot;</span>&#125;)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span>&#123;<br>		log.Fatal(err)<br>	&#125;<br>	server := hello.NewServer(<span class="hljs-built_in">new</span>(HelloImpl), server.WithRegistry(r), server.WithServerBasicInfo(&amp;rpcinfo,EndpointBasicInfo &#123;<br>		ServiceName: <span class="hljs-string">&quot;Hello&quot;</span>,<br>	&#125;))<br>	err = server.Run()<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Fatal(err)<br>	&#125;<br>&#125;<br><br><br><span class="hljs-comment">// 客户端</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    r, err := etcd.NewEtcdResolver([]<span class="hljs-type">string</span>&#123;<span class="hljs-string">&quot;127.0.0.1:2379&quot;</span>&#125;)<br>    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>        log.Fatal(err)<br>    &#125;<br>    client := hello.MustNewClient(<span class="hljs-string">&quot;hello&quot;</span>, client.WithResolver(r))<br>    <span class="hljs-keyword">for</span> &#123;<br>        ctx, cancel := context.WithTimeout(context.Background(), time.Second * <span class="hljs-number">3</span>)<br>        resp, err := client.Echo(ctx, &amp;api.Request&#123;Message: <span class="hljs-string">&quot;Hello&quot;</span>&#125;)<br>        cancel()<br>        <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>            log.Fatal(err)<br>        &#125;<br>        log.Println(resp)<br>        time.Sleep(time.Second)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Kitex生态"><a href="#Kitex生态" class="headerlink" title="Kitex生态"></a>Kitex生态</h3><img src="/2023/01/20/Go/Gorm%E3%80%81Kitex%E3%80%81Hertz/image-20230122233045543.png" srcset="/img/loading.gif" lazyload class title="image-20230122233045543">
+<h2 id="Hertz"><a href="#Hertz" class="headerlink" title="Hertz"></a>Hertz</h2><p>Hertz是一个HTTP框架</p>
+<h3 id="基本使用-2"><a href="#基本使用-2" class="headerlink" title="基本使用"></a>基本使用</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;context&quot;</span><br><br>	<span class="hljs-string">&quot;github.com/cloudwego/hertz/pkg/app&quot;</span><br>	<span class="hljs-string">&quot;github.com/cloudwego/hertz/pkg/app/server&quot;</span><br>	<span class="hljs-string">&quot;github.com/cloudwego/hertz/pkg/common/utils&quot;</span><br>	<span class="hljs-string">&quot;github.com/cloudwego/hertz/pkg/protocol/consts&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	h := server.Default()<br><br>	h.GET(<span class="hljs-string">&quot;/ping&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(c context.Context, ctx *app.RequestContext)</span></span> &#123;<br>		ctx.JSON(consts.StatusOK, utils.H&#123;<span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;pong&quot;</span>&#125;)<br>	&#125;)<br><br>	h.Spin()<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h3 id="Hertx路由"><a href="#Hertx路由" class="headerlink" title="Hertx路由"></a><a target="_blank" rel="noopener" href="https://www.cloudwego.io/zh/docs/hertz/tutorials/basic-feature/route/">Hertx路由</a></h3><p>路由：路由指导报文转发的路径信息，通过路由可以确认转发IP报文的路径。路由设备是依据路由转发报文到达目的网段的网络设备，最常见的路由设备：路由器。路由器维护着一张表，保存着路由信息。</p>
+<img src="/2023/01/20/Go/Gorm%E3%80%81Kitex%E3%80%81Hertz/image-20230123211854157.png" srcset="/img/loading.gif" lazyload class title="image-20230123211854157">
+<p>Hertz提供了GET、POST、DELETE、ANY等方法用于路由注册</p>
+<img src="/2023/01/20/Go/Gorm%E3%80%81Kitex%E3%80%81Hertz/image-20230123123240582.png" srcset="/img/loading.gif" lazyload class title="image-20230123123240582">
+<img src="/2023/01/20/Go/Gorm%E3%80%81Kitex%E3%80%81Hertz/image-20230123123759324.png" srcset="/img/loading.gif" lazyload class title="image-20230123123759324">
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;context&quot;</span><br>	<span class="hljs-string">&quot;github.com/cloudwego/hertz/pkg/app&quot;</span><br>	<span class="hljs-string">&quot;github.com/cloudwego/hertz/pkg/app/server&quot;</span><br>	<span class="hljs-string">&quot;github.com/cloudwego/hertz/pkg/protocol/consts&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	h := server.Default(server.WithHostPorts(<span class="hljs-string">&quot;127.0.0.1:8080&quot;</span>))<br><br>	h.StaticFS(<span class="hljs-string">&quot;/&quot;</span>, &amp;app.FS&#123;Root: <span class="hljs-string">&quot;./&quot;</span>, GenerateIndexPages: <span class="hljs-literal">true</span>&#125;)<br><br>	h.GET(<span class="hljs-string">&quot;/get&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(ctx context.Context, c *app.RequestContext)</span></span> &#123;<br>		c.String(consts.StatusOK, <span class="hljs-string">&quot;get&quot;</span>)<br>	&#125;)<br>	h.POST(<span class="hljs-string">&quot;/post&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(ctx context.Context, c *app.RequestContext)</span></span> &#123;<br>		c.String(consts.StatusOK, <span class="hljs-string">&quot;post&quot;</span>)<br>	&#125;)<br>	h.PUT(<span class="hljs-string">&quot;/put&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(ctx context.Context, c *app.RequestContext)</span></span> &#123;<br>		c.String(consts.StatusOK, <span class="hljs-string">&quot;put&quot;</span>)<br>	&#125;)<br>	h.DELETE(<span class="hljs-string">&quot;/delete&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(ctx context.Context, c *app.RequestContext)</span></span> &#123;<br>		c.String(consts.StatusOK, <span class="hljs-string">&quot;delete&quot;</span>)<br>	&#125;)<br>	h.PATCH(<span class="hljs-string">&quot;/patch&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(ctx context.Context, c *app.RequestContext)</span></span> &#123;<br>		c.String(consts.StatusOK, <span class="hljs-string">&quot;patch&quot;</span>)<br>	&#125;)<br>	h.HEAD(<span class="hljs-string">&quot;/head&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(ctx context.Context, c *app.RequestContext)</span></span> &#123;<br>		c.String(consts.StatusOK, <span class="hljs-string">&quot;head&quot;</span>)<br>	&#125;)<br>	h.OPTIONS(<span class="hljs-string">&quot;/options&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(ctx context.Context, c *app.RequestContext)</span></span> &#123;<br>		c.String(consts.StatusOK, <span class="hljs-string">&quot;options&quot;</span>)<br>	&#125;)<br>	h.Any(<span class="hljs-string">&quot;/ping_any&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(ctx context.Context, c *app.RequestContext)</span></span> &#123;<br>		c.String(consts.StatusOK, <span class="hljs-string">&quot;any&quot;</span>)<br>	&#125;)<br>	h.Handle(<span class="hljs-string">&quot;LOAD&quot;</span>,<span class="hljs-string">&quot;/load&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(ctx context.Context, c *app.RequestContext)</span></span> &#123;<br>		c.String(consts.StatusOK, <span class="hljs-string">&quot;load&quot;</span>)<br>	&#125;)<br>	h.Spin()<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>Hertz 提供了路由组( <code>Group</code> )的能力，用于支持路由分组的功能，同时中间件也可以注册到路由组上。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;context&quot;</span><br>	<span class="hljs-string">&quot;github.com/cloudwego/hertz/pkg/app&quot;</span><br>	<span class="hljs-string">&quot;github.com/cloudwego/hertz/pkg/app/server&quot;</span><br>	<span class="hljs-string">&quot;github.com/cloudwego/hertz/pkg/protocol/consts&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	h := server.Default(server.WithHostPorts(<span class="hljs-string">&quot;127.0.0.1:8080&quot;</span>))<br>	v1 := h.Group(<span class="hljs-string">&quot;/v1&quot;</span>)<br>	v1.GET(<span class="hljs-string">&quot;/get&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(ctx context.Context, c *app.RequestContext)</span></span> &#123;<br>		c.String(consts.StatusOK, <span class="hljs-string">&quot;get&quot;</span>)<br>	&#125;)<br>	v1.POST(<span class="hljs-string">&quot;/post&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(ctx context.Context, c *app.RequestContext)</span></span> &#123;<br>		c.String(consts.StatusOK, <span class="hljs-string">&quot;post&quot;</span>)<br>	&#125;)<br>	v2 := h.Group(<span class="hljs-string">&quot;/v2&quot;</span>)<br>	v2.PUT(<span class="hljs-string">&quot;/put&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(ctx context.Context, c *app.RequestContext)</span></span> &#123;<br>		c.String(consts.StatusOK, <span class="hljs-string">&quot;put&quot;</span>)<br>	&#125;)<br>	v2.DELETE(<span class="hljs-string">&quot;/delete&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(ctx context.Context, c *app.RequestContext)</span></span> &#123;<br>		c.String(consts.StatusOK, <span class="hljs-string">&quot;delete&quot;</span>)<br>	&#125;)<br>	h.Spin()<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Hertz代码生成工具"><a href="#Hertz代码生成工具" class="headerlink" title="Hertz代码生成工具"></a>Hertz代码生成工具</h3><p>提供代码生成工具Hz，也可以使用接口定义语言IDL生成对应的基础服务代码</p>
+<p>文件的结构：</p>
+<img src="/2023/01/20/Go/Gorm%E3%80%81Kitex%E3%80%81Hertz/image-20230123212838794.png" srcset="/img/loading.gif" lazyload class title="image-20230123212838794">
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/">青训营</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/Go%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">Go框架设计与实现</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/01/19/Go/RPC/">
+                        <span class="hidden-mobile">RPC</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"FVOHeWkJmFW4IL0Dyt3XhY5f-gzGzoHsz","appKey":"aguFoKPPLq6Qvk8DAkOgsdkz","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"https://fvohewkj.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/10/2018 17:38:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.8},"log":false});</script></body>
+</html>
