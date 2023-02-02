@@ -1,0 +1,635 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/touxiang.png">
+  <link rel="icon" href="/img/touxiang.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="规则引擎一种嵌入在应用服务中的组件，可以将灵活多变的业务决策从服务代码中分离出来，并使用预定义的语义模块编写决策业务。接受数据输入，解释业务规则，并根据业务规则做出业务决策  组成部分：  数据输入：接受使用预定义的语义编写的规则作为策略集。接受业务的数据作为执行过程中的参数 规则理解：能够按照预先定义的语法、词法、优先级、运算符等正确理解业务规则所表达的语义 规则执行：根据执行时输入的参数对策略">
+<meta property="og:type" content="article">
+<meta property="og:title" content="规则引擎的设计与实现">
+<meta property="og:url" content="https://www.example.com/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="规则引擎一种嵌入在应用服务中的组件，可以将灵活多变的业务决策从服务代码中分离出来，并使用预定义的语义模块编写决策业务。接受数据输入，解释业务规则，并根据业务规则做出业务决策  组成部分：  数据输入：接受使用预定义的语义编写的规则作为策略集。接受业务的数据作为执行过程中的参数 规则理解：能够按照预先定义的语法、词法、优先级、运算符等正确理解业务规则所表达的语义 规则执行：根据执行时输入的参数对策略">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.example.com/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230131212121109.png">
+<meta property="og:image" content="https://www.example.com/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230131213335795.png">
+<meta property="og:image" content="https://www.example.com/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230131213742777.png">
+<meta property="og:image" content="https://www.example.com/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230131213959669.png">
+<meta property="og:image" content="https://www.example.com/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230131215331656.png">
+<meta property="og:image" content="https://www.example.com/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230131215446357.png">
+<meta property="og:image" content="https://www.example.com/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230131220153904.png">
+<meta property="og:image" content="https://www.example.com/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230201160635034.png">
+<meta property="og:image" content="https://www.example.com/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230201160714694.png">
+<meta property="og:image" content="https://www.example.com/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230201161244778.png">
+<meta property="og:image" content="https://www.example.com/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230201161426223.png">
+<meta property="og:image" content="https://www.example.com/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230201161806509.png">
+<meta property="og:image" content="https://www.example.com/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230201163142446.png">
+<meta property="og:image" content="https://www.example.com/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230201163322654.png">
+<meta property="og:image" content="https://www.example.com/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230201163638300.png">
+<meta property="og:image" content="https://www.example.com/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230201164115814.png">
+<meta property="article:published_time" content="2023-01-31T13:09:49.000Z">
+<meta property="article:modified_time" content="2023-02-01T09:39:23.447Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.example.com/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230131212121109.png">
+  
+  
+  <title>规则引擎的设计与实现 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<!--动态线条背景-->
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>这里有即用配件</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/fengmian.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="规则引擎的设计与实现">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-01-31 21:09" pubdate>
+        2023年1月31日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">规则引擎的设计与实现</h1>
+            
+            <div class="markdown-body">
+              <h1 id="规则引擎"><a href="#规则引擎" class="headerlink" title="规则引擎"></a>规则引擎</h1><p>一种嵌入在应用服务中的组件，可以将灵活多变的业务决策从服务代码中分离出来，并使用预定义的语义模块编写决策业务。接受数据输入，解释业务规则，并根据业务规则做出业务决策</p>
+<img src="/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230131212121109.png" srcset="/img/loading.gif" lazyload class title="image-20230131212121109">
+<p>组成部分：</p>
+<ul>
+<li><strong>数据输入</strong>：接受使用预定义的语义编写的规则作为策略集。接受业务的数据作为执行过程中的参数</li>
+<li><strong>规则理解</strong>：能够按照预先定义的语法、词法、优先级、运算符等正确理解业务规则所表达的语义</li>
+<li><strong>规则执行</strong>：根据执行时输入的参数对策略集中的规则进行正确的解释和执行，同时对规则执行过程中的数据类型进行检查，确保执行结果正确</li>
+</ul>
+<h1 id="编译原理的基本概念"><a href="#编译原理的基本概念" class="headerlink" title="编译原理的基本概念"></a>编译原理的基本概念</h1><img src="/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230131213335795.png" srcset="/img/loading.gif" lazyload class title="image-20230131213335795">
+<h2 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h2><p>就是把源代码字符串转换为词法单元(Token)的过程</p>
+<img src="/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230131213742777.png" srcset="/img/loading.gif" lazyload class title="image-20230131213742777">
+<p>这里使用<strong>有限自动机。</strong>有限自动机就是一个状态机。它的状态数量就是有限的。该状态机在任何一个状态，基于输入的字符，都能做一个确定的状态转换。</p>
+<img src="/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230131213959669.png" srcset="/img/loading.gif" lazyload class title="image-20230131213959669">
+<p>状态机就是对于规则引擎支持的词法的描述</p>
+<p>词法转换就是基于状态机去挨个的遍历表达式，输出一系列的Token来给下一阶段使用</p>
+<h2 id="语法分析"><a href="#语法分析" class="headerlink" title="语法分析"></a>语法分析</h2><p>在词法分析的基础上，识别表达式的语法结构的过程</p>
+<img src="/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230131215331656.png" srcset="/img/loading.gif" lazyload class title="image-20230131215331656">
+<p>抽象语法树：表达式的语法结构可以用树来表示，其每一个节点是一个语法单元，这个单元的构成规则就叫“语法”</p>
+<img src="/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230131215446357.png" srcset="/img/loading.gif" lazyload class title="image-20230131215446357">
+<p>上下文无关语法：语言句子无需考虑上下文，就可以判断正确性。可以使用巴科斯范式来表达</p>
+<p>BNF是描述上下文无关理论的一种具体方法</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">expr</span>&gt;</span> ::= <span class="hljs-tag">&lt;<span class="hljs-name">expr</span>&gt;</span> + <span class="hljs-tag">&lt;<span class="hljs-name">term</span>&gt;</span><br>         | <span class="hljs-tag">&lt;<span class="hljs-name">expr</span>&gt;</span> - <span class="hljs-tag">&lt;<span class="hljs-name">term</span>&gt;</span><br>         | <span class="hljs-tag">&lt;<span class="hljs-name">term</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">term</span>&gt;</span> ::= <span class="hljs-tag">&lt;<span class="hljs-name">term</span>&gt;</span> * <span class="hljs-tag">&lt;<span class="hljs-name">factor</span>&gt;</span><br>         | <span class="hljs-tag">&lt;<span class="hljs-name">term</span>&gt;</span> / <span class="hljs-tag">&lt;<span class="hljs-name">factor</span>&gt;</span><br>         | <span class="hljs-tag">&lt;<span class="hljs-name">factor</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">factor</span>&gt;</span> ::= ( <span class="hljs-tag">&lt;<span class="hljs-name">expr</span>&gt;</span> )<br>           | Num<br></code></pre></td></tr></table></figure>
+<p>BNF本质上就是树形分解，分解成一棵抽象语法树</p>
+<ul>
+<li><p>每个产生式就是一个子树，在写编译器时，每个子树对应一个解析函数</p>
+</li>
+<li><p>叶子节点叫做终结符，非叶子节点叫做非终结符</p>
+</li>
+</ul>
+<p>如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">a = <span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
+<p>这是一个赋值语句，无论语句前后是什么代码，这个语句所代表的操作是确定的。</p>
+<p><strong>上下文无关语法G：终结符集合T + 非终结符集合N + 产生式集合P + 起始符号S</strong></p>
+<p>G由T、N、S和P组成，由语法G推导出来的所有句子的集合称为G语言！</p>
+<p><strong>终结符：</strong> 组成串的基本符号。可以理解为词法分析器产生的token集合。比如 <code>+</code> <code>Id</code> <code>(</code> <code>)</code> 等</p>
+<p><strong>非终结符：</strong> 表示token的的集合的语法变量。比如 <code>stmt</code> <code>varDecl</code> 等等</p>
+<img src="/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230131220153904.png" srcset="/img/loading.gif" lazyload class title="image-20230131220153904">
+<p>产生式：形如 S : AB，就是说S的含义可以用语法AB进行表达</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ada">S : <span class="hljs-type">AB</span><br>A : <span class="hljs-type">aA</span> | ε<br>B : <span class="hljs-type">b</span> | bB<br></code></pre></td></tr></table></figure>
+<p><code>展开</code>(expand)：将P(A-&gt;<em>u</em> )应用到符号串vAw中，得到新串v<em>u</em> **w</p>
+<p><code>折叠</code>(reduce)：将P(A-&gt;<em>uu</em> )应用到符号串v<em>uu</em> w中，得到新串vAw</p>
+<p><code>推导</code>(derivate)：符号串<em>u</em> 应用一系列产生式，变成符号串<em>v</em> ，则<em>u</em> =&gt;<em>v：S =&gt; ab | b | bb</em></p>
+<p><strong>递归下降算法</strong>：自顶向下构造语法树。不断的对Token进行与发展开，展开过程中可能会遇到递归的情况</p>
+<p>如变量声明语句的规则：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c">varDecl : types Id varInitializer？ <span class="hljs-string">&#x27;;&#x27;</span> ;        <span class="hljs-comment">//变量声明</span><br>varInitializer : <span class="hljs-string">&#x27;=&#x27;</span> <span class="hljs-built_in">exp</span> ;                       <span class="hljs-comment">//变量初始化</span><br><span class="hljs-built_in">exp</span> : add ;                                      <span class="hljs-comment">//表达式       </span><br>add : add <span class="hljs-string">&#x27;+&#x27;</span> mul | mul;                         <span class="hljs-comment">//加法表达式</span><br>mul : mul <span class="hljs-string">&#x27;*&#x27;</span> pri | pri;                         <span class="hljs-comment">//乘法表达式</span><br>pri : IntLiteral | Id | <span class="hljs-string">&#x27;(&#x27;</span> <span class="hljs-built_in">exp</span> <span class="hljs-string">&#x27;)&#x27;</span> ;            <span class="hljs-comment">//基础表达式</span><br></code></pre></td></tr></table></figure>
+<p>如果写成产生式的格式，就是这样：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c">varDecl -&gt; types Id varInitializer <span class="hljs-string">&#x27;;&#x27;</span> <br>varInitializer -&gt; <span class="hljs-string">&#x27;=&#x27;</span> <span class="hljs-built_in">exp</span>              <br>varInitializer -&gt; ε<br><span class="hljs-built_in">exp</span> -&gt; add<br>add -&gt; add + mul<br>add -&gt; mul<br>mul -&gt; mul * pri<br>mul -&gt; pri<br>pri -&gt; IntLiteral<br>pri -&gt; Id<br>pri -&gt; ( <span class="hljs-built_in">exp</span> )<br></code></pre></td></tr></table></figure>
+<p>基于这个规则做解析的算法如下：</p>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs xl">匹配一个数据类型(types)<br>匹配一个标识符(Id)，作为变量名称<br>匹配初始化部分(varInitializer)，而这会导致下降一层，使用一个新的语法规则：<br>   匹配一个等号<br>   匹配一个表达式(在这个步骤会导致多层下降：<span class="hljs-function"><span class="hljs-title">exp</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">add</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">mul</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">pri</span>-&gt;</span>IntLiteral)<br>   创建一个varInitializer对应的AST节点并返回<br>如果没有成功地匹配初始化部分，则回溯，匹配ε，也就是没有初始化部分。<br>匹配一个分号   <br>创建一个varDecl对应的AST节点并返回<br></code></pre></td></tr></table></figure>
+<p>举例：</p>
+<img src="/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230201160635034.png" srcset="/img/loading.gif" lazyload class title="image-20230201160635034">
+<p>然后将绿色去掉，用树连接起来：</p>
+<img src="/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230201160714694.png" srcset="/img/loading.gif" lazyload class title="image-20230201160714694">
+<h2 id="类型检查"><a href="#类型检查" class="headerlink" title="类型检查"></a>类型检查</h2><ul>
+<li><p>类型综合：根据子表达式的类型构造出父表达式的类型。例如表达式A+B的类型是根据A和B的类型定义的<img src="/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230201161244778.png" srcset="/img/loading.gif" lazyload class title="image-20230201161244778"></p>
+</li>
+<li><p>编译时检查、运行时检查：类型检查可以发生在表达式的编译阶段，即在构造语法树的阶段；也可以发生在执行时的阶段<img src="/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230201161426223.png" srcset="/img/loading.gif" lazyload class title="image-20230201161426223"></p>
+</li>
+</ul>
+<h1 id="设计一个规则引擎"><a href="#设计一个规则引擎" class="headerlink" title="设计一个规则引擎"></a>设计一个规则引擎</h1><p>设计目标：</p>
+<img src="/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230201161806509.png" srcset="/img/loading.gif" lazyload class title="image-20230201161806509">
+<p> <strong>词法分析：</strong></p>
+<img src="/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230201163142446.png" srcset="/img/loading.gif" lazyload class title="image-20230201163142446">
+<p><strong>语法分析：</strong></p>
+<img src="/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230201163322654.png" srcset="/img/loading.gif" lazyload class title="image-20230201163322654">
+<p>优先级的表达：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> precedence <span class="hljs-keyword">struct</span> &#123;<br>	validSymbols 	[]Symbol		<span class="hljs-comment">// 当前优先级支持的运算符类型</span><br>	nextPrecedence	*precedence		<span class="hljs-comment">// 更高优先级的</span><br>	planner			planner			<span class="hljs-comment">// 当前优先级的处理函数</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<img src="/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230201163638300.png" srcset="/img/loading.gif" lazyload class title="image-20230201163638300">
+<p>语法树的结构：</p>
+<ul>
+<li>一元运算符：左子树为空，右子树为右操作数</li>
+<li>二元运算符：左子树为左操作数，右子树为右操作数</li>
+<li>括号：左子树为空，右子树为内部表达式的AST</li>
+</ul>
+<img src="/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/image-20230201164115814.png" srcset="/img/loading.gif" lazyload class title="image-20230201164115814">
+<p><strong>语法树的执行和类型检查：</strong></p>
+<p>执行：</p>
+<ul>
+<li>预先定义好每种操作符的执行逻辑</li>
+<li>对抽象语法树进行后续遍历操作</li>
+</ul>
+<p>类型检查：</p>
+<ul>
+<li>时机：执行时检查</li>
+<li>检查方法：在一个节点的左右子节点执行完成后，分别校验左右子节点的类型是否符合对应操作符的类型检查预设规则</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/">青训营</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/Go%E8%AF%AD%E8%A8%80%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/">Go语言原理与实践</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">分布式理论</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/01/20/Go/Gorm%E3%80%81Kitex%E3%80%81Hertz/">
+                        <span class="hidden-mobile">Gorm、Kitex、Hertz 的使用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"FVOHeWkJmFW4IL0Dyt3XhY5f-gzGzoHsz","appKey":"aguFoKPPLq6Qvk8DAkOgsdkz","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"https://fvohewkj.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/10/2018 17:38:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.8},"log":false});</script></body>
+</html>

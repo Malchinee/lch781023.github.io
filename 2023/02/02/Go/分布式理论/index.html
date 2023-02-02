@@ -1,0 +1,710 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/touxiang.png">
+  <link rel="icon" href="/img/touxiang.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="概述分布式系统是计算机程序的集合，这些程序利用跨多个独立计算节点的计算资源来实现共同的目标。可以分为分布式计算、分布式存储、分布式数据库等 优势：  去中心化 低成本 弹性 资源共享 可靠性高  挑战：  普遍的单点故障 不可靠的网络 异构的机器与硬件环境 安全  常见的分布式系统 系统模型故障模型故障时常在发生，所以不得不研究故障的类型  Byzantine failure（拜占庭故障）：节点可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式理论">
+<meta property="og:url" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="概述分布式系统是计算机程序的集合，这些程序利用跨多个独立计算节点的计算资源来实现共同的目标。可以分为分布式计算、分布式存储、分布式数据库等 优势：  去中心化 低成本 弹性 资源共享 可靠性高  挑战：  普遍的单点故障 不可靠的网络 异构的机器与硬件环境 安全  常见的分布式系统 系统模型故障模型故障时常在发生，所以不得不研究故障的类型  Byzantine failure（拜占庭故障）：节点可">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202163002506.png">
+<meta property="og:image" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202163143333.png">
+<meta property="og:image" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202164849287.png">
+<meta property="og:image" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202165223172.png">
+<meta property="og:image" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202205122767.png">
+<meta property="og:image" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202205252484.png">
+<meta property="og:image" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202205743415.png">
+<meta property="og:image" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202210214368.png">
+<meta property="og:image" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202210924823.png">
+<meta property="og:image" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202211307239.png">
+<meta property="og:image" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202211544292.png">
+<meta property="og:image" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202212304335.png">
+<meta property="og:image" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202212701979.png">
+<meta property="og:image" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202212747432.png">
+<meta property="og:image" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202212922246.png">
+<meta property="og:image" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202214212006.png">
+<meta property="og:image" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202214627388.png">
+<meta property="og:image" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202214751952.png">
+<meta property="og:image" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202214913994.png">
+<meta property="og:image" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202215210440.png">
+<meta property="og:image" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202215321889.png">
+<meta property="og:image" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202220222427.png">
+<meta property="og:image" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202220447018.png">
+<meta property="article:published_time" content="2023-02-02T08:15:19.000Z">
+<meta property="article:modified_time" content="2023-02-02T14:05:51.372Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.example.com/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202163002506.png">
+  
+  
+  <title>分布式理论 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<!--动态线条背景-->
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>这里有即用配件</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/fengmian.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="分布式理论">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-02-02 16:15" pubdate>
+        2023年2月2日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      29 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">分布式理论</h1>
+            
+            <div class="markdown-body">
+              <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>分布式系统是计算机程序的集合，这些程序利用跨多个独立计算节点的计算资源来实现共同的目标。可以分为分布式计算、分布式存储、分布式数据库等</p>
+<p>优势：</p>
+<ul>
+<li>去中心化</li>
+<li>低成本</li>
+<li>弹性</li>
+<li>资源共享</li>
+<li>可靠性高</li>
+</ul>
+<p>挑战：</p>
+<ul>
+<li>普遍的单点故障</li>
+<li>不可靠的网络</li>
+<li>异构的机器与硬件环境</li>
+<li>安全</li>
+</ul>
+<h2 id="常见的分布式系统"><a href="#常见的分布式系统" class="headerlink" title="常见的分布式系统"></a>常见的分布式系统</h2><img src="/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202163002506.png" srcset="/img/loading.gif" lazyload class title="image-20230202163002506">
+<h1 id="系统模型"><a href="#系统模型" class="headerlink" title="系统模型"></a>系统模型</h1><h2 id="故障模型"><a href="#故障模型" class="headerlink" title="故障模型"></a>故障模型</h2><p>故障时常在发生，所以不得不研究故障的类型</p>
+<img src="/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202163143333.png" srcset="/img/loading.gif" lazyload class title="image-20230202163143333">
+<p><strong>Byzantine failure</strong>（拜占庭故障）：节点可以任意篡改发送给其他节点的数据</p>
+<p><strong>Authentication detectable byzantine failure（ADB）</strong>：拜占庭故障的特例，节点可以篡改数据，但不能伪造其他节点的数据</p>
+<p><strong>Performance failure</strong>：节点未在特定时间段内收到数据，即时间太早或太晚</p>
+<p><strong>Omission failure</strong>：节点收到数据的时间无限晚，即收不到数据</p>
+<p><strong>Crash failure</strong>：在omission failure的基础上，增加了节点停止响应的假设，也即持续性地omission failure（只知道原因，不知道状态）</p>
+<p><strong>Fail-stop failure</strong>：在Crash failure的基础上增加了错误可检测的假设（既知道状态，也知道原因）</p>
+<h2 id="拜占庭将军问题"><a href="#拜占庭将军问题" class="headerlink" title="拜占庭将军问题"></a>拜占庭将军问题</h2><p>引入：两将军问题：两支军队的将军只能拍信使穿越敌方领土互相通信，以此约定进攻时间</p>
+<p>结论：两将军问题是被证实为无解的电脑通信问题，两支军队理论上永远无法达成共识</p>
+<p>方案一：同时发送N个信使，任何一个达到对方军队，都算成功</p>
+<p>方案二：设置超时时间，发送后未在一定时间返回，则加派信使</p>
+<p>共识与消息传递的不同：即使保证了消息传递成功，也不能保证达成共识</p>
+<p>TCP三次握手是在两个方向确认包的序列号，增加了超时重试，是两将军问题的一个工程解</p>
+<img src="/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202164849287.png" srcset="/img/loading.gif" lazyload class title="image-20230202164849287">
+<p>如果考虑更加普适的场景，例如3个将军ABC互相传递消息，也可能被篡改，当有一个将军是叛徒（即出现拜占庭故障），整个系统无法达成一致</p>
+<img src="/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202165223172.png" srcset="/img/loading.gif" lazyload class title="image-20230202165223172">
+<p>解法是再引入一个将军D，作为消息分发中枢。</p>
+<ul>
+<li>如果D为叛徒，ABC无论收到任何消息，总能达成一致</li>
+<li>如果D不是叛徒，假设AB不是叛徒，C是叛徒。ABC中有两人将D的消息进行正确的传递，同样能保证最终觉得符合大多数</li>
+</ul>
+<p>最后证明当有3m + 1个将军，其中有m个叛徒时，可以增加m轮协商，最终达成一致</p>
+<h2 id="共识和一致性"><a href="#共识和一致性" class="headerlink" title="共识和一致性"></a>共识和一致性</h2><p>如果要保证“线性”一致性，多个节点间势必要进行协商，以寻求一致性。这样增加了延迟，系统可用性便会受损</p>
+<p>时间和事件顺序：</p>
+<img src="/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202205122767.png" srcset="/img/loading.gif" lazyload class title="image-20230202205122767">
+<img src="/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202205252484.png" srcset="/img/loading.gif" lazyload class title="image-20230202205252484">
+<h1 id="理论基础"><a href="#理论基础" class="headerlink" title="理论基础"></a>理论基础</h1><h2 id="CAP理论"><a href="#CAP理论" class="headerlink" title="CAP理论"></a>CAP理论</h2><p>C：一致性，数据在多个副本之间能够保持一致的特性</p>
+<p>A：可用性，系统提供的服务必须一直处于可用的状态，每次请求都能获取到非错的响应，但是不保证获取的数据为最新数据</p>
+<p>P：分区容错性，分布式系统在遇到任何网络分区故障的时候，仍能对外提供一致性和可用性的服务，除非整个网络环境都发生了故障</p>
+<img src="/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202205743415.png" srcset="/img/loading.gif" lazyload class title="image-20230202205743415">
+<p>在网络发生分区的情况下，我们必须在可用性和一致性之间做出选择，近似解决办法：把故障节点的负载转移给备用节点负责</p>
+<p>用多个节点一个master和多个备用节点backup，当master故障后转移到backup节点</p>
+<img src="/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202210214368.png" srcset="/img/loading.gif" lazyload class title="image-20230202210214368">
+<h2 id="ACID理论"><a href="#ACID理论" class="headerlink" title="ACID理论"></a>ACID理论</h2><p>事务具有四个特性：</p>
+<ul>
+<li>原子性：事务包含的所有操作要么全部成功，要么全部失败回滚</li>
+<li>一致性：事务必须使数据库从一个一致性状态变换到另一个一致性状态，也就是说事务执行之前和事务执行之后都必须处于一致性状态</li>
+<li>‘隔离性：多个用户并发访问数据库时，数据库为每一个用户开启的事务，不能被其他事务的操作所干扰，多个并发事务之间要相互隔离</li>
+<li>持久性：一个事务一旦被提交了，那么对数据库中的数据的改变就是永久性的，即便是在数据库系统遇到故障的情况下也不会丢失提交事务的操作</li>
+</ul>
+<h2 id="BASE理论"><a href="#BASE理论" class="headerlink" title="BASE理论"></a>BASE理论</h2><p>互联网业务不一定都对一致性有很高的要求</p>
+<p>Base理论是对CAP中一致性和可用性权衡的结果</p>
+<img src="/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202210924823.png" srcset="/img/loading.gif" lazyload class title="image-20230202210924823">
+<h1 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h1><h2 id="二阶段提交"><a href="#二阶段提交" class="headerlink" title="二阶段提交"></a>二阶段提交</h2><p>二阶段提交：为了使基于分布式系统架构下的所有节点在进行事务提交时保持一致性而设计的一种演算法</p>
+<p>三个假设：</p>
+<ol>
+<li>引入协调者和参与者，互相进行网络通信</li>
+<li>所有节点采用预写式日志，且日志被写入后即被保持在可靠的存储设备上</li>
+<li>所有节点不会永久性损坏，即使损坏后仍然可以恢复</li>
+</ol>
+<img src="/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202211307239.png" srcset="/img/loading.gif" lazyload class title="image-20230202211307239">
+<p>可能出现的情况：</p>
+<ul>
+<li><p>协调者不宕机，参与者宕机，需要进行回滚操作</p>
+<img src="/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202211544292.png" srcset="/img/loading.gif" lazyload class title="image-20230202211544292">
+</li>
+<li><p>参与者不宕机，协调者宕机。可以起新的协调者，待查询状态后，重复二阶段提交</p>
+</li>
+<li>双方都宕机。需要数据库管理员的介入</li>
+</ul>
+<p>两阶段提交需要注意的问题：</p>
+<ul>
+<li>性能问题</li>
+<li>协调者单点故障的问题</li>
+<li>网络分区带来的数据不一致。一部分参与者收到了Commit消息，另一部分没收到Commit消息，会导致了节点之间数据不一致。解决方法：用锁</li>
+</ul>
+<p>日志被保存在“可靠”的存储设备上，如何保证？</p>
+<ul>
+<li>单机数据库时代用高可用的硬件保证，IOE来做数据库</li>
+<li>分布式时代使用分布式文件系统、KV系统等</li>
+</ul>
+<p>参与者Commit了，但Ack消息协调者没收到，怎么办？</p>
+<p>会带来性能浪费，继续回滚</p>
+<h2 id="三阶段提交"><a href="#三阶段提交" class="headerlink" title="三阶段提交"></a>三阶段提交</h2><p>将上述二阶段提交的Prepare阶段拆成两部分：CanCommit和PreCommit机制。可以解决单点故障问题和阻塞问题</p>
+<img src="/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202212304335.png" srcset="/img/loading.gif" lazyload class title="image-20230202212304335">
+<p>另外引入超时机制，在等待超时之后，会继续进行事物的提交</p>
+<p>但是仍然没解决二阶段提交的性能问题和网络分区带来的数据一致性问题</p>
+<h2 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h2><p>锁：</p>
+<ul>
+<li><p>悲观锁：操作数据时直接把数据锁住，知道操作完成后才会释放锁；上锁期间其他人不能修改数据</p>
+<img src="/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202212701979.png" srcset="/img/loading.gif" lazyload class title="image-20230202212701979">
+</li>
+<li><p>乐观锁：不会上锁，只是在执行更新时判断别人是否修改数据，只有在冲突时才会放弃操作</p>
+<img src="/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202212747432.png" srcset="/img/loading.gif" lazyload class title="image-20230202212747432">
+</li>
+</ul>
+<p>MVCC是一种并发控制的方法，维持一个数据的多个版本使读写操作没有冲突。</p>
+<p>MVCC为每一个修改保存一个版本，和事物的时间戳相关联，可以提高并发性能，解决脏读的问题</p>
+<img src="/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202212922246.png" srcset="/img/loading.gif" lazyload class title="image-20230202212922246">
+<p>另外一种时间戳的实现：时间戳预言机（TSO），采用中心化的授时方式，所有协调者向中心化节点获取时钟</p>
+<h1 id="共识协议"><a href="#共识协议" class="headerlink" title="共识协议"></a>共识协议</h1><h2 id="Quorum-NWR模型"><a href="#Quorum-NWR模型" class="headerlink" title="Quorum NWR模型"></a>Quorum NWR模型</h2><ul>
+<li>N：在分布式系统中，有多少分备份数据</li>
+<li>W：代表一次成功的更新操作要求至少有w份数据写入成功</li>
+<li>R：代表一次成功的读数据操作要求至少有R份数据成功读取</li>
+</ul>
+<p>为了保证强一致性，需要满足</p>
+<script type="math/tex; mode=display">
+W+R>N</script><p>Quorum NWR模型将CAP的选择交给用户，如可以设置N、W、R的值</p>
+<h2 id="RAFT协议"><a href="#RAFT协议" class="headerlink" title="RAFT协议"></a>RAFT协议</h2><p>是一种分布式一致性算法（共识算法），即使出现部分节点故障，网络延时等情况，也不影响个节点，进而提高系统的整体可用性。Raft时使用较为广泛的分布式协议</p>
+<p>Leader：领导者，通常一个系统时一主多从。Leader负责处理所有客户端的请求，冰箱Follower同步请求日志，当日志同步到大多数节点后，通知Follower提交日志</p>
+<p>Follower：跟随者，不会发送任何请求。接受并持久化Leader同步的日志，在Leader告知日志可以提交后，提交日志。当Leader出现故障时，主动推荐自己为Candidate</p>
+<p>Candidate：备选者，Leader选举过程中的临时角色。向其他节点发送请求投票信息。如果获得大多数选票，则晋升为Leader</p>
+<img src="/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202214212006.png" srcset="/img/loading.gif" lazyload class title="image-20230202214212006">
+<p>Log：日志，节点之间同步的信息，以只追加写的方式进行同步，解决了数据被覆盖的问题</p>
+<p>Term：任期号：单调递增，每个Term内最多有一个Leader</p>
+<p>Committed：日志被复制到多数派节点，即可认为已经被提交</p>
+<p>Applied：日志被应用到本地状态机，执行了log中命令，修改了内存状态</p>
+<p>综上，RAFT只需要写两份，读一份，所以性能很好</p>
+<img src="/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202214627388.png" srcset="/img/loading.gif" lazyload class title="image-20230202214627388">
+<p><strong>RAFT的运作机制：</strong></p>
+<p><strong>Leader的选举过程：</strong></p>
+<img src="/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202214751952.png" srcset="/img/loading.gif" lazyload class title="image-20230202214751952">
+<p>心跳是指Leader和Followers之间的周期性通信</p>
+<p><strong>Log Replication过程：</strong></p>
+<img src="/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202214913994.png" srcset="/img/loading.gif" lazyload class title="image-20230202214913994">
+<p>两个规则：</p>
+<ul>
+<li>在一个任期内每个参与者最多投一票</li>
+<li>要成为Leader，必须拿到多数选票</li>
+</ul>
+<p><strong>切换Leader：</strong></p>
+<img src="/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202215210440.png" srcset="/img/loading.gif" lazyload class title="image-20230202215210440">
+<p>如果出现网络分区，数据没有同步，产生”双主“，如何解决？</p>
+<p><strong>Stable读：</strong></p>
+<img src="/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202215321889.png" srcset="/img/loading.gif" lazyload class title="image-20230202215321889">
+<h2 id="Paxos协议"><a href="#Paxos协议" class="headerlink" title="Paxos协议"></a>Paxos协议</h2><p>Paxos算法与RAFT算法区别：</p>
+<ul>
+<li>Multi-Paxos 可以并发修改日志，而Raft写日志操作必须是连续的</li>
+<li>Multi-Paxos 可以随机选主，不必最新最全的节点当选Leader</li>
+</ul>
+<p>优劣势</p>
+<ul>
+<li>优势：写入并发性能高，所有节点都能写</li>
+<li>劣势：没有一个节点有完整的最新的数据，恢复流程复杂，需要同步历史记录</li>
+</ul>
+<h1 id="分布式实践"><a href="#分布式实践" class="headerlink" title="分布式实践"></a>分布式实践</h1><h2 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h2><p>Mapper：将输入分解为多个Job来并行处理。彼此之间几乎没有依赖关系</p>
+<p>Shuffler：将maper结果打乱，防止数据倾斜</p>
+<p>Reducer：对map阶段的结果进行全局汇总</p>
+<img src="/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202220222427.png" srcset="/img/loading.gif" lazyload class title="image-20230202220222427">
+<h2 id="分布式KV"><a href="#分布式KV" class="headerlink" title="分布式KV"></a>分布式KV</h2><p>架构：将海量结构化数据根据Key划分成不同的Region，每个Region构建一个单机KV数据库，Region之间形成Raft Groups，做到强一致</p>
+<p>容错：当Node故障时，通过Raft Learner模式进行数据修复</p>
+<p>弹性：当出现局部key热点或者数据膨胀时，Region可以进行Split操作，分成两个子Region，反之收缩进行Merge操作</p>
+<img src="/2023/02/02/Go/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/image-20230202220447018.png" srcset="/img/loading.gif" lazyload class title="image-20230202220447018">
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/">青训营</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%9D%92%E8%AE%AD%E8%90%A5/%E5%BC%80%E5%8F%91%E4%B8%8E%E8%BF%AD%E4%BB%A3/">开发与迭代</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/01/31/Go/%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">
+                        <span class="hidden-mobile">规则引擎的设计与实现</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"FVOHeWkJmFW4IL0Dyt3XhY5f-gzGzoHsz","appKey":"aguFoKPPLq6Qvk8DAkOgsdkz","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"https://fvohewkj.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/10/2018 17:38:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.8},"log":false});</script></body>
+</html>
