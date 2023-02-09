@@ -1,0 +1,769 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/touxiang.png">
+  <link rel="icon" href="/img/touxiang.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="总线的基本概念计算机使用总线结构便于增减外设，同时减少了信息传输线的条数 总线是连接各个部件的信息传输线，是各个部件共享的传输介质 总线上信息的传送:  串行 并行  总线结构的计算机举例  单总线结构框图  同一时刻只能由一对设备使用总线，严重影响CPU的效率，时间延迟比较大  面向CPU的双总线结构框图  但是I&#x2F;O设备与主存无信息传输，只能借助CPU，加大CPU的工作负担  以存储器为中心的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="总线">
+<meta property="og:url" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="总线的基本概念计算机使用总线结构便于增减外设，同时减少了信息传输线的条数 总线是连接各个部件的信息传输线，是各个部件共享的传输介质 总线上信息的传送:  串行 并行  总线结构的计算机举例  单总线结构框图  同一时刻只能由一对设备使用总线，严重影响CPU的效率，时间延迟比较大  面向CPU的双总线结构框图  但是I&#x2F;O设备与主存无信息传输，只能借助CPU，加大CPU的工作负担  以存储器为中心的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919082600169.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919082813507.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919083016272.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220920080331255.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220920080402996.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919083849672.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919085301338.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919085426322.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919090333681.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919090511913.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919090737580.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919090832871.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919091020142.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919091040727.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919091133204.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919091223786.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919092140883.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919093229866.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919093732560.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919095212767.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919095446029.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919100752288.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919101727665.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919101742518.png">
+<meta property="og:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220922090229606.png">
+<meta property="article:published_time" content="2022-09-19T00:15:20.000Z">
+<meta property="article:modified_time" content="2022-09-22T01:37:16.818Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.example.com/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919082600169.png">
+  
+  
+  <title>总线 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"www.example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<!--动态线条背景-->
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>这里有即用配件</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/fengmian.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="总线">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-09-19 08:15" pubdate>
+        2022年9月19日 早上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">总线</h1>
+            
+            <div class="markdown-body">
+              <h1 id="总线的基本概念"><a href="#总线的基本概念" class="headerlink" title="总线的基本概念"></a>总线的基本概念</h1><p>计算机使用总线结构便于增减外设，同时减少了信息传输线的条数</p>
+<p>总线是连接各个部件的信息传输线，是各个部件共享的传输介质</p>
+<p>总线上信息的传送:</p>
+<ul>
+<li>串行</li>
+<li>并行</li>
+</ul>
+<p>总线结构的计算机举例</p>
+<ol>
+<li><p>单总线结构框图</p>
+<img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919082600169.png" srcset="/img/loading.gif" lazyload class title="image-20220919082600169">
+<p>同一时刻只能由一对设备使用总线，严重影响CPU的效率，时间延迟比较大</p>
+</li>
+<li><p>面向CPU的双总线结构框图</p>
+<img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919082813507.png" srcset="/img/loading.gif" lazyload class title="image-20220919082813507">
+<p>但是I/O设备与主存无信息传输，只能借助CPU，加大CPU的工作负担</p>
+</li>
+<li><p>以存储器为中心的双总线结构框图</p>
+<img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919083016272.png" srcset="/img/loading.gif" lazyload class title="image-20220919083016272">
+</li>
+</ol>
+<h1 id="总线的分类"><a href="#总线的分类" class="headerlink" title="总线的分类"></a>总线的分类</h1><p>根据连接部件不同分类：</p>
+<ol>
+<li>片内总线：芯片内部的总线</li>
+</ol>
+<img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220920080331255.png" srcset="/img/loading.gif" lazyload class title="image-20220920080331255">
+<ol>
+<li>系统总线：计算机各部件之间的信息传输线</li>
+</ol>
+<ul>
+<li><p><strong>数据总线DB</strong>：用来传输各个部件之间的<strong>数据信息</strong></p>
+<p>双向，与机器字长、存储字长有关</p>
+</li>
+<li><p><strong>地址总线AB</strong>：单向、与存储地址、I/O地址有关</p>
+<p>一组用来指出数据总线上的数据所对应的<strong>内存单元地址</strong>或<strong>I/O外设地址</strong>的总线</p>
+<p>单向，由CPU发出；CPU可访问的<strong>存储空间大小</strong>（<strong>也叫寻址空间</strong>）为<strong>$2^n$</strong>（n为地址线的根数），寻找地址的过程为<strong>寻址过程</strong></p>
+</li>
+<li><p><strong>控制总线CB</strong>：各个功能部件之间相互协调工作的控制信号</p>
+<p>有出、有入</p>
+<img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220920080402996.png" srcset="/img/loading.gif" lazyload class title="image-20220920080402996">
+</li>
+</ul>
+<ol>
+<li><strong>通信总线（外总线</strong>）：用于计算机系统之间或者计算机系统与其它系统之间的通信</li>
+</ol>
+<ul>
+<li>串行通信总线</li>
+<li>并行通信总线</li>
+</ul>
+<h1 id="总线特性及性能指标"><a href="#总线特性及性能指标" class="headerlink" title="总线特性及性能指标"></a>总线特性及性能指标</h1><h3 id="总线物理实现"><a href="#总线物理实现" class="headerlink" title="总线物理实现"></a>总线物理实现</h3><img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919083849672.png" srcset="/img/loading.gif" lazyload class title="image-20220919083849672">
+<p>I/O接口举例：网卡、声卡、显卡，键盘鼠标等外设受I/O接口控制</p>
+<h3 id="总线特性"><a href="#总线特性" class="headerlink" title="总线特性"></a>总线特性</h3><p><strong>发送的互斥性和接受的共享性</strong></p>
+<p>机械特性：尺寸、形状、管脚数、线和线之间的排列顺序等</p>
+<p>电气特性：信号的<strong>传输方向</strong>和有效<strong>电平</strong>范围</p>
+<p>功能特性：每根<strong>传输线</strong>的功能—-地址信号、数据信号、控制信号等</p>
+<p>时间特性：信号的<strong>时序关系</strong></p>
+<h3 id="总线的性能指标"><a href="#总线的性能指标" class="headerlink" title="总线的性能指标"></a>总线的性能指标</h3><ul>
+<li><p>总线宽度（位宽）： <strong>数据线</strong>的根数，一次操作可传输的数据位数</p>
+</li>
+<li><p>工作时钟频率：控制总线中时钟信号线所提供的时钟频率</p>
+</li>
+<li><p>标准传输率：每秒传输的最大字节数<strong>MBps</strong></p>
+<p>总线带宽=总线位宽X总线工作频率/8</p>
+</li>
+<li><p>时钟同步/异步：<strong>同步、不同步</strong></p>
+</li>
+<li><p>总线复用：<strong>地址线</strong>、<strong>数据线</strong>复用，可以减少总线中信号线的数量</p>
+</li>
+<li><p>信号线数：地址线、数据线和控制线的总和</p>
+</li>
+<li><p>总线控制方式：突发、自动、仲裁、逻辑、技术</p>
+</li>
+<li><p>其他指标：负载能力：总线上所能连接部件的最大个数</p>
+</li>
+</ul>
+<h3 id="总线标准"><a href="#总线标准" class="headerlink" title="总线标准"></a>总线标准</h3><img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919085301338.png" srcset="/img/loading.gif" lazyload class title="image-20220919085301338">
+<img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919085426322.png" srcset="/img/loading.gif" lazyload class title="image-20220919085426322">
+<h1 id="总线结构"><a href="#总线结构" class="headerlink" title="总线结构"></a>总线结构</h1><h3 id="单总线结构"><a href="#单总线结构" class="headerlink" title="单总线结构"></a>单总线结构</h3><p>如上图</p>
+<h3 id="多总线结构"><a href="#多总线结构" class="headerlink" title="多总线结构"></a>多总线结构</h3><ol>
+<li><p>双总线结构</p>
+<img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919090333681.png" srcset="/img/loading.gif" lazyload class title="image-20220919090333681">
+</li>
+<li><p>三总线结构</p>
+<img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919090511913.png" srcset="/img/loading.gif" lazyload class title="image-20220919090511913">
+</li>
+<li><p>三总线结构的又一形式</p>
+<img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919090737580.png" srcset="/img/loading.gif" lazyload class title="image-20220919090737580">
+<p>但是影响外部设备的工作速度</p>
+</li>
+<li><p>四总线结构</p>
+<img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919090832871.png" srcset="/img/loading.gif" lazyload class title="image-20220919090832871">
+</li>
+</ol>
+<h3 id="总线结构举例"><a href="#总线结构举例" class="headerlink" title="总线结构举例"></a>总线结构举例</h3><ol>
+<li><p>传统的微型计算机总线结构</p>
+<img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919091020142.png" srcset="/img/loading.gif" lazyload class title="image-20220919091020142">
+</li>
+<li><p>VL-BUS局部总线结构</p>
+<img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919091040727.png" srcset="/img/loading.gif" lazyload class title="image-20220919091040727">
+</li>
+<li><p>PCI总线结构</p>
+<img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919091133204.png" srcset="/img/loading.gif" lazyload class title="image-20220919091133204">
+</li>
+<li><p>多层PCI总线结构</p>
+<img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919091223786.png" srcset="/img/loading.gif" lazyload class title="image-20220919091223786">
+</li>
+</ol>
+<h1 id="总线控制"><a href="#总线控制" class="headerlink" title="总线控制"></a>总线控制</h1><p>为了协调总线上各个部件堆总线的争用、避免发生总线冲突，必须有<strong>总线控制器</strong>来对总线的使用进行分配和管理</p>
+<p>总线仲裁：当总线上多个候选的主部件同时申请使用总线时，必须有一个<strong>总线控制机构</strong>按照某种策略对申请进行裁决</p>
+<h3 id="总线判优控制"><a href="#总线判优控制" class="headerlink" title="总线判优控制"></a>总线判优控制</h3><ul>
+<li>主设备：对总线具有控制权</li>
+<li>从设备：响应从主设备发来的总线命令</li>
+</ul>
+<p>方法：</p>
+<ul>
+<li>集中式：链式查询、计数器定时查询、独立请求方式</li>
+<li>分布式</li>
+</ul>
+<h4 id="链式查询方式"><a href="#链式查询方式" class="headerlink" title="链式查询方式"></a>链式查询方式</h4><img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919092140883.png" srcset="/img/loading.gif" lazyload class title="image-20220919092140883">
+<p>特点：</p>
+<ul>
+<li>总线授权信号<strong>BG串行地</strong>从一个I/O设备传送到下一个I/O设备</li>
+<li>优先级固定：离“总线控制部件”<strong>最近的优先级最高</strong>，<strong>最远的优先级最低</strong>。优先级通过物理上的<strong>排队电路</strong>来实现的</li>
+<li>采用很少的几根线就能实现</li>
+<li><strong>对电路故障很敏感</strong></li>
+<li>若优先级高地设备频繁发出请求，则优先级低的设备可能很长时间都无法得到总线控制权</li>
+</ul>
+<h4 id="计数器定时查询方式"><a href="#计数器定时查询方式" class="headerlink" title="计数器定时查询方式"></a>计数器定时查询方式</h4><img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919093229866.png" srcset="/img/loading.gif" lazyload class title="image-20220919093229866">
+<p>若设备数量为n，设备地址线至少需要$Log_2^n$位宽度向上取整</p>
+<ol>
+<li>仲裁器接收到请求信号以后，在<strong>BS线为“0”的情况下，让计数器开始计数，计数器通过一组地址线发向各个设备</strong></li>
+<li>每个设备接口都有一个“设备地址判别电路”，当<strong>地址线上的计数值与请求总线的设备地址相一致时，该设备将BS线设置为1</strong>，获得了总线的使用权，从而中止技术查询</li>
+<li>从0开始，每个设备的优先级次序同“<strong>链式查询法</strong>”相同，此时优先级的顺序是固定的</li>
+<li>若从中止点开始，则每个设备的优先级相等</li>
+<li>可通过程序来设置计数器初值，动态来改变其优先级，可编程</li>
+</ol>
+<h4 id="独立请求方式"><a href="#独立请求方式" class="headerlink" title="独立请求方式"></a>独立请求方式</h4><img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919093732560.png" srcset="/img/loading.gif" lazyload class title="image-20220919093732560">
+<p>优先级在控制部件内部有一个排队器</p>
+<p>设备有N个，需要2N条线解决</p>
+<h3 id="总线通信控制"><a href="#总线通信控制" class="headerlink" title="总线通信控制"></a>总线通信控制</h3><p>解决<strong>主设备与从设备之间协调配合</strong>的关系</p>
+<p><strong>总线传输周期</strong>：主设备和从设备之间完成一次完整、可靠的通信的时间</p>
+<ul>
+<li>申请分配阶段：<strong>主模块申请</strong>，总线仲裁决定</li>
+<li>寻址阶段：主模块向从模块给出<strong>地址和命令</strong></li>
+<li>传输阶段：主模块和从模块<strong>交换数据</strong></li>
+<li>结束阶段：主模块<strong>撤销有关消息</strong></li>
+</ul>
+<p>总线通信的四种方式：</p>
+<ul>
+<li><p>同步通信：由<strong>定宽、定距的时标</strong>控制数据传送</p>
+</li>
+<li><p>异步通信：采用应答方式、没有公共时钟标准</p>
+</li>
+<li><p>半同步通信：同步、异步结合</p>
+</li>
+<li><p>分离式通信：发掘系统总线每一瞬间的潜力</p>
+</li>
+</ul>
+<p>一个总线传输周期（以输入数据为例）：</p>
+<ul>
+<li>主模块发地址、命令 ：占用总线</li>
+<li>从模块准备数据：不占用总线</li>
+<li>从模块向主模块发数据：占用总线</li>
+</ul>
+<h4 id="同步式"><a href="#同步式" class="headerlink" title="同步式"></a>同步式</h4><p>特点：</p>
+<ul>
+<li><strong>强制性同步，采用同一时钟</strong>，简单易控制</li>
+<li>对于每一个操作，每一时间都有明确的规定，显得比较死板</li>
+<li>必须按照<strong>工作速度最慢的部件</strong>来设计时钟</li>
+<li>当各个模块的存取时间相差较大时，会大大损失总线的工作效率</li>
+<li>适用于<strong>总线时间较短</strong>，各模块部件存取时间比较一致的场合</li>
+</ul>
+<p>数据输入：</p>
+<p>地址：平为无地址数据，分叉后为有地址数据</p>
+<p>读命令：高电平为无效、低电平有效</p>
+<p>数据线同理</p>
+<img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919095212767.png" srcset="/img/loading.gif" lazyload class title="image-20220919095212767">
+<p>数据输出：</p>
+<img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919095446029.png" srcset="/img/loading.gif" lazyload class title="image-20220919095446029">
+<p>写命令需要两个时钟周期，读命令只需要一个</p>
+<p>应用在总线长度比较短，各个模块存取时间比较一致的情况下</p>
+<h4 id="异步式"><a href="#异步式" class="headerlink" title="异步式"></a>异步式</h4><p>参与通信的两个部件需要感知对方操作，通过“握手”信号实现</p>
+<ul>
+<li>单边控制：由源部件<strong>或</strong>目的部件控制</li>
+<li>双边控制：由源部件<strong>和</strong>目的部件控制</li>
+</ul>
+<p>特点：</p>
+<ul>
+<li>没有公共时钟</li>
+<li>采用握手方式，请求应答方式</li>
+<li>相互通信的设备的工作速度参差不齐</li>
+</ul>
+<img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919100752288.png" srcset="/img/loading.gif" lazyload class title="image-20220919100752288">
+<h4 id="半同步通信"><a href="#半同步通信" class="headerlink" title="半同步通信"></a>半同步通信</h4><p>同步：发送方用<strong>系统时钟前沿</strong>发信号，接收方用<strong>系统时钟后沿</strong>判断、识别</p>
+<p>异步：允许不同速度的模块和谐工作，增加一条“等待”响应信号，$\overline{WAIT}$</p>
+<img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919101727665.png" srcset="/img/loading.gif" lazyload class title="image-20220919101727665">
+<img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220919101742518.png" srcset="/img/loading.gif" lazyload class title="image-20220919101742518">
+<p>以上三种的系统总线的使用权完全由占有使用权的主模块和从模块战局，总线利用率不高</p>
+<h4 id="分离式通信"><a href="#分离式通信" class="headerlink" title="分离式通信"></a>分离式通信</h4><p>在从模块准备数据的时间内，主模块让出总线的使用权</p>
+<img src="/2022/09/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%80%BB%E7%BA%BF/image-20220922090229606.png" srcset="/img/loading.gif" lazyload class title="image-20220922090229606">
+<p>一个总线的传输周期：</p>
+<ul>
+<li>子周期1：主模块申请占用总线，使用完后放弃总线的使用权</li>
+<li>子周期2：从模块申请占用总线，将各种信息放到总线上去</li>
+</ul>
+<p>特点：</p>
+<ol>
+<li>各模块有权申请占用总线</li>
+<li>采用同步方式通信，不等对方回答</li>
+<li>各模块准备数据时，不占用总线</li>
+<li>总线被占用时，无空闲</li>
+</ol>
+<p>以上，充分利用总线的带宽</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/09/20/cs61b/proj0-%E6%A8%A1%E6%8B%9F%E5%AE%87%E5%AE%99/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">proj0-模拟宇宙</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/09/17/CSAPP/datalab/">
+                        <span class="hidden-mobile">datalab</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"FVOHeWkJmFW4IL0Dyt3XhY5f-gzGzoHsz","appKey":"aguFoKPPLq6Qvk8DAkOgsdkz","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"https://fvohewkj.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          Fluid.plugins.initFancyBox('#valine .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/10/2018 17:38:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.8},"log":false});</script></body>
+</html>
