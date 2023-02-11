@@ -16,17 +16,48 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="控制单元的功能微操作命令">
+    <meta name="description" content="控制单元的功能微操作命令完成一条指令分4个工作周期：取指周期、间址周期、执行周期、中断周期 取指周期MAR：存储器地址寄存器，存放欲读写的存储单元的地址（与系统地址总线相连接） MDR：存储器数据寄存器，存放欲读写存储器的数据信息（与系统数据总线相连接） PC：程序计数器，存放CPU当前正在执行的指令的下一条指令在内存中的地址 IR：指令寄存器：存放CPU当前正在执行的命令  取指精髓：CPU通过">
 <meta property="og:type" content="article">
 <meta property="og:title" content="控制单元">
 <meta property="og:url" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="控制单元的功能微操作命令">
+<meta property="og:description" content="控制单元的功能微操作命令完成一条指令分4个工作周期：取指周期、间址周期、执行周期、中断周期 取指周期MAR：存储器地址寄存器，存放欲读写的存储单元的地址（与系统地址总线相连接） MDR：存储器数据寄存器，存放欲读写存储器的数据信息（与系统数据总线相连接） PC：程序计数器，存放CPU当前正在执行的指令的下一条指令在内存中的地址 IR：指令寄存器：存放CPU当前正在执行的命令  取指精髓：CPU通过">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211111921490.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211113137379.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211113246360.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211113740990.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211113608019.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211113638238.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211113758635.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211113834397.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211114018304.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211114124617.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211120806503.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211121505966.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211123855126.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211121124555.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211123933930.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211124005910.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211124021178.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211124045643.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211124056731.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211124103810.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211132038964.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211132204351.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211132647865.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211133555882.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211133726410.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211133940946.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211134124988.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211134219881.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211135826730.png">
+<meta property="og:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211135958681.png">
 <meta property="article:published_time" content="2023-02-10T12:44:20.000Z">
-<meta property="article:modified_time" content="2023-02-10T12:45:26.869Z">
+<meta property="article:modified_time" content="2023-02-11T06:03:49.905Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.example.com/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211111921490.png">
   
   
   <title>控制单元 - Hexo</title>
@@ -199,7 +230,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      12 字
+      1.3k 字
     </span>
   
 
@@ -208,7 +239,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1 分钟
+      12 分钟
     </span>
   
 
@@ -240,7 +271,111 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             <h1 style="display: none">控制单元</h1>
             
             <div class="markdown-body">
-              <h1 id="控制单元的功能"><a href="#控制单元的功能" class="headerlink" title="控制单元的功能"></a>控制单元的功能</h1><h2 id="微操作命令"><a href="#微操作命令" class="headerlink" title="微操作命令"></a>微操作命令</h2>
+              <h1 id="控制单元的功能"><a href="#控制单元的功能" class="headerlink" title="控制单元的功能"></a>控制单元的功能</h1><h2 id="微操作命令"><a href="#微操作命令" class="headerlink" title="微操作命令"></a>微操作命令</h2><p>完成一条指令分4个工作周期：取指周期、间址周期、执行周期、中断周期</p>
+<h3 id="取指周期"><a href="#取指周期" class="headerlink" title="取指周期"></a>取指周期</h3><p>MAR：存储器地址寄存器，存放欲读写的存储单元的地址（与系统地址总线相连接）</p>
+<p>MDR：存储器数据寄存器，存放欲读写存储器的数据信息（与系统数据总线相连接）</p>
+<p>PC：程序计数器，存放CPU当前正在执行的指令的下一条指令在内存中的地址</p>
+<p>IR：指令寄存器：存放CPU当前正在执行的命令</p>
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211111921490.png" srcset="/img/loading.gif" lazyload class title="image-20230211111921490">
+<p><strong>取指精髓：</strong>CPU通过三条总线读取内存指定单元内容，取到CPU内部</p>
+<h3 id="间址周期"><a href="#间址周期" class="headerlink" title="间址周期"></a>间址周期</h3><p>指令字中给出的是操作数有效地址的地址，为了得到操作数，需要再次访问内存，取出有效地址，再访问内存得到操作数</p>
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211113137379.png" srcset="/img/loading.gif" lazyload class title="image-20230211113137379">
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211113246360.png" srcset="/img/loading.gif" lazyload class title="image-20230211113246360">
+<h3 id="执行周期"><a href="#执行周期" class="headerlink" title="执行周期"></a>执行周期</h3><p>执行指令要求的操作</p>
+<ol>
+<li><p>非访存指令</p>
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211113740990.png" srcset="/img/loading.gif" lazyload class title="image-20230211113740990">
+</li>
+<li><p>访存指令</p>
+</li>
+</ol>
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211113608019.png" srcset="/img/loading.gif" lazyload class title="image-20230211113608019">
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211113638238.png" srcset="/img/loading.gif" lazyload class title="image-20230211113638238">
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211113758635.png" srcset="/img/loading.gif" lazyload class title="image-20230211113758635">
+<ol>
+<li><p>转移指令</p>
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211113834397.png" srcset="/img/loading.gif" lazyload class title="image-20230211113834397">
+</li>
+</ol>
+<p>任何一条指令的指令周期至少需要两个CPU周期，而一些复杂的指令周期需要更多的CPU周期。</p>
+<p>遇到间接寻址的指令时，指令周期中有一段“间址周期”用于访存取出有效地址</p>
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211114018304.png" srcset="/img/loading.gif" lazyload class title="image-20230211114018304">
+<h3 id="中断周期"><a href="#中断周期" class="headerlink" title="中断周期"></a>中断周期</h3><img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211114124617.png" srcset="/img/loading.gif" lazyload class title="image-20230211114124617">
+<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><h3 id="外特性"><a href="#外特性" class="headerlink" title="外特性"></a>外特性</h3><img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211120806503.png" srcset="/img/loading.gif" lazyload class title="image-20230211120806503">
+<p><strong>输入信号：</strong></p>
+<ul>
+<li><p>时钟：CU受时钟控制</p>
+<p>发出一个操作命令或一组需同时执行的操作命令</p>
+<p>每一次脉冲到来，芯片内的晶体管就改变一次状态，让芯片完成一定任务</p>
+</li>
+<li><p>指令寄存器   OP（IR）- &gt; CU</p>
+<p>控制信号与操作码有关</p>
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211121505966.png" srcset="/img/loading.gif" lazyload class title="image-20230211121505966">
+</li>
+<li><p>标志</p>
+<p>CU 受标志控制</p>
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211123855126.png" srcset="/img/loading.gif" lazyload class title="image-20230211123855126">
+</li>
+<li><p>外来信号，如INTR 中断请求信号</p>
+</li>
+</ul>
+<p><strong>输出信号：</strong></p>
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211121124555.png" srcset="/img/loading.gif" lazyload class title="image-20230211121124555">
+<h3 id="控制信号举例"><a href="#控制信号举例" class="headerlink" title="控制信号举例"></a>控制信号举例</h3><p><strong>不采用CPU内部总线的方式</strong></p>
+<p>以间接寻址的加法指令ADD @X为例</p>
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211123933930.png" srcset="/img/loading.gif" lazyload class title="image-20230211123933930">
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211124005910.png" srcset="/img/loading.gif" lazyload class title="image-20230211124005910">
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211124021178.png" srcset="/img/loading.gif" lazyload class title="image-20230211124021178">
+<p><strong>采用CPU内部总线方式</strong></p>
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211124045643.png" srcset="/img/loading.gif" lazyload class title="image-20230211124045643">
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211124056731.png" srcset="/img/loading.gif" lazyload class title="image-20230211124056731">
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211124103810.png" srcset="/img/loading.gif" lazyload class title="image-20230211124103810">
+<h3 id="机器周期与时钟周期"><a href="#机器周期与时钟周期" class="headerlink" title="机器周期与时钟周期"></a>机器周期与时钟周期</h3><p><strong>机器周期：</strong>通常用内存中读取一个指令字的最短时间来规定CPU周期，也就是计算机完成一个基本操作所花费的时间 </p>
+<p>机器周期也叫CPU周期，若指令字长等于存储字长，则<strong>取指周期等于机器周期</strong></p>
+<p><strong>时钟周期：</strong>一个机器周期内包含了若干个时钟周期，是处理器操作的最基本单位。在一个时钟周期内机器可完成一个或几个需同时执行的操作</p>
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211132038964.png" srcset="/img/loading.gif" lazyload class title="image-20230211132038964">
+<p><strong>多级时序系统</strong></p>
+<p>一个指令周期包含的若干个机器周期，一个机器周期包含若干个时钟周期</p>
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211132204351.png" srcset="/img/loading.gif" lazyload class title="image-20230211132204351">
+<p><strong>控制方式</strong></p>
+<ul>
+<li><p><strong>同步控制方式</strong>：任何一条指令或指令中的任何一个微操作的执行，都由<strong>事先确定且有统一基准时标的时序信号</strong>所控制的方式</p>
+<p>在任何情况下，已定的指令在执行时所需的机器周期数和时钟周期数都是固定不变的</p>
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211132647865.png" srcset="/img/loading.gif" lazyload class title="image-20230211132647865">
+<ul>
+<li><p>方式一：采用<strong>完全统一</strong>的机器周期和节拍执行各种不同的指令</p>
+<p>原则：所有指令周期具有<strong>相同的</strong>机器周期数和时钟周期数，以<strong>最长的微操作序列</strong>和<strong>最繁的微操作</strong>作为标准</p>
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211133555882.png" srcset="/img/loading.gif" lazyload class title="image-20230211133555882">
+<p>特点：对简单指令和简单微操作来说，造成时间的浪费</p>
+</li>
+<li><p>方式二：采用<strong>不定长机器周期</strong></p>
+<p>原则：<strong>每个机器周期内的节拍数可以不等</strong>。将大多数操作安排在一个较短的机器周期内完成，对某些时间紧张的操作，则采用延长机器周期的办法来解决</p>
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211133726410.png" srcset="/img/loading.gif" lazyload class title="image-20230211133726410">
+<p>特点：解决微操作执行时间不统一的问题</p>
+</li>
+<li><p>方式三：采用<strong>中央控制</strong>和<strong>局部控制</strong>相结合的方式</p>
+<p>原则：将大部分指令安排在<strong>固定的、较短的机器周期内</strong>完成，称为<strong>中央控制</strong>，对少数复杂指令，采用<strong>另外的时序进行</strong>，称为<strong>局部控制</strong></p>
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211133940946.png" srcset="/img/loading.gif" lazyload class title="image-20230211133940946">
+<p>特点：合理地考虑指令的实际执行情况，但需要复杂的硬件电路支持</p>
+</li>
+</ul>
+</li>
+<li><p><strong>异步控制方式</strong></p>
+<p>原则：无基准时标信号、无固定的周期节拍和严格的时钟同步、采用应答方式</p>
+<p>特点：<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211134124988.png" srcset="/img/loading.gif" lazyload class title="image-20230211134124988"></p>
+</li>
+<li><p><strong>联合控制方式</strong></p>
+<p>原则：同步与异步相结合、对各种不同指令的微操作实行<strong>“大部分统一，小部分区别对待”</strong></p>
+<p>特点：<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211134219881.png" srcset="/img/loading.gif" lazyload class title="image-20230211134219881"></p>
+</li>
+</ul>
+<h1 id="控制单元的设计"><a href="#控制单元的设计" class="headerlink" title="控制单元的设计"></a>控制单元的设计</h1><h2 id="组合逻辑设计"><a href="#组合逻辑设计" class="headerlink" title="组合逻辑设计"></a>组合逻辑设计</h2><h3 id="组合逻辑控制单元框图"><a href="#组合逻辑控制单元框图" class="headerlink" title="组合逻辑控制单元框图"></a>组合逻辑控制单元框图</h3><p><strong>CU外特性</strong></p>
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211135826730.png" srcset="/img/loading.gif" lazyload class title="image-20230211135826730">
+<p><strong>节拍信号</strong></p>
+<img src="/2023/02/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8E%A7%E5%88%B6%E5%8D%95%E5%85%83/image-20230211135958681.png" srcset="/img/loading.gif" lazyload class title="image-20230211135958681">
+<p>每一个机器周期包含四个节拍周期</p>
+<h3 id="微操作的节拍安排"><a href="#微操作的节拍安排" class="headerlink" title="微操作的节拍安排"></a>微操作的节拍安排</h3><p>设计：采用同步控制方式，一个机器周期内有三个节拍（时钟周期），CPU内部结构采用非总线方式</p>
+
             </div>
             <hr>
             <div>
@@ -266,6 +401,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/02/10/Go/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">消息队列</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
