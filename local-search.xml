@@ -4,6 +4,57 @@
   
   
   <entry>
+    <title>客户开发管理</title>
+    <link href="/2023/03/10/%E5%A4%96%E4%B8%93%E4%B8%9A/%E5%AE%A2%E6%88%B7%E5%BC%80%E5%8F%91%E7%AE%A1%E7%90%86/"/>
+    <url>/2023/03/10/%E5%A4%96%E4%B8%93%E4%B8%9A/%E5%AE%A2%E6%88%B7%E5%BC%80%E5%8F%91%E7%AE%A1%E7%90%86/</url>
+    
+    <content type="html"><![CDATA[<p>销售管理过程：</p><ol><li><p>确定销售队伍的职能、任务及目标</p></li><li><p>确定销售战略</p></li><li>设计销售组织</li><li>简历销售队伍</li><li>管理销售队伍</li><li>评估效率和绩效</li></ol><p>销售队伍的职能：</p><p>销售工作一直围绕“交易”这一核心展开</p><p>销售工作的职能就是寻找合适的交易对象，并通过与交易对象洽谈、沟通、合作</p><p>从交易对象来看，可以是渠道成员客户，也可以是最终目标客户</p><p>从交易过程来看，涉及多种环节</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>CMake</title>
+    <link href="/2023/03/10/C++%E5%BC%80%E5%8F%91/CMake/"/>
+    <url>/2023/03/10/C++%E5%BC%80%E5%8F%91/CMake/</url>
+    
+    <content type="html"><![CDATA[<h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><figure class="highlight shell"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><pre><code class="hljs shell">cmake directory // 根据CMakeList.txt生成makefile文件<br>make// 执行Makefile文件，编译程序，生成可执行文件<br></code></pre></td></tr></table></figure><p>directory为CMakeLists.txt所在目录</p><p>一般把CMakeLists.txt文件放在工程目录下，使用时，先创建一个build文件夹，cmake命令指向CMakeLists.txt的所在的目录。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd build<br>cmake ..<br>make<br></code></pre></td></tr></table></figure><p><strong>编写CMakeLists.txt</strong></p><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-comment"># 声明要求的cmake的最低版本</span><br>cmake_minimun_required(VERSION <span class="hljs-number">3.22</span>)<br><br><span class="hljs-comment"># 添加C++11标准支持</span><br><span class="hljs-comment">#set(CMAKE_CXX_FLAGS &quot;-std=c++11&quot;)</span><br><br><span class="hljs-comment"># 声明一个cmake工程</span><br><span class="hljs-keyword">PROJECT</span>(rpt_main)<br><br><span class="hljs-comment"># 打印相关消息信息</span><br><span class="hljs-keyword">MESSAGE</span>(STATUS <span class="hljs-string">&quot;project:SERVER&quot;</span>)<br><br><span class="hljs-comment"># 头文件</span><br><span class="hljs-keyword">include_directories</span> (<br><span class="hljs-variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/../<span class="hljs-keyword">include</span>/xx<br><span class="hljs-variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/../<span class="hljs-keyword">include</span>/xxx<br>...<br>)<br><br><span class="hljs-comment"># 通过设定SRC变量，将源代码路径都给SRC，如果有多个，可以直接在后面添加</span><br><span class="hljs-keyword">set</span>(SRC<br><span class="hljs-variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/../<span class="hljs-keyword">include</span>/xx/xx.cc<br><span class="hljs-variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/../<span class="hljs-keyword">include</span>/xxx/xxx.cc<br><span class="hljs-variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/xxx.cc<br>)<br><br><span class="hljs-comment"># 创建共享库/静态库</span><br><br><span class="hljs-comment"># 设置路径（下面生成共享库的路径）</span><br><span class="hljs-keyword">set</span>(CMAKE_LIBRARY_OUTPUT_DIRECTORY <span class="hljs-variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/lib)<br><span class="hljs-comment"># 即生成的共享库在工程文件夹下的lib文件夹中</span><br> <br><span class="hljs-keyword">set</span>(LIB_NAME rpt_main_lib)<br><span class="hljs-comment"># 创建共享库（把工程内的cpp文件都创建成共享库文件，方便通过头文件来调用）</span><br><span class="hljs-comment"># 这时候只需要cpp，不需要有主函数 </span><br><span class="hljs-comment"># $&#123;PROJECT_NAME&#125;是生成的库名 表示生成的共享库文件就叫做 lib工程名.so</span><br><span class="hljs-comment"># 也可以专门写cmakelists来编译一个没有主函数的程序来生成共享库，供其它程序使用</span><br><span class="hljs-comment"># SHARED为生成动态库，STATIC为生成静态库</span><br><span class="hljs-keyword">add_library</span>(<span class="hljs-variable">$&#123;LIB_NAME&#125;</span> STATIC <span class="hljs-variable">$&#123;SRC&#125;</span>)<br> <br><span class="hljs-comment"># 链接库文件</span><br><span class="hljs-comment"># 把刚刚生成的$&#123;LIB_NAME&#125;库和所需的其它库链接起来</span><br><span class="hljs-comment"># 如果需要链接其他的动态库，-l后接去除lib前缀和.so后缀的名称，以链接</span><br><span class="hljs-comment"># libpthread.so 为例,-lpthread</span><br><span class="hljs-keyword">target_link_libraries</span>(<span class="hljs-variable">$&#123;LIB_NAME&#125;</span> pthread dl)<br>   <br><span class="hljs-comment"># 编译主函数，生成可执行文件</span><br><span class="hljs-comment"># 先设置路径</span><br><span class="hljs-keyword">set</span>(CMAKE_RUNTIME_OUTPUT_DIRECTORY <span class="hljs-variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/bin)<br>   <br><span class="hljs-comment"># 可执行文件生成</span><br><span class="hljs-keyword">add_executable</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> <span class="hljs-variable">$&#123;SRC&#125;</span>)<br>   <br><span class="hljs-comment"># 这个可执行文件所需的库（一般就是刚刚生成的工程的库咯）</span><br><span class="hljs-keyword">target_link_libraries</span>(<span class="hljs-variable">$&#123;PROJECT_NAME&#125;</span> pthread dl <span class="hljs-variable">$&#123;LIB_NAME&#125;</span>)<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>C++开发</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>C++多线程</title>
+    <link href="/2023/03/10/WebServer/C-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    <url>/2023/03/10/WebServer/C-%E5%A4%9A%E7%BA%BF%E7%A8%8B/</url>
+    
+    <content type="html"><![CDATA[<h1 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h1><p><strong>万能解决方案：使用shared_ptr和 weak_ptr。</strong>他们都是计数型智能指针。引用计数是自动化资源管理的常用手段，当引用计数降为0时，对象就会被销毁。</p><p>不同点是weak_ptr不会增加对象的引用次数</p><ul><li><p>shared_ptr：控制对象的生命周期，强引用，只要有一个指向x的对象的shared_ptr存在，x对象就不会析构。</p></li><li><p>weak_ptr：不控制对象的声明周期；如果对象还活着，就会提升为有效的shared_ptr，如果对象已死，就会返回一个空的shared_ptr</p></li></ul><p><strong>C++出现内存问题一般有一下方面：</strong></p><ol><li><p>缓存区溢出</p><p>用std::vector\<char> / std::string或者自己编写Buffer class来控制缓冲区，自动记住缓冲区的长度，并通过成员函数而不是裸指针修改缓冲区</char></p></li><li><p>野指针</p><p>用shared_ptr或weak_ptr</p></li><li><p>重复释放</p><p>用scoped_ptr ，只在对象析构的时候释放一次</p></li><li><p>内存泄漏</p><p>用scoped_ptr，对象析构的时候自动释放内存</p></li><li><p>不配对的new[] / delete</p><p>把new [] 替换成std::vector / scoped_array</p></li><li><p>内存碎片</p></li></ol><p>但是，shared_ptr本身不是线程安全的，只是它管理的对象是线程安全的。如果多个线程要访问同一个shared_ptr，就需要加锁</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>WebServer</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>二分与前缀和</title>
     <link href="/2023/02/23/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E4%BA%8C%E5%88%86%E4%B8%8E%E5%89%8D%E7%BC%80%E5%92%8C/"/>
     <url>/2023/02/23/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/%E4%BA%8C%E5%88%86%E4%B8%8E%E5%89%8D%E7%BC%80%E5%92%8C/</url>
